@@ -1,4 +1,3 @@
-echo "General aliases..."
 
 alias fucking="sudo"
 alias c="clear"
