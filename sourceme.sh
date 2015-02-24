@@ -1,6 +1,6 @@
 my_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-alias edf="vim $my_dir && source $my_dir/sourceme.sh"
+alias edf="vim $my_dir && git add $my_dir && git commit && source $my_dir/sourceme.sh"
 alias c="clear"
 
 source "$my_dir/aliases/git.sh"
