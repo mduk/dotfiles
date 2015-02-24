@@ -1,7 +1,6 @@
 my_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-EDF_CMD="vim $my_dir && git --work-tree=$my_dir add . && git --work-tree=$my_dir commit $my_dir && source $my_dir/sourceme.sh"
-alias edf="echo \"$EDF_CMD\" && $EDF_CMD"
+alias edf="vim $my_dir && git --work-tree=$my_dir add . && git --work-tree=$my_dir commit $my_dir && source $my_dir/sourceme.sh"
 alias c="clear"
 
 source "$my_dir/ps1.sh"
