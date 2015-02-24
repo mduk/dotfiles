@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 cd $HOME
 
 echo "Cloning mduk/dotfiles into $HOME/.dotfiles"
