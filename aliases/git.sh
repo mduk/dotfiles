@@ -7,4 +7,7 @@ alias gcb="git checkout -b"
 alias gll="git log --oneline"
 alias gbl="git branch"
 alias gf="git fetch"
+alias grh="git reset HEAD"
+alias gb="git checkout"
+
 alias gpom="git push origin master"
