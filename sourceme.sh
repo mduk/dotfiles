@@ -6,6 +6,7 @@ alias c="clear"
 
 source "$my_dir/ps1.sh"
 
+source "$my_dir/aliases/clipboard.sh"
 source "$my_dir/aliases/git.sh"
 source "$my_dir/aliases/erlang.sh"
 source "$my_dir/aliases/ruby.sh"
