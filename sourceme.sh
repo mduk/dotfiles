@@ -2,7 +2,7 @@ my_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 alias dot="source $my_dir/sourceme.sh"
 alias e="vim -p"
-alias edf="vim $my_dir && git --work-tree=$my_dir add . && git --work-tree=$my_dir commit $my_dir && resource"
+alias edf="vim $my_dir && git --work-tree=$my_dir add . && git --work-tree=$my_dir commit $my_dir && dot"
 alias c="clear"
 
 source "$my_dir/ps1.sh"
