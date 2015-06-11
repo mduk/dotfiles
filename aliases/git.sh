@@ -12,3 +12,4 @@ alias grh="git reset HEAD"
 alias gb="git checkout"
 
 alias gpom="git push origin master"
+alias gpot="git push origin --tags"
