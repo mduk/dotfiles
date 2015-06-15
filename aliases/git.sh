@@ -11,5 +11,6 @@ alias gp="git pull"
 alias grh="git reset HEAD"
 alias gb="git checkout"
 
-alias gpom="git push origin master"
-alias gpot="git push origin --tags"
+alias gpo="git push origin"
+alias gpom="gpo master"
+alias gpot="gpo --tags"
