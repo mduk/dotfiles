@@ -14,3 +14,9 @@ alias gb="git checkout"
 alias gpo="git push origin"
 alias gpom="gpo master"
 alias gpot="gpo --tags"
+
+function gpob {
+	branch=$(git symbolic-ref -q HEAD)
+	branch=${branch##refs/heads/}
+	gpo $branch
+}
