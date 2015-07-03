@@ -6,4 +6,4 @@ function ruby_version {
   ruby -v | awk '{print $2}' | sed -e 's/\(.*\)/[\1]/'
 }
 
-export PS1="\n\[\033[1m\][\u@\h:\w]\[\033[0;32m\]\$(git_branch) \[\033[0;91m\]$(ruby_version) \[\033[0m\]\n\[\033[1m\][$(date +%k:%M:%S)]\[\033[0m\] \$ "
+export PS1="\n\[\033[1m\][\u@\h:\w]\[\033[0;32m\]\$(git_branch) \[\033[0;91m\]\$(ruby_version) \[\033[0m\]\n\[\033[1m\][\$(date +%k:%M:%S)]\[\033[0m\] \$ "
