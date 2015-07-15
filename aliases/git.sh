@@ -20,3 +20,15 @@ function gpob {
 	branch=${branch##refs/heads/}
 	gpo $branch
 }
+
+function gnb {
+	if [ -z "$1" ]; then
+		echo "Specify a branch name as the first parameter"
+		return 1
+	fi
+
+	git checkout integration
+	gf
+	gp
+	git checkout -b "$1"
+}
