@@ -16,7 +16,7 @@ function pe {
       fi
 
       if [ "${dir}" = "test" ]; then
-        srcFile=$( echo "${arg}" | sed 's/test/src/' )
+        srcFile=$( echo "${arg}" | sed -e 's/test/src/' -e 's/Test.php/.php/' )
         testFile=${arg}
       fi
     else
