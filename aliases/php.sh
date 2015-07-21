@@ -10,20 +10,23 @@ function pe {
     extension="${filename##*.}"
 
     if [ ${extension} = "php" ]; then
+      srcFile=""
+      testFile=""
+
       if [ "${dir}" = "src" ]; then
-        testFile=$( echo "${arg}" | sed -e 's/src/test/' -e 's/.php/Test.php/' )
         srcFile=${arg}
+        testFile=$( echo "${arg}" | sed -e 's/src/test/' -e 's/.php/Test.php/' )
       fi
 
       if [ "${dir}" = "test" ]; then
         srcFile=$( echo "${arg}" | sed -e 's/test/src/' -e 's/Test.php/.php/' )
         testFile=${arg}
       fi
+
+      files+=( ${srcFile} ${testFile} )
     else
       files+=( ${arg} )
     fi
-
-    files+=( ${srcFile} ${testFile} )
   done
 
   e ${files[*]}
