@@ -12,6 +12,7 @@ alias gp="git pull"
 alias grh="git reset HEAD"
 alias gb="git checkout"
 alias grm="git rm -r"
+alias gmv="git mv"
 
 alias gpo="git push origin"
 alias gpom="gpo master"
