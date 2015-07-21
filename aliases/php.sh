@@ -6,14 +6,21 @@ function pe {
   for arg in "$@"; do
     dir=$( echo "${arg}" | awk -F/ '{print $1}' )
 
-    if [ "${dir}" = "src" ]; then
-      testFile=$( echo "${arg}" | sed -e 's/src/test/' -e 's/.php/Test.php/' )
-      srcFile=${arg}
-    fi
+    filename=$(basename "${arg}")
+    extension="${filename##*.}"
 
-    if [ "${dir}" = "test" ]; then
-      srcFile=$( echo "${arg}" | sed 's/test/src/' )
-      testFile=${arg}
+    if [ ${extension} = "php" ]; then
+      if [ "${dir}" = "src" ]; then
+        testFile=$( echo "${arg}" | sed -e 's/src/test/' -e 's/.php/Test.php/' )
+        srcFile=${arg}
+      fi
+
+      if [ "${dir}" = "test" ]; then
+        srcFile=$( echo "${arg}" | sed 's/test/src/' )
+        testFile=${arg}
+      fi
+    else
+      files+=( ${arg} )
     fi
 
     files+=( ${srcFile} ${testFile} )
