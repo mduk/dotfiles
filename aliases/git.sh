@@ -11,6 +11,7 @@ alias gf="git fetch"
 alias gp="git pull"
 alias grh="git reset HEAD"
 alias gb="git checkout"
+alias grm="git rm -r"
 
 alias gpo="git push origin"
 alias gpom="gpo master"
