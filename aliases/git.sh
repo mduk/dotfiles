@@ -14,6 +14,7 @@ alias gb="git checkout"
 alias grm="git rm -r"
 alias gmv="git mv"
 alias gei="e .gitignore"
+alias gai="ga .gitignore"
 
 alias gpo="git push origin"
 alias gpom="gpo master"
