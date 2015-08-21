@@ -6,3 +6,8 @@ alias up="cd .."
 alias up2="cd ../.."
 
 alias ll="ls -lh"
+
+function mkcd {
+  mkdir $1
+  cd $1
+}
