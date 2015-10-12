@@ -12,5 +12,8 @@ echo "" >> $HOME/.bash_profile
 echo "# mduk/dotfiles" >> $HOME/.bash_profile
 echo "source \"$HOME/.dotfiles/sourceme.sh\"" >> $HOME/.bash_profile
 
+ln -s ~/.dotfiles/.git_template ~/.git_template
+git config --global init.templatedir '~/.git_template'
+
 echo "Installation complete."
 echo "Now exec: source \"$HOME/.dotfiles/sourceme.sh\""
