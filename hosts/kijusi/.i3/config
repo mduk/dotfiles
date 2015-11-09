@@ -10,6 +10,7 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 #exec xscreensaver
+exec /home/daniel/.fehbg
 exec /home/daniel/bin/keyboard.sh
 
 set $mod Mod1
