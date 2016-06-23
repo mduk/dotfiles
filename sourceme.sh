@@ -6,6 +6,9 @@ export PATH="~/bin/:$PATH"
 # Add the Composer bin/ to PATH
 export PATH="$PATH:~/.composer/vendor/bin/"
 
+export EDITOR="vim"
+export VISUAL="vim"
+
 alias dot="source $my_dir/sourceme.sh"
 alias edf="vim $my_dir && git --work-tree=$my_dir add . && git --work-tree=$my_dir commit $my_dir && dot"
 
