@@ -7,6 +7,7 @@ alias up="cd .."
 alias up2="cd ../.."
 
 alias ll="ls -lh"
+alias lla="ll -a"
 
 # Make and Change Into directory
 function mkcd {
