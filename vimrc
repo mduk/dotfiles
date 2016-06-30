@@ -62,6 +62,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
+Plug 'jistr/vim-nerdtree-tabs'
 Plug 'nvie/vim-flake8'
 Plug 'Chiel92/vim-autoformat'
 call plug#end()
@@ -106,6 +107,9 @@ let g:airline_symbols.linenr = ''
 let NERDChristmasTree=1
 let NERDTreeMouseMode=3
 let NERDTreeShowHidden=1
+
+let g:nerdtree_tabs_open_on_gui_startup=1
+let g:nerdtree_tabs_open_on_console_startup=1
 
 map <C-n> :NERDTreeToggle<CR>
 autocmd VimEnter * NERDTree
