@@ -55,7 +55,20 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
+Plug 'nvie/vim-flake8'
 call plug#end()
+
+"###############################################################################
+" Plugin: Flake8
+"###############################################################################
+
+" For some ultimately bizzare reason, I have to be super-explicit about the
+"   location of flake8 even though it's on my path. `which` doesn't seem to
+"   find it though so I suspect that might have something to do with it. :/
+let g:flake8_cmd="/home/daniel/.local/bin/flake8"
+
+" Run flake8 over all Python files when they're written
+autocmd BufWritePost *.py call Flake8()
 
 "###############################################################################
 " Plugin: Airline
