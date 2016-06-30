@@ -6,6 +6,7 @@ export PATH="~/bin/:$PATH"
 # Add the Composer bin/ to PATH
 export PATH="$PATH:~/.composer/vendor/bin/"
 
+# Default editor should always be vim
 export EDITOR="vim"
 export VISUAL="vim"
 
