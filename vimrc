@@ -22,6 +22,11 @@ set list
 set listchars=tab:>-,trail:~,extends:>,precedes:<
 
 "###############################################################################
+" Automatically reload the .vimrc file when it has been written
+"###############################################################################
+autocmd BufWritePost $MYVIMRC nested source $MYVIMRC
+
+"###############################################################################
 " Tab Navigation
 "###############################################################################
 nnoremap <C-t> :tabnew<CR>
