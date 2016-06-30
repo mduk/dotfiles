@@ -47,10 +47,10 @@ autocmd BufRead,BufNewFile *.php set expandtab ts=4 sw=4
 " Highlight the line that the cursor is on
 "###############################################################################
 augroup CursorLine
-    autocmd!
-    autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-    autocmd VimEnter,WinEnter,BufWinEnter * hi CursorLine cterm=NONE ctermbg=black
-    autocmd WinLeave * setlocal nocursorline
+	autocmd!
+	autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+	autocmd VimEnter,WinEnter,BufWinEnter * hi CursorLine cterm=NONE ctermbg=black
+	autocmd WinLeave * setlocal nocursorline
 augroup END
 
 "###############################################################################
@@ -88,7 +88,7 @@ let g:airline_theme = 'zenburn'
 let g:airline#extensions#tabline#enabled = 1
 
 if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
+	let g:airline_symbols = {}
 endif
 
 let g:airline_left_sep = ''
@@ -119,26 +119,26 @@ autocmd BufRead,VimEnter .vimrc :NERDTreeClose
 " Automatically close NERDTree if it's the only window left
 " Pilfered from: https://github.com/scrooloose/nerdtree/issues/21
 function! NERDTreeQuit()
-    redir => buffersoutput
-    silent buffers
-    redir END
-    "                     1BufNo  2Mods.     3File           4LineNo
-    let pattern = '^\s*\(\d\+\)\(.....\) "\(.*\)"\s\+line \(\d\+\)$'
-    let windowfound = 0
+	redir => buffersoutput
+	silent buffers
+	redir END
+	"                     1BufNo  2Mods.     3File           4LineNo
+	let pattern = '^\s*\(\d\+\)\(.....\) "\(.*\)"\s\+line \(\d\+\)$'
+	let windowfound = 0
 
-    for bline in split(buffersoutput, "\n")
-        let m = matchlist(bline, pattern)
+	for bline in split(buffersoutput, "\n")
+		let m = matchlist(bline, pattern)
 
-        if (len(m) > 0)
-            if (m[2] =~ '..a..')
-                let windowfound = 1
-            endif
-        endif
-    endfor
+		if (len(m) > 0)
+			if (m[2] =~ '..a..')
+				let windowfound = 1
+			endif
+		endif
+	endfor
 
-    if (!windowfound)
-        quitall
-    endif
+	if (!windowfound)
+		quitall
+	endif
 endfunction
 
 autocmd WinEnter * call NERDTreeQuit()
