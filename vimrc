@@ -21,6 +21,8 @@ set laststatus=2
 set list
 set listchars=tab:>-,trail:~,extends:>,precedes:<
 
+set encoding=utf-8
+
 "###############################################################################
 " Automatically reload the .vimrc file when it has been written
 "###############################################################################
