@@ -56,7 +56,15 @@ Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'nvie/vim-flake8'
+Plug 'Chiel92/vim-autoformat'
 call plug#end()
+
+"###############################################################################
+" Plugin: Autoformat
+"###############################################################################
+
+" Autoformat source on F3
+noremap <F3> :Autoformat<CR>
 
 "###############################################################################
 " Plugin: Flake8
@@ -104,26 +112,26 @@ autocmd BufRead,VimEnter .vimrc :NERDTreeClose
 " Automatically close NERDTree if it's the only window left
 " Pilfered from: https://github.com/scrooloose/nerdtree/issues/21
 function! NERDTreeQuit()
-  redir => buffersoutput
-  silent buffers
-  redir END
-"                     1BufNo  2Mods.     3File           4LineNo
-  let pattern = '^\s*\(\d\+\)\(.....\) "\(.*\)"\s\+line \(\d\+\)$'
-  let windowfound = 0
+    redir => buffersoutput
+    silent buffers
+    redir END
+    "                     1BufNo  2Mods.     3File           4LineNo
+    let pattern = '^\s*\(\d\+\)\(.....\) "\(.*\)"\s\+line \(\d\+\)$'
+    let windowfound = 0
 
-  for bline in split(buffersoutput, "\n")
-    let m = matchlist(bline, pattern)
+    for bline in split(buffersoutput, "\n")
+        let m = matchlist(bline, pattern)
 
-    if (len(m) > 0)
-      if (m[2] =~ '..a..')
-        let windowfound = 1
-      endif
+        if (len(m) > 0)
+            if (m[2] =~ '..a..')
+                let windowfound = 1
+            endif
+        endif
+    endfor
+
+    if (!windowfound)
+        quitall
     endif
-  endfor
-
-  if (!windowfound)
-    quitall
-  endif
 endfunction
 
 autocmd WinEnter * call NERDTreeQuit()
