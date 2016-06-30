@@ -102,6 +102,11 @@ let g:airline_symbols.linenr = ''
 "###############################################################################
 " Plugin: NERDTree
 "###############################################################################
+
+let NERDChristmasTree=1
+let NERDTreeMouseMode=3
+let NERDTreeShowHidden=1
+
 map <C-n> :NERDTreeToggle<CR>
 autocmd VimEnter * NERDTree
 autocmd VimEnter * wincmd p
