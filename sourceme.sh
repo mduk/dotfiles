@@ -10,6 +10,10 @@ export PATH="$PATH:~/.composer/vendor/bin/"
 export EDITOR="vim"
 export VISUAL="vim"
 
+# Don't want Python VirtualEnv's default prompt modification
+# I'll take care of that myself in ps1.sh
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+
 alias dot="source $my_dir/sourceme.sh"
 alias edf="vim $my_dir && git --work-tree=$my_dir add . && git --work-tree=$my_dir commit $my_dir && dot"
 
