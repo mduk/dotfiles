@@ -1,13 +1,13 @@
 my_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Add .local/bin/ to PATH
-export PATH="$PATH:~/.local/bin/"
+export PATH="$PATH:$HOME/.local/bin/"
 
 # Add the Composer bin/ to PATH
-export PATH="$PATH:~/.composer/vendor/bin/"
+export PATH="$PATH:$HOME/.composer/vendor/bin/"
 
 # Add my personal bin/ to the front of the PATH, overriding everything else
-export PATH="~/bin/:$PATH"
+export PATH="$HOME/bin/:$PATH"
 
 # Default editor should always be vim
 export EDITOR="vim"
