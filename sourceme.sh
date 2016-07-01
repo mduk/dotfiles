@@ -9,6 +9,9 @@ export PATH="$PATH:$HOME/.composer/vendor/bin/"
 # Add my personal bin/ to the front of the PATH, overriding everything else
 export PATH="$HOME/bin/:$PATH"
 
+# Declare the location of my general Development directory
+export DEV_DIR="$HOME/Development"
+
 # Default editor should always be vim
 export EDITOR="vim"
 export VISUAL="vim"

@@ -5,7 +5,10 @@ alias t="tree -L 4"
 alias h="cd ~"
 
 # Go to the Development directory
-alias d="cd ~/Development"
+alias d="cd $DEV_DIR"
+
+# Go to MY Development directory
+alias dm="cd $DEV_DIR/mduk"
 
 alias up="cd .."
 alias up2="cd ../.."
