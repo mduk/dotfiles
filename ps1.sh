@@ -60,7 +60,8 @@ prompt_command() {
     PS1="${PS1}\n"
 
     if [[ -f "$(pwd)/.ps1" ]]; then
-        source "$(pwd)/.ps1"
+
+        PS1="${PS1}$(source "$(pwd)/.ps1")\n"
     fi
 
     # Timestamp
