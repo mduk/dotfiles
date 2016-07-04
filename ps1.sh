@@ -59,6 +59,10 @@ prompt_command() {
     # Newline
     PS1="${PS1}\n"
 
+    if [[ -f "$(pwd)/.ps1" ]]; then
+        source "$(pwd)/.ps1"
+    fi
+
     # Timestamp
     PS1="${PS1}\[\033[1m\][\$(date +%k:%M:%S)]\[\033[0m\] \$ "
 
