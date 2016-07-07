@@ -10,6 +10,9 @@ alias d="cd $DEV_DIR"
 # Go to MY Development directory
 alias dm="cd $DEV_DIR/mduk"
 
+# Go to Doftiles Dev directory
+alias cdf="cd $DEV_DIR/mduk/dotfiles"
+
 alias up="cd .."
 alias up2="cd ../.."
 
