@@ -8,7 +8,7 @@ alias h="cd ~"
 alias d="cd $DEV_DIR"
 
 # Go to MY Development directory
-alias dm="cd $DEV_DIR/mduk"
+alias cdm="cd $DEV_DIR/mduk"
 
 # Go to Doftiles Dev directory
 alias cdf="cd $DEV_DIR/mduk/dotfiles"
