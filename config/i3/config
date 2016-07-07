@@ -3,11 +3,15 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 ################################################################################
-# KDE Adaptations
+# Special Window Rules
 ################################################################################
-#
+
+# Feh windows should float. It just works better for viewing images since
+# they're often aspect ratios that don't fit nicely into the tiled layout.
+for_window [class="feh"] floating enable
+
 # Make sure things like the volume and display brightness OSD
-# windows are always floating and don't interfere with the layout
+# windows are always floating and don't interfere with the layout.
 for_window [class="plasmashell"] floating enable
 
 # Plasma insists on drawing a desktop window and I haven't found a way to
