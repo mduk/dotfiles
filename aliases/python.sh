@@ -1,5 +1,9 @@
 # Python Aliases
 
+alias pi="pip install"
+alias pf="pip freeze"
+alias pfr="pf | grep -v pkg-resources > ./requirements.txt"
+
 function touchmod {
     if [[ -z $1 ]]; then
         echo "Need module name!"
