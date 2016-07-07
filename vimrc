@@ -42,6 +42,9 @@ autocmd BufRead,BufNewFile *.py set expandtab ts=4 sw=4
 autocmd BufRead,BufNewFile Makefile* set noexpandtab ts=4 sw=4
 autocmd BufRead,BufNewFile *.js set expandtab ts=2 sw=2
 autocmd BufRead,BufNewFile *.php set expandtab ts=4 sw=4
+autocmd BufRead,BufNewFile *.yaml set expandtab ts=2 sw=2
+autocmd BufRead,BufNewFile *.yml set expandtab ts=2 sw=2
+autocmd BufRead,BufNewFile *.feature set expandtab ts=2 sw=2
 
 "###############################################################################
 " Highlight the line that the cursor is on
