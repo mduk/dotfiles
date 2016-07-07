@@ -1,7 +1,7 @@
 # Python Aliases
 
 function touchmod {
-    if [ -z $1 ]; then
+    if [[ -z $1 ]]; then
         echo "Need module name!"
         return 1
     fi
