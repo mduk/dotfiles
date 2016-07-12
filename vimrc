@@ -110,6 +110,8 @@ let g:airline_symbols.linenr = ''
 let NERDChristmasTree=1
 let NERDTreeMouseMode=3
 let NERDTreeShowHidden=1
+let NERDTreeIgnore=['\.swp$']
+let NERDTreeWinPos="right"
 
 let g:nerdtree_tabs_open_on_gui_startup=1
 let g:nerdtree_tabs_open_on_console_startup=1
