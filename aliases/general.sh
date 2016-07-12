@@ -15,3 +15,7 @@ function dotup {
   dot
   popd
 }
+
+function hl {
+    sed -e "s/\($1\)/\x1b[7m\1\x1b[0m/g"
+}
