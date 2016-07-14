@@ -9,6 +9,10 @@ alias rmb="find . -name *.bkp -exec rm -r {} \;"
 
 alias ep="e ${DEV_DIR}/mduk/dotfiles/ps1.sh"
 
+function cdd {
+  cd "${DEV_DIR}/${1}"
+}
+
 function dotup {
   pushd ~/.dotfiles
   gf && gp
