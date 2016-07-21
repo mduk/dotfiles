@@ -1,6 +1,16 @@
 alias ytdll="youtube-dl -F"
-alias ytdla="youtube-dl -f m4a"
-alias ytdlv="youtube-dl -f best"
+
+function ytdla() {
+    pushd ~/Music
+    youtube-dl -f m4a --output "%(uploader)s/%(title)s.%(ext)s" "${1}"
+    popd
+}
+
+function ytdlv() {
+    pushd ~/Videos
+    youtube-dl -f best --output "%(uploader)s/%(title)s.%(ext)s" "${1}"
+    popd
+}
 
 function ytdlj() {
     youtube-dl -j $1 | jq .

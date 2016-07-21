@@ -13,13 +13,6 @@ function cdd {
   cd "${DEV_DIR}/${1}"
 }
 
-function dotup {
-  pushd ~/.dotfiles
-  gf && gp
-  dot
-  popd
-}
-
 function hl {
     sed -e "s/\($1\)/\x1b[7m\1\x1b[0m/g"
 }

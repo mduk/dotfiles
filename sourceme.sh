@@ -1,27 +1,10 @@
 my_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-# Add .local/bin/ to PATH
-export PATH="$PATH:$HOME/.local/bin"
+# Configure Environment
+source "$my_dir/env.sh"
 
-# Add the Composer bin/ to PATH
-export PATH="$PATH:$HOME/.composer/vendor/bin"
-
-# Add my personal bin/ to the front of the PATH, overriding everything else
-export PATH="$HOME/bin/:$PATH"
-
-# Declare the location of my general Development directory
-export DEV_DIR="$HOME/Development"
-
-# Default editor should always be vim
-export EDITOR="vim"
-export VISUAL="vim"
-
-# Don't want Python VirtualEnv's default prompt modification
-# I'll take care of that myself in ps1.sh
-export VIRTUAL_ENV_DISABLE_PROMPT=1
-
-alias dot="source $my_dir/sourceme.sh"
-alias edf="vim $my_dir && git --work-tree=$my_dir add . && git --work-tree=$my_dir commit $my_dir && dot"
+# Configure PATH
+source "$my_dir/path.sh"
 
 # Prompt
 source "$my_dir/ps1.sh"
@@ -31,6 +14,7 @@ source "$my_dir/aliases/clipboard.sh"
 source "$my_dir/aliases/chef.sh"
 source "$my_dir/aliases/comedy.sh"
 source "$my_dir/aliases/docker.sh"
+source "$my_dir/aliases/dotfiles.sh"
 source "$my_dir/aliases/erlang.sh"
 source "$my_dir/aliases/files.sh"
 source "$my_dir/aliases/general.sh"
