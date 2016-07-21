@@ -18,6 +18,8 @@ for_window [class="plasmashell"] floating enable
 # disable it, so instead I'll just get i3 to kill the window.
 for_window [title="Desktop"] kill
 
+for_window [class="vlc"] floating enable
+
 # Set the background picture
 exec ~/.fehbg
 
@@ -43,9 +45,11 @@ floating_modifier $mod
 
 bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+Return exec chromium-browser
-bindsym $mod+Shift+f exec dolphin
+bindsym $mod+Shift+f exec dolphin ~
 bindsym $mod+Shift+d exec dolphin ~/Downloads
 bindsym $mod+Shift+m exec dolphin ~/Music
+bindsym $mod+Shift+v exec dolphin ~/Videos
+bindsym $mod+Shift+p exec dolphin ~/Public
 
 # kill focused window
 bindsym $mod+Shift+q kill
