@@ -192,12 +192,32 @@ mode "browser" {
 }
 
 ##########################################################################
-# Move Mode
+# Media Mode
 ##########################################################################
-bindsym $mod+m mode "move"
-mode "move" {
-    bindsym 1 move workspace to output eDP1
-    bindsym 2 move workspace to output HDMI1
+bindsym $mod+m mode "media"
+mode "media" {
+    bindsym Up exec amixer set Master 5%+
+    bindsym Down exec amixer set Master 5%-
+
+    bindsym Left exec mpc --password spider prev
+    bindsym Right exec mpc --password spider next
+
+    bindsym space exec mpc --password spider toggle
+
+    bindsym Home exec mpc --password spider play
+    bindsym End exec mpc --password spider stop
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+##########################################################################
+# Output Mode
+##########################################################################
+bindsym $mod+o mode "output"
+mode "output" {
+    bindsym i move workspace to output eDP1
+    bindsym h move workspace to output HDMI1
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
