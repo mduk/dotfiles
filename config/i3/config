@@ -10,6 +10,11 @@
 # they're often aspect ratios that don't fit nicely into the tiled layout.
 for_window [class="feh"] floating enable
 
+# VLC windows should float. Much like feh windows, it just works out better
+# to have them float so that the window is the correct aspect ratio for the
+# video, I tend to immediately full screen it anyway.
+for_window [class="vlc"] floating enable
+
 # Make sure things like the volume and display brightness OSD
 # windows are always floating and don't interfere with the layout.
 for_window [class="plasmashell"] floating enable
@@ -17,8 +22,6 @@ for_window [class="plasmashell"] floating enable
 # Plasma insists on drawing a desktop window and I haven't found a way to
 # disable it, so instead I'll just get i3 to kill the window.
 for_window [title="Desktop"] kill
-
-for_window [class="vlc"] floating enable
 
 # Set the background picture
 exec ~/.fehbg
