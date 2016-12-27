@@ -1,7 +1,8 @@
 function g {
     grep --color=always \
          --exclude=*.swp \
-         --exclude=.git/ \
+         --exclude=*.pyc \
+         --exclude-dir=.git/ \
          --recursive \
          --line-number \
          $1 \
@@ -11,7 +12,8 @@ function g {
 function gi {
     grep --color=always \
          --exclude=*.swp \
-         --exclude=.git/ \
+         --exclude=*.pyc \
+         --exclude-dir=.git/ \
          --recursive \
          --line-number \
          --ignore-case \
