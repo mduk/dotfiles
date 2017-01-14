@@ -1,29 +1,38 @@
-my_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+export DOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+export DEV_DIR="$HOME/Development"
 
-# Configure Environment
-source "$my_dir/env.sh"
+export EDITOR="vim"
+export VISUAL="vim"
 
-# Configure PATH
-source "$my_dir/path.sh"
+export VIRTUAL_ENV_DISABLE_PROMPT=1
 
-# Prompt
-source "$my_dir/ps1.sh"
+alias dot="source $DOT_DIR/sourceme.sh"
+alias cdf="cd $DOT_DIR"
 
-# Aliases
-source "$my_dir/aliases/clipboard.sh"
-source "$my_dir/aliases/chef.sh"
-source "$my_dir/aliases/comedy.sh"
-source "$my_dir/aliases/docker.sh"
-source "$my_dir/aliases/dotfiles.sh"
-source "$my_dir/aliases/erlang.sh"
-source "$my_dir/aliases/files.sh"
-source "$my_dir/aliases/general.sh"
-source "$my_dir/aliases/git.sh"
-source "$my_dir/aliases/grep.sh"
-source "$my_dir/aliases/i3.sh"
-source "$my_dir/aliases/mpd.sh"
-source "$my_dir/aliases/php.sh"
-source "$my_dir/aliases/python.sh"
-source "$my_dir/aliases/ruby.sh"
-source "$my_dir/aliases/vagrant.sh"
-source "$my_dir/aliases/youtube.sh"
+function dotup {
+  pushd ~/.dotfiles
+  gf && gp
+  dot
+  popd
+}
+
+source "$DOT_DIR/path.sh"
+source "$DOT_DIR/ps1.sh"
+
+source "$DOT_DIR/aliases/clipboard.sh"
+source "$DOT_DIR/aliases/chef.sh"
+source "$DOT_DIR/aliases/comedy.sh"
+source "$DOT_DIR/aliases/docker.sh"
+source "$DOT_DIR/aliases/erlang.sh"
+source "$DOT_DIR/aliases/files.sh"
+source "$DOT_DIR/aliases/general.sh"
+source "$DOT_DIR/aliases/git.sh"
+source "$DOT_DIR/aliases/grep.sh"
+source "$DOT_DIR/aliases/i3.sh"
+source "$DOT_DIR/aliases/mpd.sh"
+source "$DOT_DIR/aliases/php.sh"
+source "$DOT_DIR/aliases/python.sh"
+source "$DOT_DIR/aliases/ruby.sh"
+source "$DOT_DIR/aliases/ssh.sh"
+source "$DOT_DIR/aliases/vagrant.sh"
+source "$DOT_DIR/aliases/youtube.sh"
