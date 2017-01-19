@@ -1,21 +1,10 @@
 WORK_HOST="dkendell-Latitude-E5470"
 MY_USERNAME="daniel"
 
-if [[ -v PROMPT_VERSIONS ]]; then
-    export PROMPT_VERSIONS=0
-fi
-
-if [[ -v PROMPT_CLOCK ]]; then
-    export PROMPT_CLOCK="1"
-fi
-
-if [[ -v PROMPT_EXITBAR ]]; then
-    export PROMPT_EXITBAR=1
-fi
-
-if [[ -v PROMPT_SPACE ]]; then
-    export PROMPT_SPACE=2
-fi
+DEFAULT_PROMPT_VERSIONS=0
+DEFAULT_PROMPT_CLOCK=1
+DEFAULT_PROMPT_BAR=1
+DEFAULT_PROMPT_SPACE=2
 
 terminal_width() {
     local cols=$(tput cols)
@@ -122,12 +111,12 @@ prompt_command() {
     PS1=""
 
     # Exit Bar
-    if [[ "$PROMPT_EXITBAR" == "1" ]]; then
+    if [[ "${PROMPT_BAR:-$DEFAULT_PROMPT_BAR}" == "1" ]]; then
         PS1="${PS1}$(exit_bar)"
     fi
 
     # Command Space
-    for i in $(seq 2); do
+    for i in $(seq ${PROMPT_SPACE:-$DEFAULT_PROMPT_SPACE}); do
         PS1="$PS1\n"
     done
 
@@ -140,7 +129,7 @@ prompt_command() {
     PS1="$PS1\n"
 
     # Versions Line
-    if [[ "$PROMPT_VERSIONS" == "1" ]]; then
+    if [[ "${PROMPT_VERSIONS:-$DEFAULT_PROMPT_VERSIONS}" == "1" ]]; then
         PS1="${PS1}$(block_php)"
         PS1="${PS1}$(block_ruby)"
         PS1="${PS1}$(block_python)"
@@ -148,7 +137,7 @@ prompt_command() {
     fi
 
     # Prompt Line
-    if [[ "$PROMPT_CLOCK" == "1" ]]; then
+    if [[ "${PROMPT_CLOCK:-$DEFAULT_PROMPT_CLOCK}" == "1" ]]; then
         PS1="${PS1}$(block_timestamp)"
     fi
 
