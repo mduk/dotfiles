@@ -60,7 +60,9 @@ block_timestamp() {
 }
 
 block_path() {
-    echo "[\w]"
+    if [[ "$(pwd)" != "$HOME" ]]; then
+        echo "[\w]"
+    fi
 }
 
 block_host() {
