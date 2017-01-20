@@ -67,7 +67,7 @@ block_path() {
 
 block_host() {
     if [[ "$(hostname)" != "$WORK_HOST" ]]; then
-        echo "[\h]"
+        bold "[\h]"
     fi
 }
 
