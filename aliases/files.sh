@@ -33,6 +33,17 @@ function mkcd {
   cd $1
 }
 
+# View Permissions
+function p {
+  stat -c '%A' $1 \
+    | sed -n \
+      -re 's/^([a-z-])([r|w|x|-]{3})([r|w|x|-]{3})([r|w|x|-]{3})/\1 \2 \3 \4/p'
+
+  stat -c '%a' $1 \
+    | sed -n \
+      -re 's/([0-9])([0-9])([0-9])/   \1   \2   \3/p'
+}
+
 # Toggle Executable bit on file
 function x {
     if [[ -x "$1" ]]; then
