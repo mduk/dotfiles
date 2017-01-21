@@ -54,7 +54,7 @@ block_python() {
 }
 
 block_timestamp() {
-    local time=$(date +%k:%M:%S)
+    local time=$(date +%H:%M:%S)
 
     bold "[$time]"
 }
