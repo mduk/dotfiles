@@ -1,6 +1,8 @@
 alias cu="composer update"
 alias ecj="e composer.json"
 
+alias pcsf="php-cs-fixer fix ."
+
 function pe {
   files=()
   for arg in "$@"; do
