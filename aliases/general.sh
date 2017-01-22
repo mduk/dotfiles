@@ -20,3 +20,8 @@ function cdd {
 function hl {
     sed -e "s/\($1\)/\x1b[7m\1\x1b[0m/g"
 }
+
+# http://stackoverflow.com/questions/1763891/can-stdout-and-stderr-use-different-colors-under-xterm-konsole
+hlerr()(
+  set -o pipefail;"$@" 2>&1>&3 | sed $'s,.*,\e[91m\e[1m&\e[7m,' >&2
+) 3>&1
