@@ -11,6 +11,8 @@ alias rmb="find . -name *.bkp -exec rm -r {} \;"
 
 alias ep="e ${DEV_DIR}/mduk/dotfiles/ps1.sh"
 
+alias lsp="apt list --installed | tail -n +2 | sed -re 's/^(.*)\/.+/\1/'"
+
 function cdd {
   cd "${DEV_DIR}/${1}"
 }
