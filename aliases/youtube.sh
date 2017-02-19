@@ -25,6 +25,7 @@ function ytdlv() {
     youtube-dl \
         -f best \
         --output "%(uploader)s/%(release_date)s - %(title)s.%(ext)s" \
+        --write-info-json \
         "${1}"
     popd
 }
@@ -34,6 +35,7 @@ function ytdlvpl() {
     youtube-dl \
         -f best \
         --output "%(uploader)s/%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s" \
+        --write-info-json \
         "${1}"
     popd
 }
