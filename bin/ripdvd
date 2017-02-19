@@ -1,0 +1,20 @@
+#!/bin/bash
+
+dvd_path="$1"
+preset=${2:-Universal}
+
+titles=$(HandBrakeCLI -i "$dvd_path" -t 0 2>&1 | sed -ne 's/+ title \([0-9]*\):/\1/p')
+
+for n in $titles; do
+    incomplete_path="${dvd_path}/title${n}-incomplete.mkv"
+    complete_path="${dvd_path}/title${n}.mkv"
+
+    HandBrakeCLI \
+        --input "$dvd_path" \
+        --title $n \
+        --preset "$preset" \
+        --format av_mkv \
+        --output "$incomplete_path"
+
+    mv "$incomplete_path" "$complete_path"
+done

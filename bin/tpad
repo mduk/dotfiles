@@ -1,0 +1,17 @@
+#!/bin/bash
+
+touchpad_id=$(\
+  xinput | sed \
+    -e '/Touchpad/!d' \
+    -e 's/.*id=\([0-9]*\).*/\1/' \
+)
+
+if [[ -e /tmp/touchpadoff ]]; then
+  xinput enable $touchpad_id
+  rm /tmp/touchpadoff
+  echo "Touchpad Enabled"
+else
+  xinput disable $touchpad_id
+  touch /tmp/touchpadoff
+  echo "Touchpad Disabled"
+fi

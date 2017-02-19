@@ -1,0 +1,3 @@
+#!/bin/bash
+
+konsole -e 'ytdla $1 && notify-send "Download Complete"'

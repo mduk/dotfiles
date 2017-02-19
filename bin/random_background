@@ -1,0 +1,6 @@
+#!/bin/bash
+
+feh \
+    --randomize \
+    --bg-center \
+    $HOME/Pictures/Backgrounds/*
