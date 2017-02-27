@@ -6,11 +6,11 @@ alias t3="tree -L 3"
 # Go Home
 alias h="cd ~"
 
-# Go to the Development directory
-alias d="cd $DEV_DIR"
-
 # Go to MY Development directory
 alias cdm="cd $DEV_DIR/mduk"
+
+# Go to the World First Development directory
+alias cdw="cd $DEV_DIR/worldfirst"
 
 # Go to Doftiles Dev directory
 alias cdf="cd $DEV_DIR/mduk/dotfiles"

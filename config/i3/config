@@ -2,6 +2,10 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
+exec_always setxkbmap -option ctrl:nocaps
+exec_always feh --bg-center ~/Pictures/Backgrounds/Space_NASA_space_shuttle_is_to_dock_with_the_ISS_098928_.jpg
+#exec /usr/lib/xscreensaver/binaryring -root &
+
 ################################################################################
 # Special Window Rules
 ################################################################################
@@ -22,9 +26,10 @@ for_window [class="plasmashell"] floating enable
 # Plasma insists on drawing a desktop window and I haven't found a way to
 # disable it, so instead I'll just get i3 to kill the window.
 for_window [title="Desktop"] kill
+for_window [class="desktop_window"] kill
 
 # Set the background picture
-exec ~/.fehbg
+#exec ~/.fehbg
 
 ##########################################################################
 # Default i3 Font
@@ -36,6 +41,8 @@ font pango:monospace 8
 ##########################################################################
 set $mod Mod1
 
+bindsym $mod+z focus parent; fullscreen; focus child
+
 ##########################################################################
 # Screenshots
 ##########################################################################
@@ -46,7 +53,7 @@ bindsym Shift+Print exec dolphin ~/Pictures/Screenshots
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec konsole --workdir ~/Development/worldfirst/mobile-api
 bindsym $mod+Shift+Return exec chromium-browser
 bindsym $mod+Shift+f exec dolphin ~
 bindsym $mod+Shift+d exec dolphin ~/Downloads
@@ -215,7 +222,14 @@ mode "output" {
 # i3bar
 ##########################################################################
 bar {
+    id statusbar
+    output DP2
+    output DP3
+
+  #status_command i3status
+  status_command i3blocks
   #status_command i3blocks -c /home/daniel/.config/i3blocks/config
+  #
   colors {
     separator #586e75
     background #002b36
@@ -225,6 +239,11 @@ bar {
     inactive_workspace #002b36 #002b36 #aea79f
     urgent_workspace #77216f #77216f #ffffff
   }
+}
+
+bar {
+    output HDMI1
+    mode invisible
 }
 
 ##########################################################################

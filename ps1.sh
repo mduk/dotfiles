@@ -53,7 +53,7 @@ block_python() {
     echo "[Python: $version ($env)]"
 }
 
-block_timestamp() {
+block_clock() {
     local time=$(date +%H:%M:%S)
 
     bold "[$time]"
@@ -140,7 +140,7 @@ prompt_command() {
 
     # Prompt Line
     if [[ "${PROMPT_CLOCK:-$DEFAULT_PROMPT_CLOCK}" == "1" ]]; then
-        PS1="${PS1}$(block_timestamp)"
+        PS1="${PS1}$(block_clock)"
     fi
 
     # Insert Custom Directory Prompt

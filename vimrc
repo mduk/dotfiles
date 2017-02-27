@@ -1,5 +1,7 @@
 set mouse=a
 
+set nowrap
+
 set nu
 set rnu
 
@@ -73,8 +75,10 @@ Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'jistr/vim-nerdtree-tabs'
+Plug 'Nopik/vim-nerdtree-direnter'
 Plug 'nvie/vim-flake8'
 Plug 'Chiel92/vim-autoformat'
+Plug 'ekalinin/Dockerfile.vim'
 call plug#end()
 
 "###############################################################################
@@ -128,17 +132,18 @@ let g:airline_symbols.linenr = ''
 "###############################################################################
 
 let NERDChristmasTree=1
-let NERDTreeMouseMode=3
-let NERDTreeShowHidden=1
+let NERDTreeHighlightCursorLine=1
+"let NERDTreeMouseMode=3
+"let NERDTreeShowHidden=1
 let NERDTreeIgnore=['\.swp$']
 let NERDTreeWinPos="right"
-
-let g:nerdtree_tabs_open_on_gui_startup=1
-let g:nerdtree_tabs_open_on_console_startup=1
+let NERDTreeMapOpenInTab='\r'
+"let g:nerdtree_tabs_open_on_gui_startup=1
+"let g:nerdtree_tabs_open_on_console_startup=1
 
 map <C-n> :NERDTreeToggle<CR>
-autocmd VimEnter * NERDTree
-autocmd VimEnter * wincmd p
+"autocmd VimEnter * NERDTree
+"autocmd VimEnter * wincmd p
 
 " Turn off NERDTree for editing git commit messages
 autocmd VimEnter * if &filetype ==# 'gitcommit' | NERDTreeClose | endif
