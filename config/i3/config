@@ -3,7 +3,7 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 exec_always setxkbmap -option ctrl:nocaps
-exec_always feh --bg-center ~/Development/dotfiles/backgrounds/Space_NASA_space_shuttle_is_to_dock_with_the_ISS_098928_.jpg
+exec_always feh --bg-center ~/Development/mduk/dotfiles/backgrounds/Space_NASA_space_shuttle_is_to_dock_with_the_ISS_098928_.jpg
 
 ################################################################################
 # Special Window Rules
