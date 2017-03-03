@@ -1,6 +1,7 @@
 alias shutdown="sudo shutdown -h now"
 alias reboot="sudo reboot"
 
+alias o="xdg-open"
 alias e="vim -p"
 alias c="clear"
 alias s="sudo"
