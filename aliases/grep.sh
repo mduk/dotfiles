@@ -5,8 +5,8 @@ function g {
          --exclude-dir=.git/ \
          --recursive \
          --line-number \
-         $1 \
-         .
+         "$1" \
+         "${2:-.}"
 }
 
 function gi {
@@ -17,6 +17,6 @@ function gi {
          --recursive \
          --line-number \
          --ignore-case \
-         $1 \
-         .
+         "$1" \
+         "${2:-.}"
 }
