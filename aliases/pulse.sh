@@ -1,7 +1,23 @@
 alias pa="pacmd"
-alias pall="pa list | sed -n \
+alias opall="pa list | sed -n \
     -e '/(s).*\.$/p' \
-    -e '/^\s*index/p' \
-    -e '/^\s*name:/p' \
-    -e '/application\.name = /p'
+    -e 's/^\s*name: <\(.*\)>/  * \1/p' \
+    -e 's/\s*application\.name = \"\(.*\)\"/  * \1/p'
 "
+
+pall() {
+  echo "Cards:"
+  pactl list short cards
+  echo
+  echo "Sources:"
+  pactl list short sources
+  echo
+  echo "Sinks:"
+  pactl list short sinks
+  echo
+  echo "Clients:"
+  pactl list short clients
+  echo
+  echo "Samples:"
+  pactl list short samples
+}
