@@ -1,10 +1,4 @@
 export DOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-export DEV_DIR="$HOME/Development"
-
-export EDITOR="vim"
-export VISUAL="vim"
-
-export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 alias dot="source $DOT_DIR/sourceme.sh"
 alias cdf="cd $DOT_DIR"
@@ -16,6 +10,7 @@ function dotup {
   popd
 }
 
+source "$DOT_DIR/env.sh"
 source "$DOT_DIR/path.sh"
 source "$DOT_DIR/ps1.sh"
 
