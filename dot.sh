@@ -1,6 +1,6 @@
 export DOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-alias dot="source $DOT_DIR/sourceme.sh"
+alias dot="source $DOT_DIR/dot.sh"
 alias cdf="cd $DOT_DIR"
 
 function dotup {
