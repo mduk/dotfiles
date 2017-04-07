@@ -1,7 +1,12 @@
+# Movement
+alias ..="cd .."
+alias ...="cd ../.."
+
 # Tree Listing
-alias t="tree -L 4"
+alias t="t4"
 alias t2="tree -L 2"
 alias t3="tree -L 3"
+alias t4="tree -L 4"
 
 # Go Home
 alias h="cd ~"
@@ -14,9 +19,6 @@ alias cdw="cd $DEV_DIR/worldfirst"
 
 # Go to Doftiles Dev directory
 alias cdf="cd $DEV_DIR/mduk/dotfiles"
-
-alias up="cd .."
-alias up2="cd ../.."
 
 # Default file listing with meaningful file sizes
 alias ll="ls -lh"
