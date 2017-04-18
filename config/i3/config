@@ -173,18 +173,6 @@ mode "resize" {
 }
 
 ##########################################################################
-# Browser Mode
-##########################################################################
-bindsym $mod+b mode "browser"
-mode "browser" {
-    bindsym c exec chromium-browser
-    bindsym f exec firefox
-
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-
-##########################################################################
 # Media Mode
 ##########################################################################
 bindsym $mod+m mode "media"
