@@ -7,6 +7,10 @@ alias s="sudo"
 alias rmb="find . -name *.bkp -exec rm -r {} \;"
 alias lsp="apt list --installed | tail -n +2 | sed -re 's/^(.*)\/.+/\1/'"
 
+function calc {
+  echo "scale=3; $@" | bc -q
+}
+
 function cdd {
   cd "${DEV_DIR}/${1}"
 }
