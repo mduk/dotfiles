@@ -2,5 +2,5 @@
 
 feh \
     --randomize \
-    --bg-center \
+    --bg-max \
     $DOT_DIR/backgrounds/*
