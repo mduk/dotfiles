@@ -1,3 +1,5 @@
+set t_Co=256
+
 set mouse=a
 
 set nowrap
