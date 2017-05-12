@@ -1,4 +1,8 @@
 set t_Co=256
+set rtp+=/usr/local/lib/python3.5/dist-packages/powerline/bindings/vim/
+set laststatus=2
+set showtabline=1
+set noshowmode
 
 set mouse=a
 
@@ -71,8 +75,10 @@ augroup END
 " Define Plugins
 "###############################################################################
 call plug#begin('~/.vim/plugged')
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
+"
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
@@ -83,6 +89,7 @@ Plug 'Chiel92/vim-autoformat'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'peterhoeg/vim-qml'
+
 call plug#end()
 
 "###############################################################################
