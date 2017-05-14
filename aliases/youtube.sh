@@ -5,7 +5,7 @@ function ytdla() {
     youtube-dl \
         -f m4a \
         --output "%(uploader)s/%(title)s.%(ext)s" \
-        "${1}"
+        "${1:-$(pbpaste)}"
     popd
 }
 
@@ -14,7 +14,7 @@ function ytdlapl() {
     youtube-dl \
         -f m4a \
         --output "%(uploader)s/%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s" \
-        "${1}"
+        "${1:-$(pbpaste)}"
     popd
 }
 
@@ -26,7 +26,7 @@ function ytdlv() {
         -f best \
         --output "%(uploader)s/%(release_date)s - %(title)s.%(ext)s" \
         --write-info-json \
-        "${1}"
+        "${1:-$(pbpaste)}"
     popd
 }
 
@@ -36,12 +36,10 @@ function ytdlvpl() {
         -f best \
         --output "%(uploader)s/%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s" \
         --write-info-json \
-        "${1}"
+        "${1:-$(pbpaste)}"
     popd
 }
 
-
-
 function ytdlj() {
-    youtube-dl -j $1 | jq .
+    youtube-dl -j "${1:-$(pbpaste)}" | jq .
 }
