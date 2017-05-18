@@ -8,6 +8,7 @@ alias gc="git commit"
 alias gca="gc --amend"
 
 alias gll="git log --oneline"
+alias glla="gll --decorate --graph"
 
 alias gcb="git checkout -b"
 alias gls="gs -s"
