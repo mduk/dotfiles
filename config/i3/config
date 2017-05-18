@@ -2,8 +2,9 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
+set $mod Mod1
+
 exec_always setxkbmap -option ctrl:nocaps
-exec_always feh --bg-center ~/Development/mduk/dotfiles/backgrounds/Space_NASA_space_shuttle_is_to_dock_with_the_ISS_098928_.jpg
 
 ################################################################################
 # Special Window Rules
@@ -27,18 +28,18 @@ for_window [class="plasmashell"] floating enable
 for_window [title="Desktop"] kill
 for_window [class="desktop_window"] kill
 
-# Set the background picture
-#exec ~/.fehbg
+
+##########################################################################
+# XF86Audio Keys
+##########################################################################
+bindsym XF86AudioMute           exec amixer set -D pulse Master toggle
+bindsym XF86AudioLowerVolume    exec amixer set -D pulse Master 5%-
+bindsym XF86AudioRaiseVolume    exec amixer set -D pulse Master 5%+
 
 ##########################################################################
 # Default i3 Font
 ##########################################################################
 font pango:monospace 8
-
-##########################################################################
-# Key Bindings
-##########################################################################
-set $mod Mod1
 
 bindsym $mod+z focus parent; fullscreen; focus child
 

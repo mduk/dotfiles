@@ -89,8 +89,13 @@ Plug 'Chiel92/vim-autoformat'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'peterhoeg/vim-qml'
-
+Plug 'vim-scripts/gnuplot-syntax-highlighting'
 call plug#end()
+
+"###############################################################################
+" File Extensions and Types
+"###############################################################################
+autocmd BufRead,BufNewFile *.plt set ft=gnuplot
 
 "###############################################################################
 " Moving Lines
