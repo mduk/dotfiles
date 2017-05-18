@@ -53,7 +53,7 @@ bindsym Shift+Print exec dolphin ~/Pictures/Screenshots
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-bindsym $mod+Return exec konsole --workdir ~/Development/worldfirst/mobile-api
+bindsym $mod+Return exec konsole
 bindsym $mod+Shift+Return exec chromium-browser
 bindsym $mod+Shift+f exec dolphin ~
 bindsym $mod+Shift+d exec dolphin ~/Downloads
