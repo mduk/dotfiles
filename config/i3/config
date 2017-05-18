@@ -28,6 +28,8 @@ for_window [class="plasmashell"] floating enable
 for_window [title="Desktop"] kill
 for_window [class="desktop_window"] kill
 
+for_window [class="gnuplot_qt"] floating enable
+for_window [class="Display"] floating enable
 
 ##########################################################################
 # XF86Audio Keys
