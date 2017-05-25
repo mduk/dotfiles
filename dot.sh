@@ -14,6 +14,7 @@ source "$DOT_DIR/env.sh"
 source "$DOT_DIR/path.sh"
 source "$DOT_DIR/ps1.sh"
 
+source "$DOT_DIR/aliases/baseconversion.sh"
 source "$DOT_DIR/aliases/clipboard.sh"
 source "$DOT_DIR/aliases/chef.sh"
 source "$DOT_DIR/aliases/comedy.sh"
