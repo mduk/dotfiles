@@ -1,8 +1,27 @@
-# Add .local/bin/ to PATH
-export PATH="$PATH:$HOME/.local/bin"
+path_prepend() {
+  export PATH="$1:$PATH"
+}
 
-# Add the Composer bin/ to PATH
-export PATH="$PATH:$HOME/.config/composer/vendor/bin"
+path_append() {
+  export PATH="$PATH:$1"
+}
 
-# Add my personal bin/ to the front of the PATH, overriding everything else
-export PATH="$HOME/bin/:$PATH"
+latest_jetbrains_bin() {
+  echo -n $(ls -d /opt/JetBrains/$1-* | sort | tail -n 1)
+  echo -n "/bin"
+}
+
+# Home bin overrides everything
+path_prepend "$HOME/bin"
+
+# Python Pip
+path_append "$HOME/.local/bin"
+
+# PHP Composer
+path_append "$HOME/.config/composer/vendor/bin"
+
+# JetBrains IDEs
+path_append $(latest_jetbrains_bin DataGrip)
+path_append $(latest_jetbrains_bin PhpStorm)
+path_append $(latest_jetbrains_bin RubyMine)
+
