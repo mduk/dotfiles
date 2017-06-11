@@ -29,6 +29,10 @@ alias lla="ll -a"
 # List only Directories
 alias lld="ll -d */"
 
+function f {
+  find . -name "*$1*" | hl "$1"
+}
+
 # Make and Change Into directory
 function mkcd {
   mkdir -p $1
