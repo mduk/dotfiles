@@ -10,9 +10,13 @@ function dotup {
   popd
 }
 
+export TERM="xterm-256color"
+
 source "$DOT_DIR/env.sh"
 source "$DOT_DIR/path.sh"
+
 source "$DOT_DIR/ps1.sh"
+source "$DOT_DIR/powerline.sh"
 
 source "$DOT_DIR/aliases/baseconversion.sh"
 source "$DOT_DIR/aliases/clipboard.sh"
