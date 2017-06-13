@@ -24,4 +24,6 @@ path_append "$HOME/.config/composer/vendor/bin"
 path_append $(latest_jetbrains_bin DataGrip)
 path_append $(latest_jetbrains_bin PhpStorm)
 path_append $(latest_jetbrains_bin RubyMine)
-
+path_append $(latest_jetbrains_bin WebStorm)
+path_append $(latest_jetbrains_bin pycharm)
+path_append $(latest_jetbrains_bin idea-IU)
