@@ -32,6 +32,19 @@ set listchars=tab:>-,trail:~,extends:>,precedes:<
 set encoding=utf-8
 
 "###############################################################################
+" Fuck off Middle Mouse, you're really pissing me off now.
+"###############################################################################
+map <MiddleMouse> <Nop>
+imap <MiddleMouse> <Nop>
+noremap <MiddleMouse> <LeftMouse>
+map <2-MiddleMouse> <Nop>
+imap <2-MiddleMouse> <Nop>
+map <3-MiddleMouse> <Nop>
+imap <3-MiddleMouse> <Nop>
+map <4-MiddleMouse> <Nop>
+imap <4-MiddleMouse> <Nop>
+
+"###############################################################################
 " Automatically reload the .vimrc file when it has been written
 "###############################################################################
 autocmd BufWritePost $MYVIMRC nested source $MYVIMRC
