@@ -8,6 +8,15 @@ alias t2="tree -L 2"
 alias t3="tree -L 3"
 alias t4="tree -L 4"
 
+# Move to common locations
+function mvdoc {
+  mv "$1" "$HOME/Documents/"
+}
+
+function mvpic {
+  mv "$1" "$HOME/Pictures/"
+}
+
 # Go Home
 alias h="cd ~"
 
