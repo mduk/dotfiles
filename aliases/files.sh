@@ -17,6 +17,10 @@ function mvpic {
   mv "$1" "$HOME/Pictures/"
 }
 
+function mvbg {
+  mv "$1" "$DOT_DIR/backgrounds/"
+}
+
 # Go Home
 alias h="cd ~"
 
