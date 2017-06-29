@@ -1,0 +1,25 @@
+#!/bin/bash
+
+chip=$1
+
+datasheetsDir="$HOME/Documents/Datasheets"
+
+datasheet=$(find "$datasheetsDir" -name "74*$1*.pdf" | head -n 1)
+
+if [ "$datasheet" = "" ]; then
+  statusCode=$(curl -sI "https://assets.nexperia.com/documents/data-sheet/74HC$1.pdf" | head -n 1 | awk '{print $2}')
+  if [ "$statusCode" = "200" ]; then
+    curl -s "https://assets.nexperia.com/documents/data-sheet/74HC$1.pdf" > "$datasheetsDir/74HC$1.pdf"
+  else
+    statusCode=$(curl -sI "https://assets.nexperia.com/documents/data-sheet/74HC_HCT$1.pdf" | head -n 1 | awk '{print $2}')
+    if [ "$statusCode" = "200" ]; then
+      curl -s "https://assets.nexperia.com/documents/data-sheet/74HC_HCT$1.pdf" > "$datasheetsDir/74HC_HCT$1.pdf"
+    else
+      echo "Can't find datasheet for $1"
+      exit
+    fi
+  fi
+fi
+
+datasheet=$(find "$datasheetsDir" -name "74*$1*.pdf" | head -n 1)
+okular "$datasheet"
