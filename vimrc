@@ -64,6 +64,7 @@ nnoremap <F2> gqip<CR>
 "###############################################################################
 " Indentation
 "###############################################################################
+set expandtab ts=2 sw=2
 autocmd BufRead,BufNewFile *.py      set expandtab   ts=4 sw=4 tw=79
 autocmd BufRead,BufNewFile *.js      set expandtab   ts=2 sw=2
 autocmd BufRead,BufNewFile *.json    set expandtab   ts=2 sw=2
