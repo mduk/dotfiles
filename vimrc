@@ -11,13 +11,6 @@ set nowrap
 set nu
 set rnu
 
-set autoindent
-set copyindent
-set expandtab
-set smarttab
-set smartindent
-set ts=4 sw=4
-
 set autoread
 set title
 
@@ -64,7 +57,7 @@ nnoremap <F2> gqip<CR>
 "###############################################################################
 " Indentation
 "###############################################################################
-set expandtab ts=2 sw=2
+set expandtab smarttab smartindent autoindent copyindent ts=2 sw=2
 autocmd BufRead,BufNewFile *.py      set expandtab   ts=4 sw=4 tw=79
 autocmd BufRead,BufNewFile *.js      set expandtab   ts=2 sw=2
 autocmd BufRead,BufNewFile *.json    set expandtab   ts=2 sw=2
