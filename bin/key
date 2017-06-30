@@ -1,0 +1,10 @@
+#!/bin/bash
+
+keyname="$1"
+
+if [ "$keyname" = "" ]; then
+  ssh-add -l
+  exit 0
+fi
+
+ssh-add "$HOME/.ssh/${keyname}_rsa"
