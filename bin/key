@@ -1,10 +1,33 @@
 #!/bin/bash
 
-keyname="$1"
+subcommand="$1"
+keyname="$2"
+keypath="$HOME/.ssh/${keyname}_rsa"
 
-if [ "$keyname" = "" ]; then
-  ssh-add -l
-  exit 0
-fi
+case "$subcommand" in
 
-ssh-add "$HOME/.ssh/${keyname}_rsa"
+  "add")
+    ssh-add "$keypath"
+    ;;
+
+  "remove")
+    ssh-add -d "$keypath"
+    ;;
+
+  "gen")
+    ssh-keygen
+    ;;
+
+  "upload")
+    ssh-copy-id -i "$keypath"
+    ;;
+
+  "passwd")
+    ssh-keygen -p -f "$keypath"
+    ;;
+
+  "list"|*)
+    ssh-add -l
+    ;;
+
+esac
