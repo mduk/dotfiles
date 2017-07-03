@@ -2,8 +2,8 @@
 
 url="http://$1"
 
-if [[ -f "$HOME/.config/w/$1" ]]; then
-    url=$(cat "$HOME/.config/w/$1")
+if [[ -f "$HOME/.config/www/$1" ]]; then
+    url=$(cat "$HOME/.config/www/$1")
 fi
 
 chromium-browser --app="$url"
