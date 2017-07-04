@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ "$1" = "" ]; then
+  echo
+  echo "1. BE A MAN."
+  echo
+  exit
+fi
+
+/usr/bin/man "$1"
