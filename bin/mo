@@ -1,5 +1,16 @@
 #!/bin/bash
 
-output=$(xrandr | grep " connected" | cut -d ' ' -f 1 | tr '[:upper:]' '[:lower:]' | grep -i $1)
+if [[ "$1" = "" ]]; then
+  echo "Please specify an output name according to XRandR"
+  exit 1
+fi
+
+nummatches=$(xrandr | grep " connected" | cut -d ' ' -f 1 | tr '[:upper:]' '[:lower:]' | grep -i "^$1" | wc -l)
+output=$(xrandr | grep " connected" | cut -d ' ' -f 1 | tr '[:upper:]' '[:lower:]' | grep -i "^$1")
+
+if [[ $nummatches > 1 ]]; then
+  echo "\"$1\" is ambiguous:" $output
+  exit 2
+fi
 
 i3-msg move workspace to output $output
