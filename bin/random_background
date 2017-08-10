@@ -3,4 +3,4 @@
 feh \
     --randomize \
     --bg-max \
-    $DOT_DIR/backgrounds/*
+    $DOT_DIR/backgrounds/enabled/*
