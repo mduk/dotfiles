@@ -1,6 +1,12 @@
 #!/bin/bash
 
-url="http://$1"
+url=""
+
+if [[ $1 = http* ]]; then
+  url="$1"
+else
+  url="http://$1"
+fi
 
 if [[ -f "$HOME/.config/www/$1" ]]; then
     url=$(cat "$HOME/.config/www/$1")
