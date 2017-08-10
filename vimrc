@@ -89,6 +89,10 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'Nopik/vim-nerdtree-direnter'
 
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-abolish'
+
 Plug 'pangloss/vim-javascript'
 Plug 'Chiel92/vim-autoformat'
 Plug 'ekalinin/Dockerfile.vim'
