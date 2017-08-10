@@ -8,9 +8,14 @@ fi
 nummatches=$(xrandr | grep " connected" | cut -d ' ' -f 1 | tr '[:upper:]' '[:lower:]' | grep -i "^$1" | wc -l)
 output=$(xrandr | grep " connected" | cut -d ' ' -f 1 | tr '[:upper:]' '[:lower:]' | grep -i "^$1")
 
-if [[ $nummatches > 1 ]]; then
-  echo "\"$1\" is ambiguous:" $output
+if [[ $nummatches == 0 ]]; then
+  notify-send "\"$1\" found nothing"
   exit 2
+fi
+
+if [[ $nummatches > 1 ]]; then
+  notify-send "\"$1\" is ambiguous: $output"
+  exit 3
 fi
 
 i3-msg move workspace to output $output
