@@ -27,9 +27,6 @@ alias h="cd ~"
 # Go to MY Development directory
 alias cdm="cd $DEV_DIR/mduk"
 
-# Go to the World First Development directory
-alias cdw="cd $DEV_DIR/worldfirst"
-
 # Go to Doftiles Dev directory
 alias cdf="cd $DEV_DIR/mduk/dotfiles"
 
@@ -44,12 +41,6 @@ alias lld="ll -d */"
 
 function f {
   find . -name "*$1*" | hl "$1"
-}
-
-# Make and Change Into directory
-function mkcd {
-  mkdir -p $1
-  cd $1
 }
 
 # View Permissions
