@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+  echo "Specify a branch name as the first parameter"
+  return 1
+fi
+
+git checkout integration
+git fetch
+git push
+git checkout -b "$1"
