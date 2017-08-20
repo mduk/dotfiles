@@ -1,0 +1,6 @@
+#!/bin/bash
+
+if [[ -x "$1" ]];
+  then chmod -x "$1"
+  else chmod +x "$1"
+fi

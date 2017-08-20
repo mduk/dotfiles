@@ -53,12 +53,3 @@ function p {
     | sed -n \
       -re 's/([0-9])([0-9])([0-9])/   \1   \2   \3/p'
 }
-
-# Toggle Executable bit on file
-function x {
-    if [[ -x "$1" ]]; then
-        chmod -x "$1"
-    else
-        chmod +x "$1"
-    fi
-}
