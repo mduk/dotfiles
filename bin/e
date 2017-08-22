@@ -1,0 +1,11 @@
+#!/bin/bash
+
+path="$1"
+owner="$(ls -ld $path | awk '{print $3}')"
+cmd="$EDITOR"
+
+if [[ "$owner" != "$USER" ]]; then
+    cmd="sudo $EDITOR"
+fi
+
+$cmd "$path"
