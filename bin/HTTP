@@ -1,0 +1,24 @@
+#!/bin/sh
+
+method="$1"; shift
+url="$1"; shift
+
+header_Authorization=""
+
+if [ -f .http_bearer ]; then
+  if [ -x .http_bearer ]; then
+    bearer_token="$(./.http_bearer)"
+  else
+    bearer_token="$(cat .http_bearer)"
+  fi
+  header_Authorization="Authorization:Bearer ${bearer_token}"
+fi
+
+http \
+  --verbose \
+  --check-status \
+  --all \
+  $method \
+  $url \
+  "$header_Authorization" \
+  $@

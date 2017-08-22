@@ -1,6 +1,0 @@
-alias GET="http GET"
-alias POST="http POST"
-alias PUT="http PUT"
-alias DELETE="http DELETE"
-alias OPTIONS="http OPTIONS"
-alias HEAD="http HEAD"
