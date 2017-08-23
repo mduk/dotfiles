@@ -1,0 +1,9 @@
+#!/bin/sh
+
+partitions=$(mount | grep mmcblk0 | awk '{print $1}')
+
+for partition in $partitions
+do umount $partition
+done
+
+notify-send "SD Card" "Unmounted partitions: $partitions"
