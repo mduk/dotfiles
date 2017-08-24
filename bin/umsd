@@ -2,6 +2,11 @@
 
 partitions=$(mount | grep mmcblk0 | awk '{print $1}')
 
+if [ "x$partitions" = "x" ]
+then notify-send "SD Card" "Not mounted"
+     exit 0
+fi
+
 for partition in $partitions
 do umount $partition
 done
