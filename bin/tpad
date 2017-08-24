@@ -9,9 +9,9 @@ touchpad_id=$(\
 if [[ -e /tmp/touchpadoff ]]; then
   xinput enable $touchpad_id
   rm /tmp/touchpadoff
-  echo "Touchpad Enabled"
+  notify-send --expire-time=3 "Touchpad On"
 else
   xinput disable $touchpad_id
   touch /tmp/touchpadoff
-  echo "Touchpad Disabled"
+  notify-send --expire-time=3 "Touchpad Off"
 fi
