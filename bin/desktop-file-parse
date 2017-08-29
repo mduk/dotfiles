@@ -1,0 +1,37 @@
+#!/bin/bash
+
+desktopFile="$1"
+key="$2"
+
+globalPath="/usr/share/applications/$1.desktop"
+localPath="$HOME/.local/share/applications/$1.desktop"
+usePath="$globalPath"
+
+if [[ -f $localPath ]]; then
+  usePath="$localPath"
+fi
+
+extractKey() {
+  local file="$1"
+  local key="$2"
+
+  cat "$file" \
+    | sed -n -e "/^$key=/s/^$key=\(.*\)/\1/p"
+}
+
+case "$key" in
+
+  MimeType|Categories)
+    extractKey "$usePath" "$key" \
+      | sed 's/;/\n/g'
+    ;;
+
+  "")
+    cat "$usePath"
+    ;;
+
+  *)
+    extractKey "$usePath" "$key"
+    ;;
+
+esac
