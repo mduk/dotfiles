@@ -1,6 +1,3 @@
-alias shutdown="sudo shutdown -h now"
-alias reboot="sudo reboot"
-
 alias o="xdg-open"
 alias s="sudo"
 alias rmb="find . -name *.bkp -exec rm -r {} \;"
