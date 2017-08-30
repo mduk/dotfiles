@@ -11,14 +11,25 @@ if [ -f .http_bearer ]; then
   else
     bearer_token="$(cat .http_bearer)"
   fi
+
   header_Authorization="Authorization:Bearer ${bearer_token}"
+
+  http \
+    --verbose \
+    --check-status \
+    --all \
+    $method \
+    $url \
+    "$header_Authorization" \
+  $@
+else
+  http \
+    --verbose \
+    --check-status \
+    --all \
+    $method \
+    $url \
+    $@
 fi
 
-http \
-  --verbose \
-  --check-status \
-  --all \
-  $method \
-  $url \
-  "$header_Authorization" \
-  $@
+
