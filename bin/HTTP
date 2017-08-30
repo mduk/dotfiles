@@ -1,35 +1,32 @@
-#!/bin/sh
+#!/bin/bash
 
 method="$1"; shift
 url="$1"; shift
 
-header_Authorization=""
+options="--check-status"
+headers=""
 
-if [ -f .http_bearer ]; then
-  if [ -x .http_bearer ]; then
-    bearer_token="$(./.http_bearer)"
-  else
-    bearer_token="$(cat .http_bearer)"
-  fi
-
-  header_Authorization="Authorization:Bearer ${bearer_token}"
-
-  http \
-    --verbose \
-    --check-status \
-    --all \
-    $method \
-    $url \
-    "$header_Authorization" \
-  $@
-else
-  http \
-    --verbose \
-    --check-status \
-    --all \
-    $method \
-    $url \
-    $@
+# If STDOUT is connected to a terminal (not a pipe)
+if [ -t 1 ]
+then options="$options --verbose --all"
 fi
 
+# Check for a Bearer Access Token
+if [ -f .http_bearer ]; then
+  if [ -x .http_bearer ]; then
+    bearer_token=$(./.http_bearer)
+  else
+    bearer_token=$(cat .http_bearer)
+  fi
 
+  headers="$headers \"Authorization:Bearer $bearer_token\""
+fi
+
+# I have no idea why eval makes this work
+#   Without it, $headers ends up being requoted weirdly
+#   Use set -x to see what I mean. If anyone can explain
+#   this to me, please do. :)
+
+#set -x
+
+eval http $options $method "$url" $headers
