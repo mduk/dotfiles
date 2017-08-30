@@ -1,7 +1,6 @@
 #!/bin/bash
 
 infile="$1"; shift
-
 markers="$@"
 
 duration=$(ffprobe "$infile" 2>&1 | grep "Duration" | awk '{print $2}' | sed 's/\(..:..:..\)...,/\1/')
@@ -16,13 +15,14 @@ do
   outfilename=$(echo $infile | sed "s/\./-$starttime-$endtime./g")
 
   echo -n "$starttime-$endtime : "
-  [ -f "$outfilename" ] && echo "Already exists. Skipping..."
 
   if [ ! -f "$outfilename" ]
   then
     echo "Writing $outfilename"
     ffmpeg -v error -y -i "$infile" \
       -vcodec copy -acodec copy -ss $starttime.0000 -to $endtime.0000 -sn "$outfilename"
+  else
+    echo "Already exists. Skipping..."
   fi
 
   starttime="$marker"
