@@ -1,5 +1,8 @@
 #!/bin/bash
 
+[[ $# -eq 0 ]] && echo "Usage: x <file>" \
+               && exit 1
+
 if [[ -x "$1" ]];
   then chmod -x "$1"
   else chmod +x "$1"
