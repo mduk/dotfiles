@@ -1,0 +1,7 @@
+#!/bin/sh
+
+mimetype \
+  --output-format '%m' \
+  --dereference \
+  - \
+  $@
