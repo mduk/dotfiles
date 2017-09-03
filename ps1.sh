@@ -1,6 +1,7 @@
 WORK_HOST="dkendell-Latitude-E5470"
 MY_USERNAME="daniel"
 
+DEFAULT_PROMPT_HOST=0
 DEFAULT_PROMPT_VERSIONS=0
 DEFAULT_PROMPT_CLOCK=1
 DEFAULT_PROMPT_BAR=1
@@ -125,7 +126,11 @@ prompt_command() {
     # Environment Line
     PS1="${PS1}$(block_term)"
     PS1="${PS1}$(block_user)"
-    PS1="${PS1}$(block_host)"
+
+    if [[ "${PROMPT_HOST:-$DEFAULT_PROMPT_HOST}" == "1" ]]; then
+      PS1="${PS1}$(block_host)"
+    fi
+
     PS1="${PS1}$(block_path)"
     PS1="${PS1}$(block_git)"
     PS1="$PS1\n"
