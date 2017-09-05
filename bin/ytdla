@@ -1,0 +1,10 @@
+#!/bin/bash
+
+pushd $HOME/Music
+
+youtube-dl \
+  -f m4a \
+  --output "%(uploader)s/%(title)s.%(ext)s" \
+  "${1:-$(cbp)}"
+
+popd
