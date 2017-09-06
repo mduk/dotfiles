@@ -1,7 +1,6 @@
-WORK_HOST="dkendell-Latitude-E5470"
 MY_USERNAME="daniel"
 
-DEFAULT_PROMPT_HOST=0
+DEFAULT_PROMPT_HOST=1
 DEFAULT_PROMPT_VERSIONS=0
 DEFAULT_PROMPT_CLOCK=1
 DEFAULT_PROMPT_BAR=1
@@ -65,8 +64,8 @@ block_path() {
 }
 
 block_host() {
-    if [[ "$(hostname)" != "$WORK_HOST" ]]; then
-        bold "[\h]"
+    if [[ "$SSH_TTY" != "" ]]; then
+      green $(bold "[\u@\h]")
     fi
 }
 
@@ -88,6 +87,10 @@ block_git() {
     )
 
     echo "\[\033[0;32m\]$git_branch\[\033[0m\]"
+}
+
+green() {
+    echo "\[\033[92m$1\033[0m\]"
 }
 
 yellow() {
