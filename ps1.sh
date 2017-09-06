@@ -61,9 +61,7 @@ block_clock() {
 }
 
 block_path() {
-    if [[ "$(pwd)" != "$HOME" ]]; then
-        echo "[\w]"
-    fi
+    echo "[\w]"
 }
 
 block_host() {
@@ -131,9 +129,12 @@ prompt_command() {
       PS1="${PS1}$(block_host)"
     fi
 
-    PS1="${PS1}$(block_path)"
-    PS1="${PS1}$(block_git)"
-    PS1="$PS1\n"
+    # Location
+    if [[ "$(pwd)" != "$HOME" ]]; then
+      PS1="${PS1}$(block_path)"
+      PS1="${PS1}$(block_git)"
+      PS1="$PS1\n"
+    fi
 
     # Versions Line
     if [[ "${PROMPT_VERSIONS:-$DEFAULT_PROMPT_VERSIONS}" == "1" ]]; then
