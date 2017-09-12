@@ -2,7 +2,24 @@
 
 dvdpath="$1"
 
-HandBrakeCLI \
-  -i "$dvdpath" \
-  -t 0 2>&1 \
-    | sed -ne 's/+ title \([0-9]*\):/\1/p'
+_OLDIFS="$IFS"
+IFS=$'\n'
+set -f
+
+dvdscan=$(HandBrakeCLI \
+            -i "$dvdpath" \
+            -t 0 \
+            2>&1 | sed -rne '/^[[:space:]]*\+/p')
+
+thistitle=""
+thisduration=""
+
+for line in $dvdscan;
+do
+  [[ $line =~ \+\ title ]] && echo -n $line | sed 's/\+ title \(.*\):/\1/' \
+                           && echo -n " "
+  [[ $line =~ \+\ duration ]] && echo $line | sed 's/.*\(..:..:..\).*/\1/'
+done
+
+IFS=$_OLDIFS
+unset -f
