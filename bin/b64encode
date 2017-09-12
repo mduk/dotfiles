@@ -1,0 +1,11 @@
+#!/bin/bash
+
+[[ $# -eq 0 ]] && cat - | base64 \
+               && exit
+
+[[ $# -eq 1 ]] && echo "$1" | base64 \
+               && exit
+
+echo "Usage: cat ./file | b64encode"
+echo "       b64encode \"shell safe string\""
+exit 1

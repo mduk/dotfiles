@@ -1,0 +1,11 @@
+#!/bin/bash
+
+[[ $# -eq 0 ]] && cat - | base32 --decode \
+               && exit
+
+[[ $# -eq 1 ]] && echo "$1" | base32 --decode \
+               && exit
+
+echo "Usage: cat ./file | b32decode"
+echo "       echo \"shell safe string\" | b32decode"
+exit 1
