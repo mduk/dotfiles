@@ -1,0 +1,10 @@
+#!/bin/bash
+
+[[ $# -eq 0 ]] && xdg-open "$(cbp)" \
+               && exit
+
+[[ $# -eq 1 ]] && xdg-open "$1" \
+               && exit
+
+
+

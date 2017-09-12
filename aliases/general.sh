@@ -1,4 +1,3 @@
-alias o="xdg-open"
 alias s="sudo"
 alias rmb="find . -name *.bkp -exec rm -r {} \;"
 alias lsp="apt list --installed | tail -n +2 | sed -re 's/^(.*)\/.+/\1/'"
