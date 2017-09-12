@@ -2,7 +2,7 @@
 
 url=""
 
-if [[ $1 = http* ]]; then
+if [[ $1 = http* || $1 = file* ]]; then
   url="$1"
 else
   url="http://$1"
