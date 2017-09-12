@@ -1,0 +1,14 @@
+#!/bin/bash
+
+basevideo="$1"
+overlayvideo="$2"
+
+ffmpeg \
+  -i "$basevideo" \
+  -i "$overlayvideo" \
+  -filter_complex '[0:v][1:v]overlay[out]' \
+  -map '[out]' \
+  outfile.mov
+
+#  -filter_complex '[1:v]colorkey=0x000893[out]' \
+#

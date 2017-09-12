@@ -1,0 +1,10 @@
+#!/bin/bash
+
+infile="$1"
+outfile=$(echo $infile | sed 's/\./-greyscale./')
+
+ffmpeg \
+  -i "$infile" \
+  -vf hue=s=0 \
+  -c:a copy \
+  "$outfile"

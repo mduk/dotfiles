@@ -1,0 +1,11 @@
+#!/bin/bash
+
+infile="$1"
+resolution="${2:-1920x1080}"
+outfile=$(echo $infile | sed "s/\./-$resolution./")
+
+ffmpeg \
+  -i "$infile" \
+  -vf "scale=$resolution" \
+  "$outfile"
+
