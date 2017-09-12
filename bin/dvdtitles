@@ -1,0 +1,8 @@
+#!/bin/bash
+
+dvdpath="$1"
+
+HandBrakeCLI \
+  -i "$dvdpath" \
+  -t 0 2>&1 \
+    | sed -ne 's/+ title \([0-9]*\):/\1/p'
