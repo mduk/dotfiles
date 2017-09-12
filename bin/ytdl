@@ -1,0 +1,41 @@
+#!/bin/bash
+
+destpath="$HOME/YouTube"
+
+url=${1:-$(cbp)}
+url_encoded=$(b64encode $url | sed 's/\///g')
+
+tmp_jsonpath="/tmp/ytdl-$url_encoded"
+
+youtube-dl -j "$url" > "$tmp_jsonpath"
+
+yt_id=$(cat "$tmp_jsonpath" | jq -r '.id')
+yt_uploader=$(cat "$tmp_jsonpath" | jq -r '.uploader')
+yt_title=$(cat "$tmp_jsonpath" | jq -r '.title')
+
+notify-send "Downloading" "$yt_title"
+
+dl_filename=$(
+  youtube-dl \
+    -f best \
+    --output "%(id)s.%(ext)s" \
+    "$url" \
+    2>&1 | sed -n '/Destination/s/.*: \(.*\)$/\1/p'
+)
+dl_extension=${dl_filename##*.}
+
+echo "$ytdl_out" > /tmp/tmp.out
+
+if [[ $? -eq 0 ]]
+
+  then if [[ "x$dl_filename" = "x" ]]
+         then notify-send "Already Downloaded" "$yt_title"
+         else notify-send "Download Complete" "$yt_title [$dl_filename]"
+              mv "$tmp_jsonpath" "$destpath/.$yt_id.json"
+              mv "$dl_filename" "$destpath/.$yt_id.$dl_extension"
+              ln -s "$destpath/.$yt_id.$dl_extension" "$destpath/$yt_title.$dl_extension"
+       fi
+
+  else notify-send "Download Failed!" "$yt_title"
+
+fi
