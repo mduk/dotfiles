@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [[ $# -lt 1 ]]
+then
+  echo "Usage: $(basename $0) <crl-url>"
+  exit
+fi
+
+crlUrl="$1"
+
+openssl crl \
+        -inform DER \
+        -in "$crlUrl" \
+        -text \
+        -noout

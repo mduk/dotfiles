@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [[ $# -lt 1 ]]
+then
+  echo "Usage: $(basename $0) <certificate-file>"
+  exit
+fi
+
+certFile="$1"
+
+openssl x509 -in "$certFile" -text -noout

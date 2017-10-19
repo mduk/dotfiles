@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [[ $# -lt 3 ]]
+then
+  echo "Usage $(basename $0) <issuer-cert> <test-cert> <ocsp-url>"
+  exit 1
+fi
+
+issuerCert="$1"
+ocspUrl="$2"
+testCert="$3"
+
+openssl ocsp \
+  -issuer "$issuerCert" \
+  -cert "$testCert" \
+  -url "$ocspUrl" \
+  -no_nonce \
+  -noverify \
+  -resp_text
