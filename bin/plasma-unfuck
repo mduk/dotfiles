@@ -1,0 +1,4 @@
+#!/bin/bash
+
+sed -i 's/^lastScreen=.*/lastScreen=0/g' $HOME/.config/plasma-org.kde.plasma.desktop-appletsrc
+plasma-restart
