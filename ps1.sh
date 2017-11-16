@@ -1,7 +1,7 @@
 MY_USERNAME="daniel"
 
 DEFAULT_PROMPT_HOST=1
-DEFAULT_PROMPT_VERSIONS=0
+DEFAULT_PROMPT_VERSIONS=""
 DEFAULT_PROMPT_CLOCK=1
 DEFAULT_PROMPT_BAR=1
 DEFAULT_PROMPT_SPACE=2
@@ -37,20 +37,31 @@ block_term() {
 }
 
 block_php() {
-    local version=$(php -r 'echo phpversion();')
-    echo "[PHP: $version]"
+    echo "$PROMPT_VERSIONS" | grep "php" > /dev/null
+    if [ $? -eq 0 ]
+    then
+        local version=$(php -r 'echo phpversion();')
+        echo "[PHP: $version]"
+    fi
 }
 
 block_ruby() {
-    local version=$(ruby -v | awk '{print $2}')
-    echo "[Ruby: $version]"
+    echo "$PROMPT_VERSIONS" | grep "ruby" > /dev/null
+    if [ $? -eq 0 ]
+    then
+        local version=$(ruby -v | awk '{print $2}')
+        echo "[Ruby: $version]"
+    fi
 }
 
 block_python() {
-    local version=$(python --version 2>&1 | awk '{print $2}')
-    local env=$([[ -v VIRTUAL_ENV ]] && echo venv || echo system)
-
-    echo "[Python: $version ($env)]"
+    echo "$PROMPT_VERSIONS" | grep "python" > /dev/null
+    if [ $? -eq 0 ]
+    then
+        local version=$(python --version 2>&1 | awk '{print $2}')
+        local env=$([[ -v VIRTUAL_ENV ]] && echo venv || echo system)
+        echo "[Python: $version ($env)]"
+    fi
 }
 
 block_clock() {
@@ -140,7 +151,7 @@ prompt_command() {
     fi
 
     # Versions Line
-    if [[ "${PROMPT_VERSIONS:-$DEFAULT_PROMPT_VERSIONS}" == "1" ]]; then
+    if [[ "${PROMPT_VERSIONS:-$DEFAULT_PROMPT_VERSIONS}" != "" ]]; then
         PS1="${PS1}$(block_php)"
         PS1="${PS1}$(block_ruby)"
         PS1="${PS1}$(block_python)"
