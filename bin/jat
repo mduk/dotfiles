@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [[ $# -lt 1 ]]
+then
+  echo "Usage: $(basename $0) <json-file> [jq-expression]"
+  exit
+fi
+
+jqexpr=${2:-.}
+
+cat "$1" | jq "$jqexpr"
