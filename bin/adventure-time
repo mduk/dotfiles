@@ -1,0 +1,4 @@
+#!/bin/bash
+
+files=($HOME/Videos/Adventure\ Time/*.mp4)
+mpv -fs "$(printf "%s\n" "${files[RANDOM % ${#files[@]}]}")"
