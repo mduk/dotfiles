@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if hdmi-connected
+then cat /sys/class/drm/card0-HDMI-A-1/edid | parse-edid 2>/dev/null | sed -n '/Identifier/s/.*"\(.*\)".*/\1/p'
+else echo "No display connected." > /dev/stderr
+     exit 1
+fi
