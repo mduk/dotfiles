@@ -6,10 +6,17 @@ then
   exit
 fi
 
-crlUrl="$1"
-
-openssl crl \
-        -inform DER \
-        -in "$crlUrl" \
-        -text \
-        -noout
+if [[ $1 = http* ]]
+then
+  openssl crl \
+          -inform DER \
+          -in <(curl -s "$1") \
+          -text \
+          -noout
+else
+  openssl crl \
+          -inform DER \
+          -in "$crlUrl" \
+          -text \
+          -noout
+fi
