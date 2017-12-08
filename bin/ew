@@ -1,3 +1,12 @@
 #!/bin/bash
 
-e "$(which $1)"
+if [[ $# -lt 1 ]]
+then
+  echo "Usage: $(basename $0) <file-on-PATH>"
+  exit 1
+fi
+
+if which "$1"
+  then e "$(which $1)"
+  else e "$HOME/bin/$1"
+fi
