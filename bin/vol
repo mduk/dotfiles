@@ -10,6 +10,10 @@ case $1 in
     amixer set Master 2%-
     ;;
 
+  mute)
+    amixer set Master 0
+    ;;
+
   *)
     echo "Usage: vol [up|down]"
     exit 1
