@@ -4,7 +4,7 @@ path="$1"
 
 if [ -f "$path" ]
 then
-  owner="$(ls -ld $path | awk '{print $3}')"
+  owner="$(ls -ld "$path" | awk '{print $3}')"
 
   if [[ "$owner" != "$USER" ]]
   then
