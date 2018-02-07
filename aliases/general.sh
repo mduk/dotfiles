@@ -1,6 +1,4 @@
-alias s="sudo"
-alias rmb="find . -name *.bkp -exec rm -r {} \;"
-alias lsp="apt list --installed | tail -n +2 | sed -re 's/^(.*)\/.+/\1/'"
+alias rm="rm -i"
 
 function c {
   if [ -z "$@" ]
