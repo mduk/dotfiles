@@ -1,19 +1,63 @@
 #!/bin/bash
 
-set -e
+package() {
+  echo -n "Installing $1: "
 
-cd $HOME
+  if sudo dpkg -s $1 | grep '^Status:.* ok .*' >/dev/null 2>/dev/null
+  then
+    echo "Already Installed"
+    return 0
+  else
+    echo -n "Installing"
+    if sudo apt-get install -y $1 >/dev/null
+    then echo "OK"
+    else echo "ERROR"
+    fi
+  fi
+}
 
-echo "Cloning mduk/dotfiles into $HOME/.dotfiles"
-git clone git@github.com:mduk/dotfiles.git .dotfiles
+symlink() {
+  declare target="$PWD/$1"
+  declare link="$2"
 
-echo "Adding source line to $HOME/.bash_profile - Don't forget to source it after installing!"
-echo "" >> $HOME/.bash_profile
-echo "# mduk/dotfiles" >> $HOME/.bash_profile
-echo "source \"$HOME/.dotfiles/sourceme.sh\"" >> $HOME/.bash_profile
+  echo -n "Linking ./$1 to $link: "
 
-ln -s ~/.dotfiles/.git_template ~/.git_template
-git config --global init.templatedir '~/.git_template'
+  if [[ -L "$link" ]]
+  then
+    if [[ $(readlink "$link") == "$target" ]]
+    then
+      echo "Link already exists"
+    else
+      echo "Unknown Link found:"
+      echo "     Link: $link"
+      echo "   Target: $(readlink "$link")"
+      echo "  Desired: $target"
+    fi
+    return
+  fi
 
-echo "Installation complete."
-echo "Now exec: source \"$HOME/.dotfiles/sourceme.sh\""
+  if [[ -f "$link" ]]
+  then
+    echo "  Blocked by file. Moving aside."
+    mv "$link" "$link.predot"
+  fi
+
+  if [[ ! -L "$link" ]]
+  then
+    echo -n "  Created Link "
+    ln -s "$target" "$link"
+  fi
+}
+
+
+
+# Update APT
+echo -n "Updating APT... "
+if sudo apt-get update >/dev/null
+then echo "Done"
+else echo "Error"
+fi
+
+source install-cli.sh
+source install-dev.sh
+source install-gui.sh
