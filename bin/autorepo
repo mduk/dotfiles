@@ -1,0 +1,21 @@
+#!/bin/bash
+
+while read repo
+do
+  # Skip blank lines ($repo has /z/ero length)
+  [[ -z "$repo" ]] && continue
+
+  # Line matches: vendor/repo
+  if echo -n "$repo" | grep '.*/.*'
+  then
+    declare vendor="$HOME/Development/$(echo -n "$repo" | cut -d/ -f1)"
+    [[ ! -d  $vendor ]] && mkdir "$vendor"
+    cd "$vendor"
+    git clone "git@github.com:${repo}.git"
+
+    continue
+  fi
+
+  echo "Dunno this one: $repo"
+
+done < <(cat $HOME/.config/autorepo)
