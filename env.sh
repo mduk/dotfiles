@@ -9,5 +9,7 @@ export VISUAL="vim"
 # I'll take care of that myself in ps1.sh
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
-# Enable Chruby
-source /usr/local/share/chruby/chruby.sh
+# Enable Chruby if installed
+if [[ -f /usr/local/share/chruby/chruby.sh ]]
+then source /usr/local/share/chruby/chruby.sh
+fi
