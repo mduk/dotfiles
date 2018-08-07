@@ -16,6 +16,9 @@ package i3blocks
 package feh
 package gimp
 
+# PDF Viewer (gnome)
+package evince
+
 # Multimedia
 package vlc
 package mpv
