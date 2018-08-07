@@ -1,21 +1,42 @@
 #!/bin/bash
 
-while read repo
+repo-name-is-empty() {
+  [[ -z "$REPO" ]]
+}
+
+repo-was-already-cloned() {
+  [[ -d "$HOME/Development/$REPO/.git" ]]
+}
+
+clone-repo() {
+  git \
+    clone \
+    "git@github.com:${REPO}.git" \
+    "$HOME/Development/$REPO/"
+}
+
+fetch-repo() {
+  git \
+    --work-tree="$HOME/Development/$REPO/" \
+    --git-dir="$HOME/Development/$REPO/.git/" \
+    fetch
+}
+
+vendor-path() {
+  echo "$HOME/Development/$(echo -n "$1" | cut -d/ -f1)"
+}
+
+while read REPO
 do
-  # Skip blank lines ($repo has /z/ero length)
-  [[ -z "$repo" ]] && continue
+  echo "$REPO"
 
-  # Line matches: vendor/repo
-  if echo -n "$repo" | grep '.*/.*'
-  then
-    declare vendor="$HOME/Development/$(echo -n "$repo" | cut -d/ -f1)"
-    [[ ! -d  $vendor ]] && mkdir "$vendor"
-    cd "$vendor"
-    git clone "git@github.com:${repo}.git"
-
-    continue
+  if repo-name-is-empty
+  then continue
   fi
 
-  echo "Dunno this one: $repo"
+  if repo-was-already-cloned
+  then fetch-repo
+  else clone-repo
+  fi | sed 's/^/   /'
 
 done < <(cat $HOME/.config/autorepo)
