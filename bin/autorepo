@@ -15,17 +15,6 @@ clone-repo() {
     "$HOME/Development/$REPO/"
 }
 
-fetch-repo() {
-  git \
-    --work-tree="$HOME/Development/$REPO/" \
-    --git-dir="$HOME/Development/$REPO/.git/" \
-    fetch
-}
-
-vendor-path() {
-  echo "$HOME/Development/$(echo -n "$1" | cut -d/ -f1)"
-}
-
 while read REPO
 do
   echo "$REPO"
@@ -35,7 +24,7 @@ do
   fi
 
   if repo-was-already-cloned
-  then fetch-repo
+  then continue
   else clone-repo
   fi | sed 's/^/   /'
 
