@@ -12,7 +12,7 @@ clone-repo() {
   git \
     clone \
     "git@github.com:${REPO}.git" \
-    "$HOME/Development/$REPO/"
+    "$HOME/Development/$REPO/" 2>&1 | cat
 }
 
 while read REPO
