@@ -44,7 +44,7 @@ symlink() {
 
   if [[ ! -L "$link" ]]
   then
-    echo -n "  Created Link "
+    echo "  Created Link "
     ln -s "$target" "$link"
   fi
 }
