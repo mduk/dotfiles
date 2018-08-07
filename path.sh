@@ -1,8 +1,10 @@
 path_prepend() {
+  [[ ! -d $1 ]] && return
   export PATH="$1:$PATH"
 }
 
 path_append() {
+  [[ ! -d $1 ]] && return
   export PATH="$PATH:$1"
 }
 
