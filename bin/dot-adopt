@@ -1,6 +1,6 @@
 #!/bin/bash
 
-declare adoptfile="$1"
+declare adoptfile="$(realpath "$1")"
 declare dotfile="${DOT_DIR}${adoptfile}"
 
 if [[ -L $adoptfile ]]
