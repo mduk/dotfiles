@@ -1,0 +1,50 @@
+#!/bin/bash
+
+declare adoptfile="$1"
+declare dotfile="${DOT_DIR}${adoptfile}"
+
+if [[ -L $adoptfile ]]
+then
+  declare linktarget=$(readlink "$adoptfile")
+  if [[ $linktarget == $dotfile ]]
+  then
+    echo "Already adopted $adoptfile"
+    exit 0
+  else
+    echo "$adoptfile is a link pointing to $linktarget"
+    echo "Erring on the side of caution and leaving well enough alone."
+    exit 1
+  fi
+fi
+
+if [[ -f $adoptfile ]] || [[ -d $adoptfile ]]
+then
+  declare dotdir=$(dirname "$dotfile")
+
+  mkdir -p "$dotdir"
+  sudo cp -r "$adoptfile" "$dotfile"
+  sudo chown -R $USER:$USER "$dotfile"
+
+  git \
+    --work-tree="$DOT_DIR" \
+    --git-dir="$DOT_DIR/.git" \
+    add "$dotfile"
+
+  git \
+    --work-tree="$DOT_DIR" \
+    --git-dir="$DOT_DIR/.git" \
+    commit -m "Adopted $adoptfile"
+
+  git \
+    --work-tree="$DOT_DIR" \
+    --git-dir="$DOT_DIR/.git" \
+    push
+
+  if sudo rm -f "$adoptfile"
+  then
+    sudo ln -s "$dotfile" "$adoptfile"
+  else
+    echo "Couldn't delete original file"
+    exit 2
+  fi
+fi
