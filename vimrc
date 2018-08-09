@@ -102,6 +102,8 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-abolish'
 
+Plug 'vim-syntastic/syntastic'
+
 " syntax highlighters
 Plug 'pangloss/vim-javascript'
 Plug 'Chiel92/vim-autoformat'
