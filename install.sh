@@ -9,7 +9,7 @@ package() {
     return 0
   else
     echo -n "Installing"
-    if sudo apt-get install -y $1 >/dev/null
+    if sudo apt-get install -y $1 | sed 's/^/   /'
     then echo "OK"
     else echo "ERROR"
     fi
