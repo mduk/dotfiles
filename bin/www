@@ -1,15 +1,26 @@
 #!/bin/bash
 
-url=""
+case $# in
+  1)
+    declare url
 
-if [[ $1 = http* || $1 = file* ]]; then
-  url="$1"
-else
-  url="http://$1"
-fi
+    if [[ $1 == http* ]] || [[ $1 == file* ]]
+    then url="$1"
+    elif [[ -f "$HOME/.config/www/$1" ]]
+    then url=$(cat "$HOME/.config/www/$1")
+    else url="http://$1"
+    fi
 
-if [[ -f "$HOME/.config/www/$1" ]]; then
-    url=$(cat "$HOME/.config/www/$1")
-fi
+    chromium-browser --app="$url"
+    ;;
 
-chromium-browser --app="$url"
+  2)
+    echo "$2" > $HOME/.config/www/$1
+    ;;
+
+  *)
+    echo "Usage:"
+    echo "  www <alias>       - Open aliased address"
+    echo "  www <alias> <url> - Set address alias"
+    ;;
+esac
