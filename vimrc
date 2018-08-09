@@ -103,7 +103,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-abolish'
 
 " syntax highlighters
-Plug 'evanmiller/nginx-vim-syntax'
 Plug 'pangloss/vim-javascript'
 Plug 'Chiel92/vim-autoformat'
 Plug 'ekalinin/Dockerfile.vim'
