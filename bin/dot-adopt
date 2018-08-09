@@ -38,16 +38,17 @@ then
     --git-dir="$DOT_DIR/.git" \
     commit -m "Adopted $adoptfile"
 
-  git \
-    --work-tree="$DOT_DIR" \
-    --git-dir="$DOT_DIR/.git" \
-    push
-
-  if sudo rm -f "$adoptfile"
+  if sudo rm -r --interactive=never "$adoptfile"
   then
     sudo ln -s "$dotfile" "$adoptfile"
   else
     echo "Couldn't delete original file"
     exit 2
   fi
+
+  git \
+    --work-tree="$DOT_DIR" \
+    --git-dir="$DOT_DIR/.git" \
+    push
+
 fi
