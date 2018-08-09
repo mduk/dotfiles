@@ -3,6 +3,9 @@
 declare adoptfile="$(realpath "$1")"
 declare dotfile="${DOT_DIR}${adoptfile}"
 
+echo "Adopting $adoptfile" >&2
+echo "      -> $dotfile" >&2
+
 if [[ -L $adoptfile ]]
 then
   declare linktarget=$(readlink "$adoptfile")
