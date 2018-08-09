@@ -23,8 +23,13 @@ package evince
 package vlc
 package mpv
 package ffmpeg
+package kdenlive
 
 # PulseAudio
 package pavucontrol
 package pavumeter
 package pamix
+
+# Development
+package glade
+package dconf-editor
