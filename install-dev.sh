@@ -12,3 +12,4 @@ package git
 package httpie
 package jq
 package openssl
+package virtualbox
