@@ -58,6 +58,6 @@ then echo "Done"
 else echo "Error"
 fi
 
-source install-cli.sh
-source install-dev.sh
-source install-gui.sh
+for arg in "$@"
+do source "./install-${arg}.sh"
+done
