@@ -1,5 +1,3 @@
-symlink config/autorepo $HOME/.config/autorepo
-
 # Python
 package virtualenv
 
