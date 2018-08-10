@@ -30,6 +30,9 @@ package pavucontrol
 package pavumeter
 package pamix
 
+# Office
+package libreoffice-writer
+
 # Development
 package glade
 package dconf-editor
