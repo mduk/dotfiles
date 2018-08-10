@@ -6,3 +6,5 @@ package vim
 package screen
 package tmux
 package tree
+
+package youtube-dl
