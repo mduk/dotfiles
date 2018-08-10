@@ -1,0 +1,11 @@
+#!/bin/bash
+
+while read adoptedfile
+do
+  declare dotfile=$(realpath "$DOT_DIR/$adoptedfile")
+  echo "Restoring adopted file: $dotfile"
+  echo "                     -> $adoptedfile"
+
+  sudo mv "$adoptedfile" "$adoptedfile.dist"
+  sudo ln -s "$dotfile" "$adoptedfile"
+done < <(cat $DOT_DIR/adoptedfiles)
