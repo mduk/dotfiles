@@ -1,0 +1,44 @@
+#!/bin/bash
+
+declare abandonfile="$(realpath "$1")"
+declare dotfile="${DOT_DIR}${abandonfile}"
+
+echo "Abandoning $dotfile" >&2
+echo "        -> $abandonfile" >&2
+
+if [[ -L $abandonfile ]]
+then
+  declare linktarget=$(readlink "$abandonfile")
+  if [[ $linktarget != $dotfile ]]
+  then
+    echo "$abandonfile is not adopted"
+    exit 0
+  else
+    echo "$abandonfile is a link pointing to $linktarget"
+    echo "Erring on the side of caution and leaving well enough alone."
+    exit 1
+  fi
+else
+  echo "$abandonfile is not a link."
+  exit 2
+fi
+
+if sudo rm --interactive=never "$abandonfile"
+then
+  sudo mv "$dotfile" "$abandonfile"
+
+  git \
+    --work-tree="$DOT_DIR" \
+    --git-dir="$DOT_DIR/.git" \
+    rm -r "$dotfile"
+
+  git \
+    --work-tree="$DOT_DIR" \
+    --git-dir="$DOT_DIR/.git" \
+    commit -m "Abandoned $abandonfile"
+
+  git \
+    --work-tree="$DOT_DIR" \
+    --git-dir="$DOT_DIR/.git" \
+    push
+fi
