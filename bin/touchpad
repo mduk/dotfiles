@@ -1,0 +1,44 @@
+#!/bin/bash
+
+touchpad_id=$(
+  xinput | sed \
+    -e '/Touchpad/!d' \
+    -e 's/.*id=\([0-9]*\).*/\1/'
+)
+
+notify() {
+  notify-send \
+    --icon=input-touchpad \
+    "Touchpad $1"
+}
+
+touchpad-on() {
+  xinput --list-props $touchpad_id | grep "Device Enabled.*:.*1$" >/dev/null
+}
+
+cmd-id() {
+  echo $touchpad_id
+}
+
+cmd-on() {
+  xinput enable $touchpad_id
+  notify "On"
+}
+
+cmd-off() {
+  xinput disable $touchpad_id
+  notify "Off"
+}
+
+cmd-xprops() {
+  xinput --list-props $touchpad_id
+}
+
+cmd-toggle() {
+  if touchpad-on
+  then cmd-off
+  else cmd-on
+  fi
+}
+
+eval "cmd-$1"
