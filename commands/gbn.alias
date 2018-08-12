@@ -1,0 +1,1 @@
+git branch --no-color | sed -n '/^\*/s/^\* //p'
