@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if [[ $# -lt 1 ]]
+then
+  echo "Usage: $(basename $0) <certificate-file>"
+  exit 1
+fi
+
+certFile="$1"
+
+serial=$(crtcat "$certFile" | grep "Serial")
+
+dec=$(echo "$serial" | sed 's/.*: \(\[0-9\]+\) .*/\1/')
+
+echo $serial
+echo $dec
