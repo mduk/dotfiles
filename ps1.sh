@@ -81,8 +81,8 @@ block_path() {
 }
 
 block_host() {
-    if [[ "$SSH_TTY" != "" ]]; then
-      green $(bold "[\u@\h]")
+    if [[ ! -z "$SSH_TTY" ]]; then
+      yellow "[$USER@$(hostname)]"
     fi
 }
 
@@ -148,10 +148,7 @@ prompt_command() {
     # Environment Line
     PS1="${PS1}$(block_term)"
     PS1="${PS1}$(block_user)"
-
-    if [[ $PROMPT_HOST == "1" ]]
-    then PS1="${PS1}$(block_host)"
-    fi
+    PS1="${PS1}$(block_host)"
 
     # PATH
     if [[ $PROMPT_PATH == true ]] \
