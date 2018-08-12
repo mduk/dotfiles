@@ -1,0 +1,23 @@
+#!/bin/bash
+
+dvd="$1"
+
+if [[ $(basename "$dvd") = "VIDEO_TS" ]]
+  then dvd=$(dirname "$dvd")
+fi
+
+infofile="$dvd/info.txt"
+
+if [[ -f "$infofile" ]]
+  then rm "$infofile"
+fi
+
+HandBrakeCLI \
+  --scan \
+  --title 0 \
+  --input "$1" \
+  2>&1 \
+    | sed -n \
+          -e '/^\s*+/p' > "$infofile"
+
+cat "$infofile"
