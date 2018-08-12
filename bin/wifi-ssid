@@ -1,0 +1,1 @@
+iwconfig 2>/dev/null | sed -n '/^wlp2s0/s/.*ESSID:"\(.*\)".*/\1/p'
