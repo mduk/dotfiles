@@ -1,0 +1,12 @@
+#!/bin/bash
+
+application="$1"
+supportedMimeTypes=$(desktop-file-parse $application MimeType)
+mimeappspath="$HOME/.local/share/applications/mimeapps.list"
+
+for mime in $supportedMimeTypes; do
+  echo "${mime}=${application}.desktop;" >> $mimeappspath
+done
+
+cat $mimeappspath | uniq > "${mimeappspath}-uniq"
+mv "${mimeappspath}-uniq" "$mimeappspath"
