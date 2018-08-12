@@ -1,0 +1,48 @@
+#!/bin/bash
+
+declare cmd=${1:-cp -n}
+
+#for file in $(find "$PWD" -name '*.*')
+find "$PWD" -name '*.*' ! -name '.*' | while read file
+do
+    declare createdate=$(
+      exiftool "$file" \
+        | grep "Create Date" \
+        | tail -1 \
+        | sed 's/.* : \(.*\)/\1/' \
+        | tr ' ' '-' \
+        | tr '/' ':' \
+        | tr '.' '-'
+    )
+
+    if [[ -z $createdate ]]
+    then
+      echo $file >&2
+      continue
+    fi
+
+  declare extension="${file##*.}" # Strip off everything before the dot
+  declare newfile="/media/daniel/DECEBC1ACEBBE8C3/Camera/$createdate.$extension"
+
+  echo -n "$file => $newfile "
+
+
+    if [[ -f $newfile ]]
+    then
+      echo 'blocked'
+      continue
+    else
+      tput sc
+      echo -n 'copying'
+      $cmd "$file" "$newfile"
+      if [[ $? -eq 0 ]]
+      then
+        tput rc
+        echo 'copied '
+      else
+        echo "error!"
+        exit
+      fi
+    fi
+
+done
