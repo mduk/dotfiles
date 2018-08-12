@@ -1,0 +1,33 @@
+#!/bin/bash
+
+FILE="input.pem"
+PREAMBLE="{\"e\":\"AQAB\",\"kty\":\"RSA\",\"n\":\""
+
+if [[ $# > 1 ]]; then
+    echo "TOO MANY ARGS - #"
+    exit 1
+fi
+
+if [[ $# -eq 1 ]]; then
+  FILE=$1
+fi
+
+MODULUS=$(cat $FILE |openssl x509 -noout -modulus|sed s/Modulus=//)
+
+JSON_64_MODULUS=$(echo -n ${MODULUS} | xxd -r -p |base64 |tr + - |tr -d =|tr / _)
+echo $JSON_64_MODULUS
+JSON_CANONICAL_INPUT=$(echo -nE ${PREAMBLE}${JSON_64_MODULUS}"\"}" | tr -d \ )
+
+SHA1_RAW=$(echo -nE ${JSON_CANONICAL_INPUT}|shasum)
+SHA256_RAW=$(echo -nE ${JSON_CANONICAL_INPUT}|shasum -a 256)
+
+SHA1_TPRINT=$(echo -nE ${SHA1_RAW}|xxd -r -p |base64 |tr -d =)
+SHA256_TPRINT=$(echo -nE ${SHA256_RAW}|xxd -r -p |base64 |tr -d =)
+
+echo "File - ${FILE}"
+echo "Modulus - ${MODULUS}"
+echo "Canonical input - ${JSON_CANONICAL_INPUT}"
+echo "SHA1 hash - ${SHA1_RAW}"
+echo "SHA256 hash - ${SHA256_RAW}"
+echo "SHA1 Thumbprint - ${SHA1_TPRINT}"
+echo "SHA256 Thumbprint - ${SHA256_TPRINT}"
