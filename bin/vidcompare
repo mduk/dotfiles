@@ -1,0 +1,12 @@
+#!/bin/bash
+
+i3-msg workspace vidcompare
+
+mpv "$1" &
+declare leftpid=$!
+
+mpv "$2" &
+declare rightpid=$!
+
+
+wait
