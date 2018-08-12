@@ -1,0 +1,6 @@
+function tn() {
+    host="$1"
+    port="$2"
+
+    telnet "$host" "$port"
+}

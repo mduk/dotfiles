@@ -1,0 +1,3 @@
+function hli {
+    sed -e "s/\($1\)/\x1b[7m\1\x1b[0m/gi"
+}

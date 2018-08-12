@@ -1,0 +1,4 @@
+function fuckyoucitrix() {
+  kill $(ps ax | grep ICAClient | grep -v grep | tail -n 1 | awk '{print $1}')
+}
+

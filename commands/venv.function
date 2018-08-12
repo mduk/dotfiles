@@ -1,0 +1,11 @@
+function venv {
+    if [[ ! -d venv ]]; then
+        virtualenv venv
+    fi
+
+    if [[ ${VIRTUAL_ENV:=unset} = "unset" ]]; then
+        source venv/bin/activate
+    else
+        deactivate
+    fi
+}

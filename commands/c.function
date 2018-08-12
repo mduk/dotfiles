@@ -1,0 +1,6 @@
+function c {
+  if [ -z "$@" ]
+  then clear
+  else echo "scale=3; $@" | bc -q
+  fi
+}
