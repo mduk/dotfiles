@@ -16,8 +16,9 @@ source "$DOT_DIR/path.sh"
 source "$DOT_DIR/ps1.sh"
 #source "$DOT_DIR/powerline.sh"
 
-for alias in $(ls "$DOT_DIR/aliases")
+for file in $(find ./aliases -name '*.alias')
 do
-  declare command=$(cat "$DOT_DIR/aliases/$alias")
+  declare alias=$(basename $file | sed -r 's/(.*).alias/\1/')
+  declare command=$(cat $file)
   alias "${alias}=${command}"
 done
