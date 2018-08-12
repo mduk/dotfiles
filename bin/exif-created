@@ -1,0 +1,9 @@
+#!/bin/bash
+
+exiftool "$1" \
+  | grep "Create Date" \
+  | tail -1 \
+  | sed 's/.* : \(.*\)/\1/' \
+  | tr ' ' '-' \
+  | tr '/' ':' \
+  | tr '.' '-'
