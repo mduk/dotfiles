@@ -1,0 +1,7 @@
+#!/bin/bash
+
+sudo loginctl unlock-sessions
+
+echo "Unlocked"
+echo "Press any key to continue..."
+read
