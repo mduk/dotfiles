@@ -1,0 +1,42 @@
+#!/bin/bash
+
+
+directories="$@"
+
+case "$#" in
+
+  0) echo "Usage!"
+     exit
+     ;;
+
+  1) icon="$1"
+     directories="$(pwd)"
+     ;;
+
+  *) icon="$1"; shift
+     directories="$@"
+     ;;
+
+esac
+
+for dir in "$directories"
+do
+  echo "Setting icon for" $dir
+  file="$dir/.directory"
+
+  if [[ ! -f "$file" ]]
+  then
+    touch "$file"
+    echo "[Desktop Entry]" >> "$file"
+  fi
+
+  # Sed command unceremoniously pilfered from:
+  #  https://superuser.com/questions/590630/sed-how-to-replace-line-if-found-or-append-to-end-of-file-if-not-found
+  sed -e "/^Icon=/{
+            h
+            s/=.*/=$icon/
+          }" \
+      -e "\${x;/^$/{s//Icon=$icon/;H};x}" \
+      -i "$file"
+done
+
