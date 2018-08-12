@@ -2,11 +2,12 @@
 
 infile="$1"
 colour="$2"
-outfile=$(echo $infile | sed "s/\./-chromakey-$colour./" )
+numbers="$3"
+outfile=$(echo $infile | sed "s/\./-chromakey-${colour}./" )
 
 ffmpeg \
   -i "$infile" \
-  -vf "chromakey=$colour:0.2:0.2" \
+  -vf "chromakey=$colour:$numbers" \
   -c copy \
   -c:v png \
   "$outfile"

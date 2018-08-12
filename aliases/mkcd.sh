@@ -1,4 +1,0 @@
-function mkcd() {
-  mkdir $@
-  cd $@
-}

@@ -13,6 +13,11 @@ latest_jetbrains_bin() {
   echo -n "/bin"
 }
 
+path_prepend "/opt/arduino-1.8.5/"
+
+# Dot Bin
+path_prepend "$DOT_DIR/bin"
+
 # Home bin overrides everything
 path_prepend "$HOME/bin"
 

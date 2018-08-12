@@ -3,16 +3,21 @@
 infile="$1"; shift
 markers="$@"
 
-duration=$(ffprobe "$infile" 2>&1 | grep "Duration" | awk '{print $2}' | sed 's/\(..:..:..\)...,/\1/')
+ext=${infile##*.}
+dir=${infile%.*}
+
+[[ ! -d "$dir" ]] && mkdir "$dir"
+
+duration=$(ffprobe "$infile" 2>&1 | grep "Duration" | awk '{print $2}' | sed 's/\(..:..:..\...\),/\1/')
 markers+=" $duration"
 
-starttime="00:00:00"
+starttime="00:00:00.00"
 
 for marker in $markers
 do
   endtime="$marker"
 
-  outfilename=$(echo $infile | sed "s/\./-$starttime-$endtime./g")
+  outfilename="$dir/$starttime-$endtime.$ext"
 
   echo -n "$starttime-$endtime : "
 
@@ -20,7 +25,7 @@ do
   then
     echo "Writing $outfilename"
     ffmpeg -v error -y -i "$infile" \
-      -vcodec copy -acodec copy -ss $starttime.0000 -to $endtime.0000 -sn "$outfilename"
+      -vcodec copy -acodec copy -ss $starttime -to $endtime -sn "$outfilename"
   else
     echo "Already exists. Skipping..."
   fi

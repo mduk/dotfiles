@@ -1,2 +1,0 @@
-alias bv="berks vendor"
-

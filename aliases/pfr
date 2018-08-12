@@ -1,0 +1,1 @@
+pf | grep -v pkg-resources > ./requirements.txt

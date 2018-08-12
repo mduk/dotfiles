@@ -1,9 +1,25 @@
 #!/bin/bash
 
+alert() {
+  notify-send \
+    --icon=/home/daniel/Icons/youtube-icon-full-color.png \
+    "YouTube Download" \
+    "$1"
+}
+
 pushd ~/Videos
+
+alert "Download Beginning..."
+
 youtube-dl \
-    -f best \
-    --output "%(uploader)s/%(release_date)s - %(title)s.%(ext)s" \
-    --write-info-json \
-    "${1:-$(cbp)}"
+  -f best \
+  --output "%(uploader)s/%(release_date)s - %(title)s.%(ext)s" \
+  --write-info-json \
+  "${1:-$(cbp)}"
+
+if [[ $? -eq 0 ]]
+  then alert "Download Complete"
+  else alert "Download Failed"
+fi
+
 popd

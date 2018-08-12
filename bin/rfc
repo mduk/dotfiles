@@ -3,6 +3,7 @@
 rfcDir="$HOME/Documents/RFCs"
 rfcStoreDir="$HOME/Documents/RFCs/.rfc"
 rfc="$1"
+depth="${2:-shallow}"
 
 if [ "$rfc" = "" ]; then
     ls "$rfcDir"
@@ -17,12 +18,31 @@ if [ ! -d "$rfcStoreDir" ]; then
   mkdir "$rfcStoreDir"
 fi
 
-rfcFile="$rfcStoreDir/$rfc.html"
+rfcFile="$rfcStoreDir/rfc${rfc}"
+
+echo -n "RFC $rfc: "
 
 if [ ! -f "$rfcFile" ]; then
+  echo -n "Downloading... "
   GET "https://tools.ietf.org/html/rfc${rfc}" > $rfcFile
-  rfcTitle=$(grep "<title>" $rfcFile | sed -n -e 's/.*<title>\(.*\)<\/title>.*/\1/' -e 's/\///g' -e 'p')
-  ln -s "$rfcFile" "$rfcDir/$rfcTitle.html"
+  rfcTitle=$(hxnormalize -x $rfcFile | hxselect -s ' ' -c 'title')
+  cleanTitle=$(echo $rfcTitle | tr -d '/' | tr -d '\n' | tr -s '[:space:]')
+  ln -s "$rfcFile" "$rfcDir/$cleanTitle.html"
+  echo "($cleanTitle)"
+else
+  echo "Cached..."
+fi
+
+if [[ "$depth" = "deep" ]]; then
+  mentionedRfcs=$(hxnormalize -x $rfcFile | hxselect -s '\n' -c 'a' | sed -n -e '/^RFC /s/^RFC //p' | uniq)
+
+  while read -r mentionedRfc; do
+    if [[ "$mentionedRfc" = "$rfc" ]]; then
+      continue;
+    fi
+    echo -n "RFC $rfc -> "
+    rfc $mentionedRfc shallow
+  done <<< "$mentionedRfcs"
 fi
 
 chromium-browser --app="file://${rfcFile}"

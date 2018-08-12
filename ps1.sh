@@ -1,10 +1,12 @@
 MY_USERNAME="daniel"
 
-DEFAULT_PROMPT_HOST=1
-DEFAULT_PROMPT_VERSIONS=""
-DEFAULT_PROMPT_CLOCK=1
-DEFAULT_PROMPT_BAR=1
-DEFAULT_PROMPT_SPACE=2
+export PROMPT_GIT=true
+export PROMPT_PATH=true
+export PROMPT_HOST=true
+export PROMPT_VERSIONS=""
+export PROMPT_CLOCK=true
+export PROMPT_BAR=true
+export PROMPT_SPACE=2
 
 terminal_width() {
     local cols=$(tput cols)
@@ -22,6 +24,10 @@ terminal_width() {
 
 exit_bar() {
     echo "\033[48;5;\$([[ \$? -gt 0 ]] && echo \"88\" || echo \"22\")m\033[K\033[0m"
+}
+
+block_wifi() {
+  echo "[$(wifi-ssid)]"
 }
 
 block_screen() {
@@ -71,7 +77,7 @@ block_clock() {
 }
 
 block_path() {
-    echo "[\w]"
+  [[ $PROMPT_PATH == true ]] && echo "[\w]"
 }
 
 block_host() {
@@ -91,6 +97,8 @@ block_user() {
 }
 
 block_git() {
+  if [[ $PROMPT_GIT == true ]]
+  then
     local git_branch=$(
         git branch --no-color 2> /dev/null | sed \
             -e '/^[^*]/d' \
@@ -98,6 +106,7 @@ block_git() {
     )
 
     echo "\[\033[0;32m\]$git_branch\[\033[0m\]"
+  fi
 }
 
 green() {
@@ -120,13 +129,14 @@ bold() {
 # THE PROMPT
 ################################################################################
 prompt_command() {
+    CMD_EXIT=$?
     local term_lines=$(tput lines)
     local term_cols=$(tput cols)
 
     PS1=""
 
     # Exit Bar
-    if [[ "${PROMPT_BAR:-$DEFAULT_PROMPT_BAR}" == "1" ]]; then
+    if [[ $PROMPT_BAR == true ]]; then
         PS1="${PS1}$(exit_bar)"
     fi
 
@@ -139,19 +149,30 @@ prompt_command() {
     PS1="${PS1}$(block_term)"
     PS1="${PS1}$(block_user)"
 
-    if [[ "${PROMPT_HOST:-$DEFAULT_PROMPT_HOST}" == "1" ]]; then
-      PS1="${PS1}$(block_host)"
+    if [[ $PROMPT_HOST == "1" ]]
+    then PS1="${PS1}$(block_host)"
     fi
 
-    # Location
-    if [[ "$(pwd)" != "$HOME" ]]; then
-      PS1="${PS1}$(block_path)"
-      PS1="${PS1}$(block_git)"
-      PS1="$PS1\n"
+    # PATH
+    if [[ $PROMPT_PATH == true ]] \
+    && [[ "$(pwd)" != "$HOME" ]]
+    then PS1="${PS1}$(block_path)"
     fi
+
+    if [[ $PROMPT_GIT == false ]]
+    then PS1+="\n"
+    fi
+
+    # Git
+    if [[ $PROMPT_GIT == true ]] \
+    && [[ -d .git ]]; then
+      PS1="${PS1}$(block_git)"
+    fi
+
+    PS1="$PS1\n"
 
     # Versions Line
-    if [[ "${PROMPT_VERSIONS:-$DEFAULT_PROMPT_VERSIONS}" != "" ]]; then
+    if [[ $PROMPT_VERSIONS != "" ]]; then
         PS1="${PS1}$(block_php)"
         PS1="${PS1}$(block_ruby)"
         PS1="${PS1}$(block_python)"
@@ -159,7 +180,7 @@ prompt_command() {
     fi
 
     # Prompt Line
-    if [[ "${PROMPT_CLOCK:-$DEFAULT_PROMPT_CLOCK}" == "1" ]]; then
+    if [[ $PROMPT_CLOCK == true ]]; then
         PS1="${PS1}$(block_clock)"
     fi
 

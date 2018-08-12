@@ -19,7 +19,7 @@ case "$subcommand" in
     ;;
 
   "upload")
-    ssh-copy-id -i "$keypath"
+    ssh-copy-id -i "$keypath" "$3"
     ;;
 
   "passwd")

@@ -1,7 +1,0 @@
-alias v="vagrant"
-alias vbls="vagrant box list"
-alias vu="vagrant up"
-alias vd="vagrant halt"
-alias vssh="vagrant ssh"
-alias vp="vagrant provision"
-alias vr="vagrant reload"

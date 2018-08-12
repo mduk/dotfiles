@@ -5,6 +5,11 @@ set showtabline=1
 set noshowmode
 
 set mouse=a
+"if has("mouse_sgr")
+"  set ttymouse=sgr
+"else
+"  set ttymouse=xterm2
+"end
 
 set nowrap
 
@@ -101,12 +106,14 @@ Plug 'Nopik/vim-nerdtree-direnter'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-speeddating'
+
+Plug 'Chiel92/vim-autoformat'
 
 Plug 'vim-syntastic/syntastic'
 
 " syntax highlighters
 Plug 'pangloss/vim-javascript'
-Plug 'Chiel92/vim-autoformat'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'peterhoeg/vim-qml'
@@ -144,7 +151,7 @@ noremap <F3> :Autoformat<CR>
 "###############################################################################
 
 " Run flake8 over all Python files when they're written
-autocmd BufWritePost *.py call Flake8()
+"autocmd BufWritePost *.py call Flake8()
 
 "###############################################################################
 " Plugin: Airline

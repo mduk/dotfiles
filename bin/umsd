@@ -11,4 +11,6 @@ for partition in $partitions
 do umount $partition
 done
 
-notify-send "SD Card" "Unmounted partitions:\n$partitions"
+notify-send \
+  "SD Card" \
+  "Unmounted partitions:\n$partitions"

@@ -16,6 +16,8 @@ source "$DOT_DIR/path.sh"
 source "$DOT_DIR/ps1.sh"
 #source "$DOT_DIR/powerline.sh"
 
-for aliases in $(ls "$DOT_DIR/aliases"); do
-  source "$DOT_DIR/aliases/$aliases"
+for alias in $(ls "$DOT_DIR/aliases")
+do
+  declare command=$(cat "$DOT_DIR/aliases/$alias")
+  alias "${alias}=${command}"
 done

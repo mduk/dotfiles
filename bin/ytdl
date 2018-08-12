@@ -3,7 +3,7 @@
 destpath="$HOME/YouTube"
 
 url=${1:-$(cbp)}
-url_encoded=$(b64encode $url | sed 's/\///g')
+url_encoded=$(b64encode "$url" | sed 's/\///g')
 
 tmp_jsonpath="/tmp/ytdl-$url_encoded"
 
@@ -13,29 +13,37 @@ yt_id=$(cat "$tmp_jsonpath" | jq -r '.id')
 yt_uploader=$(cat "$tmp_jsonpath" | jq -r '.uploader')
 yt_title=$(cat "$tmp_jsonpath" | jq -r '.title')
 
-notify-send "Downloading" "$yt_title"
+music_path="$HOME/Music/${yt_uploader}"
+echo "Looking for $music_path"
 
-dl_filename=$(
-  youtube-dl \
-    -f best \
-    --output "%(id)s.%(ext)s" \
-    "$url" \
-    2>&1 | sed -n '/Destination/s/.*: \(.*\)$/\1/p'
-)
+if [[ -d "$music_path" ]]
+then echo "$yt_uploader is a music channel"
+     dl_format="m4a"
+else echo "$yt_uploader is a video channel"
+     dl_format="best"
+fi
+
+notify-send "Downloading" "$yt_title"
+dl_output=$(youtube-dl -f $dl_format --output "$destpath/%(id)s.%(ext)s" "$url" 2>&1)
+dl_exit=$?
+
+dl_filename=$(echo "$dl_output" | sed -n '/Destination/s/.*: \(.*\)$/\1/p')
 dl_extension=${dl_filename##*.}
 
-echo "$ytdl_out" > /tmp/tmp.out
-
-if [[ $? -eq 0 ]]
-
-  then if [[ "x$dl_filename" = "x" ]]
-         then notify-send "Already Downloaded" "$yt_title"
-         else notify-send "Download Complete" "$yt_title [$dl_filename]"
-              mv "$tmp_jsonpath" "$destpath/.$yt_id.json"
-              mv "$dl_filename" "$destpath/.$yt_id.$dl_extension"
-              ln -s "$destpath/.$yt_id.$dl_extension" "$destpath/$yt_title.$dl_extension"
-       fi
-
-  else notify-send "Download Failed!" "$yt_title"
-
+if [[ $dl_exit -gt 0 ]]
+then echo "$dl_output" > /tmp/ytdl-error.log
+     notify-send "Download failed" "$yt_title"
+     exit 1
+else if [[ "x$dl_filename" = "x" ]]
+     then notify-send "Already Downloaded" "$yt_title"
+     else notify-send "Download complete" "$yt_title"
+     fi
 fi
+
+mv "$tmp_jsonpath" "$destpath/$yt_id.json"
+
+if [[ -d "$music_path" ]]
+then ln -s "$destpath/$yt_id.$dl_extension" "$music_path/$yt_title.$dl_extension"
+else ln -s "$destpath/$yt_id.$dl_extension" "$destpath/$yt_title.$dl_extension"
+fi
+

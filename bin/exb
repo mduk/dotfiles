@@ -1,9 +1,15 @@
 #!/bin/bash
 
-file="$HOME/bin/$1"
+if [[ $# -lt 1 ]]
+then
+  echo "Usage: $(basename $0) <cmdname>"
+  exit 1
+fi
+
+file="$DOT_DIR/bin/$1"
 
 [[ ! -f "$file" ]] && echo "#!/bin/bash" > "$file" \
                    && echo >> "$file" \
                    && x "$file"
 
-e"$file"
+e "$file"

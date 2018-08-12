@@ -1,8 +1,0 @@
-#!/bin/bash
-xsel="xsel --clipboard --input"
-
-if [ $# -eq 0 ]; then
-  $xsel
-else
-  cat $1 | $xsel
-fi

@@ -2,5 +2,5 @@
 
 feh \
     --randomize \
-    --bg-max \
+    --bg-fill \
     $DOT_DIR/backgrounds/enabled/*
