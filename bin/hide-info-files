@@ -1,0 +1,6 @@
+IFS=$'\n'
+
+for file in $(ls *.json)
+do
+  mv "$file" ".$file"
+done
