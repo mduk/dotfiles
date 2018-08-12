@@ -1,0 +1,6 @@
+#!/bin/bash
+
+while read msg
+do
+  i3-msg "$msg"
+done < /dev/stdin
