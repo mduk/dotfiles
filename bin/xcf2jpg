@@ -1,0 +1,6 @@
+#!/bin/bash
+
+for file in $(ls *.xcf); do
+  newfile=$(echo $file | sed 's/xcf/jpg/')
+  convert $file $newfile
+done
