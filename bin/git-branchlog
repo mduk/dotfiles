@@ -1,0 +1,6 @@
+#!/bin/bash
+
+for branch in $(git branch | sed 's/^..//')
+do
+  echo "$branch | $(git log $branch --pretty=format:"%s" -1 | sed -r 's/(.{80}).*/\1/')"
+done | column -t -s'|'^
