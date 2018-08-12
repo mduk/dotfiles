@@ -1,0 +1,1 @@
+ifconfig | sed -n '/^wl/{ n ; s/.*inet addr:\(.*\)  Bcast.*/\1/ ; p }'
