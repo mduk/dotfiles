@@ -6,5 +6,6 @@ package vim
 package screen
 package tmux
 package tree
+package net-tools # ifconfig
 
 package youtube-dl
