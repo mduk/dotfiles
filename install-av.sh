@@ -5,3 +5,4 @@ package vlc
 package mpv
 package ffmpeg
 package kdenlive
+package vokoscreen
