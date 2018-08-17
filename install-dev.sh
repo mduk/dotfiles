@@ -11,3 +11,5 @@ package httpie
 package jq
 package openssl
 package virtualbox
+package dialog
+package nmap
