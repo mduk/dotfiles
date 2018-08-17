@@ -22,7 +22,9 @@ package kdenlive
 
 # Office
 package libreoffice-writer
+package libreoffice-calc
 
 # Development
 package glade
 package dconf-editor
+package konsole
