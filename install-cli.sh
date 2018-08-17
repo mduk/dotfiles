@@ -9,3 +9,5 @@ package tree
 package net-tools # ifconfig
 
 package youtube-dl
+
+package exfat-utils
