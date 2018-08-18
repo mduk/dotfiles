@@ -1,0 +1,35 @@
+#!/bin/bash
+
+set -e
+
+declare -a commits=("$@")
+declare    origin="$(git config --get remote.origin.url)"
+declare    repo=$(echo "$origin" | sed -r 's/.*:(.*)\.git/\1/')
+declare    source_workingdir="$PWD"
+declare    branch="hotpull-$(date +%s)"
+declare    tmpdir=$(mktemp -d)
+
+echo $repo
+exit
+
+git clone "$origin" "$tmpdir"
+cd "$tmpdir"
+
+git remote add sourcerepo "$source_workingdir"
+git fetch sourcerepo
+
+git checkout -b "$branch"
+
+for commit in "${commits[@]}"
+do git cherry-pick "$commit"
+done
+
+git push origin "$branch"
+
+exit
+
+http \
+  POST https://api.github.com/repos/$repo/pulls \
+  "title=Auto PR for $branch" \
+  "head=$branch" \
+  "base=master"
