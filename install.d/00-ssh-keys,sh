@@ -1,0 +1,1 @@
+rsync -avh -e ssh $USER@janet.local:~/.ssh/ $HOME/.ssh/
