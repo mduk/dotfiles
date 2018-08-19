@@ -18,26 +18,26 @@ case "$1" in
     ;;
 
   file)
-	  declare installfile="$(realpath "$2")"
-	  declare adoptedfile="$(realpath "$DOT_DIR/$2")"
+    declare installfile="$(realpath "$2")"
+    declare adoptedfile="$(realpath "$DOT_DIR/$2")"
 
-	  if [[ -L "$installfile" ]] && [[ $(readlink "$installfile") == "$adoptedfile" ]]
-	  then
-		  echo "Already installed."
-		  exit
-	  fi
+    if [[ -L "$installfile" ]] && [[ $(readlink "$installfile") == "$adoptedfile" ]]
+    then
+      echo "Already installed."
+      exit
+    fi
 
-	  if [[ -f "$installfile" ]] || [[ -d "$installfile" ]]
-	  then mv "$installfile" "$installfile.dist"
-	  fi
+    if [[ -f "$installfile" ]] || [[ -d "$installfile" ]]
+    then mv "$installfile" "$installfile.dist"
+    fi
 
-	  if [[ ! -f "$installfile" ]] && [[ ! -d "$installfile"  ]]
-	  then
-		  echo "=> $installfile"
-		  ln -s "$adoptedfile" "$installfile"
-	  fi
+    if [[ ! -f "$installfile" ]] && [[ ! -d "$installfile"  ]]
+    then
+      echo "=> $installfile"
+      ln -s "$adoptedfile" "$installfile"
+    fi
     ;;
 
    *)
-	   echo "Unknown command: $1" >&2
+     echo "Unknown command: $1" >&2
 esac
