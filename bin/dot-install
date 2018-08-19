@@ -17,7 +17,7 @@ case "$1" in
     fi
     ;;
 
-  file)
+  file|dir*)
     declare installfile="$(realpath "$2")"
     declare adoptedfile="$(realpath "$DOT_DIR/$2")"
 
