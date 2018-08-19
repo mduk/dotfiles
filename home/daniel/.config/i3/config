@@ -212,14 +212,8 @@ mode "output" {
 # i3bar
 ##########################################################################
 bar {
-    id statusbar
-    output DP2
-    output DP3
+  status_command i3status
 
-  #status_command i3status
-  status_command i3blocks
-  #status_command i3blocks -c /home/daniel/.config/i3blocks/config
-  #
   colors {
     separator #586e75
     background #002b36
@@ -229,11 +223,6 @@ bar {
     inactive_workspace #002b36 #002b36 #aea79f
     urgent_workspace #77216f #77216f #ffffff
   }
-}
-
-bar {
-    output HDMI1
-    mode invisible
 }
 
 ##########################################################################
