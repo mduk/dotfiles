@@ -1,0 +1,43 @@
+#!/bin/bash
+
+case "$1" in
+  package)
+    echo -n "Installing $2: "
+
+    if sudo dpkg -s $2 | grep '^Status:.* ok .*' >/dev/null 2>/dev/null
+    then
+      echo "Already Installed"
+      return 0
+    else
+      echo -n "Installing"
+      if sudo apt-get install -y $2 | sed 's/^/   /'
+      then echo "OK"
+      else echo "ERROR"
+      fi
+    fi
+    ;;
+
+  file)
+	  declare installfile="$(realpath "$2")"
+	  declare adoptedfile="$(realpath "$DOT_DIR/$2")"
+
+	  if [[ -L "$installfile" ]] && [[ $(readlink "$installfile") == "$adoptedfile" ]]
+	  then
+		  echo "Already installed."
+		  exit
+	  fi
+
+	  if [[ -f "$installfile" ]] || [[ -d "$installfile" ]]
+	  then mv "$installfile" "$installfile.dist"
+	  fi
+
+	  if [[ ! -f "$installfile" ]] && [[ ! -d "$installfile"  ]]
+	  then
+		  echo "=> $installfile"
+		  ln -s "$adoptedfile" "$installfile"
+	  fi
+    ;;
+
+   *)
+	   echo "Unknown command: $1" >&2
+esac
