@@ -7,6 +7,7 @@ keypath="$HOME/.ssh/${key}_rsa"
 arg_key="-i $keypath"
 
 case "$1" in
-  push) scp $arg_key $2 "$USER@${janet}:/home/$USER/Pushed/$2" ;;
-  *) ssh -XA $arg_key "$USER@${janet}" ;;
+  push) rsync -avh "$2" "$USER@$janet:$2" ;;
+  pull) rsync -avh "$USER@$janet:$2" "$2" ;;
+  *) ssh -XA $arg_key "$USER@$janet" "$@";;
 esac
