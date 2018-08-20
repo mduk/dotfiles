@@ -43,7 +43,7 @@ bindsym XF86AudioRaiseVolume    exec amixer set -D pulse Master 5%+
 ##########################################################################
 # Default i3 Font
 ##########################################################################
-font pango:monospace 24
+font pango:monospace 12
 
 bindsym $mod+z focus parent; fullscreen; focus child
 
