@@ -4,6 +4,8 @@
 
 set $mod Mod1
 
+set $filemanager nautilus
+
 exec_always setxkbmap -option ctrl:nocaps
 
 ################################################################################
@@ -50,18 +52,18 @@ bindsym $mod+z focus parent; fullscreen; focus child
 ##########################################################################
 bindsym Print exec ~/Pictures/Screenshots/screen.sh root
 bindsym $mod+Print exec ~/Pictures/Screenshots/screen.sh active
-bindsym Shift+Print exec dolphin ~/Pictures/Screenshots
+bindsym Shift+Print exec $filemanager ~/Pictures/Screenshots
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 bindsym $mod+Return exec tilix
 bindsym $mod+Shift+Return exec chromium-browser
-bindsym $mod+Shift+f exec dolphin ~
-bindsym $mod+Shift+d exec dolphin ~/Downloads
-bindsym $mod+Shift+m exec dolphin ~/Music
-bindsym $mod+Shift+v exec dolphin ~/Videos
-bindsym $mod+Shift+p exec dolphin ~/Public
+bindsym $mod+Shift+f exec $filemanager ~
+bindsym $mod+Shift+d exec $filemanager ~/Downloads
+bindsym $mod+Shift+m exec $filemanager ~/Music
+bindsym $mod+Shift+v exec $filemanager ~/Videos
+bindsym $mod+Shift+p exec $filemanager ~/Public
 
 # kill focused window
 bindsym $mod+Shift+q kill
