@@ -13,3 +13,4 @@ package openssl
 package virtualbox
 package dialog
 package nmap
+package dos2unix
