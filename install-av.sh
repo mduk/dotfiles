@@ -6,3 +6,4 @@ package mpv
 package ffmpeg
 package kdenlive
 package vokoscreen
+package exiftool
