@@ -16,7 +16,7 @@ case $# in
     else url="http://$1"
     fi
 
-    chromium-browser --app="$url"
+    chromium-browser --app="$url" &
     ;;
 
   2)
