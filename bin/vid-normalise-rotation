@@ -1,0 +1,21 @@
+#!/bin/bash
+
+for video in "$@"
+do
+  declare rotation=$(exif-rotation "$video")
+
+  if [[ $rotation == 0 ]]
+  then continue
+  fi
+
+  case "$rotation" in
+      0) echo "nothing to do" ;;
+     90) declare newrotation='-90' ;;
+    180) declare newrotation='180' ;;
+      *) echo "Unknown rotation: $rotation" >&2
+         exit
+         ;;
+  esac
+
+  vid-rotate "$newrotation" "$video"
+done
