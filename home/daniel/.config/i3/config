@@ -2,6 +2,7 @@ bindsym $alt+Escape exec umsd
 bindsym $alt+Shift+A exec toon
 
 set $terminal /usr/bin/tilix
+set $filemanager /usr/bin/nautilus
 
 ################################################################################
 # i3 Font
@@ -134,7 +135,7 @@ bindsym $alt+Shift+c            reload
 bindsym $alt+Shift+r            restart
 bindsym $alt+Shift+e            exec "i3-nagbar -t warning -m 'Exit?' -b 'Yes' 'i3-msg exit'"
 bindsym $alt+d                  exec dmenu_run
-bindsym $alt+Shift+f            exec dolphin ~
+bindsym $alt+Shift+f            exec $filemanager ~
 bindsym $alt+Shift+t            exec /home/daniel/bin/touchpad toggle
 bindsym $alt+Shift+s            exec systemsettings5
 
