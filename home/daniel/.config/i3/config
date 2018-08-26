@@ -1,224 +1,407 @@
-# i3 config file (v4)
-#
-# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+bindsym $alt+Escape exec umsd
+bindsym $alt+Shift+A exec toon
 
-set $mod Mod1
-
-set $filemanager nautilus
-
-exec_always setxkbmap -option ctrl:nocaps
+set $terminal /usr/bin/tilix
 
 ################################################################################
-# Special Window Rules
+# i3 Font
 ################################################################################
-
-# Feh windows should float. It just works better for viewing images since
-# they're often aspect ratios that don't fit nicely into the tiled layout.
-for_window [class="feh"] floating enable
-
-# VLC windows should float. Much like feh windows, it just works out better
-# to have them float so that the window is the correct aspect ratio for the
-# video, I tend to immediately full screen it anyway.
-for_window [class="vlc"] floating enable
-
-# Make sure things like the volume and display brightness OSD
-# windows are always floating and don't interfere with the layout.
-for_window [class="plasmashell"] floating enable
-
-# Plasma insists on drawing a desktop window and I haven't found a way to
-# disable it, so instead I'll just get i3 to kill the window.
-for_window [title="Desktop"] kill
-for_window [class="desktop_window"] kill
-
-for_window [class="gnuplot_qt"] floating enable
-for_window [class="Display"] floating enable
-
-##########################################################################
-# XF86Audio Keys
-##########################################################################
-bindsym XF86AudioMute           exec amixer set -D pulse Master toggle
-bindsym XF86AudioLowerVolume    exec amixer set -D pulse Master 5%-
-bindsym XF86AudioRaiseVolume    exec amixer set -D pulse Master 5%+
-
-##########################################################################
-# Default i3 Font
-##########################################################################
 font pango:monospace 12
 
-bindsym $mod+z focus parent; fullscreen; focus child
 
-##########################################################################
-# Screenshots
-##########################################################################
-bindsym Print exec ~/Pictures/Screenshots/screen.sh root
-bindsym $mod+Print exec ~/Pictures/Screenshots/screen.sh active
-bindsym Shift+Print exec $filemanager ~/Pictures/Screenshots
+################################################################################
+# Modifier Keys
+################################################################################
+set $alt              Mod1
+set $win              Mod4
+set $angryalt         Mod5
+floating_modifier $alt
 
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
 
-bindsym $mod+Return exec tilix
-bindsym $mod+Shift+Return exec chromium-browser
-bindsym $mod+Shift+f exec $filemanager ~
-bindsym $mod+Shift+d exec $filemanager ~/Downloads
-bindsym $mod+Shift+m exec $filemanager ~/Music
-bindsym $mod+Shift+v exec $filemanager ~/Videos
-bindsym $mod+Shift+p exec $filemanager ~/Public
 
-# kill focused window
-bindsym $mod+Shift+q kill
+################################################################################
+# KWallet
+################################################################################
+#exec_always kwalletd
 
-# start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
-bindsym $mod+Shift+l exec xscreensaver-command -lock
+################################################################################
+# Network Manager System Tray Icon
+################################################################################
+#exec_always nm-applet
 
-##########################################################################
-# Focus Movement
-##########################################################################
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
 
-##########################################################################
-# Move Focused Window
-##########################################################################
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+################################################################################
+# PulseAudio
+################################################################################
+exec_always pulseaudio
+exec vol mute
 
-##########################################################################
-# Container Splits
-##########################################################################
-bindsym $mod+h split h
-bindsym $mod+v split v
 
-##########################################################################
-# enter fullscreen mode for the focused container
-##########################################################################
-bindsym $mod+f fullscreen toggle
+################################################################################
+# Touchpad
+################################################################################
+set $touchpad "DLL06E4:01 06CB:7A13 Touchpad"
+exec_always xinput set-prop $touchpad "libinput Tapping Enabled" 1
+exec_always xinput set-prop $touchpad "libinput Natural Scrolling Enabled" 1
+exec_always xinput set-prop $touchpad "libinput Accel Speed" 2.000000
+exec_always xinput set-prop $touchpad "libinput Disable While Typing Enabled" 1
+exec_always xinput set-prop $touchpad "libinput Click Method Enabled" 0 1
 
-##########################################################################
-# change container layout (stacked, tabbed, toggle split)
-##########################################################################
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
 
-##########################################################################
-# toggle tiling / floating
-##########################################################################
-bindsym $mod+Shift+space floating toggle
+################################################################################
+# Caffeine
+################################################################################
+exec caffeine-indicator &
 
-# change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
 
-# focus the parent container
-bindsym $mod+Shift+a focus parent
+################################################################################
+# Control instead of Caps Lock
+################################################################################
+exec_always setxkbmap -option ctrl:nocaps
+exec_always xcape
 
-# focus the child container
-bindsym $mod+a focus child
 
-##########################################################################
-# switch to workspace
-##########################################################################
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+################################################################################
+# XScreensaver
+################################################################################
+exec_always xscreensaver -nosplash
+bindsym $alt+Shift+L exec xscreensaver-command -lock
 
-##########################################################################
-# move focused container to workspace
-##########################################################################
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
 
-##########################################################################
-# reload the configuration file
-##########################################################################
-bindsym $mod+Shift+c reload
+################################################################################
+# X Root Window
+################################################################################
+set $randomBackground /home/daniel/bin/random_background
+exec_always $randomBackground
+bindsym $alt+b exec feh --bg-fill /home/daniel/Development/mduk/dotfiles/backgrounds/enabled/clematis_royalty_flower_petals_108040_3840x2160.jpg
 
-##########################################################################
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-##########################################################################
-bindsym $mod+Shift+r restart
+bindsym $alt+Shift+b exec $randomBackground
 
-##########################################################################
-# exit i3 (logs you out of your X session)
-##########################################################################
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to exit i3?' -b 'Yes, exit i3' 'i3-msg exit'"
+exec_always xsetroot -cursor_name left_ptr
 
-##########################################################################
-# Resize Mode
-##########################################################################
-bindsym $mod+r mode "resize"
-mode "resize" {
-        bindsym Left resize shrink width 1 px or 1 ppt
-        bindsym Down resize grow height 1 px or 1 ppt
-        bindsym Up resize shrink height 1 px or 1 ppt
-        bindsym Right resize grow width 1 px or 1 ppt
 
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+################################################################################
+# Right-Handed Navigation
+################################################################################
+bindsym $angryalt+Return       exec $terminal
+bindsym $angryalt+Shift+Return exec chromium-browser
+bindsym $angryalt+Left         focus left
+bindsym $angryalt+Down         focus down
+bindsym $angryalt+Up           focus up
+bindsym $angryalt+Right        focus right
+
+
+################################################################################
+# Floating Windows
+################################################################################
+for_window [class="plasmashell"]      floating enable
+for_window [class="QtQmlViewer"]      floating enable
+#for_window [class="mpv"]              floating enable
+for_window [class="feh"]              floating enable
+for_window [class="vlc"]              floating enable
+for_window [class="ffplay"]           floating enable
+for_window [class="xmessage"]         floating enable
+for_window [class="screenkeys"]       floating enable
+for_window [class="Display"]          floating enable
+for_window [class="Wfica_Seamless"]   floating enable
+for_window [class="Electron"]         floating enable
+for_window [class="Ufraw"]            floating enable
+for_window [class="Ufraw"]            fullscreen
+for_window [class="ktorrent"]         floating enable
+
+
+################################################################################
+# Kill Windows
+################################################################################
+for_window [title="Desktop — Plasma"] kill
+for_window [class="kspashqml"]        kill
+
+
+################################################################################
+# Never Steal Focus
+################################################################################
+no_focus [class="plasmashell"]
+mouse_warping none
+
+bindsym $alt+Return             exec $terminal
+bindsym $alt+Shift+Return       exec chromium-browser
+
+#bindsym $alt+space              scratchpad show
+#bindsym $alt+space              exec dmenu_run
+
+bindsym $alt+Shift+q            kill
+bindsym $alt+Shift+c            reload
+bindsym $alt+Shift+r            restart
+bindsym $alt+Shift+e            exec "i3-nagbar -t warning -m 'Exit?' -b 'Yes' 'i3-msg exit'"
+bindsym $alt+d                  exec dmenu_run
+bindsym $alt+Shift+f            exec dolphin ~
+bindsym $alt+Shift+t            exec /home/daniel/bin/touchpad toggle
+bindsym $alt+Shift+s            exec systemsettings5
+
+
+################################################################################
+# Arrow Keys
+################################################################################
+bindsym $alt+Left               focus left
+bindsym $alt+Down               focus down
+bindsym $alt+Up                 focus up
+bindsym $alt+Right              focus right
+bindsym $alt+Shift+Left         move left
+bindsym $alt+Shift+Down         move down
+bindsym $alt+Shift+Up           move up
+bindsym $alt+Shift+Right        move right
+
+bindsym $alt+$win+J             move workspace to output eDP1
+bindsym $alt+$win+K             move workspace to output HDMI1
+bindsym $alt+$win+L             move workspace to output DP2
+
+bindsym $alt+$win+Down          move workspace to output eDP1
+bindsym $alt+$win+Up            move workspace to output HDMI1
+bindsym $alt+$win+Right         move workspace to output DP2
+
+
+################################################################################
+# Focus
+################################################################################
+
+
+bindsym $alt+bracketleft        focus left
+bindsym $alt+bracketright       focus right
+
+bindsym $alt+Shift+bracketleft  move left
+bindsym $alt+Shift+bracketright move right
+
+bindsym $alt+p                  focus parent
+bindsym $alt+l                  focus child
+
+
+################################################################################
+# Floating Windows
+################################################################################
+bindsym $alt+space              focus mode_toggle
+bindsym $alt+Shift+space        floating toggle
+
+
+################################################################################
+# Container Split
+################################################################################
+bindsym $alt+h                  split h
+bindsym $alt+v                  split v
+bindsym $alt+Shift+H            split h; exec $terminal
+bindsym $alt+Shift+V            split v; exec $terminal
+
+
+################################################################################
+# Container Layout
+################################################################################
+bindsym $alt+s                  layout stacking
+bindsym $alt+w                  layout tabbed
+bindsym $alt+e                  layout toggle split
+
+
+################################################################################
+# Fullscreen and Zoom
+################################################################################
+bindsym $alt+f                  fullscreen toggle
+bindsym $alt+z                  focus parent; fullscreen; focus child
+bindsym $alt+Shift+z            focus parent; fullscreen; focus child; layout toggle split
+
+
+################################################################################
+# Numrow
+################################################################################
+bindsym $alt+1                  workspace 1
+bindsym $alt+2                  workspace 2
+bindsym $alt+3                  workspace 3
+bindsym $alt+4                  workspace 4
+bindsym $alt+5                  workspace 5
+bindsym $alt+6                  workspace 6
+bindsym $alt+7                  workspace 7
+bindsym $alt+8                  workspace 8
+bindsym $alt+9                  workspace 9
+bindsym $alt+0                  workspace 10
+
+bindsym $alt+Shift+1            move container to workspace 1
+bindsym $alt+Shift+2            move container to workspace 2
+bindsym $alt+Shift+3            move container to workspace 3
+bindsym $alt+Shift+4            move container to workspace 4
+bindsym $alt+Shift+5            move container to workspace 5
+bindsym $alt+Shift+6            move container to workspace 6
+bindsym $alt+Shift+7            move container to workspace 7
+bindsym $alt+Shift+8            move container to workspace 8
+bindsym $alt+Shift+9            move container to workspace 9
+bindsym $alt+Shift+0            move container to workspace 10
+
+
+################################################################################
+# Numpad
+################################################################################
+bindsym $alt+Shift+KP_1         move container to workspace 1
+bindsym $alt+Shift+KP_2         move container to workspace 2
+bindsym $alt+Shift+KP_3         move container to workspace 3
+bindsym $alt+Shift+KP_4         move container to workspace 4
+bindsym $alt+Shift+KP_5         move container to workspace 5
+bindsym $alt+Shift+KP_6         move container to workspace 6
+bindsym $alt+Shift+KP_7         move container to workspace 7
+bindsym $alt+Shift+KP_8         move container to workspace 8
+bindsym $alt+Shift+KP_9         move container to workspace 9
+bindsym $alt+Shift+KP_0         move container to workspace 10
+
+bindsym $alt+KP_1               workspace 1
+bindsym $alt+KP_2               workspace 2
+bindsym $alt+KP_3               workspace 3
+bindsym $alt+KP_4               workspace 4
+bindsym $alt+KP_5               workspace 5
+bindsym $alt+KP_6               workspace 6
+bindsym $alt+KP_7               workspace 7
+bindsym $alt+KP_8               workspace 8
+bindsym $alt+KP_9               workspace 9
+bindsym $alt+KP_0               workspace 10
+
+bindsym $alt+KP_Add           exec $terminal
+bindsym $alt+Shift+KP_Add     exec chromium-browser
+
+
+################################################################################
+# Open things
+################################################################################
+bindsym $alt+O                  exec cbo
+
+
+################################################################################
+# JetBrains
+################################################################################
+bindsym $alt+Shift+j            mode "JetBrains"
+mode "JetBrains" {
+  bindsym p                     exec "phpstorm.sh"; mode "default"
+  bindsym d                     exec "datagrip.sh"; mode "default"
+  bindsym r                     exec "rubymine.sh"; mode "default"
+  bindsym i                     exec "idea.sh"    ; mode "default"
+
+  bindsym Return                mode "default"
+  bindsym Escape                mode "default"
 }
 
-##########################################################################
-# Media Mode
-##########################################################################
-bindsym $mod+m mode "media"
-mode "media" {
-    bindsym Up exec amixer set Master 5%+
-    bindsym Down exec amixer set Master 5%-
 
-    bindsym Left exec mpc --password spider prev
-    bindsym Right exec mpc --password spider next
+################################################################################
+# Resize
+################################################################################
+set $resizeStep       2
+bindsym $alt+r                  mode "Resize"
+mode "Resize" {
+  bindsym Up                    resize shrink height $resizeStep px or $resizeStep ppt
+  bindsym Down                  resize grow   height $resizeStep px or $resizeStep ppt
+  bindsym Left                  resize shrink width  $resizeStep px or $resizeStep ppt
+  bindsym Right                 resize grow   width  $resizeStep px or $resizeStep ppt
 
-    bindsym space exec mpc --password spider toggle
+  bindsym G                     resize grow height $resizeStep px or $resizeStep ppt resize grow width $resizeStep px or $resizeStep ppt
+  bindsym S                     resize shrink height $resizeStep px or $resizeStep ppt resize shrink width $resizeStep px or $resizeStep ppt
 
-    bindsym Home exec mpc --password spider play
-    bindsym End exec mpc --password spider stop
-
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-
-##########################################################################
-# Output Mode
-##########################################################################
-bindsym $mod+o mode "output"
-mode "output" {
-    bindsym i move workspace to output eDP1
-    bindsym h move workspace to output HDMI1
-
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
+  bindsym Return                mode "default"
+  bindsym Escape                mode "default"
 }
 
 
-##########################################################################
-# i3bar
-##########################################################################
+################################################################################
+# Media
+################################################################################
+bindsym $alt+Shift+m            mode "Media"
+bindsym $alt+m                  mode "Media"
+mode "Media" {
+  bindsym Up                    exec vol up
+  bindsym Down                  exec vol down
+  bindsym Left                  exec mpc prev
+  bindsym Right                 exec mpc next
+
+  bindsym space                 exec mpc toggle; mode "default"
+
+  bindsym P                     exec mpc play; mode "default"
+  bindsym S                     exec mpc stop; mode "default"
+  bindsym R                     exec recordscreen; mode "default"
+
+  bindsym V                     exec pavucontrol; mode "default"
+
+  bindsym Return                mode "default"
+  bindsym Escape                mode "default"
+}
+
+
+################################################################################
+# WWW
+################################################################################
+bindsym $alt+g exec i3-input -F 'exec chromium-browser --app="http://google.com/?q=%s"'
+bindsym $alt+Shift+W            mode "WWW"
+mode "WWW" {
+  bindsym D                     exec www deliveroo     ; mode "default"
+  bindsym E                     exec www ebay          ; mode "default"
+  bindsym F                     exec www facebook      ; mode "default"
+  bindsym G                     exec www gmail         ; mode "default"
+  bindsym I                     exec www i3manual      ; mode "default"
+  bindsym M                     exec www maps          ; mode "default"
+  bindsym N                     exec www nationalrail  ; mode "default"
+  bindsym P                     exec www paypal        ; mode "default"
+  bindsym R                     exec www requestbin    ; mode "default"
+  bindsym Y                     exec www youtube       ; mode "default"
+  bindsym Z                     exec www zoho          ; mode "default"
+
+  bindsym space exec i3-input -F 'exec www %s'         ; mode "default"
+  bindsym Return                split v; layout tabbed; exec chromium-browser  ; mode "default"
+  bindsym Escape                mode "default"
+}
+
+
+################################################################################
+# X Stuff
+################################################################################
+bindsym $alt+Shift+X           mode "Xorg"
+mode "Xorg" {
+  bindsym A                    exec arandr                                  ; mode "default"
+  bindsym C                    exec xrandr-capture                          ; mode "default"
+  bindsym --release K          exec xkill                                   ; mode "default"
+  bindsym P                    exec i3-input -F 'exec xprop > /tmp/%s.xprop'; mode "default"
+  bindsym R                    exec restart_plasma                          ; mode "default"
+  bindsym $alt+Shift+R         exec systemctl reboot                        ; mode "default"
+  bindsym S                    exec /home/daniel/.screenlayout/standalone.sh; mode "default"
+  bindsym $alt+Shift+S         exec systemctl poweroff                      ; mode "default"
+  bindsym I                    exec mo eDP1                                 ; mode "default"
+  bindsym H                    exec mo HDMI1                                ; mode "default"
+  bindsym U                    exec mo DP1                                  ; mode "default"
+
+  bindsym Up                   exec xbacklight -inc 10
+  bindsym Shift+Up             exec xbacklight -set 100                     ; mode "default"
+  bindsym Down                 exec xbacklight -dec 10
+  bindsym Shift+Down           exec xbacklight -set 10                      ; mode "default"
+
+  bindsym Space                                                             ; mode "default"
+  bindsym Return                                                            ; mode "default"
+  bindsym Escape                                                            ; mode "default"
+}
+
+bindsym $alt+Shift+D           mode "Download"
+mode "Download" {
+  bindsym Y                    mode "DLYoutube"
+
+  bindsym Space                                                             ; mode "default"
+  bindsym Return                                                            ; mode "default"
+  bindsym Escape                                                            ; mode "default"
+}
+
+mode "DLYoutube" {
+  bindsym A                    exec ytdla                                   ; mode "default"
+  bindsym V                    exec ytdlv                                   ; mode "default"
+}
+
+
+################################################################################
+# Bar
+################################################################################
 bar {
-  status_command i3status
-
+  status_command i3blocks
+  position bottom
+#  tray_output primary
   colors {
     separator #586e75
-    background #222222
+    background #31363c
     statusline #aea79f
     focused_workspace #586e75 #586e75 #ffffff
     active_workspace #073642 #073642 #ffffff
@@ -227,10 +410,18 @@ bar {
   }
 }
 
-##########################################################################
-# Colour Scheme
-##########################################################################
+
+################################################################################
+# F-Keys
+################################################################################
+bindsym $alt+Shift+F7 exec $HOME/.screenlayout/standalone.sh
+bindsym $alt+Shift+F8 exec $HOME/.screenlayout/openbanking.sh
+
+
+################################################################################
+# Colour Scheme (i3-style)
+################################################################################
 client.focused #586e75 #586e75 #fdf6e3 #268bd2
-client.focused_inactive #073642 #073642 #93a1a1 #002b36
+client.focused_inactive #773642 #773642 #73a1a1 #702b36
 client.unfocused #002b36 #002b36 #586e75 #002b36
 client.urgent #dc322f #dc322f #fdf6e3 #dc322f
