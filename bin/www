@@ -1,6 +1,11 @@
 #!/bin/bash
 
 case $# in
+  0)
+    [[ ! -f $PWD/.www ]] && exit 1
+    chromium-browser --app="$(cat $PWD/.www)" &
+    ;;
+
   1)
     declare url
 
