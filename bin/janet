@@ -5,9 +5,19 @@ key='janet'
 keypath="$HOME/.ssh/${key}_rsa"
 
 arg_key="-i $keypath"
+ssh="$USER@$janet"
+
+sync() {
+  while [[ $# -gt 0 ]]
+  do
+    rsync -avh "$HOME/$1" "$ssh:$HOME/$1"
+    shift
+  done
+}
 
 case "$1" in
-  push) rsync -avh "$2" "$USER@$janet:$2" ;;
-  pull) rsync -avh "$USER@$janet:$2" "$2" ;;
-  *) ssh -XA $arg_key "$USER@$janet" "$@";;
+  sync) sync Documents Music Pictures Public Templates Videos;;
+  push) rsync -avh "$2" "$ssh:$2" ;;
+  pull) rsync -avh "$ssh:$2" "$2" ;;
+  *) ssh -XA $arg_key "$ssh" "$@";;
 esac
