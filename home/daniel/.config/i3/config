@@ -41,7 +41,7 @@ exec vol mute
 ################################################################################
 # Touchpad
 ################################################################################
-set $touchpad "DLL06E4:01 06CB:7A13 Touchpad"
+set $touchpad "SYNA2393:00 06CB:7A13 Touchpad"
 exec_always xinput set-prop $touchpad "libinput Tapping Enabled" 1
 exec_always xinput set-prop $touchpad "libinput Natural Scrolling Enabled" 1
 exec_always xinput set-prop $touchpad "libinput Accel Speed" 2.000000
