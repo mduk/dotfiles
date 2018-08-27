@@ -141,7 +141,7 @@ bindsym $alt+Shift+r            restart
 bindsym $alt+Shift+e            exec "i3-nagbar -t warning -m 'Exit?' -b 'Yes' 'i3-msg exit'"
 bindsym $alt+d                  exec dmenu_run
 bindsym $alt+Shift+f            exec $filemanager ~
-bindsym $alt+Shift+t            exec /home/daniel/bin/touchpad toggle
+bindsym $alt+Shift+t            exec /home/daniel/.dotfiles/bin/touchpad toggle
 bindsym $alt+Shift+s            exec systemsettings5
 
 
