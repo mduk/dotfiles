@@ -1,8 +1,9 @@
 bindsym $alt+Escape exec umsd
 bindsym $alt+Shift+A exec toon
 
-set $terminal /usr/bin/tilix
+set $terminal    /usr/bin/tilix
 set $filemanager /usr/bin/nautilus
+set $www         /home/daniel/.dotfiles/bin/www
 
 ################################################################################
 # i3 Font
@@ -330,7 +331,6 @@ mode "Media" {
 ################################################################################
 # WWW
 ################################################################################
-set $www /home/daniel/.dotfiles/bin/www
 bindsym $alt+g exec i3-input -F 'exec chromium-browser --app="http://google.com/?q=%s"'
 bindsym $alt+Shift+W            mode "WWW"
 mode "WWW" {
