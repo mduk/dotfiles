@@ -6,6 +6,9 @@ set $filemanager      /usr/bin/nautilus
 set $www              /home/daniel/.dotfiles/bin/www
 set $randomBackground /home/daniel/.dotfiles/bin/random_background
 
+set $internal         eDP-1
+set $hdmi             DP-3
+
 ################################################################################
 # i3 Font
 ################################################################################
@@ -156,8 +159,8 @@ bindsym $alt+Shift+Down         move down
 bindsym $alt+Shift+Up           move up
 bindsym $alt+Shift+Right        move right
 
-bindsym $alt+$win+Left          move workspace to output eDP-1
-bindsym $alt+$win+Right         move workspace to output DP-3
+bindsym $alt+$win+Left          move workspace to output $internal
+bindsym $alt+$win+Right         move workspace to output $hdmi
 
 
 ################################################################################
