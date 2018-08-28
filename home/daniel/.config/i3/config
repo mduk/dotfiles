@@ -1,9 +1,10 @@
 bindsym $alt+Escape exec umsd
 bindsym $alt+Shift+A exec toon
 
-set $terminal    /usr/bin/tilix
-set $filemanager /usr/bin/nautilus
-set $www         /home/daniel/.dotfiles/bin/www
+set $terminal         /usr/bin/tilix
+set $filemanager      /usr/bin/nautilus
+set $www              /home/daniel/.dotfiles/bin/www
+set $randomBackground /home/daniel/.dotfiles/bin/random_background
 
 ################################################################################
 # i3 Font
@@ -78,10 +79,7 @@ bindsym $alt+Shift+L exec xscreensaver-command -lock
 ################################################################################
 # X Root Window
 ################################################################################
-set $randomBackground /home/daniel/bin/random_background
 exec_always $randomBackground
-bindsym $alt+b exec feh --bg-fill /home/daniel/Development/mduk/dotfiles/backgrounds/enabled/clematis_royalty_flower_petals_108040_3840x2160.jpg
-
 bindsym $alt+Shift+b exec $randomBackground
 
 exec_always xsetroot -cursor_name left_ptr
