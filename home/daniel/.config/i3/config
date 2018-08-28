@@ -157,13 +157,8 @@ bindsym $alt+Shift+Down         move down
 bindsym $alt+Shift+Up           move up
 bindsym $alt+Shift+Right        move right
 
-bindsym $alt+$win+J             move workspace to output eDP-1
-bindsym $alt+$win+K             move workspace to output HDMI1
-bindsym $alt+$win+L             move workspace to output DP2
-
-bindsym $alt+$win+Down          move workspace to output eDP-1
-bindsym $alt+$win+Up            move workspace to output HDMI1
-bindsym $alt+$win+Right         move workspace to output DP2
+bindsym $alt+$win+Left          move workspace to output eDP-1
+bindsym $alt+$win+Right         move workspace to output DP-3
 
 
 ################################################################################
