@@ -1,3 +1,7 @@
 #!/bin/bash
 
-ffmpeg -i "$1" -vn $(echo "$1" | sed 's/\./-audio./' )
+while [[ $# -gt 0 ]]
+do
+  ffmpeg -i "$1" -vn "$(echo "$1" | sed 's/\./-audio./' )"
+  shift
+done
