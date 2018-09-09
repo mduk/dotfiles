@@ -98,6 +98,13 @@ bindsym $alt+Shift+b exec $randomBackground
 exec_always xsetroot -cursor_name left_ptr
 
 
+
+
+
+bindsym $alt+Escape exec umsd
+
+
+
 ################################################################################
 # Right-Handed Navigation
 ################################################################################
