@@ -1,6 +1,6 @@
 #!/bin/bash
 
-read status < "/sys/class/drm/card0-HDMI-A-1/status"
+read status < "/sys/class/drm/card0-DP-3/status"
 
 if [ "$status" = "connected" ];
 then exit 0
