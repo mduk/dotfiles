@@ -26,14 +26,23 @@ floating_modifier $alt
 
 
 ################################################################################
-# KWallet
+# Function Keys
 ################################################################################
-#exec_always kwalletd
-
-################################################################################
-# Network Manager System Tray Icon
-################################################################################
-#exec_always nm-applet
+bindsym XF86AudioMute         exec --no-startup-id pactl set-sink-mute 0 toggle
+bindsym XF86AudioLowerVolume  exec --no-startup-id pactl set-sink-volume 0 -5%
+bindsym XF86AudioRaiseVolume  exec --no-startup-id pactl set-sink-volume 0 +5%
+bindsym XF86AudioPrev         exec mpc prev
+bindsym XF86AudioPause        exec mpc toggle
+bindsym XF86AudioPlay         exec mpc toggle
+bindsym XF86AudioNext         exec mpc next
+bindsym $alt+Shift+F7         exec $HOME/.screenlayout/standalone.sh
+bindsym $alt+Shift+F8         exec $HOME/.screenlayout/openbanking.sh
+bindsym $win+p                exec touch /tmp/display
+bindsym XF86Search            exec $www
+# F10 / kbdbacklight
+bindsym XF86MonBrightnessDown exec xbacklight -dec
+bindsym XF86MonBrightnessUp   exec xbacklight -inc
+bindsym XF86WLAN              exec touch /tmp/wlan
 
 
 ################################################################################
