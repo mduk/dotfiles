@@ -39,7 +39,8 @@ floating_modifier $alt
 ################################################################################
 # Top Panel
 ################################################################################
-exec_always budgie-panel
+exec_always $polybar
+
 
 ################################################################################
 # PulseAudio
@@ -395,35 +396,11 @@ mode "DLYoutube" {
 
 
 ################################################################################
-# Bar
-################################################################################
-bar {
-  status_command i3blocks
-  position bottom
-#  tray_output primary
-  colors {
-    separator #586e75
-    background #31363c
-    statusline #aea79f
-    focused_workspace #586e75 #586e75 #ffffff
-    active_workspace #073642 #073642 #ffffff
-    inactive_workspace #002b36 #002b36 #aea79f
-    urgent_workspace #77216f #77216f #ffffff
-  }
-}
-
-
-################################################################################
-# F-Keys
-################################################################################
-bindsym $alt+Shift+F7 exec $HOME/.screenlayout/standalone.sh
-bindsym $alt+Shift+F8 exec $HOME/.screenlayout/openbanking.sh
-
-
-################################################################################
 # Colour Scheme (i3-style)
 ################################################################################
-client.focused #586e75 #586e75 #fdf6e3 #268bd2
-client.focused_inactive #773642 #773642 #73a1a1 #702b36
-client.unfocused #002b36 #002b36 #586e75 #002b36
-client.urgent #dc322f #dc322f #fdf6e3 #dc322f
+client.focused          #555555 #555555 #ffffff #306B34
+client.focused_inactive #306B34 #306B34 #000000 #555555
+client.unfocused        #555555 #000000 #555555 #000000
+client.urgent           #bd2c40 #bd2c40 #bd2c40 #bd2c40
+
+
