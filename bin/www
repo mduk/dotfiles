@@ -2,8 +2,17 @@
 
 case $# in
   0)
-    [[ ! -f $PWD/.www ]] && exit 1
-    chromium-browser --app="$(cat $PWD/.www)" &
+    if [[ -f $PWD/.www ]]
+    then
+      chromium-browser --app="$(cat $PWD/.www)" &
+    else
+      declare url=$(cat $HOME/.config/www/* \
+                      | dmenu -nb '#000' \
+                              -fn 'fixed:pixelsize=22' \
+                              -p 'WWW>' )
+      chromium-browser --app="$url" &
+    fi
+
     ;;
 
   1)
