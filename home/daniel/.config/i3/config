@@ -105,7 +105,7 @@ bindsym $angryalt+Right        focus right
 ################################################################################
 for_window [class="plasmashell"]      floating enable
 for_window [class="QtQmlViewer"]      floating enable
-#for_window [class="mpv"]              floating enable
+for_window [class="mpv"]              floating enable
 for_window [class="feh"]              floating enable
 for_window [class="vlc"]              floating enable
 for_window [class="ffplay"]           floating enable
