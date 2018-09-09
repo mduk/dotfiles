@@ -1,13 +1,14 @@
-bindsym $alt+Escape exec umsd
-bindsym $alt+Shift+A exec toon
+set $dotbin                   /home/daniel/.dotfiles/bin
+set $www                      $dotbin/www
+set $randomBackground         $dotbin/random_background
+set $polybar                  $dotbin/bin/i3-polybar
+set $terminal                 /usr/bin/konsole
+set $filemanager              /usr/bin/nautilus
+set $browser                  /usr/bin/chromium-browser
 
-set $terminal         /usr/bin/tilix
-set $filemanager      /usr/bin/nautilus
-set $www              /home/daniel/.dotfiles/bin/www
-set $randomBackground /home/daniel/.dotfiles/bin/random_background
-
-set $internal         eDP-1
-set $hdmi             DP-3
+set $touchpad                 SYNA2393:00 06CB:7A13 Touchpad
+set $outputInternal           eDP-1
+set $outputHdmi               DP-3
 
 ################################################################################
 # i3 Font
@@ -61,7 +62,6 @@ exec vol mute
 ################################################################################
 # Touchpad
 ################################################################################
-set $touchpad "SYNA2393:00 06CB:7A13 Touchpad"
 exec_always xinput set-prop $touchpad "libinput Tapping Enabled" 1
 exec_always xinput set-prop $touchpad "libinput Natural Scrolling Enabled" 1
 exec_always xinput set-prop $touchpad "libinput Accel Speed" 2.000000
@@ -102,7 +102,7 @@ exec_always xsetroot -cursor_name left_ptr
 # Right-Handed Navigation
 ################################################################################
 bindsym $angryalt+Return       exec $terminal
-bindsym $angryalt+Shift+Return exec chromium-browser
+bindsym $angryalt+Shift+Return exec $browser
 bindsym $angryalt+Left         focus left
 bindsym $angryalt+Down         focus down
 bindsym $angryalt+Up           focus up
@@ -142,7 +142,7 @@ no_focus [class="plasmashell"]
 mouse_warping none
 
 bindsym $alt+Return             exec $terminal
-bindsym $alt+Shift+Return       exec chromium-browser
+bindsym $alt+Shift+Return       exec $browser
 
 #bindsym $alt+space              scratchpad show
 #bindsym $alt+space              exec dmenu_run
@@ -169,8 +169,8 @@ bindsym $alt+Shift+Down         move down
 bindsym $alt+Shift+Up           move up
 bindsym $alt+Shift+Right        move right
 
-bindsym $alt+$win+Left          move workspace to output $internal
-bindsym $alt+$win+Right         move workspace to output $hdmi
+bindsym $alt+$win+Left          move workspace to output $outputInternal
+bindsym $alt+$win+Right         move workspace to output $outputHdmi
 
 
 ################################################################################
@@ -272,7 +272,7 @@ bindsym $alt+KP_9               workspace 9
 bindsym $alt+KP_0               workspace 10
 
 bindsym $alt+KP_Add           exec $terminal
-bindsym $alt+Shift+KP_Add     exec chromium-browser
+bindsym $alt+Shift+KP_Add     exec $browser
 
 
 ################################################################################
