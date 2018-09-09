@@ -348,23 +348,21 @@ mode "Media" {
 ################################################################################
 # WWW
 ################################################################################
-bindsym $alt+g exec i3-input -F 'exec chromium-browser --app="http://google.com/?q=%s"'
 bindsym $alt+Shift+W            mode "WWW"
 mode "WWW" {
-  bindsym D                     exec $www deliveroo     ; mode "default"
-  bindsym E                     exec $www ebay          ; mode "default"
-  bindsym F                     exec $www facebook      ; mode "default"
-  bindsym G                     exec $www gmail         ; mode "default"
-  bindsym I                     exec $www i3manual      ; mode "default"
-  bindsym M                     exec $www maps          ; mode "default"
-  bindsym N                     exec $www nationalrail  ; mode "default"
-  bindsym P                     exec $www paypal        ; mode "default"
-  bindsym Y                     exec $www youtube       ; mode "default"
-  bindsym Z                     exec $www zoho          ; mode "default"
-
-  bindsym space exec i3-input -F 'exec www %s'         ; mode "default"
-  bindsym Return                split v; layout tabbed; exec chromium-browser  ; mode "default"
-  bindsym Escape                mode "default"
+  bindsym D                     exec $www deliveroo                         ; mode "default"
+  bindsym E                     exec $www ebay                              ; mode "default"
+  bindsym F                     exec $www facebook                          ; mode "default"
+  bindsym G                     exec $www gmail                             ; mode "default"
+  bindsym I                     exec $www i3manual                          ; mode "default"
+  bindsym M                     exec $www maps                              ; mode "default"
+  bindsym N                     exec $www nationalrail                      ; mode "default"
+  bindsym P                     exec $www paypal                            ; mode "default"
+  bindsym Y                     exec $www youtube                           ; mode "default"
+  bindsym Z                     exec $www zoho                              ; mode "default"
+  bindsym space                 exec $www                                   ; mode "default"
+  bindsym Return                split v; layout tabbed; exec $browser       ; mode "default"
+  bindsym Escape                                                              mode "default"
 }
 
 
