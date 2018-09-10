@@ -1,7 +1,6 @@
-set $dotbin                   /home/daniel/.dotfiles/bin
-set $www                      $dotbin/www
-set $randomBackground         $dotbin/random_background
-set $polybar                  $dotbin/bin/i3-polybar
+set $www                      www
+set $randomBackground         false
+set $polybar                  i3-polybar
 set $terminal                 /usr/bin/konsole
 set $filemanager              /usr/bin/nautilus
 set $browser                  /usr/bin/chromium-browser
