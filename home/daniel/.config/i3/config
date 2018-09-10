@@ -373,7 +373,6 @@ mode "XSession" {
   bindsym C                    exec xrandr-capture                          ; mode "default"
   bindsym --release K          exec xkill                                   ; mode "default"
   bindsym P                    exec i3-input -F 'exec xprop > /tmp/%s.xprop'; mode "default"
-  bindsym R                    exec restart_plasma                          ; mode "default"
   bindsym $alt+Shift+R         exec systemctl reboot                        ; mode "default"
   bindsym S                    exec /home/daniel/.screenlayout/standalone.sh; mode "default"
   bindsym $alt+Shift+S         exec systemctl poweroff                      ; mode "default"
