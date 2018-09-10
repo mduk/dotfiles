@@ -1,14 +1,20 @@
 #!/bin/bash
 
-set -xe
-
-killall polybar
+killall polybar &>/dev/null
 
 sleep 1
 
-$HOME/Development/jaagr/polybar/build/bin/polybar \
-  --reload \
-  --log=info \
-  --config=${XDG_CONFIG_HOME:-$HOME/.config}/polybar/config \
-  example \
-  2>&1 | logger
+declare monitors=$(
+  xrandr --query \
+    | sed -nr 's/^(.*) connected.*/\1/p'
+)
+
+for m in $monitors
+do
+  MONITOR=$m $HOME/Development/jaagr/polybar/build/bin/polybar \
+    --reload \
+    --log=info \
+    --config=${XDG_CONFIG_HOME:-$HOME/.config}/polybar/config \
+    example \
+    2>&1 | logger
+done
