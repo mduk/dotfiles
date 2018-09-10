@@ -409,9 +409,7 @@ mode "DLYoutube" {
 ################################################################################
 # Colour Scheme (i3-style)
 ################################################################################
-client.focused          #555555 #555555 #ffffff #306B34
-client.focused_inactive #306B34 #306B34 #000000 #555555
+client.focused          #aaaaaa #aaaaaa #000000 #306B34
+client.focused_inactive #555555 #555555 #000000 #555555
 client.unfocused        #555555 #000000 #555555 #000000
 client.urgent           #bd2c40 #bd2c40 #bd2c40 #bd2c40
-
-
