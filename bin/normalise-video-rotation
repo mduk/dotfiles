@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+for file in $(ls *.mp4)
+do
+  declare rotation=$(video-rotation "$file")
+
+  case "$rotation" in
+       0) continue ;;
+
+      90) rotate-video "$file" -90 ;;
+     180) rotate-video "$file" 180 ;;
+     270) rotate-video "$file" 90  ;;
+
+       *) echo "$0: Unknown rotation value: $rotation ($file)" >&2
+          continue
+          ;;
+  esac
+
+done
