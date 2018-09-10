@@ -8,7 +8,7 @@ case $# in
     else
       declare url=$(cat $HOME/.config/www/* \
                       | dmenu -nb '#000' \
-                              -fn 'fixed:pixelsize=22' \
+                              -fn "$DMENU_FONT" \
                               -p 'WWW>' )
       chromium-browser --app="$url" &
     fi

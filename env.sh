@@ -16,3 +16,6 @@ export VIRTUAL_ENV_DISABLE_PROMPT=1
 if [[ -f /usr/local/share/chruby/chruby.sh ]]
 then source /usr/local/share/chruby/chruby.sh
 fi
+
+export DMENU_FONT='fixed:pixelsize=32'
+
