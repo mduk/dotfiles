@@ -155,8 +155,8 @@ bindsym $alt+Shift+Return       exec $browser
 bindsym $alt+Shift+q            kill
 bindsym $alt+Shift+c            reload
 bindsym $alt+Shift+r            restart
-bindsym $alt+Shift+e            exec "i3-nagbar -t warning -m 'Exit?' -b 'Yes' 'i3-msg exit'"
-bindsym $alt+d                  exec dmenu_run
+#bindsym $alt+d                  exec i3-dmenu
+bindsym $alt+space              exec i3-dmenu
 bindsym $alt+Shift+f            exec $filemanager ~
 bindsym $alt+Shift+t            exec /home/daniel/.dotfiles/bin/touchpad toggle
 
@@ -195,8 +195,8 @@ bindsym $alt+l                  focus child
 ################################################################################
 # Floating Windows
 ################################################################################
-bindsym $alt+space              focus mode_toggle
-bindsym $alt+Shift+space        floating toggle
+#bindsym $alt+space              focus mode_toggle
+#bindsym $alt+Shift+space        floating toggle
 
 
 ################################################################################
@@ -365,10 +365,10 @@ mode "WWW" {
 
 
 ################################################################################
-# X Stuff
+# XSession
 ################################################################################
-bindsym $alt+Shift+X           mode "Xorg"
-mode "Xorg" {
+bindsym $alt+Shift+X           mode "XSession"
+mode "XSession" {
   bindsym A                    exec arandr                                  ; mode "default"
   bindsym C                    exec xrandr-capture                          ; mode "default"
   bindsym --release K          exec xkill                                   ; mode "default"
@@ -380,6 +380,7 @@ mode "Xorg" {
   bindsym I                    exec mo eDP1                                 ; mode "default"
   bindsym H                    exec mo HDMI1                                ; mode "default"
   bindsym U                    exec mo DP1                                  ; mode "default"
+  bindsym $alt+Shift+e         exec loginctl terminate-session $XDG_SESSION_ID
 
   bindsym Up                   exec xbacklight -inc 10
   bindsym Shift+Up             exec xbacklight -set 100                     ; mode "default"
