@@ -5,7 +5,7 @@ set $terminal                 /usr/bin/konsole
 set $filemanager              /usr/bin/nautilus
 set $browser                  /usr/bin/chromium-browser
 
-set $touchpad                 SYNA2393:00 06CB:7A13 Touchpad
+set $touchpad                 "SYNA2393:00 06CB:7A13 Touchpad"
 set $outputInternal           eDP-1
 set $outputHdmi               DP-3
 
