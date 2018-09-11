@@ -1,0 +1,21 @@
+#!/bin/bash
+
+declare file="$1"; shift
+
+if mpc add "$file"
+then
+  mpc next
+  mpc play $(mpc playlist | wc -l)
+else
+  notify-send 'MPD Play' \
+              "Error adding file: $file"
+fi
+
+while [[ $# -gt 0 ]]
+do
+  declare file="$1"
+  if ! mpc add "$file"
+  then notify-send 'MPD Play' \
+                   "Error adding file: $file"
+  fi
+done
