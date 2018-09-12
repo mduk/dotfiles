@@ -10,7 +10,9 @@ case $# in
                       | dmenu -nb '#000' \
                               -fn "$DMENU_FONT" \
                               -p 'WWW>' )
-      chromium-browser --app="$url" &
+      if [[ ! -z $url ]]
+      then chromium-browser --app="$url" &
+      fi
     fi
 
     ;;
