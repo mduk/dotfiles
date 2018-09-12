@@ -139,17 +139,17 @@ label-mode-padding = 2
 label-mode-foreground = #000
 label-mode-background = ${colors.primary}
 
-; visible = Active workspace on unfocused monitor
-label-visible = %index%
-label-visible-background = ${self.label-focused-background}
-label-visible-underline = ${self.label-focused-underline}
-label-visible-padding = ${self.label-focused-padding}
-
 ; focused = Active workspace on focused monitor
 label-focused = %index%
 label-focused-background = ${colors.background}
-label-focused-underline = ${colors.active}
+label-focused-underline = ${colors.green}
 label-focused-padding = 2
+
+; visible = Active workspace on unfocused monitor
+label-visible = %index%
+label-visible-background = ${colors.background}
+label-visible-underline = ${colors.blue}
+label-visible-padding = 2
 
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %index%
