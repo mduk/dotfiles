@@ -6,13 +6,24 @@ case $# in
     then
       chromium-browser --app="$(cat $PWD/.www)" &
     else
-      declare url=$(cat $HOME/.config/www/* \
-                      | dmenu -nb '#000' \
-                              -fn "$DMENU_FONT" \
-                              -p 'WWW>' )
-      if [[ ! -z $url ]]
-      then chromium-browser --app="$url" &
+      declare url=$(
+        (
+          find $HOME/.config/www/ -type f -printf "%f\n";
+          cat $HOME/.config/www/*
+        ) | dmenu -nb '#000' \
+                  -fn "$DMENU_FONT" \
+                  -p 'WWW>'
+      )
+
+      if [[ -z $url ]]
+      then exit
       fi
+
+      if [[ $url != http* ]]
+      then declare url=$(cat $HOME/.config/www/$url)
+      fi
+
+      chromium-browser --app="$url"
     fi
 
     ;;
