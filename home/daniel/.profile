@@ -26,10 +26,5 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-export WIFI_INTERFACE="wlp59s0"
-export DISPLAY_INTERNAL="eDP-1"
-export DISPLAY_HDMI="DP-3"
-export GTK_THEME='Adwaita-dark'
 source "/home/daniel/.dotfiles/dot.sh"
-
 auto-monitors
