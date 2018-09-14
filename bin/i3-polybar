@@ -16,5 +16,5 @@ do
     --log=info \
     --config=${XDG_CONFIG_HOME:-$HOME/.config}/polybar/config \
     example \
-    2>&1 | logger
+    2>&1 | logger &
 done
