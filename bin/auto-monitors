@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+declare profile='standalone'
+
+if hdmi-connected
+then
+  case "$(hdmi-name)" in
+    'Acer CB281HK') profile='openbanking' ;;
+                 *) exit 1
+  esac
+fi
+
+declare layout="$HOME/.screenlayout/$profile.sh"
+
+if [[ -f "$layout" ]]
+then source "$layout"
+else exit 2
+fi
+
+sleep 1
+
+i3-polybar
+map-touchscreen
