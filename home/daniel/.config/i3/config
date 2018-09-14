@@ -145,6 +145,7 @@ for_window [class="Electron"]         floating enable
 for_window [class="Ufraw"]            floating enable
 for_window [class="Ufraw"]            fullscreen
 for_window [class="ktorrent"]         floating enable
+for_window [class="Yad"]              floating enable
 
 
 ################################################################################
