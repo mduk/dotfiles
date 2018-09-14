@@ -391,9 +391,8 @@ mode "XSession" {
   bindsym $alt+Shift+R         exec systemctl reboot                        ; mode "default"
   bindsym S                    exec /home/daniel/.screenlayout/standalone.sh; mode "default"
   bindsym $alt+Shift+S         exec systemctl poweroff                      ; mode "default"
-  bindsym I                    exec mo eDP1                                 ; mode "default"
-  bindsym H                    exec mo HDMI1                                ; mode "default"
-  bindsym U                    exec mo DP1                                  ; mode "default"
+  bindsym I                    exec mo eDP-1                                ; mode "default"
+  bindsym H                    exec mo DP-3                                 ; mode "default"
   bindsym $alt+Shift+e         exec loginctl terminate-session $XDG_SESSION_ID
 
   bindsym Up                   exec xbacklight -inc 10
