@@ -46,6 +46,13 @@ bindsym XF86WLAN              exec touch /tmp/wlan
 
 
 ################################################################################
+# Scroll Wheel Volume
+################################################################################
+bindsym --whole-window --border $alt+button5 exec --no-startup-id pactl set-sink-volume 0 -5%
+bindsym --whole-window --border $alt+button4 exec --no-startup-id pactl set-sink-volume 0 +5%
+
+
+################################################################################
 # Top Panel
 ################################################################################
 exec_always $polybar
