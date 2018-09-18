@@ -34,9 +34,7 @@ bindsym XF86AudioPrev         exec mpc prev
 bindsym XF86AudioPause        exec mpc toggle
 bindsym XF86AudioPlay         exec mpc toggle
 bindsym XF86AudioNext         exec mpc next
-bindsym $alt+Shift+F7         exec $HOME/.screenlayout/standalone.sh
-bindsym $alt+Shift+F8         exec $HOME/.screenlayout/openbanking.sh
-bindsym $win+p                exec touch /tmp/display
+#bindsym $win+p                exec touch /tmp/display
 bindsym XF86Search            exec $www
 # F10 / kbdbacklight
 bindsym XF86MonBrightnessDown exec xbacklight -dec
