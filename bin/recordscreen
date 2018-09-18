@@ -7,7 +7,7 @@ function select-microphone {
   fi
 }
 
-declare output=${1:-eDP}
+declare output=${1:-${XRANDR_INTERNAL}}
 declare outdir="$HOME/Videos/screenrecordings"
 
 if [[ ! -d $outdir ]]
