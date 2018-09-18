@@ -20,6 +20,7 @@ fi
 
 # Hardware
 export WIFI_INTERFACE='wlp59s0'
+export XINPUT_TOUCHSCREEN='Wacom HID 488E Finger'
 export XRANDR_INTERNAL='eDP-1'
 export XRANDR_HDMI='DP-3'
 
