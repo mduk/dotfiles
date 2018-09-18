@@ -1,6 +1,5 @@
 set $www                      www
 set $randomBackground         false
-set $polybar                  i3-polybar
 set $terminal                 /usr/bin/konsole
 set $filemanager              /usr/bin/nautilus
 set $browser                  /usr/bin/chromium-browser
@@ -53,15 +52,9 @@ bindsym --whole-window --border $alt+button4 exec --no-startup-id pactl set-sink
 
 
 ################################################################################
-# Top Panel
+# Monitor Configuration / Touchscreen / Polybar
 ################################################################################
-exec_always $polybar
-
-
-################################################################################
-# Lock touchscreen to internal display only
-################################################################################
-exec_always xinput map-to-output "$touchscreen" "$outputInternal"
+exec_always auto-monitors
 
 
 ################################################################################
