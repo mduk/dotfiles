@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+if [[ $# -ne 1 ]]
+then
+  echo "Usage: $0 (status|toggle)"
+  exit 1
+fi
+
+case "$1" in
+
+  status)
+    if pgrep xscreensaver >/dev/null 2>&1
+    then echo "Screensaver On"
+    else echo "Screensaver Off"
+    fi
+    ;;
+
+  toggle)
+    if pgrep xscreensaver >/dev/null 2>&1
+    then
+      xscreensaver-command -exit >/dev/null 2>&1
+    else
+      killall gnome-screensaver >/dev/null 2>&1
+      xscreensaver -nosplash & >/dev/null 2>&1
+    fi
+    exit 0
+    ;;
+
+  lock)
+    if pgrep xscreensaver >/dev/null 2>&1
+    then
+      xscreensaver-command -lock >/dev/null 2>&1
+    else
+      killall gnome-screensaver >/dev/null 2>&1
+      xscreensaver -nosplash & >/dev/null 2>&1
+      sleep 1
+      xscreensaver-command -lock >/dev/null 2>&1
+    fi
+    exit 0
+    ;;
+
+esac
