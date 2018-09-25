@@ -9,6 +9,7 @@ set $touchscreen              "Wacom HID 488E Finger"
 set $outputInternal           eDP-1
 set $outputHdmi               DP-3
 
+
 ################################################################################
 # i3 Font
 ################################################################################
@@ -47,6 +48,18 @@ bindsym XF86WLAN              exec touch /tmp/wlan
 ################################################################################
 bindsym --whole-window --border $alt+button5 exec --no-startup-id pactl set-sink-volume 0 -5%
 bindsym --whole-window --border $alt+button4 exec --no-startup-id pactl set-sink-volume 0 +5%
+
+
+################################################################################
+# Middle click title bars to close windows
+################################################################################
+bindsym --border button2 kill
+
+
+################################################################################
+# Network Manager systray applet.
+################################################################################
+exec_always nm-applet
 
 
 ################################################################################
