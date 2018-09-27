@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+cat /sys/class/drm/card0-DP-3/edid \
+  | md5sum \
+  | awk '{print $1}'

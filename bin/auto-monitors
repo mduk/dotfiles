@@ -1,12 +1,15 @@
 #!/usr/bin/env bash
 
+set -x
+
 declare profile='standalone'
 
 if hdmi-connected
 then
-  case "$(hdmi-name)" in
-    'Acer CB281HK') profile='openbanking' ;;
-                 *) exit 1
+  case "$(hdmi-edid-hash)" in
+    'c605c2d43c31e7090621159fe53d15d7') profile='work' ;;
+    '7b47ec01863401062ed15a646e908526') profile='flat' ;;
+    *) exit 1
   esac
 fi
 

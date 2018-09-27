@@ -398,6 +398,7 @@ mode "XSession" {
   bindsym I                    exec mo eDP-1                                ; mode "default"
   bindsym H                    exec mo DP-3                                 ; mode "default"
   bindsym $alt+Shift+e         exec loginctl terminate-session $XDG_SESSION_ID
+  bindsym M                    exec auto-monitors                           ; mode "default"
 
   bindsym Up                   exec xbacklight -inc 10
   bindsym Shift+Up             exec xbacklight -set 100                     ; mode "default"
