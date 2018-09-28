@@ -10,14 +10,14 @@ ssh="$USER@$janet"
 sync() {
   while [[ $# -gt 0 ]]
   do
-    rsync -avh "$HOME/$1" "$ssh:$HOME/$1"
+    rsync -avh -e "ssh ${arg_key}" "$HOME/$1/" "$ssh:/mnt/ARCHIVE-2/$1"
     shift
   done
 }
 
 case "$1" in
-  sync) sync Documents Music Pictures Public Templates Videos;;
-  push) rsync -avh "$2" "$ssh:$2" ;;
-  pull) rsync -avh "$ssh:$2" "$2" ;;
-  *) ssh -XA $arg_key "$ssh" "$@";;
+  sync) sync ${2:-Documents Music Pictures Public Templates};;
+  push) rsync -avh -e "ssh ${arg_key}" "$2/" "$ssh:$2" ;;
+  pull) rsync -avh -e "ssh ${arg_key}" "$ssh:$2/" "$2" ;;
+     *) ssh -XA $arg_key "$ssh" "$@";;
 esac
