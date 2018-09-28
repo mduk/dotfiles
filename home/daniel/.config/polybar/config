@@ -66,9 +66,10 @@ module-margin-right = 1
 font-0 = fixed:pixelsize=14;1
 font-1 = fontawesome:pixelsize=14;1
 
+tray-position = right
 modules-left = i3
 modules-center =
-modules-right = xkeyboard mpd xbacklight pulseaudio wifi battery date
+modules-right = xscreensaver xkeyboard mpd xbacklight pulseaudio wifi battery date
 
 ;wm-restack = i3
 
@@ -82,7 +83,15 @@ cursor-scroll = ns-resize
 
 
 
+[module/xscreensaver]
+type = custom/script
+interval = 1
 
+exec = i3-screensaver status
+click-left = i3-screensaver toggle
+click-right = auto-monitors
+format-prefix = " "
+format-underline = ${colors.blue}
 
 
 
