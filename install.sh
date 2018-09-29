@@ -60,6 +60,6 @@ then echo "Done"
 else echo "Error"
 fi
 
-for arg in "$@"
-do source "./install-${arg}.sh"
+for arg in install.d/*
+do source $arg
 done
