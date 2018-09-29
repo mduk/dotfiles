@@ -1,2 +1,2 @@
-dot-install package erlang
-dot-install package rebar
+package erlang
+package rebar

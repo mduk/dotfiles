@@ -1,14 +1,14 @@
 
-dot-install package exiftool
-dot-install package screen
-dot-install package tmux
-dot-install package tree
-dot-install package httpie
-dot-install package jq
-dot-install package dialog
-dot-install package nmap
-dot-install package dos2unix
-dot-install package youtube-dl
-dot-install package openssl
+package exiftool
+package screen
+package tmux
+package tree
+package httpie
+package jq
+package dialog
+package nmap
+package dos2unix
+package youtube-dl
+package openssl
 
 

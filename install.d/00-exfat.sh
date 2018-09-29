@@ -1,1 +1,1 @@
-dot-install package exfat-utils
+package exfat-utils

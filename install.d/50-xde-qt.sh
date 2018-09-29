@@ -1,1 +1,1 @@
-dot-install package qtbase5-dev
+package qtbase5-dev

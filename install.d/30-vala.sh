@@ -1,2 +1,2 @@
-dot-install package build-essential
-dot-install package valac
+package build-essential
+package valac

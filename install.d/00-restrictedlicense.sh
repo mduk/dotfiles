@@ -1,2 +1,2 @@
-dot-install package ubuntu-restricted-addons
-dot-install package ubuntu-restricted-extras
+package ubuntu-restricted-addons
+package ubuntu-restricted-extras

@@ -1,2 +1,2 @@
-dot-install package kdenlive
-dot-install package vokoscreen
+package kdenlive
+package vokoscreen

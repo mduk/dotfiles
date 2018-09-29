@@ -1,22 +1,22 @@
-dot-install package xsel
-dot-install package arandr
-dot-install package read-edid
+package xsel
+package arandr
+package read-edid
 
-dot-install package xscreensaver
-dot-install package xscreensaver-data-extra
-dot-install package xscreensaver-gl
-dot-install package xscreensaver-gl-extra
-dot-install package xscreensaver-screensaver-bsod
+package xscreensaver
+package xscreensaver-data-extra
+package xscreensaver-gl
+package xscreensaver-gl-extra
+package xscreensaver-screensaver-bsod
 
-dot-install package i3-wm
-dot-install package i3-wm-dbg
-dot-install package feh
-dot-install package suckless-tools
+package i3-wm
+package i3-wm-dbg
+package feh
+package suckless-tools
 
-dot-install package dconf-editor
-dot-install package konsole
+package dconf-editor
+package konsole
 
-dot-install package evince
-dot-install package gimp
-dot-install package libreoffice-writer
-dot-install package libreoffice-calc
+package evince
+package gimp
+package libreoffice-writer
+package libreoffice-calc

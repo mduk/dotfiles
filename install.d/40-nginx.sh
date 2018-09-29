@@ -1,1 +1,1 @@
-dot-install package nginx
+package nginx

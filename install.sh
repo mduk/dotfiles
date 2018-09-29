@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source ./dot.sh
+
 package() {
   echo -n "Installing $1: "
 

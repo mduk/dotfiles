@@ -1,5 +1,5 @@
-dot-install package virtualenv
-dot-install package virtualbox
+package virtualenv
+package virtualbox
 
-dot-install package python-pip
+package python-pip
 pip install grip

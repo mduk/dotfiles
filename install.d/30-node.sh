@@ -1,4 +1,4 @@
-dot-install package nodejs
-dot-install package npm
+package nodejs
+package npm
 
 sudo npm install -g bower
