@@ -19,8 +19,10 @@ case $# in
       then exit
       fi
 
-      if [[ $url != http* ]]
-      then declare url=$(cat $HOME/.config/www/$url)
+      declare urlfile="$HOME/.config/www/$url"
+      if [[ $url != http* ]] && [[ -f $urlfile ]]
+      then declare url=$(cat "$urlfile")
+      else declare url="http://www.google.com/search?q=$(echo $url | sed -r 's/\s+/+/')"
       fi
 
       chromium-browser --app="$url"
