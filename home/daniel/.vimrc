@@ -104,6 +104,8 @@ Plug 'tpope/vim-abolish'
 
 Plug 'vim-syntastic/syntastic'
 
+Plug 'lrvick/Conque-Shell'
+
 " syntax highlighters
 Plug 'pangloss/vim-javascript'
 Plug 'Chiel92/vim-autoformat'
