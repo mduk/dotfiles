@@ -8,7 +8,7 @@ package jq
 package dialog
 package nmap
 package dos2unix
-package youtube-dl
 package openssl
 
-
+package python-pip
+pip install youtube-dl
