@@ -15,14 +15,14 @@ do
         | tr '.' '-'
     )
 
-    if [[ -z $createdate ]]
+    if [[ -z $createdate ]] \
+    || [[ $createddate == '0000:00:00-00:00:00' ]]
     then
-      echo $file >&2
       continue
     fi
 
   declare extension="${file##*.}" # Strip off everything before the dot
-  declare newfile="/media/daniel/DECEBC1ACEBBE8C3/Camera/$createdate.$extension"
+  declare newfile="${CAMERA_DIR:-$HOME/Camera}/$createdate.$extension"
 
   echo -n "$file => $newfile "
 
