@@ -16,7 +16,7 @@ sync() {
 }
 
 case "$1" in
-  sync) sync ${2:-Documents Music Pictures Templates};;
+  sync) sync ${2:-Documents Music Pictures};;
   push) rsync -avh -e "ssh ${arg_key}" "$2/" "$ssh:$2" ;;
   pull) rsync -avh -e "ssh ${arg_key}" "$ssh:$2/" "$2" ;;
      *) ssh -XA $arg_key "$ssh" "$@";;
