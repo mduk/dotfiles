@@ -379,6 +379,7 @@ mode "WWW" {
   bindsym Y                     exec $www youtube                           ; mode "default"
   bindsym Z                     exec $www zoho                              ; mode "default"
   bindsym space                 exec $www                                   ; mode "default"
+  bindsym Shift+space           split v; layout tabbed; exec $www           ; mode "default"
   bindsym Return                split v; layout tabbed; exec $browser       ; mode "default"
   bindsym Escape                                                              mode "default"
 }
