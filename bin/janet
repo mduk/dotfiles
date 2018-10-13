@@ -16,8 +16,24 @@ sync() {
 }
 
 case "$1" in
-  sync) sync ${2:-Documents Music Pictures} ;;
-  push) rsync -avhz -e "ssh ${arg_key}" "$2/" "$ssh:$2" ;;
-  pull) rsync -avhz -e "ssh ${arg_key}" "$ssh:$2/" "$2" ;;
-     *) ssh -XA $arg_key "$ssh" "$@" ;;
+
+  sync)
+    sync ${2:-Documents Music Pictures}
+    ;;
+
+  push)
+    rsync -avhz -e "ssh ${arg_key}" "$2/" "$ssh:$2"
+    ;;
+
+  pull) rsync -avhz -e "ssh ${arg_key}" "$ssh:$2/" "$2"
+    ;;
+
+  screen)
+    ssh -XAt $arg_key "$ssh" "screen -DR $2"
+    ;;
+
+  *)
+    ssh -XAt $arg_key "$ssh" "$@"
+    ;;
+
 esac
