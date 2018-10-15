@@ -7,6 +7,7 @@ then
   case "$(hdmi-edid-hash)" in
     'c605c2d43c31e7090621159fe53d15d7') profile='work' ;;
     '7b47ec01863401062ed15a646e908526') profile='flat' ;;
+    'be333760900e48176448e7e32208e432') profile='home-desk' ;;
     *) exit 1
   esac
 fi

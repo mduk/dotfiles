@@ -5,7 +5,7 @@ key='janet'
 keypath="$HOME/.ssh/${key}_rsa"
 
 arg_key="-i $keypath"
-ssh="$USER@$janet"
+ssh="ssh -XAt -i $keypath $USER@$janet"
 
 sync() {
   while [[ $# -gt 0 ]]
@@ -29,11 +29,15 @@ case "$1" in
     ;;
 
   screen)
-    ssh -XAt $arg_key "$ssh" "screen -DR $2"
+    $ssh "screen -DR $2"
+    ;;
+
+  discs)
+    $ssh /home/daniel/bin/discs
     ;;
 
   *)
-    ssh -XAt $arg_key "$ssh" "$@"
+    $ssh "$@"
     ;;
 
 esac
