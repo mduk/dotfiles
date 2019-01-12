@@ -38,9 +38,17 @@ bindsym XF86AudioNext         exec mpc next
 #bindsym $win+p                exec touch /tmp/display
 bindsym XF86Search            exec $www
 # F10 / kbdbacklight
-bindsym XF86MonBrightnessDown exec xbacklight -dec
-bindsym XF86MonBrightnessUp   exec xbacklight -inc
+#bindsym XF86MonBrightnessDown exec xbacklight -dec
+#bindsym XF86MonBrightnessUp   exec xbacklight -inc
 bindsym XF86WLAN              exec touch /tmp/wlan
+
+
+################################################################################
+# Screenshots
+# https://www.reddit.com/r/i3wm/comments/65vis5/screenshot_commands_from_my_i3_config/
+################################################################################
+bindsym --release Print exec scrot '-%Y-%m-%d-%H-%M-%S.png' -e 'mkdir -p ~/Pictures/Screenshots && mv $f ~/Pictures/Screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/Screenshots/`ls -1 -t ~/Pictures/Screenshots | head -1`' # All screens
+bindsym --release Shift+Print exec scrot -s '%Y-%m-%d-%H-%M-%S.png' -e 'mkdir -p ~/Pictures/Screenshots && mv $f ~/Pictures/Screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/Screenshots/`ls -1 -t ~/Pictures/Screenshots | head -1`' # Area selection
 
 
 ################################################################################
@@ -175,9 +183,7 @@ bindsym $alt+Shift+Return       exec $browser
 bindsym $alt+Shift+q            kill
 bindsym $alt+Shift+c            reload
 bindsym $alt+Shift+r            restart
-#bindsym $alt+d                  exec i3-dmenu
 bindsym $alt+space              exec i3-dmenu
-bindsym $alt+Shift+f            exec $filemanager ~
 bindsym $alt+Shift+t            exec /home/daniel/.dotfiles/bin/touchpad toggle
 
 
@@ -216,7 +222,7 @@ bindsym $alt+l                  focus child
 # Floating Windows
 ################################################################################
 bindsym $alt+Next              focus mode_toggle
-bindsym $alt+Prior        floating toggle
+bindsym $alt+Prior             floating toggle
 
 
 ################################################################################
@@ -295,14 +301,31 @@ bindsym $alt+KP_8               workspace 8
 bindsym $alt+KP_9               workspace 9
 bindsym $alt+KP_0               workspace 10
 
-bindsym $alt+KP_Add           exec $terminal
-bindsym $alt+Shift+KP_Add     exec $browser
+bindsym $alt+KP_Add             exec $terminal
+bindsym $alt+Shift+KP_Add       exec $browser
 
 
 ################################################################################
 # Open things
 ################################################################################
 bindsym $alt+O                  exec cbo
+
+################################################################################
+# File Management
+################################################################################
+bindsym $alt+Shift+F            mode "File Manager"
+mode "File Manager" {
+  bindsym space                 exec i3-filemanager             ; mode "default"
+
+  bindsym C                     exec i3-filemanager ~/Camera    ; mode "default"
+  bindsym D                     exec i3-filemanager ~/Documents ; mode "default"
+  bindsym H                     exec i3-filemanager ~           ; mode "default"
+  bindsym P                     exec i3-filemanager ~/Pictures  ; mode "default"
+  bindsym V                     exec i3-filemanager ~/Videos    ; mode "default"
+
+  bindsym Return                exec i3-filemanager ~           ; mode "default"
+  bindsym Escape                mode "default"
+}
 
 
 ################################################################################
@@ -366,22 +389,48 @@ mode "Media" {
 ################################################################################
 # WWW
 ################################################################################
-bindsym $alt+Shift+W            mode "WWW"
+set $tabbed split v; layout tabbed;
+bindsym $alt+Shift+W                                                              mode "WWW"
 mode "WWW" {
-  bindsym D                     exec $www deliveroo                         ; mode "default"
-  bindsym E                     exec $www ebay                              ; mode "default"
-  bindsym F                     exec $www facebook                          ; mode "default"
-  bindsym G                     exec $www gmail                             ; mode "default"
-  bindsym I                     exec $www i3manual                          ; mode "default"
-  bindsym M                     exec $www maps                              ; mode "default"
-  bindsym N                     exec $www nationalrail                      ; mode "default"
-  bindsym P                     exec $www paypal                            ; mode "default"
-  bindsym Y                     exec $www youtube                           ; mode "default"
-  bindsym Z                     exec $www zoho                              ; mode "default"
-  bindsym space                 exec $www                                   ; mode "default"
-  bindsym Shift+space           split v; layout tabbed; exec $www           ; mode "default"
-  bindsym Return                split v; layout tabbed; exec $browser       ; mode "default"
-  bindsym Escape                                                              mode "default"
+  bindsym A                   exec $www amazon                                  ; mode "default"
+  bindsym Shift+A     $tabbed exec $www amazon                                  ; mode "default"
+
+  bindsym E                   exec $www ebay                                    ; mode "default"
+  bindsym Shift+E     $tabbed exec $www ebay                                    ; mode "default"
+
+  bindsym F                   exec $www facebook                                ; mode "default"
+  bindsym Shift+F     $tabbed exec $www facebook                                ; mode "default"
+
+  bindsym G                   exec $www gmail                                   ; mode "default"
+  bindsym Shift+G     $tabbed exec $www gmail                                   ; mode "default"
+
+  bindsym I                   exec $www i3manual                                ; mode "default"
+  bindsym Shift+I     $tabbed exec $www i3manual                                ; mode "default"
+
+  bindsym M                   exec $www maps                                    ; mode "default"
+  bindsym Shift+M     $tabbed exec $www maps                                    ; mode "default"
+
+  bindsym N                   exec $www nationalrail                            ; mode "default"
+  bindsym Shift+N     $tabbed exec $www nationalrail                            ; mode "default"
+
+  bindsym O                   exec $www okc                                     ; mode "default"
+  bindsym Shift+O     $tabbed exec $www okc                                     ; mode "default"
+
+  bindsym P                   exec $www paypal                                  ; mode "default"
+  bindsym Shift+P     $tabbed exec $www paypal                                  ; mode "default"
+
+  bindsym Y                   exec $www youtube                                 ; mode "default"
+  bindsym Shift+Y     $tabbed exec $www youtube                                 ; mode "default"
+
+  bindsym Z                   exec $www zoho                                    ; mode "default"
+  bindsym Shift+Z     $tabbed exec $www zoho                                    ; mode "default"
+
+  bindsym space               exec $www                                         ; mode "default"
+  bindsym Shift+space $tabbed exec $www                                         ; mode "default"
+
+  bindsym Return      $tabbed exec $browser                                     ; mode "default"
+
+  bindsym Escape                                                                  mode "default"
 }
 
 
@@ -394,9 +443,13 @@ mode "XSession" {
   bindsym C                    exec xrandr-capture                          ; mode "default"
   bindsym --release K          exec xkill                                   ; mode "default"
   bindsym P                    exec i3-input -F 'exec xprop > /tmp/%s.xprop'; mode "default"
+
+  bindsym R                    exec $HOME/.dotfiles/bin/record-active-window; mode "default"
   bindsym $alt+Shift+R         exec systemctl reboot                        ; mode "default"
-  bindsym S                    exec /home/daniel/.screenlayout/standalone.sh; mode "default"
+
+  bindsym S                    exec auto-monitors standalone                ; mode "default"
   bindsym $alt+Shift+S         exec systemctl poweroff                      ; mode "default"
+
   bindsym I                    exec mo eDP-1                                ; mode "default"
   bindsym H                    exec mo DP-3                                 ; mode "default"
   bindsym $alt+Shift+e         exec loginctl terminate-session $XDG_SESSION_ID
