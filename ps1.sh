@@ -162,7 +162,8 @@ prompt_command() {
 
     # Git
     if [[ $PROMPT_GIT == true ]] \
-    && [[ -d .git ]]; then
+    && git branch &>/dev/null
+    then
       PS1="${PS1}$(block_git)"
     fi
 
