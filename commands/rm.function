@@ -1,0 +1,32 @@
+rm() {
+  if git branch &>/dev/null
+  then
+    for file in "$@"
+    do
+      if [[ ! -f "$file" ]]
+      then
+        echo "$file doesn't exist"
+        continue
+      fi
+
+      if git ls-files --error-unmatch "$file" &>/dev/null
+      then
+        echo "$file is tracked by git. Do you want to remove from there too?"
+        read yn
+        if [[ ${yn^^} == Y* ]]
+        then git rm "$file"
+        else command rm "$file"
+        fi
+      else
+        echo "\"$file\" is untracked and you cannot be trusted!"
+        echo "Type out the whole path to confirm that you really do want to DELETE THIS FOREVER."
+        read confirm
+        if [[ $confirm == $file ]]
+        then command rm "$file"
+        fi
+      fi
+    done
+  else
+    command rm -i "$@"
+  fi
+}
