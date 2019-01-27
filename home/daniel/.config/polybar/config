@@ -364,7 +364,7 @@ label-volume-foreground = ${root.foreground}
 
 label-muted =  MUTE
 
-use-ui-max = true
+use-ui-max = false
 
 bar-volume-width = 10
 bar-volume-foreground-0 = #55aa55
