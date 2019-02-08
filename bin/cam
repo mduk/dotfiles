@@ -1,4 +1,4 @@
 #!/bin/bash
 
 guvcview \
-  --device=/dev/video1
+  --device=/dev/video2
