@@ -22,7 +22,9 @@ rm() {
         echo "Type out the whole path to confirm that you really do want to DELETE THIS FOREVER."
         read confirm
         if [[ $confirm == $file ]]
-        then command rm "$file"
+        then
+          echo "Very well. Give him cake."
+          command rm "$file"
         fi
       fi
     done
