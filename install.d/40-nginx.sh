@@ -1,1 +1,1 @@
-package nginx
+apt_install nginx

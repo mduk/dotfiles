@@ -2,63 +2,47 @@
 
 source ./dot.sh
 
-package() {
+apt_install() {
   echo -n "Installing $1: "
 
-  if sudo dpkg -s $1 | grep '^Status:.* ok .*' >/dev/null 2>/dev/null
+  if dpkg -s $1 | grep '^Status:.* ok .*' >/dev/null 2>/dev/null
   then
     echo "Already Installed"
     return 0
   else
     echo -n "Installing"
-    if sudo apt-get install -y $1 | sed 's/^/   /'
+    if apt-get install -y $1 | sed 's/^/   /'
     then echo "OK"
     else echo "ERROR"
     fi
   fi
 }
 
-symlink() {
-  declare target="$PWD/$1"
-  declare link="$2"
+title() {
+  declare title="$@"
+  declare title_length=${#title}
+  declare n=$((title_length + 4))
 
-  echo -n "Linking ./$1 to $link: "
+  echo
+  echo
 
-  if [[ -L "$link" ]]
-  then
-    if [[ $(readlink "$link") == "$target" ]]
-    then
-      echo "Link already exists"
-    else
-      echo "Unknown Link found:"
-      echo "     Link: $link"
-      echo "   Target: $(readlink "$link")"
-      echo "  Desired: $target"
-    fi
-    return
-  fi
+  for i in $(seq $n)
+  do echo -n '#'
+  done
+  echo
 
-  if [[ -f "$link" ]]
-  then
-    echo "  Blocked by file. Moving aside."
-    mv "$link" "$link.predot"
-  fi
+  echo '#' $title '#'
 
-  if [[ ! -L "$link" ]]
-  then
-    echo "  Created Link "
-    ln -s "$target" "$link"
-  fi
+  for i in $(seq $n)
+  do echo -n '#'
+  done
+  echo
 }
 
+set -e
 
-
-# Update APT
-echo -n "Updating APT... "
-if sudo apt-get update >/dev/null
-then echo "Done"
-else echo "Error"
-fi
+title Updating APT
+apt-get update
 
 for arg in install.d/*
 do source $arg

@@ -1,2 +1,2 @@
-package build-essential
-package valac
+apt_install build-essential
+apt_install valac

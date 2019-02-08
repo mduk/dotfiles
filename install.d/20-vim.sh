@@ -1,1 +1,1 @@
-package vim
+apt_install vim

@@ -1,7 +1,9 @@
+title Looking for Janet
+
 JANET_HOST=janet.local
 
-package openssh-server
-package openssh-client
+apt_install openssh-server
+apt_install openssh-client
 
 echo "Looking for Janet..."
 if ping $JANET_HOST -c 1 &>/dev/null

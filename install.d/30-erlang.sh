@@ -1,2 +1,2 @@
-package erlang
-package rebar
+apt_install erlang
+apt_install rebar

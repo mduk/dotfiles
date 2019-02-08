@@ -1,1 +1,1 @@
-package qtbase5-dev
+apt_install qtbase5-dev

@@ -1,14 +1,14 @@
 
-package exiftool
-package screen
-package tmux
-package tree
-package httpie
-package jq
-package dialog
-package nmap
-package dos2unix
-package openssl
+apt_install exiftool
+apt_install screen
+apt_install tmux
+apt_install tree
+apt_install httpie
+apt_install jq
+apt_install dialog
+apt_install nmap
+apt_install dos2unix
+apt_install openssl
 
-package python-pip
+apt_install python-pip
 pip install youtube-dl

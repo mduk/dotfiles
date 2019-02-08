@@ -1,4 +1,4 @@
-package ffmpeg
-package handbrake
-package handbrakecli
-package dvdbackup
+apt_install ffmpeg
+apt_install handbrake
+apt_install handbrakecli
+apt_install dvdbackup

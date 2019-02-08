@@ -1,5 +1,5 @@
-package virtualenv
-package virtualbox
+apt_install virtualenv
+apt_install virtualbox
 
-package python-pip
+apt_install python-pip
 pip install grip

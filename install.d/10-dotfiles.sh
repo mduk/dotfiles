@@ -1,14 +1,10 @@
-set -x
-set -e
-
+dot_dir="$HOME/.dotfiles"
 ssh_url="git@github.com:mduk/dotfiles.git"
+http_url="https://github.com/mduk/dotfiles.git"
 
-if ! which git >/dev/null
-then 
-  sudo apt-get update
-  sudo apt-get install -y git
+if [[ -f $HOME/.ssh/id_rsa ]]
+then git clone "$ssh_url" "$dot_dir"
+else git clone "$http_url" "$dot_dir"
 fi
-
-git clone "$ssh_url" "$HOME/.dotfiles"
 
 echo -e "\n\nsource \"$HOME/.dotfiles/dot.sh\"" >> $HOME/.bashrc

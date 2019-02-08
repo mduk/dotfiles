@@ -1,22 +1,22 @@
-package xsel
-package arandr
-package read-edid
+apt_install xsel
+apt_install arandr
+apt_install read-edid
 
-package xscreensaver
-package xscreensaver-data-extra
-package xscreensaver-gl
-package xscreensaver-gl-extra
-package xscreensaver-screensaver-bsod
+apt_install xscreensaver
+apt_install xscreensaver-data-extra
+apt_install xscreensaver-gl
+apt_install xscreensaver-gl-extra
+apt_install xscreensaver-screensaver-bsod
 
-package i3-wm
-package i3-wm-dbg
-package feh
-package suckless-tools
+apt_install i3-wm
+apt_install i3-wm-dbg
+apt_install feh
+apt_install suckless-tools
 
-package dconf-editor
-package konsole
+apt_install dconf-editor
+apt_install konsole
 
-package evince
-package gimp
-package libreoffice-writer
-package libreoffice-calc
+apt_install evince
+apt_install gimp
+apt_install libreoffice-writer
+apt_install libreoffice-calc
