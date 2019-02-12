@@ -1,8 +1,4 @@
 #!/bin/bash
 
 read status < "/sys/class/drm/card0-${XRANDR_HDMI}/status"
-
-if [ "$status" = "connected" ];
-then exit 0
-else exit 1
-fi
+[[ "$status" == "connected" ]]
