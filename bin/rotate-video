@@ -9,7 +9,7 @@ fi
 declare file="$1"
 declare rotation="$2"
 
-declare newfile="${file%.*}.rotated.${file##*.}"
+declare newfile="${file%.*}.r${rotation}.${file##*.}"
 
 if [[ -f "$newfile" ]]
 then

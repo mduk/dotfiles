@@ -69,6 +69,12 @@ autocmd BufRead,BufNewFile *.md      set expandtab   ts=4 sw=4 tw=80
 autocmd BufRead,BufNewFile Makefile* set noexpandtab ts=4 sw=4
 
 "###############################################################################
+"###############################################################################
+autocmd BufRead,BufNewFile *.sh      let b:is_kornshell = 1
+autocmd BufRead,BufNewFile *.sh      let b:is_bash = 1
+
+
+"###############################################################################
 " Highlight the line that the cursor is on
 "###############################################################################
 augroup CursorLine
@@ -106,6 +112,11 @@ Plug 'vim-syntastic/syntastic'
 
 Plug 'lrvick/Conque-Shell'
 
+Plug 'inside/vim-search-pulse'
+Plug 'terryma/vim-smooth-scroll'
+Plug 'lilydjwg/colorizer'
+Plug 'luochen1990/rainbow'
+
 " syntax highlighters
 Plug 'pangloss/vim-javascript'
 Plug 'Chiel92/vim-autoformat'
@@ -115,6 +126,13 @@ Plug 'peterhoeg/vim-qml'
 Plug 'vim-scripts/gnuplot-syntax-highlighting'
 Plug 'arrufat/vala.vim'
 call plug#end()
+
+let g:vim_search_pulse_duration = 50
+
+noremap <silent> <PageUp> :call smooth_scroll#up(&scroll, 0, 5)<CR>
+noremap <silent> <PageDown> :call smooth_scroll#down(&scroll, 0, 5)<CR>
+
+let g:rainbow_active = 1
 
 "###############################################################################
 " File Extensions and Types

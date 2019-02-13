@@ -1,16 +1,18 @@
 #!/bin/bash
 
-janet=192.168.0.34
+janet=janet.local
 key='janet'
 keypath="$HOME/.ssh/${key}_rsa"
 
-arg_key="-i $keypath"
-ssh="ssh -XAt -i $keypath $USER@$janet"
+ssh_key="-i $keypath"
+ssh_args=""
+ssh_dest="$USER@$janet"
+ssh="ssh -At $ssh_key $ssh_dest"
 
 sync() {
   while [[ $# -gt 0 ]]
   do
-    rsync -avhz -e "ssh ${arg_key}" "$HOME/$1/" "$ssh:~/$1"
+    rsync -avhzK -e "ssh ${ssh_key}" "$HOME/$1/" "$ssh_dest:~/$1"
     shift
   done
 }
@@ -18,14 +20,14 @@ sync() {
 case "$1" in
 
   sync)
-    sync ${2:-Documents Music Pictures}
+    sync ${2:-Documents Music Pictures Camera}
     ;;
 
   push)
-    rsync -avhz -e "ssh ${arg_key}" "$2/" "$ssh:$2"
+    rsync -avhz -e "ssh ${ssh_key}" "$2/" "$ssh_dest:$2"
     ;;
 
-  pull) rsync -avhz -e "ssh ${arg_key}" "$ssh:$2/" "$2"
+  pull) rsync -avhz -e "ssh ${ssh_key}" "$ssh_dest:$2/" "$2"
     ;;
 
   screen)

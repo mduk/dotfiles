@@ -1,12 +1,12 @@
 MY_USERNAME="daniel"
 
-export PROMPT_GIT=true
-export PROMPT_PATH=true
-export PROMPT_HOST=true
-export PROMPT_VERSIONS=""
-export PROMPT_CLOCK=true
-export PROMPT_BAR=true
-export PROMPT_SPACE=2
+declare PROMPT_GIT=true
+declare PROMPT_PATH=true
+declare PROMPT_HOST=true
+declare PROMPT_VERSIONS=""
+declare PROMPT_CLOCK=true
+declare PROMPT_BAR=true
+declare PROMPT_SPACE=2
 
 terminal_width() {
     local cols=$(tput cols)

@@ -24,8 +24,8 @@ do
   if [ ! -f "$outfilename" ]
   then
     echo "Writing $outfilename"
-    ffmpeg -v error -y -i "$infile" \
-      -vcodec copy -acodec copy -ss $starttime -to $endtime -sn "$outfilename"
+    ffmpeg -v error -y -i "file:${infile}" \
+      -vcodec copy -acodec copy -ss $starttime -to $endtime -sn "file:${outfilename}"
   else
     echo "Already exists. Skipping..."
   fi
