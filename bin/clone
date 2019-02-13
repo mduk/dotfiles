@@ -14,7 +14,9 @@ remote=$(echo "$*" | sed 's/git clone//')
 
 if [[ $remote != *"@"* ]] && [[ $remote != "http"* ]]; then
     vendor=$(echo $remote | cut -d/ -f1)
-    if [[ $vendor == $GITHUB_USERNAME ]]; then
+    if [[ $vendor == $GITHUB_USERNAME ]] \
+    || [[ $vendor == OpenBankingUK ]]
+    then
         remote="git@github.com:${remote}.git"
         local_path=$(echo $remote | cut -d: -f2 | cut -d. -f1)
     else
