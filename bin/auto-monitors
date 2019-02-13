@@ -1,29 +1,29 @@
 #!/usr/bin/env bash
 
-set -x
-
 declare profile='standalone'
+
+declare -A monitor_profiles=(
+  [c605c2d43c31e7090621159fe53d15d7]='work'
+  [7b47ec01863401062ed15a646e908526]='flat'
+  [be333760900e48176448e7e32208e432]='home-desk'
+  [45fddb542f5b3cab00835b8d46986de0]='home-kitchen'
+  [1309228f39f53636f00b25977ed0b964]='home-tv+audio' # tv
+  [fdb68fcec44cd29c74723a1874234271]='home-tv+audio' # avreceiver
+)
 
 if [[ -z $1 ]]
 then
   if hdmi-connected
-  then
-    case "$(hdmi-edid-hash)" in
-      'c605c2d43c31e7090621159fe53d15d7') profile='work' ;;
-      '7b47ec01863401062ed15a646e908526') profile='flat' ;;
-      'be333760900e48176448e7e32208e432') profile='home-desk' ;;
-      '45fddb542f5b3cab00835b8d46986de0') profile='home-kitchen' ;;
-      '1309228f39f53636f00b25977ed0b964') profile='home-tv+audio' ;; # tv
-      'fdb68fcec44cd29c74723a1874234271') profile='home-tv+audio' ;; # avreceiver
-      *) exit 1
-    esac
+  then profile="${monitor_profiles[$(hdmi-edid-hash)]}"
   fi
 else
   profile="$1"
 fi
 
-if [[ $profile == '*+audio' ]]
-then sound-out-hdmi
+if [[ $profile == *+audio ]]
+then
+  sound-out-hdmi
+  profile="${profile/+audio/}"
 fi
 
 declare layout="$HOME/.screenlayout/$profile.sh"
