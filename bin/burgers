@@ -1,0 +1,31 @@
+#!/bin/bash
+
+find . -print0 | while read -d $'\0' file
+do
+  new=$(
+    <<<"$file" \
+    sed -E '
+
+      # Leading Zeros on SsEe formats
+      s/S(.)E/S0\1E/;
+      s/E(.) -/E0\1 -/;
+
+      # see format with two part
+      s/- ([0-9]{1})([0-9]{2})-([0-9]{1})([0-9]{2}).([a-zA-Z0-9]{3})/- S0\1E\2-E\4.\5/;
+      s/- ([0-9]{1})([0-9]{2}).([a-zA-Z0-9]{3})/- S0\1E\2.\3/;
+
+      # Trailing Space before Extension
+      s/(.*[a-zA-Z0-9]) +\.([a-zA-Z0-9]{3})/\1.\2/;
+
+      # Smart Quotes
+      s/[’‘]/'"'"'/;
+    ' )
+
+    if [[ $file == $new ]]
+    then continue
+    else if [[ -n $1 ]]
+         then eval "$1 ${file@Q} ${new@Q}"
+         else echo "$file\n  => $new\n"
+         fi
+    fi
+done
