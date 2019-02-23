@@ -1,0 +1,6 @@
+#!/bin/bash
+
+while read file
+do
+  exiftool -j $file | jq '.[0]'
+done < <(find "$HOME/Camera" -type f -name '*.*')

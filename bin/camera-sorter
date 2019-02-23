@@ -1,0 +1,62 @@
+#!/bin/bash
+
+
+find "$PWD" -name '*.*' ! -name '.*' | while read file
+do
+    declare createdate=$(
+      exiftool "$file" \
+        | grep "Create Date" \
+        | tail -1 \
+        | sed 's/.* : \(.*\)/\1/' \
+        | tr ' ' '-' \
+        | tr '/' ':' \
+        | tr '.' '-'
+    )
+
+    echo -n "$file => "
+
+    if [[ -z $createdate ]] \
+    || [[ $createddate == '0000:00:00-00:00:00' ]]
+    then
+      declare createdate=$(
+        exiftool "$file" \
+          | grep "File Modification Date/Time" \
+          | tail -1 \
+          | sed 's/.* : \(.*\)/\1/' \
+          | tr ' ' '-' \
+          | tr '/' ':' \
+          | tr '.' '-'
+      )
+      if [[ -z $createdate ]] \
+      || [[ $createddate == '0000:00:00-00:00:00' ]]
+      then
+        echo 'error'
+        continue
+      fi
+    fi
+
+  declare extension="${file##*.}" # Strip off everything before the dot
+  declare newfile="${CAMERA_DIR:-$HOME/Camera}/$createdate.$extension"
+
+  echo -n "$newfile "
+
+
+    if [[ -f $newfile ]]
+    then
+      echo 'blocked'
+      continue
+    else
+      tput sc
+      echo -n 'copying'
+      $cmd "$file" "$newfile"
+      if [[ $? -eq 0 ]]
+      then
+        tput rc
+        echo 'copied '
+      else
+        echo "error!"
+        exit
+      fi
+    fi
+
+done
