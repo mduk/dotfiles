@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -x
+
+ffmpeg \
+  -f concat \
+  -safe 0 \
+  -i <(find "$PWD" -name "${1}*.mp4" -printf "file '%p'\n") \
+  -c copy \
+  "file:${1}.mp4"

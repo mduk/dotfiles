@@ -48,6 +48,7 @@ autocmd BufWritePost $MYVIMRC nested source $MYVIMRC
 nnoremap <C-t> :tabnew<CR>
 nnoremap <C-Left> :tabprevious<CR>
 nnoremap <C-Right> :tabnext<CR>
+imap <C-Right> :tabnext<CR>
 
 "###############################################################################
 " Line Wrapping

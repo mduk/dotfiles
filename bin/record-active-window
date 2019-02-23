@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+set -x
+
+declare destdir="$HOME/Videos"
+declare destfile="window-$(date +'%Y-%m-%d-%H-%M-%S').mkv"
+
+declare windowid="$(xdotool getactivewindow)"
+eval $(xwininfo -id $windowid \
+  | sed -n '
+      s/^ \+Absolute upper-left X: \+\([0-9]\+\).*/x=\1/p;
+      s/^ \+Absolute upper-left Y: \+\([0-9]\+\).*/y=\1/p;
+      s/^ \+Width: \+\([0-9]\+\).*/w=\1/p;
+      s/^ \+Height: \+\([0-9]\+\).*/h=\1/p;
+      ')
+
+ffmpeg -video_size "${w}x${h}" \
+       -framerate 25 \
+       -f x11grab \
+       -i ":0.0+${x},${y}" \
+       "$destdir/$destfile"

@@ -1,0 +1,102 @@
+#!/bin/bash
+
+declare    abort=false
+declare -r font=/usr/share/fonts/truetype/msttcorefonts/Courier_New_Bold.ttf
+declare -i pad=5
+
+declare    vf=''
+declare -A drawtext=(
+  [fontfile]=$font
+  [text]=''
+  [fontcolor]=white
+  [fontsize]=24
+  [box]=1
+  [boxcolor]=black
+  [boxborderw]=$pad
+  [x]=$pad
+  [y]=$pad
+)
+
+declare -A meta=()
+
+preview() {
+  if [[ -n $vf ]]
+  then ffplay -i "file:$input" -vf "$vf"
+  else ffplay -i "file:$input"
+  fi
+}
+
+query-title() {
+  declare title=$(kdialog --inputbox "Title for this video?" "$title")
+
+  update-meta title "$title"
+
+  if [[ -n $title ]]
+  then drawtext[text]="$date - $title"
+  else drawtext[text]="$date"
+  fi
+
+  update-vf
+  preview
+}
+
+query-ok() {
+  kdialog --yesnocancel "Look OK?"
+  case $? in
+    0) return 0 ;; # Yes
+    1) return 1 ;; # No
+    2) abort=true  # Cancel
+       return 0 ;;
+  esac
+}
+
+update-meta() {
+  meta[$1]="$2"
+}
+
+update-vf() {
+  vf='drawtext='
+  for key in ${!drawtext[@]}
+  do vf+="${key}=${drawtext[$key]}:"
+  done
+
+  vf=${vf%%:} # strip trailing colon
+}
+
+write-meta() {
+  declare args=''
+
+  for key in "${!meta[@]}"
+  do args+="-metadata '${key}=${meta[$key]}' "
+  done
+
+  declare tmp=$(mktemp --suffix=.${input#*.})
+  if eval ffmpeg -y -i "file:$input" -c copy -map_metadata 0 $args "file:$tmp" 2>/dev/null
+  then mv "$tmp" "$input"
+  fi
+}
+
+render() {
+  ffmpeg -i "file:$input" -vf "$vf" "file:${input%.*}.annotated.mkv"
+}
+
+for input
+do
+  declare date=$(exiftool "$input" | sed -n '/Create Date \+: /{ s///; s/:/\\\\:/g; p; q; }' | head -1)
+  declare title=''
+
+  preview
+  query-title
+
+  until query-ok
+  do query-title
+  done
+
+  if $abort
+  then exit
+  fi
+
+  write-meta || kdialog --error "Failed to write metadata. Aborting." && exit
+done
+
+#query-render-now && render || kdialog --error "Failed to render. Aborting." && exit

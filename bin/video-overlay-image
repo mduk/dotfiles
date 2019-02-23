@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+declare video="$1"
+declare image="$2"
+declare image_pos="${3:-nw}"
+
+read video_x video_y < <(
+  ffprobe "file:$video" 2>&1 \
+    | sed -nr '/Video:/s/.*, ([0-9]*)x([0-9]*).*/\1 \2/p'
+)
+
+read image_x image_y < <(identify -format "%w %h" "$image")
+
+echo "Video: $video_x $video_y"
+echo "Image: $image_x $image_y"
+
+declare -i margin=25
+declare    overlay=''
+
+case "$image_pos" in
+  nw) overlay="$margin:$margin";;
+   n) overlay="$(( (video_x / 2) - (image_x / 2) )):$margin" ;;
+  ne) overlay="$((video_x - margin - image_x)):$margin" ;;
+   e) overlay="$((video_x - margin - image_x)):$(( (video_y / 2) - (image_y / 2) ))" ;;
+  se) overlay="$((video_x - margin - image_x)):$((video_y - margin - image_y))" ;;
+   s) overlay="$(( (video_x / 2) - (image_x / 2) )):$margin" ;;
+  sw) overlay="$margin:$((video_y - margin - image_y))" ;;
+esac
+
+echo "Overlay Position: $overlay"
+
+ffmpeg -i "file:$video" \
+       -i "file:$image" \
+       -filter_complex "[0:v][1:v]overlay=$overlay[v]" \
+       -map '[v]' \
+       "file:${video%%.*}.overlay-${image_pos}.${video##*.}"

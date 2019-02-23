@@ -6,7 +6,19 @@ then
   exit 1
 fi
 
+start_xscreensaver() {
+  killall gnome-screensaver >/dev/null 2>&1
+  xscreensaver -nosplash & >/dev/null 2>&1
+}
+
 case "$1" in
+
+  start)
+    case "$(wifi-ssid)" in
+      'Airport Extreme') ;;
+      *) start_xscreensaver ;;
+    esac
+    ;;
 
   status)
     if pgrep xscreensaver >/dev/null 2>&1
@@ -17,11 +29,8 @@ case "$1" in
 
   toggle)
     if pgrep xscreensaver >/dev/null 2>&1
-    then
-      xscreensaver-command -exit >/dev/null 2>&1
-    else
-      killall gnome-screensaver >/dev/null 2>&1
-      xscreensaver -nosplash & >/dev/null 2>&1
+    then xscreensaver-command -exit >/dev/null 2>&1
+    else start_xscreensaver
     fi
     exit 0
     ;;

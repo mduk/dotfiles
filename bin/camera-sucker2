@@ -1,0 +1,50 @@
+#!/bin/bash
+
+declare -r cmd=${1:-cp -n}
+declare -a blocked=()
+
+while read file
+do
+
+  read year month day hour minute second _tail < <( \
+    exiftool "$file" \
+      | sed -En '/.+(0000:00:00 00:00:00(\+00:00)?).*/d;
+                 /.+(....:..:.. ..:..:..(\+..:..)?).*/{
+                   s//\1/;
+                   s/[:\+]/ /g;
+                   p;
+                 }' \
+      | sort -n \
+      | uniq \
+      | tail -1
+  )
+
+  # Validate date maybe?
+
+  declare extension="${file##*.}" # Strip off everything before the dot
+  declare createdate="$year:$month:$day-$hour:$minute:$second" # Splitseconds, maybe?
+  declare newdir="${CAMERA_DIR:-$HOME/Camera}/$year-$month"
+  declare newfile="$newdir/$createdate.$extension"
+
+  if [[ "$file" == "$newfile" ]]
+  then
+    echo "$file same"
+    continue
+  fi
+
+  echo "================================================================================"
+  echo "$file"
+  echo "  =>"
+  echo "$newfile"
+  echo
+
+  declare cmdstring="$cmd '$file' '$newfile'"
+  echo "# $cmdstring"
+
+  eval "$cmdstring"
+
+done < <(find "$PWD" \
+           -iname '*.jpg' -or \
+           -iname '*.mp4' -or \
+           -iname '*.m4v' \
+           -not -name '.*')

@@ -1,0 +1,39 @@
+#!/bin/bash
+
+declare    font="/usr/share/fonts/truetype/msttcorefonts/Courier_New_Bold.ttf"
+declare -i padpx=5
+
+read cdate ctime < <(
+  exiftool "$1" \
+    | sed -n -E '/^Create Date\s+: /{ s///; s/:/-/g; p; }')
+
+if [[ $cdate =~ 0000.00.00 ]] \
+|| [[ $ctime =~ 00.00.00.* ]]
+then
+  echo "Create Date appears to be zeroed out." >&2
+  exit 1
+fi
+
+declare -A drawtext=(
+  [fontcolor]='white'
+  [fontsize]='36'
+  [box]='1'
+  [boxcolor]='black'
+  [fontfile]="$font"
+  [boxborderw]="$padpx"
+  [x]="$padpx"
+  [y]="$padpx"
+  [text]="$cdate $ctime"
+)
+
+declare   vf='drawtext='
+for key in "${!drawtext[@]}"
+do
+  declare val="${drawtext[$key]}"
+  vf+="${key}=${val}:"
+done
+
+vf="${vf%:}" # Strip off trailing colon
+
+ffmpeg -i "file:$1" -vf "$vf" -codec:v huffyuv -codec:a copy "file:${1%.*}.mkv"
+

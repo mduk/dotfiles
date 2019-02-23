@@ -109,7 +109,7 @@ exec_always xcape
 ################################################################################
 # XScreensaver
 ################################################################################
-exec_always xscreensaver -nosplash
+exec_always i3-screensaver start
 bindsym $alt+Shift+L exec i3-screensaver lock
 
 
