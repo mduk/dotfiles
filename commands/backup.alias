@@ -1,0 +1,1 @@
+ rsync --archive --verbose --ignore-existing --delete --exclude '.cache' --exclude '.dbus' "$HOME/" /media/daniel/Backup
