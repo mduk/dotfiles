@@ -12,7 +12,7 @@ ssh="ssh -At $ssh_key $ssh_dest"
 sync() {
   while [[ $# -gt 0 ]]
   do
-    rsync -avhzK -e "ssh ${ssh_key}" "$HOME/$1/" "$ssh_dest:~/$1"
+    rsync -avhzK -e "ssh ${ssh_key}" "$HOME/$1/" "$ssh_dest:/mnt/PAIR/$1"
     shift
   done
 }
@@ -24,10 +24,14 @@ case "$1" in
     ;;
 
   push)
-    rsync -avhz -e "ssh ${ssh_key}" "$2/" "$ssh_dest:$2"
+    if [[ -d "$2" ]]
+    then rsync -avhz -e "ssh ${ssh_key}" "$2/" "$ssh_dest:$2"
+    else scp "$ssh_key" "$2" "$ssh_dest:~/$2"
+    fi
     ;;
 
-  pull) rsync -avhz -e "ssh ${ssh_key}" "$ssh_dest:$2/" "$2"
+  pull)
+    rsync -avhz -e "ssh ${ssh_key}" "$ssh_dest:$2" "$2"
     ;;
 
   screen)
