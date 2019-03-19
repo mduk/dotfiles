@@ -3,7 +3,7 @@ rm() {
   then
     for file in "$@"
     do
-      if [[ ! -f "$file" ]]
+      if [[ ! -r "$file" ]]
       then
         echo "$file doesn't exist"
         continue
