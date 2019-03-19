@@ -1,0 +1,75 @@
+#!/bin/bash
+
+declare -r  profile="${1:-nut}"
+declare -r  output='eDP-1'
+declare -r  preferred_camera='/dev/video2'
+
+declare -ir thread_queue_size=512
+declare -ir fps=30
+declare -r  delay=0.4
+declare -r  filename_format='%Y-%m-%d-%H-%M-%S'
+
+################################################################################
+# Here there be Dragons
+################################################################################
+
+# Determine geometry of display to record
+read w h x y < <(
+  xrandr | sed -nr "/${display} connected/s/.* ([0-9]+)x([0-9]+)\+([0-9]+)\+([0-9]+) .*/\1 \2 \3 \4/p"
+)
+
+# If preferred camera doesn't exist, use the first one (likely built-in)
+if [[ -f "$preferred_camera" ]]
+then declare -r camera="$preferred_camera"
+else declare -r camera='/dev/video0'
+fi
+
+if [[ ! -r "$camera" ]]
+then
+  echo "Error: No camera or no permission to read camera." >&2
+  exit 1
+fi
+
+
+case "$profile" in
+  nut)
+    declare -r vcodec='copy'
+    declare -r acodec='copy'
+    declare -r container='nut'
+    ;;
+
+  mkv)
+    declare -r vcodec='huffyuv'
+    declare -r acodec='flac'
+    declare -r container='mkv'
+    ;;
+
+  mp4)
+    declare -r vcodec='libx264 -crf 0 -preset ultrafast'
+    declare -r acodec='aac'
+    declare -r container='mp4'
+    ;;
+esac
+
+################################################################################
+# Here there be Cthulu
+################################################################################
+
+declare -r tqs="-thread_queue_size ${thread_queue_size}"
+declare -r fr="-framerate ${fps}"
+declare -r its="-itsoffset ${delay}"
+declare -r filename="$(date +"$filename_format").${container}"
+
+set -x
+ffmpeg -y \
+  $tqs -f v4l2         $fr   -video_size 1920x1080       -input_format mjpeg -i "$camera" \
+  $tqs -f x11grab $its $fr   -video_size "${w}x${h}"                         -i ":0.0+${x},${y}" \
+  $tqs -f pulse   $its -ac 2 -name 'Screencast Recorder' -sample_rate 48000  -i default \
+  -map 0:v -map 1:v -map 2:a \
+  -codec:v $vcodec \
+  -codec:a $acodec \
+  -b:a 320k \
+  "$filename"
+
+[[ -L "output.${container}" ]] && rm -f "output.${container}"
+ln -s "./$filename" "output.${container}"
