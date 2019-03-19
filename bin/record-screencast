@@ -1,7 +1,7 @@
 #!/bin/bash
 
 declare -r  profile="${1:-nut}"
-declare -r  output='eDP-1'
+declare -r  output='DP-3'
 declare -r  preferred_camera='/dev/video2'
 
 declare -ir thread_queue_size=512
@@ -13,23 +13,23 @@ declare -r  filename_format='%Y-%m-%d-%H-%M-%S'
 # Here there be Dragons
 ################################################################################
 
-# Determine geometry of display to record
 read w h x y < <(
-  xrandr | sed -nr "/${display} connected/s/.* ([0-9]+)x([0-9]+)\+([0-9]+)\+([0-9]+) .*/\1 \2 \3 \4/p"
+  xrandr | sed -nr "/${output} connected/s/.* ([0-9]+)x([0-9]+)\+([0-9]+)\+([0-9]+) .*/\1 \2 \3 \4/p"
 )
 
-# If preferred camera doesn't exist, use the first one (likely built-in)
-if [[ -f "$preferred_camera" ]]
-then declare -r camera="$preferred_camera"
-else declare -r camera='/dev/video0'
-fi
+echo "Recording output: ${output}"
+echo "      Resolution: ${w}x${h}"
+echo "        Position: ${x}x${y}"
 
-if [[ ! -r "$camera" ]]
+if [[ -r "$preferred_camera" ]]
 then
-  echo "Error: No camera or no permission to read camera." >&2
-  exit 1
+  declare -r camera="$preferred_camera"
+else
+  declare -r camera='/dev/video0'
+  echo "Preferred camera unavailable: ${preferred_camera}"
 fi
 
+echo "Recording Camera: ${camera}"
 
 case "$profile" in
   nut)
@@ -38,16 +38,15 @@ case "$profile" in
     declare -r container='nut'
     ;;
 
-  mkv)
-    declare -r vcodec='huffyuv'
-    declare -r acodec='flac'
-    declare -r container='mkv'
-    ;;
-
   mp4)
     declare -r vcodec='libx264 -crf 0 -preset ultrafast'
     declare -r acodec='aac'
     declare -r container='mp4'
+    ;;
+
+  *)
+    echo "Unknown profile: ${profile}" >&2
+    exit 2
     ;;
 esac
 
@@ -69,7 +68,8 @@ ffmpeg -y \
   -codec:v $vcodec \
   -codec:a $acodec \
   -b:a 320k \
-  "$filename"
+  "${SCREENCAST_DIR:-$HOME/Screencasts}/$filename"
+set +x
 
 [[ -L "output.${container}" ]] && rm -f "output.${container}"
 ln -s "./$filename" "output.${container}"
