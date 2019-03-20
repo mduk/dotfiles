@@ -1,8 +1,15 @@
 #!/bin/bash
 
-declare -r  profile="${1:-nut}"
-declare -r  output='DP-3'
-declare -r  preferred_camera='/dev/video2'
+declare profile="${1:-nut}"
+declare output=${OUTPUT:-'DP-3'}
+declare preferred_camera="$(
+  for input in /sys/class/video4linux/*
+  do
+    read name < $input/name
+    read path < <(basename $input)
+    echo /dev/$path $name
+  done | sed -n '/[a-z\/]* .*C920/s///p'
+)"
 
 declare -ir thread_queue_size=512
 declare -ir fps=30
@@ -14,8 +21,22 @@ declare -r  filename_format='%Y-%m-%d-%H-%M-%S'
 ################################################################################
 
 read w h x y < <(
-  xrandr | sed -nr "/${output} connected/s/.* ([0-9]+)x([0-9]+)\+([0-9]+)\+([0-9]+) .*/\1 \2 \3 \4/p"
+  xrandr | sed -nr "
+    /${output} connected/{
+      s/.* ([0-9]+)x([0-9]+)\+([0-9]+)\+([0-9]+) .*/\1 \2 \3 \4/p;
+      q 0;
+    }
+
+    \${
+      q 1;
+    }"
 )
+
+if [[ $? -gt 0 ]]
+then
+  echo "Error getting output geometry." >&2
+  exit 1
+fi
 
 echo "Recording output: ${output}"
 echo "      Resolution: ${w}x${h}"
@@ -58,6 +79,9 @@ declare -r tqs="-thread_queue_size ${thread_queue_size}"
 declare -r fr="-framerate ${fps}"
 declare -r its="-itsoffset ${delay}"
 declare -r filename="$(date +"$filename_format").${container}"
+declare -r screencast_dir="${SCREENCAST_DIR:-$HOME/Screencasts}"
+declare -r output_file="${screencast_dir}/${filename}"
+declare -r link_file="${screencast_dir}/latest.${container}"
 
 set -x
 ffmpeg -y \
@@ -68,8 +92,14 @@ ffmpeg -y \
   -codec:v $vcodec \
   -codec:a $acodec \
   -b:a 320k \
-  "${SCREENCAST_DIR:-$HOME/Screencasts}/$filename"
+  "$output_file"
 set +x
 
-[[ -L "output.${container}" ]] && rm -f "output.${container}"
-ln -s "./$filename" "output.${container}"
+echo
+echo "==> $output_file"
+
+if [[ -L "$link_file" ]]
+then rm "$link_file"
+fi
+
+ln -s "$output_file" "$link_file"
