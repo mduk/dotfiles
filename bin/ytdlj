@@ -1,3 +1,0 @@
-#!/bin/bash
-
-youtube-dl -j "${1:-$(cbp)}" | jq .
