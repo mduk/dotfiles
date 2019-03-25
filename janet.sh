@@ -42,6 +42,8 @@ fi
 
 
 sudo apt install -y exiftool
-sudo apt install -y ffmpeg ubuntu-restricted-extras dvdbackup libdvdcss
+sudo apt install -y ffmpeg ubuntu-restricted-extras \
+	            dvdbackup libdvdcss
+sudo apt install -y ffmpeg alsa alsa-utils
 
 sudo apt autoremove -y
