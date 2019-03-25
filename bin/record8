@@ -1,0 +1,8 @@
+#!/bin/bash
+
+declare output="~/Video8/$(date +'%Y-%m-%d-%H-%M-%S').mkv"
+
+sudo ffmpeg \
+  -f video4linux2 -i /dev/video0 \
+  -f alsa -ac 1 -i hw:1 \
+  -c:a copy -c:v copy "$output"
