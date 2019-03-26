@@ -40,10 +40,10 @@ else
   echo "Dotfiles already cloned"
 fi
 
-
-sudo apt install -y exiftool
+sudo apt install -y exiftool jq
 sudo apt install -y ffmpeg ubuntu-restricted-extras \
-	            dvdbackup libdvdcss
+	            dvdbackup handbrake-cli libdvd-pkg jq
+
 sudo apt install -y ffmpeg alsa alsa-utils
 
 sudo apt autoremove -y
