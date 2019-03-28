@@ -1,20 +1,26 @@
-sudo apt update
+#!/bin/bash
 
-sudo apt upgrade -y
-
-install() {
-  sudo apt install -y "$@"
-}
+source base.sh
 
 # system
-install xbacklight exfat-utils openssh-server
+install xbacklight
 
-# command line
-install screen vim tmux tree melt mpc mpd ncmpc
+# Audio
+install mpc mpd ncmpc
+
+# Video (X11)
+install mpv
 
 # dev
-install dialog git dos2unix jq httpie nmap
+install jq httpie
 
 # graphical
-install xscreensaver xscreensaver-data-extra xscreensaver-gl-extra xscreensaver-screensaver-bsod
+install xscreensaver \
+        xscreensaver-data-extra \
+        xscreensaver-gl-extra \
+        xscreensaver-screensaver-bsod
+
 install ttf-mscorefonts-installer scrot vlc xcape i3 suckless-tools konsole pavucontrol feh guvcview arandr
+install adwaita-qt
+
+sudo apt autoremove -y
