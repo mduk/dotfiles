@@ -1,14 +1,16 @@
 #!/usr/bin/env bash
 
-declare profile='standalone'
+declare host="$(hostname)"
+declare profile="${host}-standalone"
 
 declare -A monitor_profiles=(
-  [c605c2d43c31e7090621159fe53d15d7]='work'
-  [7b47ec01863401062ed15a646e908526]='flat'
-  [be333760900e48176448e7e32208e432]='home-desk'
-  [45fddb542f5b3cab00835b8d46986de0]='home-kitchen'
-  [1309228f39f53636f00b25977ed0b964]='home-tv+audio' # tv
-  [fdb68fcec44cd29c74723a1874234271]='home-tv+audio' # avreceiver
+  [c605c2d43c31e7090621159fe53d15d7]='eddie-work'
+  [7b47ec01863401062ed15a646e908526]='eddie-flat'
+  [be333760900e48176448e7e32208e432]='eddie-home-desk'
+  [45fddb542f5b3cab00835b8d46986de0]='eddie-home-kitchen'
+  [1309228f39f53636f00b25977ed0b964]='eddie-home-tv+audio' # tv
+  [fdb68fcec44cd29c74723a1874234271]='eddie-home-tv+audio' # avreceiver
+  [d41d8cd98f00b204e9800998ecf8427e]='queeg-flat' # mDP->HDMI adapter?
 )
 
 if [[ -z $1 ]]
@@ -36,4 +38,7 @@ fi
 sleep 1
 
 i3-polybar
-map-touchscreen
+
+if [[ -n $XINPUT_TOUCHSCREEN ]]
+then map-touchscreen
+fi

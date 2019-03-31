@@ -19,10 +19,22 @@ fi
 
 
 # Hardware
-export WIFI_INTERFACE='wlp59s0'
-export XINPUT_TOUCHSCREEN='Wacom HID 488E Finger'
-export XRANDR_INTERNAL='eDP-1'
-export XRANDR_HDMI='DP-3'
+case "$(hostname)" in
+  eddie)
+    export WIFI_INTERFACE='wlp59s0'
+    export XINPUT_TOUCHSCREEN='Wacom HID 488E Finger'
+    export XRANDR_INTERNAL='eDP-1'
+    export XRANDR_HDMI='DP-3'
+    ;;
+
+  queeg)
+    export WIFI_INTERFACE='wlp3s0'
+    export XINPUT_TOUCHSCREEN=''
+    export XRANDR_INTERNAL='LVDS-1'
+    export XRANDR_HDMI='HDMI-A-1'
+    ;;
+
+esac
 
 
 # Appearance
