@@ -2,10 +2,31 @@
 
 while read adoptedfile
 do
-  declare dotfile=$(realpath "$DOT_DIR/$adoptedfile")
-  echo "Restoring adopted file: $dotfile"
-  echo "                     -> $adoptedfile"
+  echo
+  echo '================================================================================'
 
-  sudo mv "$adoptedfile" "$adoptedfile.dist"
-  sudo ln -s "$dotfile" "$adoptedfile"
+  declare dotfile=$(realpath "$DOT_DIR/$adoptedfile")
+
+  if [[ ! -f $adoptedfile ]] && [[ ! -d $adoptedfile ]]
+  then
+    echo "File doesn't exist: $adoptedfile"
+    echo "           Skipped"
+    continue
+  fi
+
+  echo "Linking adopted file: $adoptedfile"
+  echo "                from: $dotfile"
+
+  if [[ -O $adoptedfile ]]
+  then      mv "$adoptedfile" "$adoptedfile.dist"
+  else sudo mv "$adoptedfile" "$adoptedfile.dist"
+  fi
+
+  if [[ -O $(dirname "$adoptedfile") ]]
+  then      ln -s "$dotfile" "$adoptedfile"
+  else sudo ln -s "$dotfile" "$adoptedfile"
+  fi
 done < <(cat $DOT_DIR/adoptedfiles)
+
+echo "All done. :)"
+echo
