@@ -5,7 +5,6 @@ set $filemanager              /usr/bin/nautilus
 set $browser                  /usr/bin/chromium-browser
 
 set $touchpad                 "SYNA2393:00 06CB:7A13 Touchpad"
-set $touchscreen              "Wacom HID 488E Finger"
 set $outputInternal           eDP-1
 set $outputHdmi               DP-3
 
