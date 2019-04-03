@@ -33,7 +33,7 @@ do
   then      ln -s "$dotfile" "$adoptedfile"
   else sudo ln -s "$dotfile" "$adoptedfile"
   fi
-done < <(cat $DOT_DIR/adoptedfiles)
+done < "$DOT_DIR/adoptedfiles"
 
 echo
 echo "All done. :)"
