@@ -1,0 +1,1 @@
+history | tail -2 | head -1 | sed 's/ [0-9]\+ *//'
