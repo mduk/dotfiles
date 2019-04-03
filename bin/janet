@@ -7,7 +7,7 @@ keypath="$HOME/.ssh/${key}_rsa"
 ssh_key="-i $keypath"
 ssh_args=""
 ssh_dest="$USER@$janet"
-ssh="ssh -At $ssh_key $ssh_dest"
+ssh="ssh -XAt $ssh_key $ssh_dest"
 
 sync() {
   while [[ $# -gt 0 ]]
