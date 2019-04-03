@@ -1,0 +1,4 @@
+while true
+do sleep 0.1
+  printf "\xe2\x95\xb$((1 + ($RANDOM & 1)))"
+done
