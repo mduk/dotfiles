@@ -27,4 +27,3 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 
 source "/home/daniel/.dotfiles/dot.sh"
-auto-monitors
