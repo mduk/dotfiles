@@ -14,6 +14,13 @@ do
     continue
   fi
 
+  if [[ -L $adoptedfile ]]
+  then
+    echo "Adopted file already linked: $adoptedfile"
+    echo "                     Target: $(readlink $adoptedfile)"
+    continue
+  fi
+
   echo "Linking adopted file: $adoptedfile"
   echo "                from: $dotfile"
 
@@ -28,5 +35,6 @@ do
   fi
 done < <(cat $DOT_DIR/adoptedfiles)
 
+echo
 echo "All done. :)"
 echo
