@@ -1,0 +1,23 @@
+#!/bin/bash
+
+sed -n '
+  s/ \+/ /g;
+
+  /{{Episode list/{
+    x;
+    s/^.*$//;
+    x;
+  };
+
+  /{{Episode list/,/^}}$/{
+    H;
+    x;
+    s/\n/ /g;
+    x;
+  };
+
+  /^}}$/{
+    x;
+    p;
+  };' | less -S
+
