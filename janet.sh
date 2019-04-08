@@ -10,6 +10,7 @@ sudo apt install -y git
 git config --global user.email "daniel.kendell@gmail.com"
 git config --global user.name "Daniel Kendell"
 
+sudo apt install -y nfs-kernel-server
 sudo apt install -y avahi-daemon avahi-discover avahi-utils libnss-mdns mdns-scan
 
 sudo apt install -y exfat-utils
