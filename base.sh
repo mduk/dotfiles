@@ -41,8 +41,6 @@ install avahi-daemon \
         libnss-mdns \
         mdns-scan
 
-install nfs-kernel-server
-
 install vim \
         screen
 

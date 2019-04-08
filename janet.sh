@@ -2,6 +2,9 @@
 
 source base.sh
 
+# NFS Server
+install nfs-kernel-server
+
 # Plex
 if [[ ! -f  ./plexmediaserver_1.14.1.5488-cc260c476_amd64.deb ]]
 then
