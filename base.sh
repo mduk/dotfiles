@@ -1,13 +1,23 @@
+header() {
+  echo -ne "\n\n"
+  echo "################################################################################"
+  echo "# " $@
+  echo "################################################################################"
+}
+
+header Configuring Repositories
 sudo add-apt-repository universe
 sudo add-apt-repository multiverse
 
+header APT Update and Upgrade
 sudo apt update
 sudo apt upgrade -y
 
 install() {
-  apt install -y "$@"
+  sudo apt install -y "$@"
 }
 
+header Git and Dotfiles
 install -y git
 git config --global user.email "daniel.kendell@gmail.com"
 git config --global user.name "Daniel Kendell"
@@ -28,21 +38,25 @@ else
   echo "Dotfiles already cloned"
 fi
 
+header Filesystems
 install exfat-utils
 
+header Network Utilities
 install nmap
-
-install openssh-server \
-        openssh-client
-
 install avahi-daemon \
         avahi-discover \
         avahi-utils \
         libnss-mdns \
         mdns-scan
 
+header Services
+install openssh-server \
+        openssh-client
+
+header Command Line Utilities
 install vim \
         screen
 
+header Shell Scripting Utilities
 install dos2unix \
         dialog
