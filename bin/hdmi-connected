@@ -1,4 +1,6 @@
 #!/bin/bash
 
-read status < "/sys/class/drm/card0-${XRANDR_HDMI}/status"
-[[ "$status" == "connected" ]]
+set -x
+
+
+[[ "$(cat $SYS_DISPLAY_EXTERNAL/status)" == "connected" ]]
