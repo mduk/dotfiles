@@ -1,0 +1,10 @@
+#!/bin/bash
+
+for arg
+do
+  read series discs < <(echo "$arg" | tr ':' ' ')
+  for i in $(seq $discs)
+  do
+    echo -n "S${series}D${i} "
+  done
+done

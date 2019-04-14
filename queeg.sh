@@ -8,19 +8,11 @@ install xbacklight
 # Audio
 install mpc mpd ncmpc
 
-# Video (X11)
-install mpv
-
 # dev
+install nginx
 install jq httpie
 
-# graphical
-install xscreensaver \
-        xscreensaver-data-extra \
-        xscreensaver-gl-extra \
-        xscreensaver-screensaver-bsod
+source xdesktop.sh
 
-install ttf-mscorefonts-installer scrot vlc xcape i3 suckless-tools konsole pavucontrol feh guvcview arandr
-install adwaita-qt
-
+# tidy up
 sudo apt autoremove -y
