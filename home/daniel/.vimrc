@@ -124,6 +124,9 @@ Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'peterhoeg/vim-qml'
 Plug 'vim-scripts/gnuplot-syntax-highlighting'
 Plug 'arrufat/vala.vim'
+Plug 'chr4/nginx.vim'
+Plug 'tbastos/vim-lua'
+
 call plug#end()
 
 let g:vim_search_pulse_duration = 50

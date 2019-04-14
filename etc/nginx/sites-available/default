@@ -8,6 +8,8 @@ server {
   autoindex on;
   index index.html
 
+  error_log /tmp/info.log;
+
   server_name _;
 
   location / {
@@ -19,6 +21,17 @@ server {
 
   location ~ /\. {
     deny all;
+  }
+
+  lua_code_cache off;
+
+  location = /lua {
+    default_type 'text/plain';
+    content_by_lua_file $document_root/main.lua;
+  }
+
+  location = /as/token.oauth2 {
+    content_by_lua_file $document_root/as-token.lua;
   }
 }
 
