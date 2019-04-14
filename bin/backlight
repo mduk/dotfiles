@@ -1,0 +1,22 @@
+#!/bin/bash
+
+declare backlight=/sys/class/backlight/intel_backlight
+
+declare -i brightness=0
+read brightness < $backlight/brightness
+
+declare    incdec="${1:-read}"
+declare -i amount="${2:-5000}"
+
+if [[ $incdec == read ]]
+then
+  echo "$brightness"
+  exit
+fi
+
+case "$incdec" in
+  +|inc*) ((brightness += amount)) ;;
+  -|dec*) ((brightness -= amount)) ;;
+esac
+
+echo -n "$brightness" | sudo tee $backlight/brightness
