@@ -1,6 +1,7 @@
-IFS=$'\n'
+#!/bin/bash
 
-for file in $(ls *.json)
+while read file
 do
-  mv "$file" ".$file"
-done
+  declare hidden="$(dirname "$file")/.$(basename "$file")"
+  mv "$file" "$hidden"
+done < <(find . -name '*.info.json')
