@@ -22,6 +22,8 @@ else
   profile="$1"
 fi
 
+echo "Setting profile: $profile"
+
 if [[ $profile == *+audio ]]
 then
   sound-out-hdmi
@@ -30,15 +32,22 @@ fi
 
 declare layout="$HOME/.screenlayout/$profile.sh"
 
-if [[ -f "$layout" ]]
-then source "$layout"
-else exit 2
+
+if [[ ! -f "$layout" ]]
+then
+  echo "Profile not found: $layout"
+  exit 2
 fi
+
+source "$layout"
 
 sleep 1
 
-i3-polybar
-
+echo Mapping Touchscreen
 if [[ -n $XINPUT_TOUCHSCREEN ]]
 then map-touchscreen
 fi
+
+echo Starting Polybar
+i3-polybar
+

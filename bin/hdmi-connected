@@ -1,6 +1,3 @@
 #!/bin/bash
 
-set -x
-
-
 [[ "$(cat $SYS_DISPLAY_EXTERNAL/status)" == "connected" ]]
