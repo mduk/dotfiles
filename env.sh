@@ -48,3 +48,5 @@ export QT_STYLE_OVERRIDE='Adwaita-dark'
 export QT_AUTO_SCREEN_SCALE_FACTOR='true'
 export QT_SCALE_FACTOR='1.5'
 export TERM="xterm-256color"
+
+shopt -s autocd
