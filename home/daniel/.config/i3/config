@@ -330,19 +330,6 @@ mode "File Manager" {
 }
 
 
-################################################################################
-# JetBrains
-################################################################################
-bindsym $alt+Shift+j            mode "JetBrains"
-mode "JetBrains" {
-  bindsym p                     exec "phpstorm.sh"; mode "default"
-  bindsym d                     exec "datagrip.sh"; mode "default"
-  bindsym r                     exec "rubymine.sh"; mode "default"
-  bindsym i                     exec "idea.sh"    ; mode "default"
-
-  bindsym Return                mode "default"
-  bindsym Escape                mode "default"
-}
 
 
 ################################################################################
