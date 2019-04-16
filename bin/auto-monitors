@@ -3,20 +3,33 @@
 declare host="$(hostname)"
 declare profile="${host}-standalone"
 
+echo "Default Profile: $profile"
+
 declare -A monitor_profiles=(
+  [d41d8cd98f00b204e9800998ecf8427e]='eddie-work'
   [c605c2d43c31e7090621159fe53d15d7]='eddie-work'
   [7b47ec01863401062ed15a646e908526]='eddie-flat'
   [be333760900e48176448e7e32208e432]='eddie-home-desk'
   [45fddb542f5b3cab00835b8d46986de0]='eddie-home-kitchen'
   [1309228f39f53636f00b25977ed0b964]='eddie-home-tv+audio' # tv
   [fdb68fcec44cd29c74723a1874234271]='eddie-home-tv+audio' # avreceiver
-  [d41d8cd98f00b204e9800998ecf8427e]='queeg-flat'
+#  [d41d8cd98f00b204e9800998ecf8427e]='queeg-flat'
 )
 
 if [[ -z $1 ]]
 then
+  echo "Discovering Monitors"
   if hdmi-connected
-  then profile="${monitor_profiles[$(hdmi-edid-hash)]}"
+  then
+    echo "  External Monitor Connected"
+
+    declare hash="$(hdmi-edid-hash)"
+    echo "  External Monitor EDID Hash: $hash"
+
+    profile="${monitor_profiles[$hash]}"
+    echo "  Selected Profile: $profile"
+  else
+    echo "  No External Monitor Connected"
   fi
 else
   profile="$1"
