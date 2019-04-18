@@ -2,17 +2,18 @@
 
 source base.sh
 
-# system
+header System
 install xbacklight
 
-# Audio
+header Music
 install mpc mpd ncmpc
 
-# dev
+header Web Dev
 install nginx
 install jq httpie
 
 source xdesktop.sh
+source video-tools.sh
 
-# tidy up
+header Apt Autoremove
 sudo apt autoremove -y
