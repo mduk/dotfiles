@@ -1,0 +1,97 @@
+#!/bin/bash
+
+case $1 in
+
+  index) case $2 in
+
+    update) for disc in /mnt/*; do
+      echo Indexing $disc ...
+      pushd $disc > /dev/null
+      find . > .index
+      sort \
+        < .index \
+        > .index.sorted
+      mv .index.sorted .index
+      popd > /dev/null
+    done ;;
+
+    duplicates)
+      declare disc="/mnt/$3"
+      declare otherdisc="/mnt/$4"
+      comm -12 "$disc/.index" "$otherdisc/.index" | wc -l
+    ;;
+
+  esac ;;
+
+  mount)
+    for volume in /dev/disk/by-label/*
+    do
+      label=$(basename $volume)
+      mountpoint="/mnt/${label}"
+
+      if mount | grep $mountpoint > /dev/null
+      then
+        echo "${label} already mounted"
+      else
+        echo "Mounting ${volume} on ${mountpoint}"
+
+        if [[ ! -d $mountpoint ]]
+        then mkdir "$mountpoint"
+        fi
+
+        sudo mount $volume $mountpoint
+      fi
+    done
+    ;;
+
+  usage)
+    echo "Usage:"
+
+    chr_repeat() {
+      for i in $(seq $2)
+      do echo -ne "$1"
+      done
+    }
+
+    echo -e "  Filesystem\tSize\tUsed\tAvail\tUse%\tMounted on"
+    df -h | sed -n '\|/dev/sd|p' | while read device size used free use mount
+    do
+      declare used=${use%%\%}
+      declare free=$(( 100 - used ))
+
+      declare cols=$(tput cols)
+      declare bar_width=100
+
+      echo -e "  $device\t $size\t $used\t $free\t $use\t $mount"
+
+      # Align fill bar right
+      if [[ $cols -gt $bar_width ]]
+      then chr_repeat ' ' $((cols - $bar_width))
+      fi
+
+      declare green_threshold=50
+      declare red_threshold=50
+
+      if [[ $used -lt $green_threshold ]]
+      then tput setaf 2
+      fi
+
+      if [[ $used -ge $green_threshold ]] \
+      && [[ $used -lt $red_threshold ]]
+      then tput setaf 3
+      fi
+
+      if [[ $used -ge $red_threshold ]]
+      then tput setaf 1
+      fi
+
+      chr_repeat "\u2588" $used
+      chr_repeat "\u2591" $free
+
+      tput sgr0
+
+      echo
+    done
+    esac
+
+    echo
