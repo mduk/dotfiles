@@ -24,14 +24,11 @@ do
   echo "Linking adopted file: $adoptedfile"
   echo "                from: $dotfile"
 
-  if [[ -O $adoptedfile ]]
-  then      mv "$adoptedfile" "$adoptedfile.dist"
-  else sudo mv "$adoptedfile" "$adoptedfile.dist"
-  fi
-
   if [[ -O $(dirname "$adoptedfile") ]]
-  then      ln -s "$dotfile" "$adoptedfile"
-  else sudo ln -s "$dotfile" "$adoptedfile"
+  then      mv "$adoptedfile" "$adoptedfile.dist"
+            ln -s "$dotfile" "$adoptedfile"
+  else sudo mv "$adoptedfile" "$adoptedfile.dist"
+       sudo ln -s "$dotfile" "$adoptedfile"
   fi
 done < "$DOT_DIR/adoptedfiles"
 
