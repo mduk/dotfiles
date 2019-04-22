@@ -35,15 +35,11 @@ case "$1" in
     ;;
 
   screen)
-    $ssh "screen -DR $2"
+    $ssh "SCREEN_NAME='$2' screen -DR $2"
     ;;
 
   screens)
     $ssh "screen -ls"
-    ;;
-
-  discs)
-    $ssh /home/daniel/bin/discs
     ;;
 
   *)
