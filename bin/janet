@@ -38,6 +38,10 @@ case "$1" in
     $ssh "screen -DR $2"
     ;;
 
+  screens)
+    $ssh "screen -ls"
+    ;;
+
   discs)
     $ssh /home/daniel/bin/discs
     ;;
