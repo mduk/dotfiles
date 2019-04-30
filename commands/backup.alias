@@ -1,1 +1,11 @@
- rsync --archive --verbose --delete --ignore-existing --exclude 'Screencasts/*.nut' --exclude '.cache' --exclude '.dbus' "$HOME/" /media/daniel/Backup
+rsync \
+  --archive \
+  --verbose  \
+  --delete \
+  --ignore-existing \
+  --exclude 'Screencasts/*.nut' \
+  --exclude '.cache' \
+  --exclude '.dbus' \
+  --exclude '.local/share/Trash' \
+  "$HOME/" \
+  /media/daniel/Backup
