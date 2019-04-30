@@ -19,4 +19,7 @@ case "$incdec" in
   -|dec*) ((brightness -= amount)) ;;
 esac
 
-echo -n "$brightness" | sudo tee $backlight/brightness
+if [[ $brightness =~ ^00* ]]
+then echo "brightness 0. nope"
+else echo -n "$brightness" | sudo tee $backlight/brightness
+fi
