@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [[ "$1" != 'configure' ]]
+then
+  echo "Usage: keyboard configure" >&2
+  exit 1
+fi
+
+setxkbmap -option ctrl:nocaps
+

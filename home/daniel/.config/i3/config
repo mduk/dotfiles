@@ -84,26 +84,16 @@ exec vol mute
 
 
 ################################################################################
-# Touchpad
+# HID Configuration
 ################################################################################
-exec_always xinput set-prop $touchpad "libinput Tapping Enabled" 1
-exec_always xinput set-prop $touchpad "libinput Natural Scrolling Enabled" 1
-exec_always xinput set-prop $touchpad "libinput Accel Speed" 2.000000
-exec_always xinput set-prop $touchpad "libinput Disable While Typing Enabled" 1
-exec_always xinput set-prop $touchpad "libinput Click Method Enabled" 0 1
+exec_always touchpad configure
+exec_always keyboard configure
 
 
 ################################################################################
 # Caffeine
 ################################################################################
 exec caffeine-indicator &
-
-
-################################################################################
-# Control instead of Caps Lock
-################################################################################
-exec_always setxkbmap -option ctrl:nocaps
-exec_always xcape
 
 
 ################################################################################
