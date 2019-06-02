@@ -1,6 +1,24 @@
 #!/bin/bash
 
-touchpad_id=$(
+if [[ $# -lt 1 ]]
+then
+  echo "Usage: touchpad <command>" >&2
+  echo "       touchpad configure" >&2
+  echo "       touchpad id       " >&2
+  echo "       touchpad enable   " >&2
+  echo "       touchpad disable  " >&2
+  exit 1
+fi
+
+declare -A touchpad_config=(
+  [libinput Tapping Enabled]=1
+  [libinput Natural Scrolling Enabled]=1
+  [libinput Accel Speed]=2.000000
+  [libinput Disable While Typing Enabled]=1
+  [libinput Click Method Enable]='0 1'
+)
+
+declare touchpad_id=$(
   xinput | sed \
     -e '/Touchpad/!d' \
     -e 's/.*id=\([0-9]*\).*/\1/'
@@ -14,6 +32,15 @@ notify() {
 
 touchpad-on() {
   xinput --list-props $touchpad_id | grep "Device Enabled.*:.*1$" >/dev/null
+}
+
+cmd-configure() {
+  set -x
+  for k in "${!touchpad_config[@]}"
+  do
+    declare v="${touchpad_config[$k]}"
+    xinput set-prop "$touchpad_id" "$k" "$v"
+  done
 }
 
 cmd-id() {
@@ -41,4 +68,11 @@ cmd-toggle() {
   fi
 }
 
-eval "cmd-$1"
+declare cmdfunction="cmd-$1"
+
+if declare -fp "$cmdfunction" &>/dev/null
+then eval "$cmdfunction"
+else
+  echo "Invalid subcommand: $1" >&2
+  exit 2
+fi

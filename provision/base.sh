@@ -5,6 +5,9 @@ header() {
   echo "################################################################################"
 }
 
+header Authorisation
+sudo echo "OK"
+
 header Configuring Repositories
 sudo add-apt-repository universe
 sudo add-apt-repository multiverse
