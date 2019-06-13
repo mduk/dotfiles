@@ -1,11 +1,23 @@
 path_prepend() {
-  [[ ! -d $1 ]] && return
-  export PATH="$1:$PATH"
+  if [[ $# == 0 ]]
+  then declare path="$PWD"
+  else declare path="$1"
+  fi
+
+  [[ ! -d $path ]] && return
+
+  export PATH="$path:$PATH"
 }
 
 path_append() {
-  [[ ! -d $1 ]] && return
-  export PATH="$PATH:$1"
+  if [[ $# == 0 ]]
+  then declare path="$PWD"
+  else declare path="$1"
+  fi
+
+  [[ ! -d $path ]] && return
+
+  export PATH="$PATH:$path"
 }
 
 latest_jetbrains_bin() {
