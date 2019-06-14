@@ -38,6 +38,8 @@ do
   echo "$newfile"
   echo
 
+  mkdir "$newdir"
+
   declare cmdstring="$cmd '$file' '$newfile'"
   echo "# $cmdstring"
 

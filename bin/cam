@@ -1,4 +1,4 @@
 #!/bin/bash
 
 guvcview \
-  --device=/dev/video2
+  --device=$(find-camera C920)

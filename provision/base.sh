@@ -58,7 +58,8 @@ install openssh-server \
 
 header Command Line Utilities
 install vim \
-        screen
+        screen \
+        inotify-tools
 
 header Shell Scripting Utilities
 install dos2unix \
