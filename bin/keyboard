@@ -7,4 +7,4 @@ then
 fi
 
 setxkbmap -option ctrl:nocaps
-
+numlockx on

@@ -64,8 +64,11 @@ install \
 
 install \
   scrot \
-  xcape \
   xsel
+
+install \
+  xcape \
+  numlockx
 
 install \
   konsole \
