@@ -1,5 +1,7 @@
 function mini() {
-  unset PROMPT_COMMAND
-  export PS1="\$ "
-  clear
+  PROMPT_SPACE=0
+  PROMPT_BAR=false
+  PROMPT_VERSIONS=false
+  PROMPT_CLOCK=false
+  PROMPT_GIT=false
 }
