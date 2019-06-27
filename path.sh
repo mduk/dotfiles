@@ -30,9 +30,6 @@ path_prepend "/opt/arduino-1.8.5/"
 # Dot Bin
 path_prepend "$DOT_DIR/bin"
 
-# Home bin overrides everything
-path_prepend "$HOME/bin"
-
 # Python Pip
 path_append "$HOME/.local/bin"
 
