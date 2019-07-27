@@ -1,9 +1,4 @@
-header() {
-  echo -ne "\n\n"
-  echo "################################################################################"
-  echo "# " $@
-  echo "################################################################################"
-}
+. include.sh
 
 header Authorisation
 sudo echo "OK"
@@ -15,10 +10,6 @@ sudo add-apt-repository multiverse
 header APT Update and Upgrade
 sudo apt update
 sudo apt upgrade -y
-
-install() {
-  sudo apt install -y "$@"
-}
 
 header Git and Dotfiles
 install -y git
