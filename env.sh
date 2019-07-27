@@ -45,8 +45,12 @@ esac
 export DMENU_FONT='fixed:pixelsize=32'
 export GTK_THEME='Adwaita-dark'
 export QT_STYLE_OVERRIDE='Adwaita-dark'
-export QT_AUTO_SCREEN_SCALE_FACTOR='true'
-export QT_SCALE_FACTOR='1.5'
 export TERM="xterm-256color"
+
+if [[ $(hostname) == eddie ]]
+then
+  export QT_AUTO_SCREEN_SCALE_FACTOR='true'
+  export QT_SCALE_FACTOR='1.5'
+fi
 
 shopt -s autocd
