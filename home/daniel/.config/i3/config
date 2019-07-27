@@ -134,6 +134,7 @@ bindsym $angryalt+Right        focus right
 # Floating Windows
 ################################################################################
 for_window [class="plasmashell"]      floating enable
+for_window [class="Tek4010"]          floating enable
 for_window [class="QtQmlViewer"]      floating enable
 for_window [class="mpv"]              floating enable
 for_window [class="melt"]             floating enable
