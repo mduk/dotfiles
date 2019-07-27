@@ -399,6 +399,9 @@ mode "WWW" {
   bindsym P                   exec $www paypal                                  ; mode "default"
   bindsym Shift+P     $tabbed exec $www paypal                                  ; mode "default"
 
+  bindsym S                   exec $www youtubestudio                           ; mode "default"
+  bindsym Shift+S     $tabbed exec $www youtubestudio                           ; mode "default"
+
   bindsym Y                   exec $www youtube                                 ; mode "default"
   bindsym Shift+Y     $tabbed exec $www youtube                                 ; mode "default"
 
