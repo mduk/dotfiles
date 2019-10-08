@@ -6,7 +6,7 @@ host="$host.local"
 
 ssh_key="-i $keypath"
 ssh_args=""
-ssh_dest="$USER@$host"
+ssh_dest="daniel@$host"
 ssh="ssh -XAt $ssh_key $ssh_dest"
 
 sync() {
