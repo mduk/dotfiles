@@ -46,3 +46,5 @@ then
   path_append $(latest_jetbrains_bin pycharm)
   path_append $(latest_jetbrains_bin idea-IU)
 fi
+
+path_append "$HOME/.gloo/bin"
