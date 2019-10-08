@@ -39,4 +39,8 @@ fi
 
 ffmpeg -i "file:$file" \
        -vf "$vf" \
+       -c:a copy \
+       -c:v libx264 \
+       -preset slow \
+       -crf 22 \
        "file:$newfile"
