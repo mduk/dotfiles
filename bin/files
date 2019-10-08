@@ -1,0 +1,22 @@
+#!/bin/bash
+
+case $# in
+  0)
+      declare dir=$(
+        ls -d $HOME/*/ \
+          | dmenu -nb '#000' \
+                  -fn "$DMENU_FONT" \
+                  -p 'FS>'
+      )
+
+      if [[ -z $dir ]]
+      then exit
+      fi
+
+      nautilus "$dir"
+    ;;
+
+  *)
+    nautilus "$@"
+    ;;
+esac
