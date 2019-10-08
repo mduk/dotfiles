@@ -32,21 +32,17 @@ do
     continue
   fi
 
-  echo "================================================================================"
-  echo "$file"
-  echo "  =>"
-  echo "$newfile"
-  echo
+  echo -e "$cmd\t$file\t$newfile"
 
-  mkdir "$newdir"
+  mkdir -p "$newdir"
 
   declare cmdstring="$cmd '$file' '$newfile'"
-  echo "# $cmdstring"
 
   eval "$cmdstring"
 
 done < <(find "$PWD" \
            -iname '*.jpg' -or \
            -iname '*.mp4' -or \
+           -iname '*.nef' -or \
            -iname '*.m4v' \
            -not -name '.*')
