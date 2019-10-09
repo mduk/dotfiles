@@ -116,6 +116,8 @@ Plug 'vim-syntastic/syntastic'
 
 Plug 'lilydjwg/colorizer'
 
+Plug 'nvie/vim-flake8'
+
 " syntax highlighters
 Plug 'pangloss/vim-javascript'
 Plug 'Chiel92/vim-autoformat'
