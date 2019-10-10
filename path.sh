@@ -39,7 +39,7 @@ path_append "$HOME/.config/composer/vendor/bin"
 # JetBrains IDEs
 if [[ -d /opt/JetBrains ]]
 then
-  #path_append $(latest_jetbrains_bin DataGrip)
+  path_append $(latest_jetbrains_bin DataGrip)
   path_append $(latest_jetbrains_bin pycharm)
   path_append $(latest_jetbrains_bin GoLand)
 fi
