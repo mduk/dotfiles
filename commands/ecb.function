@@ -1,0 +1,5 @@
+ecb() {
+  declare tmpfile=$(mktemp)
+  cb > $tmpfile
+  e $tmpfile
+}
