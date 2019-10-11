@@ -152,6 +152,7 @@ for_window [class="ktorrent"]         floating enable
 for_window [class="Yad"]              floating enable
 for_window [class="spectacle"]        floating enable
 for_window [class="Xmessage"]         floating enable
+for_window [class="java-lang-Thread"] floating enable
 
 
 ################################################################################
