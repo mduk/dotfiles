@@ -116,7 +116,7 @@ Plug 'vim-syntastic/syntastic'
 
 Plug 'lilydjwg/colorizer'
 
-Plug 'nvie/vim-flake8'
+" Plug 'nvie/vim-flake8'
 
 " syntax highlighters
 Plug 'pangloss/vim-javascript'
@@ -162,10 +162,11 @@ noremap <F3> :Autoformat<CR>
 
 "###############################################################################
 " Plugin: Flake8
+" This seems to conflict with syntastic. Commented out for now.
 "###############################################################################
 
 " Run flake8 over all Python files when they're written
-autocmd BufWritePost *.py call Flake8()
+" autocmd BufWritePost *.py call Flake8()
 
 "###############################################################################
 " Plugin: Airline
