@@ -1,3 +1,5 @@
+export ESP_DIR="$HOME/.arduino15/packages/esp8266/hardware/esp8266/2.5.2/"
+
 # Declare the location of my general Development directory
 export DEV_DIR="$HOME/Development"
 
