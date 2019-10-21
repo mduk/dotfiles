@@ -18,6 +18,7 @@ case "$incdec" in
   +|inc*) ((brightness += amount)) ;;
   -|dec*) ((brightness -= amount)) ;;
   max) read brightness < $backlight/max_brightness ;;
+  min) brightness=20000 ;;
 esac
 
 if [[ $brightness =~ ^00* ]]
