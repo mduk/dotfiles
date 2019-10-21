@@ -42,6 +42,7 @@ then
   path_append $(latest_jetbrains_bin DataGrip)
   path_append $(latest_jetbrains_bin pycharm)
   path_append $(latest_jetbrains_bin GoLand)
+  path_append $(latest_jetbrains_bin clion)
 fi
 
 path_append "$HOME/.gloo/bin"
