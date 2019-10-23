@@ -69,7 +69,7 @@ font-1 = fontawesome:pixelsize=14;1
 ;tray-position = right
 modules-left = i3
 modules-center =
-modules-right = xscreensaver xkeyboard mpd xbacklight pulseaudio wifi battery date
+modules-right = nordvpn xscreensaver xkeyboard mpd xbacklight pulseaudio wifi battery date
 
 ;wm-restack = i3
 
@@ -77,6 +77,20 @@ modules-right = xscreensaver xkeyboard mpd xbacklight pulseaudio wifi battery da
 
 cursor-click = pointer
 cursor-scroll = ns-resize
+
+
+
+
+
+
+[module/nordvpn]
+type = custom/script
+interval = 1
+
+exec = i3-nordvpn status
+click-left = i3-nordvpn toggle
+format-prefix = " "
+format-underline = ${colors.blue}
 
 
 
