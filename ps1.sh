@@ -3,10 +3,18 @@ MY_USERNAME="daniel"
 declare PROMPT_GIT=true
 declare PROMPT_PATH=true
 declare PROMPT_HOST=true
-declare PROMPT_VERSIONS=""
+declare PROMPT_VERSIONS=false
 declare PROMPT_CLOCK=true
 declare PROMPT_BAR=true
 declare PROMPT_SPACE=2
+
+mini() {
+  PROMPT_SPACE=0
+  PROMPT_BAR=false
+  PROMPT_VERSIONS=false
+  PROMPT_CLOCK=false
+  PROMPT_GIT=false
+}
 
 terminal_width() {
     local cols=$(tput cols)
@@ -156,10 +164,6 @@ prompt_command() {
     then PS1="${PS1}$(block_path)"
     fi
 
-    if [[ $PROMPT_GIT == false ]]
-    then PS1+="\n"
-    fi
-
     # Git
     if [[ $PROMPT_GIT == true ]] \
     && git branch &>/dev/null
@@ -167,18 +171,18 @@ prompt_command() {
       PS1="${PS1}$(block_git)"
     fi
 
-    PS1="$PS1\n"
 
     # Versions Line
-    if [[ $PROMPT_VERSIONS != "" ]]; then
+    if [[ $PROMPT_VERSIONS != false ]]; then
+        PS1="$PS1\n"
         PS1="${PS1}$(block_php)"
         PS1="${PS1}$(block_ruby)"
         PS1="${PS1}$(block_python)"
-        PS1="$PS1\n"
     fi
 
     # Prompt Line
     if [[ $PROMPT_CLOCK == true ]]; then
+        PS1="$PS1\n"
         PS1="${PS1}$(block_clock)"
     fi
 

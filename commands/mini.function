@@ -1,7 +1,0 @@
-function mini() {
-  PROMPT_SPACE=0
-  PROMPT_BAR=false
-  PROMPT_VERSIONS=false
-  PROMPT_CLOCK=false
-  PROMPT_GIT=false
-}
