@@ -117,6 +117,7 @@ Plug 'vim-syntastic/syntastic'
 Plug 'lilydjwg/colorizer'
 
 " Plug 'nvie/vim-flake8'
+Plug 'vim-erlang/vim-erlang-runtime'
 
 " syntax highlighters
 Plug 'pangloss/vim-javascript'
