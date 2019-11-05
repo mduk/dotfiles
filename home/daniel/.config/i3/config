@@ -100,7 +100,7 @@ exec caffeine-indicator &
 # XScreensaver
 ################################################################################
 exec_always i3-screensaver start
-bindsym $alt+Shift+L exec i3-screensaver lock
+bindsym $alt+Shift+BackSpace exec i3-screensaver lock
 
 
 ################################################################################
