@@ -42,6 +42,7 @@ then
   make -j$(nproc)
 fi
 
+install pulseaudio-equalizer
 install pavucontrol
 install pavumeter
 install pamix
