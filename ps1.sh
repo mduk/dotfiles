@@ -7,6 +7,13 @@ declare PROMPT_VERSIONS=false
 declare PROMPT_CLOCK=true
 declare PROMPT_BAR=true
 declare PROMPT_SPACE=2
+declare PROMPT_HOMETIME="17:10"
+
+declare PROMPT_GREEN="\[\033[92m\]"
+declare PROMPT_YELLOW="\033[93m"
+declare PROMPT_RED="\033[91m"
+declare PROMPT_BOLD="\033[1m"
+declare PROMPT_RESET="\033[0m"
 
 mini() {
   PROMPT_SPACE=0
@@ -44,72 +51,76 @@ block_wifi() {
   echo "[$(wifi-ssid)]"
 }
 
-block_screen() {
-    if [[ "$TERM" = "screen" ]]; then
-        red $(bold "[SCREEN]")
-    fi
-}
-
-block_term() {
-    if [[ "$TERM" = "screen" ]]; then
-        yellow "[${TERM}]"
-    fi
-}
-
 block_php() {
-    echo "$PROMPT_VERSIONS" | grep "php" > /dev/null
-    if [ $? -eq 0 ]
-    then
-        local version=$(php -r 'echo phpversion();')
-        echo "[PHP: $version]"
-    fi
+  if ! which php &>/dev/null
+  then
+    echo "$PROMPT_RESET$PROMPT_RED[PHP: X]"
+    return
+  fi
+
+  if grep -i "php" &>/dev/null <<<"$PROMPT_VERSIONS"
+  then echo "[PHP: $(php -r 'echo phpversion();')]"
+  fi
 }
 
 block_ruby() {
-    echo "$PROMPT_VERSIONS" | grep "ruby" > /dev/null
-    if [ $? -eq 0 ]
-    then
-        local version=$(ruby -v | awk '{print $2}')
-        echo "[Ruby: $version]"
-    fi
+  if ! which ruby &>/dev/null
+  then
+    echo "$PROMPT_RESET$PROMPT_RED[Ruby: X]"
+    return
+  fi
+
+  if grep -i "ruby" &>/dev/null <<<"$PROMPT_VERSIONS"
+  then echo "$PROMPT_RESET[Ruby: $(ruby -v | awk '{print $2}')]"
+  fi
 }
 
 block_python() {
-    echo "$PROMPT_VERSIONS" | grep "python" > /dev/null
-    if [ $? -eq 0 ]
-    then
-        local version=$(python --version 2>&1 | awk '{print $2}')
-        local env=$([[ -v VIRTUAL_ENV ]] && echo venv || echo system)
-        echo "[Python: $version ($env)]"
-    fi
+  if ! which python &>/dev/null
+  then
+    echo "$PROMPT_RESET$PROMPT_RED[Python: X]"
+    return
+  fi
+
+  if grep -i "python" &>/dev/null <<<"$PROMPT_VERSIONS"
+  then
+      local version=$(python --version 2>&1 | awk '{print $2}')
+      local env=$([[ -v VIRTUAL_ENV ]] && echo venv || echo system)
+      echo "[Python: $version ($env)]"
+  fi
 }
 
 block_clock() {
-    local time=$(date +%H:%M:%S)
-
-    if [[ $(date --date="17:30" +%s) -lt $(date +%s) ]]
-    then red "[$(red $time)]"
-    else bold "[$time]"
-    fi
+  echo -ne "$PROMPT_RESET"
+  if [[ $(date --date="$PROMPT_HOMETIME" +%s) -le $(date +%s) ]]
+  then echo -e "$PROMPT_RED[$(date +%H:%M:%S)]"
+  else echo -e "$PROMPT_BOLD[$(date +%H:%M:%S)]"
+  fi
 }
 
 block_path() {
   [[ $PROMPT_PATH == true ]] && echo "[\w]"
 }
 
+block_screen() {
+    if [[ -n $STY ]]
+    then echo "$PROMPT_YELLOW[$STY]"
+    fi
+}
+
 block_host() {
     if [[ ! -z "$SSH_TTY" ]]; then
-      yellow "[$USER@$(hostname)]"
+      echo "$PROMPT_YELLOW[$USER@$(hostname)]"
     fi
 }
 
 block_user() {
     local user=$(whoami)
 
-    if [[ "$user" == "root" ]]; then
-        red $(bold "[ROOT]")
-    elif [[ "$user" != "$MY_USERNAME" ]]; then
-        echo "[\u]"
+    if [[ "$user" == "root" ]]
+    then echo "$PROMPT_BOLD$PROMPT_RED[ROOT]$PROMPT_RESET"
+    elif [[ "$user" != "$MY_USERNAME" ]]
+    then echo "[\u]"
     fi
 }
 
@@ -126,21 +137,6 @@ block_git() {
   fi
 }
 
-green() {
-    echo "\[\033[92m$1\033[0m\]"
-}
-
-yellow() {
-    echo "\[\033[93m$1\033[0m\]"
-}
-
-red() {
-    echo "\[\033[91m\]$1\[\033[0m\]"
-}
-
-bold() {
-    echo "\[\033[1m\]$1\[\033[0m\]"
-}
 
 ################################################################################
 # THE PROMPT
@@ -163,7 +159,7 @@ prompt_command() {
     done
 
     # Environment Line
-    PS1="${PS1}$(block_term)"
+    PS1="${PS1}$(block_screen)"
     PS1="${PS1}$(block_user)"
     PS1="${PS1}$(block_host)"
 
@@ -200,7 +196,7 @@ prompt_command() {
         PS1="${PS1}$(source "$(pwd)/.ps1")\n"
     fi
 
-    PS1="${PS1}$(bold \$) "
+    PS1="${PS1}$PROMPT_BOLD\$$PROMPT_RESET "
 
     export PS1
 }
