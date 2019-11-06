@@ -16,6 +16,12 @@ mini() {
   PROMPT_GIT=false
 }
 
+unprompt() {
+  unset PROMPT_COMMAND
+  unset -f prompt_command
+  export PS1="[\u@\h]\$ "
+}
+
 terminal_width() {
     local cols=$(tput cols)
 
