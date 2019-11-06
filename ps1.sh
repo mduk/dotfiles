@@ -87,7 +87,10 @@ block_python() {
 block_clock() {
     local time=$(date +%H:%M:%S)
 
-    bold "[$time]"
+    if [[ $(date --date="17:30" +%s) -lt $(date +%s) ]]
+    then red "[$(red $time)]"
+    else bold "[$time]"
+    fi
 }
 
 block_path() {
