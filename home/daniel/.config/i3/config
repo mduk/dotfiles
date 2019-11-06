@@ -188,8 +188,20 @@ bindsym $alt+Shift+Down         move down
 bindsym $alt+Shift+Up           move up
 bindsym $alt+Shift+Right        move right
 
+bindsym $alt+H                  focus left
+bindsym $alt+J                  focus down
+bindsym $alt+K                  focus up
+bindsym $alt+L                  focus right
+bindsym $alt+Shift+H            move left
+bindsym $alt+Shift+J            move down
+bindsym $alt+Shift+K            move up
+bindsym $alt+Shift+L            move right
+
 bindsym $alt+$win+Left          move workspace to output $outputInternal
 bindsym $alt+$win+Right         move workspace to output $outputHdmi
+
+bindsym $alt+$win+H             move workspace to output $outputInternal
+bindsym $alt+$win+L             move workspace to output $outputHdmi
 
 
 ################################################################################
@@ -204,7 +216,7 @@ bindsym $alt+Shift+bracketleft  move left
 bindsym $alt+Shift+bracketright move right
 
 bindsym $alt+p                  focus parent
-bindsym $alt+l                  focus child
+#bindsym $alt+l                  focus child
 
 
 ################################################################################
@@ -217,10 +229,10 @@ bindsym $alt+Prior             floating toggle
 ################################################################################
 # Container Split
 ################################################################################
-bindsym $alt+h                  split h
-bindsym $alt+v                  split v
-bindsym $alt+Shift+H            split h; exec $terminal
-bindsym $alt+Shift+V            split v; exec $terminal
+bindsym $win+h                  split h
+bindsym $win+v                  split v
+bindsym $win+Shift+H            split h; exec $terminal
+bindsym $win+Shift+V            split v; exec $terminal
 
 
 ################################################################################
