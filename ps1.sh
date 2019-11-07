@@ -7,7 +7,7 @@ declare PROMPT_VERSIONS=false
 declare PROMPT_CLOCK=true
 declare PROMPT_BAR=true
 declare PROMPT_SPACE=2
-declare PROMPT_HOMETIME="17:10"
+declare PROMPT_HOMETIME="17:30"
 
 declare PROMPT_GREEN="\[\033[92m\]"
 declare PROMPT_YELLOW="\[\033[93m\]"
