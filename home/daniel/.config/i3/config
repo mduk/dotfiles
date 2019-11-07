@@ -354,10 +354,15 @@ mode "Resize" {
 bindsym $alt+Shift+m            mode "Media"
 bindsym $alt+m                  mode "Media"
 mode "Media" {
-  bindsym Up                    exec vol up
-  bindsym Down                  exec vol down
-  bindsym Left                  exec mpc prev
-  bindsym Right                 exec mpc next
+#  bindsym Up                    exec vol up
+#  bindsym Down                  exec vol down
+#  bindsym Left                  exec mpc prev
+#  bindsym Right                 exec mpc next
+
+  bindsym H                     exec mpc prev
+  bindsym J                     exec vol down
+  bindsym K                     exec vol up
+  bindsym L                     exec mpc next
 
   bindsym space                 exec mpc toggle; mode "default"
 
