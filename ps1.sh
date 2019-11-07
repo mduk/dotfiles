@@ -10,10 +10,10 @@ declare PROMPT_SPACE=2
 declare PROMPT_HOMETIME="17:10"
 
 declare PROMPT_GREEN="\[\033[92m\]"
-declare PROMPT_YELLOW="\033[93m"
-declare PROMPT_RED="\033[91m"
-declare PROMPT_BOLD="\033[1m"
-declare PROMPT_RESET="\033[0m"
+declare PROMPT_YELLOW="\[\033[93m\]"
+declare PROMPT_RED="\[\033[91m\]"
+declare PROMPT_BOLD="\[\033[1m\]"
+declare PROMPT_RESET="\[\033[0m\]"
 
 mini() {
   PROMPT_SPACE=0
