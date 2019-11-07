@@ -209,12 +209,6 @@ bindsym $alt+$win+L             move workspace to output $outputHdmi
 ################################################################################
 
 
-bindsym $alt+bracketleft        focus left
-bindsym $alt+bracketright       focus right
-
-bindsym $alt+Shift+bracketleft  move left
-bindsym $alt+Shift+bracketright move right
-
 bindsym $alt+p                  focus parent
 #bindsym $alt+l                  focus child
 
