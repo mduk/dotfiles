@@ -7,38 +7,64 @@ while read file
 do
 
   read year month day hour minute second _tail < <( \
-    exiftool "$file" \
-      | sed -En '/.+(0000:00:00 00:00:00(\+00:00)?).*/d;
-                 /.+(....:..:.. ..:..:..(\+..:..)?).*/{
-                   s//\1/;
-                   s/[:\+]/ /g;
-                   p;
-                 }' \
-      | sort -n \
-      | uniq \
-      | tail -1
+    exiftool -json "$file" \
+      | jq -r '.[0].CreateDate' \
+      | sed 's/[:\+/]/ /g'
   )
+
+  if [[ $year == 'null' ]]
+  then
+    echo "$file has null create date"
+    echo "$file ==> $newfile" >> nullcreate.log
+    continue
+  fi
 
   # Validate date maybe?
 
   declare extension="${file##*.}" # Strip off everything before the dot
-  declare createdate="$year:$month:$day-$hour:$minute:$second" # Splitseconds, maybe?
+  declare createdate="$year-$month-$day-$hour-$minute-$second" # Splitseconds, maybe?
+
+  #echo "Create Date: $createdate"
+
+  if [[ $createdate == '0000-00-00-00-00-00' ]]
+  then
+    echo "$file => $newfile" >> ./blank.log
+    continue
+  fi
+
   declare newdir="${CAMERA_DIR:-$HOME/Camera}/$year-$month"
   declare newfile="$newdir/$createdate.$extension"
+
+  if [[ ! -d "$newdir" ]]
+  then if mkdir -p "$newdir"
+       then echo "Created Directory: $newdir"
+       else echo "Error creating directory: $newdir"
+	    continue
+       fi
+  fi
 
   if [[ "$file" == "$newfile" ]]
   then
     echo "$file same"
+    echo "$file ==> $newfile" >> ./same.log
     continue
   fi
 
-  echo -e "$cmd\t$file\t$newfile"
-
-  mkdir -p "$newdir"
+  if [[ -a "$newfile" ]] 
+  then
+    echo "$newfile already exists"
+    echo "$file ==> $newfile" >> ./blocked.log
+    continue
+  fi
 
   declare cmdstring="$cmd '$file' '$newfile'"
 
-  eval "$cmdstring"
+  if eval "$cmdstring"
+  then echo "$file copied"
+       echo "$file ==> $newfile" >> ./copied.log
+  else echo "$file error" 
+       echo "$file ==> $newfile" >> ./cmderror.log
+  fi
 
 done < <(find "$PWD" \
            -iname '*.jpg' -or \

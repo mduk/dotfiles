@@ -1,6 +1,12 @@
 #!/bin/bash
 
 declare drive=/dev/dvd
+declare cols=$(tput cols)
+declare lines=$(tput lines)
+
+declare hr="$(for i in $(seq $cols)
+              do echo -n '#'
+              done)"
 
 clear
 
