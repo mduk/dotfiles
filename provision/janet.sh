@@ -35,4 +35,7 @@ install ffmpeg \
         alsa \
         alsa-utils
 
+sudo add-apt-repository ppa:transmissionbt/ppa
+sudo apt update
+
 sudo apt autoremove -y

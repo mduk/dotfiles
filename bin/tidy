@@ -1,0 +1,36 @@
+#!/bin/bash
+
+find . -type f -printf "%P\n" \
+  | while IFS="." read -a filename_parts
+    do
+      declare -i last=$((${#filename_parts[@]} - 1))
+      declare extension="${filename_parts[$last]}"
+      unset "filename_parts[$last]"
+
+      declare series episode title noise
+      for part in "${filename_parts[@]}"
+      do
+        case "$part" in
+          S??E??) episode="$part" ;;
+          DVDRip) ;;
+          BluRay|Blu-ray) ;;
+          DTS) ;;
+          1) ;;
+          x264*) ;;
+          1080?) ;;
+          DD5) ;;
+          *)
+            if [[ -z $episode ]]
+            then series+="$part "
+            else title+="$part "
+            fi
+            ;;
+        esac
+      done
+
+      if [[ -n $episode ]]
+      then echo "$series - $episode - ${title%% }.$extension"
+      fi
+
+      unset extension series episode title noise
+    done

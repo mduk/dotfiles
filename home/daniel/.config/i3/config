@@ -30,6 +30,7 @@ floating_modifier $alt
 bindsym XF86AudioMute         exec --no-startup-id pactl set-sink-mute 0 toggle
 bindsym XF86AudioLowerVolume  exec --no-startup-id pactl set-sink-volume 0 -5%
 bindsym XF86AudioRaiseVolume  exec --no-startup-id pactl set-sink-volume 0 +5%
+bindsym XF86AudioMicMute      exec --no-startup-id pactl set-source-mute 0 toggle
 bindsym XF86AudioPrev         exec mpc prev
 bindsym XF86AudioPause        exec mpc toggle
 bindsym XF86AudioPlay         exec mpc toggle
@@ -83,33 +84,17 @@ exec vol mute
 
 
 ################################################################################
-# Touchpad
+# HID Configuration
 ################################################################################
-exec_always xinput set-prop $touchpad "libinput Tapping Enabled" 1
-exec_always xinput set-prop $touchpad "libinput Natural Scrolling Enabled" 1
-exec_always xinput set-prop $touchpad "libinput Accel Speed" 2.000000
-exec_always xinput set-prop $touchpad "libinput Disable While Typing Enabled" 1
-exec_always xinput set-prop $touchpad "libinput Click Method Enabled" 0 1
-
-
-################################################################################
-# Caffeine
-################################################################################
-exec caffeine-indicator &
-
-
-################################################################################
-# Control instead of Caps Lock
-################################################################################
-exec_always setxkbmap -option ctrl:nocaps
-exec_always xcape
+exec_always touchpad configure
+exec_always keyboard configure
 
 
 ################################################################################
 # XScreensaver
 ################################################################################
 exec_always i3-screensaver start
-bindsym $alt+Shift+L exec i3-screensaver lock
+bindsym $alt+Shift+BackSpace exec i3-screensaver lock
 
 
 ################################################################################
@@ -143,6 +128,8 @@ bindsym $angryalt+Right        focus right
 # Floating Windows
 ################################################################################
 for_window [class="plasmashell"]      floating enable
+for_window [class="gnuplot_qt"]       floating enable
+for_window [class="Tek4010"]          floating enable
 for_window [class="QtQmlViewer"]      floating enable
 for_window [class="mpv"]              floating enable
 for_window [class="melt"]             floating enable
@@ -160,6 +147,7 @@ for_window [class="ktorrent"]         floating enable
 for_window [class="Yad"]              floating enable
 for_window [class="spectacle"]        floating enable
 for_window [class="Xmessage"]         floating enable
+for_window [class="java-lang-Thread"] floating enable
 
 
 ################################################################################
@@ -191,17 +179,29 @@ bindsym $alt+Shift+t            exec /home/daniel/.dotfiles/bin/touchpad toggle
 ################################################################################
 # Arrow Keys
 ################################################################################
-bindsym $alt+Left               focus left
-bindsym $alt+Down               focus down
-bindsym $alt+Up                 focus up
-bindsym $alt+Right              focus right
-bindsym $alt+Shift+Left         move left
-bindsym $alt+Shift+Down         move down
-bindsym $alt+Shift+Up           move up
-bindsym $alt+Shift+Right        move right
+#bindsym $alt+Left               focus left
+#bindsym $alt+Down               focus down
+#bindsym $alt+Up                 focus up
+#bindsym $alt+Right              focus right
+#bindsym $alt+Shift+Left         move left
+#bindsym $alt+Shift+Down         move down
+#bindsym $alt+Shift+Up           move up
+#bindsym $alt+Shift+Right        move right
 
-bindsym $alt+$win+Left          move workspace to output $outputInternal
-bindsym $alt+$win+Right         move workspace to output $outputHdmi
+bindsym $alt+H                  focus left
+bindsym $alt+J                  focus down
+bindsym $alt+K                  focus up
+bindsym $alt+L                  focus right
+bindsym $alt+Shift+H            move left
+bindsym $alt+Shift+J            move down
+bindsym $alt+Shift+K            move up
+bindsym $alt+Shift+L            move right
+
+#bindsym $alt+$win+Left          move workspace to output $outputInternal
+#bindsym $alt+$win+Right         move workspace to output $outputHdmi
+
+bindsym $alt+$win+H             move workspace to output $outputInternal
+bindsym $alt+$win+L             move workspace to output $outputHdmi
 
 
 ################################################################################
@@ -209,14 +209,8 @@ bindsym $alt+$win+Right         move workspace to output $outputHdmi
 ################################################################################
 
 
-bindsym $alt+bracketleft        focus left
-bindsym $alt+bracketright       focus right
-
-bindsym $alt+Shift+bracketleft  move left
-bindsym $alt+Shift+bracketright move right
-
 bindsym $alt+p                  focus parent
-bindsym $alt+l                  focus child
+#bindsym $alt+l                  focus child
 
 
 ################################################################################
@@ -229,10 +223,10 @@ bindsym $alt+Prior             floating toggle
 ################################################################################
 # Container Split
 ################################################################################
-bindsym $alt+h                  split h
-bindsym $alt+v                  split v
-bindsym $alt+Shift+H            split h; exec $terminal
-bindsym $alt+Shift+V            split v; exec $terminal
+bindsym $win+h                  split h
+bindsym $win+v                  split v
+bindsym $win+Shift+H            split h; exec $terminal
+bindsym $win+Shift+V            split v; exec $terminal
 
 
 ################################################################################
@@ -319,11 +313,14 @@ mode "File Manager" {
   #bindsym space                 exec $filemanager             ; mode "default"
 
   bindsym C                     exec $filemanager ~/Camera     ; mode "default"
+  bindsym D                     exec $filemanager ~/Downloads  ; mode "default"
   bindsym H                     exec $filemanager ~            ; mode "default"
   bindsym P                     exec $filemanager ~/Pictures   ; mode "default"
   bindsym S                     exec $filemanager ~/Screencasts; mode "default"
   bindsym U                     exec $filemanager ~/Documents  ; mode "default"
   bindsym V                     exec $filemanager ~/Videos     ; mode "default"
+
+  bindsym space                 exec files                     ; mode "default"
 
   bindsym Return                exec $filemanager ~            ; mode "default"
   bindsym Escape                mode "default"
@@ -357,10 +354,15 @@ mode "Resize" {
 bindsym $alt+Shift+m            mode "Media"
 bindsym $alt+m                  mode "Media"
 mode "Media" {
-  bindsym Up                    exec vol up
-  bindsym Down                  exec vol down
-  bindsym Left                  exec mpc prev
-  bindsym Right                 exec mpc next
+#  bindsym Up                    exec vol up
+#  bindsym Down                  exec vol down
+#  bindsym Left                  exec mpc prev
+#  bindsym Right                 exec mpc next
+
+  bindsym H                     exec mpc prev
+  bindsym J                     exec vol down
+  bindsym K                     exec vol up
+  bindsym L                     exec mpc next
 
   bindsym space                 exec mpc toggle; mode "default"
 
@@ -407,6 +409,9 @@ mode "WWW" {
 
   bindsym P                   exec $www paypal                                  ; mode "default"
   bindsym Shift+P     $tabbed exec $www paypal                                  ; mode "default"
+
+  bindsym S                   exec $www youtubestudio                           ; mode "default"
+  bindsym Shift+S     $tabbed exec $www youtubestudio                           ; mode "default"
 
   bindsym Y                   exec $www youtube                                 ; mode "default"
   bindsym Shift+Y     $tabbed exec $www youtube                                 ; mode "default"

@@ -1,3 +1,5 @@
+export ESP_DIR="$HOME/.arduino15/packages/esp8266/hardware/esp8266/2.5.2/"
+
 # Declare the location of my general Development directory
 export DEV_DIR="$HOME/Development"
 
@@ -45,8 +47,12 @@ esac
 export DMENU_FONT='fixed:pixelsize=32'
 export GTK_THEME='Adwaita-dark'
 export QT_STYLE_OVERRIDE='Adwaita-dark'
-export QT_AUTO_SCREEN_SCALE_FACTOR='true'
-export QT_SCALE_FACTOR='1.5'
 export TERM="xterm-256color"
+
+if [[ $(hostname) == eddie ]]
+then
+  export QT_AUTO_SCREEN_SCALE_FACTOR='true'
+  export QT_SCALE_FACTOR='1.5'
+fi
 
 shopt -s autocd

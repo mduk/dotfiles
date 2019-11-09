@@ -1,5 +1,0 @@
-function mini() {
-  unset PROMPT_COMMAND
-  export PS1="\$ "
-  clear
-}

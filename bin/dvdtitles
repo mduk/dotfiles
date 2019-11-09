@@ -1,25 +1,54 @@
 #!/bin/bash
 
-dvdpath="$1"
+preset="H.265 MKV 1080p30"
+margin=2
+episodelen=$1
+shift
 
-_OLDIFS="$IFS"
-IFS=$'\n'
-set -f
+title=""
+duration=""
 
-dvdscan=$(HandBrakeCLI \
-            -i "$dvdpath" \
-            -t 0 \
-            2>&1 | sed -rne '/^[[:space:]]*\+/p')
-
-thistitle=""
-thisduration=""
-
-for line in $dvdscan;
+for dvdpath
 do
-  [[ $line =~ \+\ title ]] && echo -n $line | sed 's/\+ title \(.*\):/\1/' \
-                           && echo -n " "
-  [[ $line =~ \+\ duration ]] && echo $line | sed 's/.*\(..:..:..\).*/\1/'
-done
+  while read line
+  do
+    if [[ $line =~ \+\ title ]]
+    then
+      title="$(echo -n $line | sed 's/\+ title \(.*\):/\1/')"
+    fi
 
-IFS=$_OLDIFS
-unset -f
+    if [[ $line =~ \+\ duration ]]
+    then
+      read hours minutes seconds <<<"$(echo $line | sed 's/.*\(..\):\(..\):\(..\).*/\1 \2 \3/;')"
+      duration="${hours}:${minutes}:${seconds}"
+
+      declare totalseconds=$(bc -q <<<"((($hours * 60) + $minutes ) * 60 ) + $seconds")
+
+      if [[ $totalseconds -lt $(((episodelen - margin) * 60)) ]] || [[ $totalseconds -gt $(((episodelen + margin) * 60)) ]]
+      then
+        echo "Skipping $dvdpath title $title. Duration: $duration" >&2
+        continue
+      fi
+
+      echo -e "${totalseconds}\t${duration}\t${title}\t${dvdpath}"
+
+      declare path="$HOME/DVDs/$dvdpath"
+      declare incomplete_path="$path/$title.incomplete.mkv"
+      declare complete_path="$path/$title.mkv"
+      mkdir -p "$path"
+
+      HandBrakeCLI \
+        --input "$dvdpath" \
+        --title $title \
+        --preset "$preset" \
+        --format av_mkv \
+        --output "$incomplete_path"
+
+      mv "$incomplete_path" "$complete_path"
+
+    fi
+  done <<<"$(HandBrakeCLI \
+              -i "$dvdpath" \
+              -t 0 \
+              2>&1 | sed -rne '/^[[:space:]]*\+/p')"
+done

@@ -42,6 +42,7 @@ then
   make -j$(nproc)
 fi
 
+install pulseaudio-equalizer
 install pavucontrol
 install pavumeter
 install pamix
@@ -64,8 +65,11 @@ install \
 
 install \
   scrot \
-  xcape \
   xsel
+
+install \
+  xcape \
+  numlockx
 
 install \
   konsole \

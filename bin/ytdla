@@ -22,3 +22,5 @@ if [[ $? -eq 0 ]];
 fi
 
 popd
+
+mpc update

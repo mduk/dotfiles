@@ -13,7 +13,6 @@ for m in $monitors
 do
   MONITOR=$m $HOME/Development/jaagr/polybar/build/bin/polybar \
     --reload \
-    --log=info \
     --config=${XDG_CONFIG_HOME:-$HOME/.config}/polybar/config \
     example \
     2>&1 | logger &

@@ -1,0 +1,27 @@
+#!/bin/bash
+
+vpnstatus() {
+    read status <<<"$(nordvpn status | sed -n '/^Status: \(.*\)/s//\1/p')"
+    echo "${status,,}"
+}
+
+case "$1" in
+  status)
+    case "$(vpnstatus)" in
+      connected) echo "VPN On" ;;
+      disconnected) echo "VPN Off" ;;
+    esac
+    ;;
+
+  toggle)
+    case "$(vpnstatus)" in
+      connected) nordvpn disconnect ;;
+      disconnected) nordvpn connect ;;
+    esac
+    ;;
+
+  *)
+    echo "Usage: $(basename $0) status"
+    echo "       $(basename $0) toggle"
+    ;;
+esac

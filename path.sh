@@ -1,11 +1,23 @@
 path_prepend() {
-  [[ ! -d $1 ]] && return
-  export PATH="$1:$PATH"
+  if [[ $# == 0 ]]
+  then declare path="$PWD"
+  else declare path="$1"
+  fi
+
+  [[ ! -d $path ]] && return
+
+  export PATH="$path:$PATH"
 }
 
 path_append() {
-  [[ ! -d $1 ]] && return
-  export PATH="$PATH:$1"
+  if [[ $# == 0 ]]
+  then declare path="$PWD"
+  else declare path="$1"
+  fi
+
+  [[ ! -d $path ]] && return
+
+  export PATH="$PATH:$path"
 }
 
 latest_jetbrains_bin() {
@@ -18,9 +30,6 @@ path_prepend "/opt/arduino-1.8.5/"
 # Dot Bin
 path_prepend "$DOT_DIR/bin"
 
-# Home bin overrides everything
-path_prepend "$HOME/bin"
-
 # Python Pip
 path_append "$HOME/.local/bin"
 
@@ -31,9 +40,9 @@ path_append "$HOME/.config/composer/vendor/bin"
 if [[ -d /opt/JetBrains ]]
 then
   path_append $(latest_jetbrains_bin DataGrip)
-  path_append $(latest_jetbrains_bin PhpStorm)
-  path_append $(latest_jetbrains_bin RubyMine)
-  path_append $(latest_jetbrains_bin WebStorm)
   path_append $(latest_jetbrains_bin pycharm)
-  path_append $(latest_jetbrains_bin idea-IU)
+  path_append $(latest_jetbrains_bin GoLand)
+  path_append $(latest_jetbrains_bin clion)
 fi
+
+path_append "$HOME/.gloo/bin"
