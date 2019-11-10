@@ -1,0 +1,50 @@
+#!/bin/bash
+
+set -eu
+
+find "$PWD" -not -path '*/.*' -iname '*.jpg' -or -iname '*.mp4' \
+  | while read result
+do
+  echo $result
+  declare path="$(realpath "$result")"
+  declare file="$(basename "$path")"
+  declare extension="${file##*.}"
+
+  read cdate ctime ctz <<<"$(exiftool -j "$path" | jq -r '.[] | .SubSecCreateDate // .CreateDate' | sed 's/+/ /')"
+  read cyear cmonth cday <<<"$(sed 's/:/ /g' <<<"$cdate")"
+
+  if [[ $cyear == '0000' ]]
+  then
+    echo "$path $cdate-$ctime+$ctz" >> error.log
+    continue
+  fi
+
+  declare dest="$HOME/Camera/$cyear/$cmonth/$cday/$cyear-$cmonth-$cday-$ctime"
+  [[ -n $ctz ]] && dest+="+$ctz"
+  dest+=".$extension"
+
+  if [[ $path == $dest ]]
+  then
+    echo "same file"
+    continue
+  fi
+
+  declare destdir="$(dirname "$dest")"
+  mkdir -p "$destdir"
+
+  if [[ -f $dest ]]
+  then
+    declare src="$(sha1sum -b "$path" | awk '{print $1}')"
+    declare dst="$(sha1sum -b "$dest" | awk '{print $1}')"
+
+    if [[ $src == $dst ]]
+    then rm -f "$path"
+    else echo "$path $dest" >> error.log
+    fi
+    continue
+  fi
+
+  mv "$path" "$dest"
+  echo "$dest"
+
+done
