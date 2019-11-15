@@ -162,6 +162,7 @@ for_window [class="kspashqml"]        kill
 ################################################################################
 no_focus [class="plasmashell"]
 mouse_warping none
+focus_follows_mouse no
 
 bindsym $alt+Return             exec $terminal
 bindsym $alt+Shift+Return       exec $browser
