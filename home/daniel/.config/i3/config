@@ -335,10 +335,10 @@ mode "File Manager" {
 set $resizeStep       2
 bindsym $alt+r                  mode "Resize"
 mode "Resize" {
-  bindsym Up                    resize shrink height $resizeStep px or $resizeStep ppt
-  bindsym Down                  resize grow   height $resizeStep px or $resizeStep ppt
-  bindsym Left                  resize shrink width  $resizeStep px or $resizeStep ppt
-  bindsym Right                 resize grow   width  $resizeStep px or $resizeStep ppt
+  bindsym H                     resize shrink width  $resizeStep px or $resizeStep ppt
+  bindsym J                     resize grow   height $resizeStep px or $resizeStep ppt
+  bindsym K                     resize shrink height $resizeStep px or $resizeStep ppt
+  bindsym L                     resize grow   width  $resizeStep px or $resizeStep ppt
 
   bindsym G                     resize grow height $resizeStep px or $resizeStep ppt resize grow width $resizeStep px or $resizeStep ppt
   bindsym S                     resize shrink height $resizeStep px or $resizeStep ppt resize shrink width $resizeStep px or $resizeStep ppt
