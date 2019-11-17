@@ -118,10 +118,10 @@ bindsym $alt+Escape exec umsd
 ################################################################################
 bindsym $angryalt+Return       exec $terminal
 bindsym $angryalt+Shift+Return exec $browser
-bindsym $angryalt+Left         focus left
-bindsym $angryalt+Down         focus down
-bindsym $angryalt+Up           focus up
-bindsym $angryalt+Right        focus right
+bindsym $angryalt+H            focus left
+bindsym $angryalt+J            focus down
+bindsym $angryalt+K            focus up
+bindsym $angryalt+L            focus right
 
 
 ################################################################################
