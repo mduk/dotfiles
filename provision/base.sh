@@ -54,4 +54,5 @@ install vim \
 
 header Shell Scripting Utilities
 install dos2unix \
-        dialog
+        dialog \
+	httpie

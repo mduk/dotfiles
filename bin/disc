@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [[ ! -d /dev/disk/by-label ]]
+then
+  echo "No /dev/disk/by-label directory. Check Discs?"
+  exit
+fi
+
 case $1 in
 
   index) case $2 in
@@ -36,7 +42,7 @@ case $1 in
         echo "Mounting ${volume} on ${mountpoint}"
 
         if [[ ! -d $mountpoint ]]
-        then mkdir "$mountpoint"
+        then sudo mkdir "$mountpoint"
         fi
 
         sudo mount $volume $mountpoint
