@@ -2,10 +2,14 @@
 
 set -eu
 
+stderr() {
+  echo -ne "$@" >&2
+}
+
 find "$PWD" -not -path '*/.*' -iname '*.jpg' -or -iname '*.mp4' \
   | while read result
 do
-  echo $result
+  stderr "\n$result ... "
   declare path="$(realpath "$result")"
   declare file="$(basename "$path")"
   declare extension="${file##*.}"
@@ -15,17 +19,18 @@ do
 
   if [[ $cyear == '0000' ]]
   then
+    stderr "no timestamp!"
     echo "$path $cdate-$ctime+$ctz" >> error.log
     continue
   fi
 
-  declare dest="$HOME/Camera/$cyear/$cmonth/$cday/$cyear-$cmonth-$cday-$ctime"
+  declare dest="${CAMERA_DIR:-$HOME/Camera}/$cyear/$cmonth/$cday/$cyear-$cmonth-$cday-$ctime"
   [[ -n $ctz ]] && dest+="+$ctz"
   dest+=".$extension"
 
   if [[ $path == $dest ]]
   then
-    echo "same file"
+    stderr "already in place\n"
     continue
   fi
 
@@ -34,17 +39,25 @@ do
 
   if [[ -f $dest ]]
   then
+    stderr "blocked\n"
     declare src="$(sha1sum -b "$path" | awk '{print $1}')"
     declare dst="$(sha1sum -b "$dest" | awk '{print $1}')"
+    stderr "\t     Source: $src\n"
+    stderr "\tDestination: $src\n"
 
-    if [[ $src == $dst ]]
-    then rm -f "$path"
-    else echo "$path $dest" >> error.log
+    if [[ $src != $dst ]]
+    then
+      stderr "\t$dest different file\n"
+      echo "$path $dest" >> error.log
+      continue
     fi
+
+    stderr "\t$dest same file\n"
+
     continue
   fi
 
-  mv "$path" "$dest"
-  echo "$dest"
+  cp "$path" "$dest"
+  stderr "copied\n"
 
 done
