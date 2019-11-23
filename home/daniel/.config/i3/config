@@ -118,10 +118,10 @@ bindsym $alt+Escape exec umsd
 ################################################################################
 bindsym $angryalt+Return       exec $terminal
 bindsym $angryalt+Shift+Return exec $browser
-bindsym $angryalt+Left         focus left
-bindsym $angryalt+Down         focus down
-bindsym $angryalt+Up           focus up
-bindsym $angryalt+Right        focus right
+bindsym $angryalt+H            focus left
+bindsym $angryalt+J            focus down
+bindsym $angryalt+K            focus up
+bindsym $angryalt+L            focus right
 
 
 ################################################################################
@@ -162,6 +162,7 @@ for_window [class="kspashqml"]        kill
 ################################################################################
 no_focus [class="plasmashell"]
 mouse_warping none
+focus_follows_mouse no
 
 bindsym $alt+Return             exec $terminal
 bindsym $alt+Shift+Return       exec $browser
@@ -335,10 +336,10 @@ mode "File Manager" {
 set $resizeStep       2
 bindsym $alt+r                  mode "Resize"
 mode "Resize" {
-  bindsym Up                    resize shrink height $resizeStep px or $resizeStep ppt
-  bindsym Down                  resize grow   height $resizeStep px or $resizeStep ppt
-  bindsym Left                  resize shrink width  $resizeStep px or $resizeStep ppt
-  bindsym Right                 resize grow   width  $resizeStep px or $resizeStep ppt
+  bindsym H                     resize shrink width  $resizeStep px or $resizeStep ppt
+  bindsym J                     resize grow   height $resizeStep px or $resizeStep ppt
+  bindsym K                     resize shrink height $resizeStep px or $resizeStep ppt
+  bindsym L                     resize grow   width  $resizeStep px or $resizeStep ppt
 
   bindsym G                     resize grow height $resizeStep px or $resizeStep ppt resize grow width $resizeStep px or $resizeStep ppt
   bindsym S                     resize shrink height $resizeStep px or $resizeStep ppt resize shrink width $resizeStep px or $resizeStep ppt

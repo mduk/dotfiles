@@ -1,45 +1,30 @@
 MY_USERNAME="daniel"
 
-declare PROMPT_GIT=true
-declare PROMPT_PATH=true
-declare PROMPT_HOST=true
-declare PROMPT_VERSIONS=false
-declare PROMPT_CLOCK=true
 declare PROMPT_BAR=true
 declare PROMPT_SPACE=2
 declare PROMPT_HOMETIME="17:30"
 
-declare PROMPT_GREEN="\[\033[92m\]"
-declare PROMPT_YELLOW="\[\033[93m\]"
-declare PROMPT_RED="\[\033[91m\]"
-declare PROMPT_BOLD="\[\033[1m\]"
-declare PROMPT_RESET="\[\033[0m\]"
+declare PROMPT_GREEN="\033[92m"
+declare PROMPT_YELLOW="\033[93m"
+declare PROMPT_RED="\033[91m"
+declare PROMPT_BOLD="\033[1m"
+declare PROMPT_RESET="\033[0m"
+
+declare -ag PROMPT_BLOCKS=(
+  'user host screen'
+  'path git'
+  'clock prompt'
+)
 
 mini() {
   PROMPT_SPACE=0
   PROMPT_BAR=false
-  PROMPT_VERSIONS=false
-  PROMPT_CLOCK=false
-  PROMPT_GIT=false
 }
 
 unprompt() {
   unset PROMPT_COMMAND
   unset -f prompt_command
   export PS1="[\u@\h]\$ "
-}
-
-terminal_width() {
-  local cols=$(tput cols)
-
-  if [[ $cols -eq 210 ]]
-  then echo "1"
-  elif [[ $cols -lt 210 ]] && [[ $cols -ge 103 ]]
-  then echo "2"
-  elif [[ $cols -lt 103 ]] && [[ $cols -ge 68 ]]
-  then echo "3"
-  else echo "4"
-  fi
 }
 
 exit_bar() {
@@ -53,7 +38,7 @@ block_wifi() {
 block_php() {
   if ! which php &>/dev/null
   then
-    echo "$PROMPT_RESET$PROMPT_RED[PHP: X]"
+    echo "[PHP: X]"
     return
   fi
 
@@ -65,19 +50,19 @@ block_php() {
 block_ruby() {
   if ! which ruby &>/dev/null
   then
-    echo "$PROMPT_RESET$PROMPT_RED[Ruby: X]"
+    echo "[Ruby: X]"
     return
   fi
 
   if grep -i "ruby" &>/dev/null <<<"$PROMPT_VERSIONS"
-  then echo "$PROMPT_RESET[Ruby: $(ruby -v | awk '{print $2}')]"
+  then echo "[Ruby: $(ruby -v | awk '{print $2}')]"
   fi
 }
 
 block_python() {
   if ! which python &>/dev/null
   then
-    echo "$PROMPT_RESET$PROMPT_RED[Python: X]"
+    echo "[Python: X]"
     return
   fi
 
@@ -90,7 +75,6 @@ block_python() {
 }
 
 block_clock() {
-  echo -ne "$PROMPT_RESET"
   if [[ $(date --date="$PROMPT_HOMETIME" +%s) -le $(date +%s) ]]
   then echo -e "$PROMPT_RED[$(date +%H:%M:%S)]"
   else echo -e "$PROMPT_BOLD[$(date +%H:%M:%S)]"
@@ -98,18 +82,20 @@ block_clock() {
 }
 
 block_path() {
-  [[ $PROMPT_PATH == true ]] && echo "[\w]"
+  if [[ $PWD != $HOME ]]
+  then echo "[${PWD/$HOME/\~}]"
+  fi
 }
 
 block_screen() {
   if [[ -n $STY ]]
-  then echo "$PROMPT_YELLOW[$STY]"
+  then echo "[$STY]"
   fi
 }
 
 block_host() {
   if [[ ! -z "$SSH_TTY" ]]
-  then echo "$PROMPT_YELLOW[$USER@$(hostname)]"
+  then echo "[$USER@$(hostname)]"
   fi
 }
 
@@ -117,24 +103,38 @@ block_user() {
   local user=$(whoami)
 
   if [[ "$user" == "root" ]]
-  then echo "$PROMPT_BOLD$PROMPT_RED[ROOT]$PROMPT_RESET"
+  then echo "$PROMPT_RED[ROOT]"
   elif [[ "$user" != "$MY_USERNAME" ]]
-  then echo "[\u]"
+  then echo "${PROMPT_YELLOW}[${USER}]"
   fi
 }
 
 block_git() {
-  if [[ $PROMPT_GIT == true ]]
-  then
-    local git_branch=$(
-        git branch --no-color 2> /dev/null | sed \
-            -e '/^[^*]/d' \
-            -e 's/* \(.*\)/[\1]/'
-    )
+  local git_branch=$(
+      git branch --no-color 2> /dev/null \
+        | sed -n '/^* /s///p'
+  )
 
-    echo "\[\033[0;32m\]$git_branch\[\033[0m\]"
+  if [[ -n $git_branch ]]
+  then echo "[$git_branch]"
   fi
 }
+
+block_prompt() {
+  echo '$ '
+}
+
+block_size() {
+  echo "[$(tput cols)x$(tput lines)]"
+}
+
+block_dirprompt() {
+  # Insert Custom Directory Prompt
+  if [[ -f "$(pwd)/.ps1" ]]
+  then PS1="${PS1}$(source "$(pwd)/.ps1")\n"
+  fi
+}
+
 
 
 ################################################################################
@@ -142,62 +142,50 @@ block_git() {
 ################################################################################
 prompt_command() {
   CMD_EXIT=$?
+
   local term_lines=$(tput lines)
   local term_cols=$(tput cols)
 
-  PS1=""
+  declare -a promptlines=()
 
-  # Exit Bar
+  declare promptbar=''
   if [[ $PROMPT_BAR == true ]]
-  then PS1="${PS1}$(exit_bar)"
+  then promptbar="$(exit_bar)"
   fi
 
-  # Command Space
+  declare promptspace=''
   for i in $(seq ${PROMPT_SPACE:-$DEFAULT_PROMPT_SPACE})
-  do PS1="$PS1\n"
+  do promptspace+=$'\n'
   done
 
-  # Environment Line
-  PS1="${PS1}$(block_screen)"
-  PS1="${PS1}$(block_user)"
-  PS1="${PS1}$(block_host)"
+  for line in "${PROMPT_BLOCKS[@]}"
+  do
+    declare promptline=""
+    for block in $line
+    do
+      declare rendered="$(eval "block_$block")"
 
-  # PATH
-  if [[ $PROMPT_PATH == true ]] \
-  && [[ "$(pwd)" != "$HOME" ]]
-  then PS1="${PS1}$(block_path)"
-  fi
+      if [[ -z $rendered ]]
+      then continue
+      fi
 
-  # Git
-  if [[ $PROMPT_GIT == true ]] \
-  && git branch &>/dev/null
-  then
-    PS1="${PS1}$(block_git)"
-  fi
+      declare joined="${promptline}${rendered}"
 
+      if [[ -n $promptline ]] && [[ ${#joined} -gt $(tput cols) ]]
+      then promptline+="${PROMPT_RESET}\n ↪ \[$rendered\]"
+      else promptline+="${PROMPT_RESET}\[${rendered}\]"
+      fi
+    done
 
-  # Versions Line
-  if [[ $PROMPT_VERSIONS != false ]]
-  then
-    PS1="$PS1\n"
-    PS1="${PS1}$(block_php)"
-    PS1="${PS1}$(block_ruby)"
-    PS1="${PS1}$(block_python)"
-  fi
+    if [[ -n $promptline ]]
+    then promptlines+=("$promptline")
+    fi
+  done
 
-  # Prompt Line
-  if [[ $PROMPT_CLOCK == true ]]
-  then
-    PS1="$PS1\n"
-    PS1="${PS1}$(block_clock)"
-  fi
-
-  # Insert Custom Directory Prompt
-  if [[ -f "$(pwd)/.ps1" ]]
-  then PS1="${PS1}$(source "$(pwd)/.ps1")\n"
-  fi
-
-  PS1="${PS1}$PROMPT_BOLD\$$PROMPT_RESET "
+  PS1="${promptbar}${promptspace}\n$(
+    local IFS=$'\n'
+    echo "${promptlines[*]}"
+  )$PROMPT_RESET"
 
   export PS1
 }

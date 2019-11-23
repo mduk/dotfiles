@@ -6,7 +6,16 @@ then
   exit 1
 fi
 
-if which "$1"
-  then e "$(which $1)"
-  else e "$DOT_DIR/bin/$1"
+declare path="$(which "$1")"
+if [[ -n "$path" ]]
+  then e "$path"
+  else
+    declare file="$DOT_DIR/bin/$1"
+    (
+      echo "#!/bin/bash"
+      echo
+      echo "set -eu"
+    ) > "$file"
+    chmod +x "$file"
+    e "$file"
 fi
