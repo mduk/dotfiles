@@ -1,5 +1,3 @@
-#!/bin/bash
-
 set -e
 
 GITHUB_USERNAME="mduk"
@@ -37,8 +35,10 @@ echo "Cloning: ${remote}"
 echo "   Into: ${local_path}"
 echo
 
-mkdir -pv ${local_path}
-git clone --recursive ${remote} ${local_path}
+mkdir -pv "$local_path"
+git clone --recursive "${remote}" "${local_path}"
 
 echo
 echo "Complete"
+
+cd "$local_path"
