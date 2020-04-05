@@ -135,6 +135,9 @@ let g:vim_search_pulse_duration = 50
 
 let g:rainbow_active = 1
 
+let g:syntastic_python_python_exec = 'python3'
+let g:syntastic_python_checkers = ['python']
+
 "###############################################################################
 " File Extensions and Types
 "###############################################################################
