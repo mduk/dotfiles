@@ -1,44 +1,46 @@
-set -e
+clone() {
+  set -e
 
-GITHUB_USERNAME="mduk"
+  GITHUB_USERNAME="mduk"
 
-if [[ -z ${DEV_DIR+x} ]]; then
-    DEV_DIR="${HOME}/Development"
-fi
+  if [[ -z ${DEV_DIR+x} ]]; then
+      DEV_DIR="${HOME}/Development"
+  fi
 
 # Stash and BitBucket like to give you the entire command
 #   Strip off the 'git clone' portion if it's present
-remote=$(echo "$*" | sed 's/git clone//')
+  remote=$(echo "$*" | sed 's/git clone//')
 
-if [[ $remote != *"@"* ]] && [[ $remote != "http"* ]]; then
-    vendor=$(echo $remote | cut -d/ -f1)
-    if [[ $vendor == $GITHUB_USERNAME ]]
-    then
-        remote="git@github.com:${remote}.git"
-        local_path=$(echo $remote | cut -d: -f2 | cut -d. -f1)
-    else
-        remote="https://github.com/${remote}.git"
-        local_path=$(echo $remote | cut -d/ -f4- | cut -d. -f1)
-    fi
-else
-    if [[ $remote == *"@"* ]]; then
-        local_path=$(echo $remote | cut -d: -f2 | cut -d. -f1)
-    else
-        local_path=$(echo $remote | cut -d/ -f4- | cut -d. -f1)
-    fi
-fi
+  if [[ $remote != *"@"* ]] && [[ $remote != "http"* ]]; then
+      vendor=$(echo $remote | cut -d/ -f1)
+      if [[ $vendor == $GITHUB_USERNAME ]]
+      then
+          remote="git@github.com:${remote}.git"
+          local_path=$(echo $remote | cut -d: -f2 | cut -d. -f1)
+      else
+          remote="https://github.com/${remote}.git"
+          local_path=$(echo $remote | cut -d/ -f4- | cut -d. -f1)
+      fi
+  else
+      if [[ $remote == *"@"* ]]; then
+          local_path=$(echo $remote | cut -d: -f2 | cut -d. -f1)
+      else
+          local_path=$(echo $remote | cut -d/ -f4- | cut -d. -f1)
+      fi
+  fi
 
 # Build a local repo path
-local_path="${DEV_DIR}/${local_path}"
+  local_path="${DEV_DIR}/${local_path}"
 
-echo "Cloning: ${remote}"
-echo "   Into: ${local_path}"
-echo
+  echo "Cloning: ${remote}"
+  echo "   Into: ${local_path}"
+  echo
 
-mkdir -pv "$local_path"
-git clone --recursive "${remote}" "${local_path}"
+  mkdir -pv "$local_path"
+  git clone --recursive "${remote}" "${local_path}"
 
-echo
-echo "Complete"
+  echo
+  echo "Complete"
 
-cd "$local_path"
+  cd "$local_path"
+}
