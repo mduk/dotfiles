@@ -60,3 +60,5 @@ then
 fi
 
 shopt -s autocd
+
+export GR="1.61803398875"
