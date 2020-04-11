@@ -12,7 +12,7 @@ ssh="ssh -XAt $ssh_key $ssh_dest"
 sync() {
   while [[ $# -gt 0 ]]
   do
-    rsync -avhzK -e "ssh ${ssh_key}" "$HOME/$1/" "$ssh_dest:/mnt/PAIR/$1"
+    rsync -avhzK -e "ssh ${ssh_key}" "$HOME/$1/" "$ssh_dest:/mnt/MEDIA/$1"
     shift
   done
 }
@@ -20,7 +20,7 @@ sync() {
 case "$1" in
 
   sync)
-    sync ${2:-Documents Music Pictures Camera}
+    sync "${2}"
     ;;
 
   push)
