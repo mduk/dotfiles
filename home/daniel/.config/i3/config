@@ -86,8 +86,9 @@ exec vol mute
 ################################################################################
 # HID Configuration
 ################################################################################
-exec_always touchpad configure
 exec_always keyboard configure
+exec_always trackpad configure
+exec_always touchscreen configure
 
 
 ################################################################################
