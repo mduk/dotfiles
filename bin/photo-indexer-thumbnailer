@@ -1,0 +1,62 @@
+#!/bin/bash
+
+set -eu
+
+declare -r  couchdb="${COUCHDB:-http://localhost:5984/camera}"
+declare -r  ts="${THUMBNAIL_SIZE:-256}"
+declare -r  gifduration='00:10'
+
+declare -r  path="$(realpath "$1")"
+declare -r  directory="$(dirname "$path")"
+declare -r  file="$(basename "$path")"
+declare -r  filename="${file%.*}"
+declare -r  extension="${file##*.}"
+declare -r  thumbfile="${directory}/.${filename}.thumb.gif"
+declare -r  infofile="${directory}/.${filename}.info.json"
+declare -rl mimetype="$(exiftool "$path" -j | jq -r '.[].MIMEType')"
+
+exiftool -J "$path" | jq '.[]' > "$infofile"
+
+declare photo_id=$(http POST $couchdb/_find 'Content-Type: application/json' <<EOF | jq -r '.docs[0]._id'
+{
+  "selector": {
+    "SourceFile": {
+      "\$regex": ".*/$file"
+    }
+  },
+  "fields": ["_id"],
+  "limit": 1
+}
+EOF
+)
+
+if [[ $photo_id == null ]]
+then
+  photo_id=$(
+    HTTP POST $couchdb "Content-Type:application/json" < "$infofile" \
+      | jq -r '.id'
+  )
+fi
+
+if [[ $photo_id == null ]]
+then
+  echo "photo_id is still null: $photo_id" >&2
+  HTTP POST $couchdb "Content-Type:application/json" < "$infofile"
+  exit
+fi
+
+if [[ ! -f $thumbfile ]]
+then
+  case "$mimetype" in
+    image/*) ( convert "$path" -scale "${ts}x${ts}" "$thumbfile" ) &>/dev/null ;;
+    video/*) ( ffmpeg -i "file:$path" -to "$gifduration" \
+                 -filter_complex "scale=w=${ts}:h=${ts}:force_original_aspect_ratio=decrease" \
+                 "$thumbfile" -hide_banner ) &>/dev/null ;;
+  esac
+fi
+
+http $couchdb/$photo_id \
+  | jq --arg thumbfile "$thumbfile" '. + {ThumbFile: $thumbfile}' \
+  | http PUT $couchdb/$photo_id
+
+echo "$thumbfile"
