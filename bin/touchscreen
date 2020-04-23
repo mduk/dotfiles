@@ -41,6 +41,10 @@ notify() {
     "$(basename $0) $1"
 }
 
+input-enabled() {
+  xinput --list-props $xinput_id | grep "Device Enabled.*:.*1$" >/dev/null
+}
+
 cmd-configure() {
   echo "Configuring $cmd ..."
   for k in "${!xinput_config[@]}"
@@ -77,6 +81,13 @@ cmd-off() {
   done
   set +x
   notify "off"
+}
+
+cmd-status() {
+  if input-enabled
+  then echo "${cmd^} On"
+  else echo "${cmd^} Off"
+  fi
 }
 
 cmd-toggle() {
