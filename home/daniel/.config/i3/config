@@ -406,9 +406,6 @@ mode "WWW" {
   bindsym N                   exec $www nationalrail                            ; mode "default"
   bindsym Shift+N     $tabbed exec $www nationalrail                            ; mode "default"
 
-  bindsym O                   exec $www okc                                     ; mode "default"
-  bindsym Shift+O     $tabbed exec $www okc                                     ; mode "default"
-
   bindsym P                   exec $www paypal                                  ; mode "default"
   bindsym Shift+P     $tabbed exec $www paypal                                  ; mode "default"
 
