@@ -4,7 +4,7 @@ declare -r cmd=$(basename $0)
 
 declare -rA regex=(
   [touchscreen]='/Wacom/!d'
-  [trackpad]='/Touchpad/!d'
+  [trackpad]='/Touch[pP]ad/!d'
 )
 
 
@@ -35,6 +35,12 @@ declare -a xinput_id=($(
     -e "${regex[$cmd]}" \
     -e 's/.*id=\([0-9]*\).*/\1/'
   ))
+
+if [[ -z $xinput_id ]]
+then
+  echo "No ${cmd^}"
+  exit 0
+fi
 
 notify() {
   notify-send \
