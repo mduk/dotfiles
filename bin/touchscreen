@@ -5,6 +5,7 @@ declare -r cmd=$(basename $0)
 declare -rA regex=(
   [touchscreen]='/Wacom/!d'
   [trackpad]='/Touch[pP]ad/!d'
+  [trackpoint]='/TrackPoint/!d'
 )
 
 
