@@ -69,7 +69,7 @@ font-1 = fontawesome:pixelsize=14;1
 ;tray-position = right
 modules-left = i3
 modules-center =
-modules-right = trackpad touchscreen nordvpn xscreensaver xkeyboard mpd xbacklight pulseaudio wifi battery date
+modules-right = trackpoint trackpad touchscreen nordvpn xscreensaver xkeyboard mpd xbacklight pulseaudio wifi battery date
 
 ;wm-restack = i3
 
@@ -83,12 +83,20 @@ cursor-scroll = ns-resize
 
 
 
+[module/trackpoint]
+type = custom/script
+interval = 1
+exec = trackpoint status
+click-left = trackpoint toggle
+format-underline = ${colors.blue}
+
+
 [module/trackpad]
 type = custom/script
 interval = 1
 exec = trackpad status
 click-left = trackpad toggle
-format-underline = ${colors.yellow}
+format-underline = ${colors.blue}
 
 
 [module/touchscreen]
@@ -96,7 +104,7 @@ type = custom/script
 interval = 1
 exec = touchscreen status
 click-left = touchscreen toggle
-format-underline = ${colors.yellow}
+format-underline = ${colors.blue}
 
 
 
