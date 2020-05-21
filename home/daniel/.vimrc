@@ -67,7 +67,7 @@ let g:is_bash = 1
 " Indentation
 "###############################################################################
 set expandtab smarttab smartindent autoindent copyindent ts=2 sw=2
-autocmd BufRead,BufNewFile *.py      set expandtab   ts=4 sw=4 tw=79
+autocmd BufRead,BufNewFile *.py      set expandtab   ts=2 sw=2 tw=79
 autocmd BufRead,BufNewFile *.js      set expandtab   ts=2 sw=2
 autocmd BufRead,BufNewFile *.json    set expandtab   ts=2 sw=2
 autocmd BufRead,BufNewFile *.php     set expandtab   ts=4 sw=4
@@ -127,7 +127,6 @@ Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'peterhoeg/vim-qml'
 Plug 'vim-scripts/gnuplot-syntax-highlighting'
 Plug 'arrufat/vala.vim'
-Plug 'chr4/nginx.vim'
 Plug 'tbastos/vim-lua'
 
 call plug#end()
@@ -135,6 +134,9 @@ call plug#end()
 let g:vim_search_pulse_duration = 50
 
 let g:rainbow_active = 1
+
+let g:syntastic_python_python_exec = 'python3'
+let g:syntastic_python_checkers = ['python']
 
 "###############################################################################
 " File Extensions and Types

@@ -1,0 +1,115 @@
+#!/bin/bash
+
+declare -r cmd=$(basename $0)
+
+declare -rA regex=(
+  [touchscreen]='/Wacom/!d'
+  [trackpad]='/Touch[pP]ad/!d'
+  [trackpoint]='/TrackPoint/!d'
+)
+
+
+if [[ $# -lt 1 ]]
+then
+  echo "Usage: $cmd <command>"  >&2
+  echo "       $cmd configure"  >&2
+  echo "       $cmd properties" >&2
+  echo "       $cmd id       "  >&2
+  echo "       $cmd on       "  >&2
+  echo "       $cmd off      "  >&2
+  exit 1
+fi
+
+declare -A touchscreen_config=()
+declare -A trackpoint_config=()
+
+declare -A trackpad_config=(
+  [libinput Tapping Enabled]=1
+  [libinput Natural Scrolling Enabled]=1
+  [libinput Accel Speed]=2.000000
+  [libinput Disable While Typing Enabled]=1
+)
+
+declare -n xinput_config="${cmd}_config"
+
+declare -a xinput_id=($(
+  xinput | sed \
+    -e "${regex[$cmd]}" \
+    -e 's/.*id=\([0-9]*\).*/\1/'
+  ))
+
+if [[ -z $xinput_id ]]
+then
+  echo "No ${cmd^}"
+  exit 0
+fi
+
+notify() {
+  notify-send \
+    "$(basename $0) $1"
+}
+
+input-enabled() {
+  xinput --list-props $xinput_id | grep "Device Enabled.*:.*1$" >/dev/null
+}
+
+cmd-configure() {
+  echo "Configuring $cmd ..."
+  for k in "${!xinput_config[@]}"
+  do
+    declare v="${xinput_config[$k]}"
+    echo "  $k => $v"
+    if xinput set-prop "$xinput_id" "$k" "$v"
+    then echo "OK"
+    else echo
+    fi
+  done
+}
+
+cmd-properties() {
+  for id in "${xinput_id[@]}"
+  do xinput list-props $id && echo
+  done
+}
+
+cmd-id() {
+  xinput | sed "${regex[$cmd]}"
+}
+
+cmd-on() {
+  for id in "${xinput_id[@]}"
+  do xinput enable $id
+  done
+  notify "on"
+}
+
+cmd-off() {
+  for id in "${xinput_id[@]}"
+  do xinput disable $id
+  done
+  set +x
+  notify "off"
+}
+
+cmd-status() {
+  if input-enabled
+  then echo "${cmd^} On"
+  else echo "${cmd^} Off"
+  fi
+}
+
+cmd-toggle() {
+  if xinput --list-props $xinput_id | grep "Device Enabled.*:.*1$" >/dev/null
+  then cmd-off
+  else cmd-on
+  fi
+}
+
+declare cmdfunction="cmd-$1"
+
+if declare -fp "$cmdfunction" &>/dev/null
+then eval "$cmdfunction"
+else
+  echo "Invalid subcommand: $1" >&2
+  exit 2
+fi

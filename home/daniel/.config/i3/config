@@ -86,8 +86,9 @@ exec vol mute
 ################################################################################
 # HID Configuration
 ################################################################################
-exec_always touchpad configure
 exec_always keyboard configure
+exec_always trackpad configure
+exec_always touchscreen configure
 
 
 ################################################################################
@@ -405,11 +406,11 @@ mode "WWW" {
   bindsym N                   exec $www nationalrail                            ; mode "default"
   bindsym Shift+N     $tabbed exec $www nationalrail                            ; mode "default"
 
-  bindsym O                   exec $www okc                                     ; mode "default"
-  bindsym Shift+O     $tabbed exec $www okc                                     ; mode "default"
-
   bindsym P                   exec $www paypal                                  ; mode "default"
   bindsym Shift+P     $tabbed exec $www paypal                                  ; mode "default"
+
+  bindsym R                   exec $www rightmove                               ; mode "default"
+  bindsym Shift+R     $tabbed exec $www rightmove                               ; mode "default"
 
   bindsym S                   exec $www youtubestudio                           ; mode "default"
   bindsym Shift+S     $tabbed exec $www youtubestudio                           ; mode "default"

@@ -1,0 +1,84 @@
+#!/bin/bash
+
+set -eu
+
+declare indexfile="index.html"
+
+cat >"$indexfile" <<EOF
+<html>
+  <head>
+    <title>Photo Album</title>
+    <style>
+.thumb { display: inline-block; margin: 10px; border: 1px solid black; }
+.thumb .a { display: block; }
+.title { display: block; font-weight: bold; }
+    </style>
+  </head>
+  <body>
+    <h1>$PWD</h1>
+EOF
+
+declare last_cdate=''
+declare last_ctime=''
+declare last_ctz=''
+declare last_cyear=''
+declare last_cmonth=''
+declare last_cday=''
+
+find "$PWD" -depth -type f -path '*/????-??-??-*.???' | while read path
+do
+  echo "Path: $path"
+  #declare path="$(realpath "$path")"
+  #echo "Realpath: $path"
+
+  declare directory="$(dirname "$path")"
+  declare file="$(basename "$path")"
+  declare filename="${file%.*}"
+  declare extension="${file##*.}"
+  declare thumbfile="${directory}/.${filename}.thumb.gif"
+  declare infofile="${directory}/.${filename}.info.json"
+
+  echo "  Directory: $directory"
+  echo "  File: $file"
+  echo "  Filename: $filename"
+  echo "  Extension: $extension"
+
+  if [[ ! -f $infofile ]]
+  then exiftool -J "$path" > "$infofile"
+  fi
+
+  read cdate ctime ctz <<<"$(jq -r '.[] | .SubSecCreateDate // .CreateDate' "$infofile" | sed 's/+/ /')"
+  read cyear cmonth cday <<<"$(sed 's/:/ /g' <<<"$cdate")"
+
+  echo "       Info: $infofile"
+  echo "             cdate : $cdate"
+  echo "             ctime : $ctime"
+  echo "               ctz : $ctz"
+
+  if [[ ! -f $thumbfile ]]
+  then mkthumbnail "$path" >/dev/null
+  fi
+
+  echo "  Thumbnail: $thumbfile"
+
+  if [[ $cdate != $last_cdate ]]
+  then cat >"$indexfile" <<-EOF
+    <h1>$cdate</h1>
+EOF
+  fi
+
+  cat >"$indexfile" <<-EOF
+    <div class="thumb">
+      <span class="title">$(basename "$path")</span>
+      <a href="file://$path"><img src="file://$thumbfile"/></a>
+    </div>
+EOF
+
+  echo
+
+done
+
+cat >"$indexfile" <<EOF
+  </body>
+</html>
+EOF
