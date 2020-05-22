@@ -21,6 +21,7 @@ then
 fi
 
 declare -A touchscreen_config=()
+declare -A trackpoint_config=()
 
 declare -A trackpad_config=(
   [libinput Tapping Enabled]=1
