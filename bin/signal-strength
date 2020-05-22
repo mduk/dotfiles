@@ -1,0 +1,3 @@
+#!/bin/bash
+
+iwconfig |& sed -n 's/.*Signal level=\(.*\)/\1/p'
