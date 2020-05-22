@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+declare squatfile="$DOT_DIR/Squatfile"
+
+header() {
+  echo
+  echo '################################################################################'
+  echo '#' $@
+  echo '################################################################################'
+  echo
+} >> $squatfile
+
+if [[ -f $squatfile ]]
+then rm $squatfile
+fi
+
+header 'Generated:' $(date)
+
+header 'Functions'
+for f in $DOT_DIR/commands/*.function
+do cat $f
+done >> $squatfile
+
+header 'Aliases'
+for f in $DOT_DIR/commands/*.alias
+do
+  declare basename=$(basename $f)
+  declare alias=${basename%.*}
+
+  echo "alias $alias=\"$(cat $f)\""
+done >> $squatfile
