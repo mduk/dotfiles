@@ -16,6 +16,9 @@ fi
 
 header 'Generated:' $(date)
 
+header 'Environment'
+cat $DOT_DIR/env.sh >> $squatfile
+
 header 'Functions'
 for f in $DOT_DIR/commands/*.function
 do cat $f
