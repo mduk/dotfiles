@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -eu
+
+firefox http://localhost:631
