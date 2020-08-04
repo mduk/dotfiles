@@ -429,6 +429,10 @@ mode "Download" {
 mode "DLYoutube" {
   bindsym A                    exec ytdla                                   ; mode "default"
   bindsym V                    exec ytdlv                                   ; mode "default"
+
+  bindsym Space                                                             ; mode "default"
+  bindsym Return                                                            ; mode "default"
+  bindsym Escape                                                            ; mode "default"
 }
 
 
