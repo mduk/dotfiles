@@ -101,10 +101,7 @@ bindsym $alt+Shift+BackSpace exec i3-screensaver lock
 ################################################################################
 # X Root Window
 ################################################################################
-exec_always $randomBackground
-bindsym $alt+Shift+b exec $randomBackground
-
-exec_always xsetroot -cursor_name left_ptr
+exec_always xsetroot -solid '#000000'
 
 
 
