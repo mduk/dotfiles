@@ -9,6 +9,21 @@ set $outputInternal           eDP-1
 set $outputHdmi               DP-3
 
 
+bindsym $alt+Escape exec umsd
+
+mouse_warping none
+focus_follows_mouse no
+
+bindsym $alt+Return             exec $terminal
+bindsym $alt+Shift+Return       exec $browser
+
+bindsym $alt+Shift+q            kill
+bindsym $alt+Shift+c            reload
+bindsym $alt+Shift+r            restart
+bindsym $alt+space              exec i3-dmenu
+bindsym $alt+Shift+t            exec /home/daniel/.dotfiles/bin/touchpad toggle
+
+
 ################################################################################
 # i3 Font
 ################################################################################
@@ -98,13 +113,6 @@ bindsym $alt+Shift+BackSpace exec i3-screensaver lock
 exec_always xsetroot -solid '#000000'
 
 
-
-
-
-bindsym $alt+Escape exec umsd
-
-
-
 ################################################################################
 # Right-Handed Navigation
 ################################################################################
@@ -138,22 +146,6 @@ for_window [class="Yad"]              floating enable
 for_window [class="spectacle"]        floating enable
 for_window [class="Xmessage"]         floating enable
 for_window [class="java-lang-Thread"] floating enable
-
-
-mouse_warping none
-focus_follows_mouse no
-
-bindsym $alt+Return             exec $terminal
-bindsym $alt+Shift+Return       exec $browser
-
-#bindsym $alt+space              scratchpad show
-#bindsym $alt+space              exec dmenu_run
-
-bindsym $alt+Shift+q            kill
-bindsym $alt+Shift+c            reload
-bindsym $alt+Shift+r            restart
-bindsym $alt+space              exec i3-dmenu
-bindsym $alt+Shift+t            exec /home/daniel/.dotfiles/bin/touchpad toggle
 
 
 ################################################################################
