@@ -149,17 +149,6 @@ for_window [class="Xmessage"]         floating enable
 for_window [class="java-lang-Thread"] floating enable
 
 
-################################################################################
-# Kill Windows
-################################################################################
-for_window [title="Desktop — Plasma"] kill
-for_window [class="kspashqml"]        kill
-
-
-################################################################################
-# Never Steal Focus
-################################################################################
-no_focus [class="plasmashell"]
 mouse_warping none
 focus_follows_mouse no
 
