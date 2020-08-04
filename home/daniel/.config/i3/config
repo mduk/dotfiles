@@ -167,10 +167,8 @@ bindsym $alt+$win+L             move workspace to output $outputHdmi
 ################################################################################
 # Focus
 ################################################################################
-
-
-bindsym $alt+p                  focus parent
-#bindsym $alt+l                  focus child
+bindsym $win+p                  focus parent
+bindsym $win+l                  focus child
 
 
 ################################################################################
