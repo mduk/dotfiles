@@ -157,17 +157,8 @@ bindsym $alt+Shift+t            exec /home/daniel/.dotfiles/bin/touchpad toggle
 
 
 ################################################################################
-# Arrow Keys
+# "Arrow" Keys
 ################################################################################
-#bindsym $alt+Left               focus left
-#bindsym $alt+Down               focus down
-#bindsym $alt+Up                 focus up
-#bindsym $alt+Right              focus right
-#bindsym $alt+Shift+Left         move left
-#bindsym $alt+Shift+Down         move down
-#bindsym $alt+Shift+Up           move up
-#bindsym $alt+Shift+Right        move right
-
 bindsym $alt+H                  focus left
 bindsym $alt+J                  focus down
 bindsym $alt+K                  focus up
@@ -176,9 +167,6 @@ bindsym $alt+Shift+H            move left
 bindsym $alt+Shift+J            move down
 bindsym $alt+Shift+K            move up
 bindsym $alt+Shift+L            move right
-
-#bindsym $alt+$win+Left          move workspace to output $outputInternal
-#bindsym $alt+$win+Right         move workspace to output $outputHdmi
 
 bindsym $alt+$win+H             move workspace to output $outputInternal
 bindsym $alt+$win+L             move workspace to output $outputHdmi
