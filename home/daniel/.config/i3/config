@@ -21,7 +21,6 @@ bindsym $alt+Shift+q            kill
 bindsym $alt+Shift+c            reload
 bindsym $alt+Shift+r            restart
 bindsym $alt+space              exec i3-dmenu
-bindsym $alt+Shift+t            exec /home/daniel/.dotfiles/bin/touchpad toggle
 
 
 ################################################################################
@@ -402,8 +401,9 @@ mode "XSession" {
   bindsym S                    exec auto-monitors standalone                ; mode "default"
   bindsym $alt+Shift+S         exec systemctl poweroff                      ; mode "default"
 
-  bindsym I                    exec mo eDP-1                                ; mode "default"
-  bindsym H                    exec mo DP-3                                 ; mode "default"
+  bindsym T                    exec touchscreen toggle                      ; mode "default"
+  bindsym Shift+T              exec trackpad toggle                         ; mode "default"
+
   bindsym $alt+Shift+e         exec loginctl terminate-session $XDG_SESSION_ID
   bindsym M                    exec auto-monitors                           ; mode "default"
 
