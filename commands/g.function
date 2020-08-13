@@ -3,6 +3,7 @@ function g {
          --exclude=*.swp \
          --exclude=*.pyc \
          --exclude-dir=.git/ \
+         --exclude-dir=.idea/ \
          --recursive \
          --line-number \
          "$1" \
