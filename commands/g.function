@@ -4,6 +4,7 @@ function g {
          --exclude=*.pyc \
          --exclude-dir=.git/ \
          --exclude-dir=.idea/ \
+         --exclude-dir=.pytest_cache/ \
          --recursive \
          --line-number \
          "$1" \
