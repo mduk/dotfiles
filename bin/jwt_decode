@@ -1,0 +1,20 @@
+#!/bin/bash
+
+set -eu
+
+read header body signature <<< $(sed 's/\./ /g')
+
+echo -n "Header: "
+b64decode <<< "$header" | jq .
+echo
+echo
+
+echo -n "Body: "
+b64decode  <<< "$body" | jq .
+echo
+echo
+
+echo "Signature: "
+echo $signature
+echo
+echo
