@@ -1,0 +1,134 @@
+#!/bin/bash
+
+set -e
+
+generate_index() {
+  declare param_size=""
+  declare param_cols=""
+  declare param_name=""
+  source $DEV_DIR/mduk/BashPlayground/advanced-argument-parser.sh
+
+  echo "indexing "
+
+}
+
+declare year=2019
+
+for year in 2019 2020
+do
+
+  rm -f $year/index.html
+  touch $year/index.html
+
+  (
+    echo '<!DOCTYPE html>'
+    echo '<html><body>'
+    echo "<h1>$year</h1>"
+  ) >> $year/index.html
+
+  for month in 01 02 03 04 05 06 07 08 09 10 11 12
+  do
+    rm -f $year/$month/index.html
+    touch $year/$month/index.html
+
+    (
+      echo '<!DOCTYPE html>'
+      echo '<html><body>'
+      echo "<h1>$year/$month</h1>"
+    ) >> $year/$month/index.html
+
+    for day in 01 02 03 04 05 06 07 08 09 10 \
+               11 12 13 14 15 16 17 18 19 20 \
+               21 22 23 24 25 26 27 28 29 30 \
+               31
+    do
+
+      echo -n "$month $day "
+
+
+      # Does day directory exist?
+      #   No? Skip it then
+      if [[ ! -d "$year/$month/$day" ]]
+      then
+        echo "nope"
+        continue
+      fi
+
+      echo
+
+      # for each jpg that isn't a thumbnail or an index
+      for jpg in $(find "$year/$month/$day/" -iname '*.jpg*' -not -name '*.thumb*' -not -name '*.index*')
+      do
+        echo -n "      $jpg "
+
+        # Don't re-generate thumbnails
+        #   if thumbnail exists then skip
+        if [[ -f "$jpg.thumb" ]]
+        then
+          echo "thumb"
+          continue
+        fi
+
+        # Generate thumbnail
+        echo "thumbing"
+        convert \
+          -define jpeg:size=1024x768 "$jpg" \
+          -auto-orient \
+          -thumbnail '320x320^' \
+          -gravity center \
+          -extent '320x320' \
+          -unsharp 0x.5 \
+          "$jpg.thumb"
+
+      done # jpg
+
+      # If there are no thumbnails,
+      #  there's no index, skip.
+      if [[ $(find "$year/$month/$day" -name '*.thumb' | wc -l) == 0 ]]
+      then
+        echo "$month $day nothumbs"
+        continue
+      fi
+
+      # There are thumbnails,
+      #  generate an index image
+      echo "$month $day indexing"
+
+      montage $year/$month/$day/*.thumb \
+        -geometry 160x160+5+5 \
+        -tile 6x \
+        -shadow \
+        index.html
+
+      # Update links to originals
+      sed -i -e 's/.thumb//g' \
+             -e "s|$year/$month/$day|/$year/$month/$day|g" \
+        index.html
+
+      # JPG index instead of PNG
+      convert index.png index.jpg
+      sed -i "s/index.png/index.jpg/g" index.html
+
+      (
+        echo "<h2>$year/$month/$day</h2>"
+        sed -nr -e "
+          /<img/{
+            s|index.jpg|/$year/$month/$day/index.jpg|
+            s/usemap=\"#index\"/usemap=\"#index$year$month$day\"/
+            p
+          }
+          /<\/map/p
+          /<map/s/index/index$year$month$day/gp
+          /<area/p
+        " index.html
+      ) >> $year/index.html
+
+      mv index* $year/$month/$day
+
+    done # day
+
+    echo
+
+  done # month
+
+done # year
