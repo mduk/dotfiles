@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -eu
+
+declare -r dlfile="$(mktemp)"
+declare -r rdir="$HOME/Recipes"
+[ ! -d "$rdir" ] && mkdir "$rdir"
+
+curl "$1" | pup '#__NEXT_DATA__ text{}' > "$dlfile"
+
+declare -r slug="$(jq -r .props.pageProps.slug "$dlfile")"
+
+jq .props.pageProps.recipeSchema "$dlfile" > "$rdir/$slug.json"
+jq .props.pageProps.ingredients "$dlfile" > "$rdir/$slug"
