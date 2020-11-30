@@ -113,6 +113,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-abolish'
 
 Plug 'vim-syntastic/syntastic'
+"Plug 'ycm-core/YouCompleteMe'
 
 Plug 'lilydjwg/colorizer'
 
@@ -120,6 +121,7 @@ Plug 'nvie/vim-flake8'
 Plug 'vim-erlang/vim-erlang-runtime'
 
 " syntax highlighters
+Plug 'elixir-editors/vim-elixir'
 Plug 'pangloss/vim-javascript'
 Plug 'Chiel92/vim-autoformat'
 Plug 'ekalinin/Dockerfile.vim'
