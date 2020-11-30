@@ -267,18 +267,18 @@ bindsym $alt+O                  exec cbo
 ################################################################################
 bindsym $alt+Shift+F            mode "File Manager"
 mode "File Manager" {
-  bindsym C                     exec $filemanager ~/Camera            ; mode "default"
-  bindsym D                     exec $filemanager ~/Downloads         ; mode "default"
-  bindsym H                     exec $filemanager ~                   ; mode "default"
-  bindsym M                     exec $filemanager ~/Music             ; mode "default"
-  bindsym P                     exec $filemanager ~/Pictures          ; mode "default"
-  bindsym S                     exec $filemanager ~/Scrollsaw Patterns; mode "default"
-  bindsym U                     exec $filemanager ~/Documents         ; mode "default"
-  bindsym V                     exec $filemanager ~/Videos            ; mode "default"
+  bindsym C                     exec $filemanager ~/Camera             ; mode "default"
+  bindsym D                     exec $filemanager ~/Downloads          ; mode "default"
+  bindsym H                     exec $filemanager ~                    ; mode "default"
+  bindsym M                     exec $filemanager ~/Music              ; mode "default"
+  bindsym P                     exec $filemanager ~/Pictures           ; mode "default"
+  bindsym S                     exec $filemanager ~/Scrollsaw\ Patterns; mode "default"
+  bindsym U                     exec $filemanager ~/Documents          ; mode "default"
+  bindsym V                     exec $filemanager ~/Videos             ; mode "default"
 
-  bindsym space                 exec files                            ; mode "default"
+  bindsym space                 exec files                             ; mode "default"
 
-  bindsym Return                exec $filemanager ~                   ; mode "default"
+  bindsym Return                exec $filemanager ~                    ; mode "default"
   bindsym Escape                mode "default"
 }
 
