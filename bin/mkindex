@@ -12,8 +12,6 @@ generate_index() {
 
 }
 
-declare year=2019
-
 for year in 2019 2020
 do
 
@@ -43,7 +41,7 @@ do
                31
     do
 
-      echo -n "$month $day "
+      echo -n "$year $month $day "
 
 
       # Does day directory exist?
@@ -86,13 +84,13 @@ do
       #  there's no index, skip.
       if [[ $(find "$year/$month/$day" -name '*.thumb' | wc -l) == 0 ]]
       then
-        echo "$month $day nothumbs"
+        echo "$year $month $day nothumbs"
         continue
       fi
 
       # There are thumbnails,
       #  generate an index image
-      echo "$month $day indexing"
+      echo "$year $month $day indexing"
 
       montage $year/$month/$day/*.thumb \
         -geometry 160x160+5+5 \
