@@ -112,6 +112,8 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-abolish'
 
+Plug 'pbrisbin/vim-mkdir'
+
 Plug 'vim-syntastic/syntastic'
 "Plug 'ycm-core/YouCompleteMe'
 
