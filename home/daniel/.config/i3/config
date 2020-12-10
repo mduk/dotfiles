@@ -159,8 +159,8 @@ bindsym $alt+Shift+J            move down
 bindsym $alt+Shift+K            move up
 bindsym $alt+Shift+L            move right
 
-bindsym $alt+$win+H             move workspace to output $outputInternal
-bindsym $alt+$win+L             move workspace to output $outputHdmi
+bindsym $alt+$win+H             move workspace to output $outputHdmi
+bindsym $alt+$win+L             move workspace to output $outputInternal
 
 
 ################################################################################
