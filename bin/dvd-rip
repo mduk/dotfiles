@@ -1,16 +1,37 @@
 #!/bin/bash
 
-dvd_path="$1"
-preset=${2:-Universal}
+declare -r dvd_path="$1"; shift
+declare -r preset=${2:-Universal}; shift
 
-titles=$(HandBrakeCLI -i "$dvd_path" -t 0 2>&1 | sed -ne 's/+ title \([0-9]*\):/\1/p')
+declare -r handbrake="$(which HandBrakeCLI)"
 
-for n in $titles; do
-    incomplete_path="${dvd_path}/title${n}-incomplete.mkv"
-    complete_path="${dvd_path}/title${n}.mkv"
+if [[ -z $handbrake ]]
+then
+  echo "HandBrakeCLI not found on PATH"
+  exit 1
+fi
+
+declare -r videots_path=$(
+  find "$dvd_path" \
+    -type d \
+    -name VIDEO_TS
+)
+
+declare -r titles=$(
+  HandBrakeCLI \
+    --input "$videots_path" \
+    --title 0 \
+    2>&1 \
+  | sed -ne 's/+ title \([0-9]*\):/\1/p'
+)
+
+for n in $titles
+do
+    declare incomplete_path="${dvd_path}/title${n}-incomplete.mkv"
+    declare complete_path="${dvd_path}/title${n}.mkv"
 
     HandBrakeCLI \
-        --input "$dvd_path" \
+        --input "$videots_path" \
         --title $n \
         --preset "$preset" \
         --format av_mkv \
