@@ -123,6 +123,7 @@ Plug 'nvie/vim-flake8'
 Plug 'vim-erlang/vim-erlang-runtime'
 
 " syntax highlighters
+Plug 'hashivim/vim-terraform'
 Plug 'elixir-editors/vim-elixir'
 Plug 'pangloss/vim-javascript'
 Plug 'Chiel92/vim-autoformat'
