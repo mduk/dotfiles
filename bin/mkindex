@@ -12,7 +12,7 @@ generate_index() {
 
 }
 
-for year in 2019 2020
+for year
 do
 
   rm -f $year/index.html

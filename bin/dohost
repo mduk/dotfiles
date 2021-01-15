@@ -35,11 +35,11 @@ case "$1" in
     ;;
 
   screen)
-    $ssh "SCREEN_NAME='$2' screen -DR $2"
+    $ssh "tmux new-session -A -s $2"
     ;;
 
   screens)
-    $ssh "screen -ls"
+    $ssh "tmux -ls"
     ;;
 
   *)
