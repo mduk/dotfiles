@@ -75,14 +75,9 @@ block_python() {
 }
 
 block_clock() {
-  if [[ $(hostname) -ne 'eddie' ]]
-  then
-    echo -e "$PROMPT_BOLD[$(date +%H:%M:%S)]"
-  else
-    if [[ $(date --date="$PROMPT_HOMETIME" +%s) -le $(date +%s) ]] && [[ ! $(wifi-ssid) == VM9243984 ]]
-    then echo -e "$PROMPT_RED[$(date +%H:%M:%S)]"
-    else echo -e "$PROMPT_BOLD[$(date +%H:%M:%S)]"
-    fi
+  if [[ $(date --date="$PROMPT_HOMETIME" +%s) -le $(date +%s) ]] && [[ ! $(wifi-ssid) == VM9243984 ]]
+  then echo -e "$PROMPT_RED[$(date +%H:%M:%S)]"
+  else echo -e "$PROMPT_BOLD[$(date +%H:%M:%S)]"
   fi
 }
 
