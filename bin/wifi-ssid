@@ -1,7 +1,3 @@
 #!/usr/bin/env bash
 
-if ! which iwconfig
-then exit 1
-fi
-
 iwconfig 2>/dev/null | sed -n '/^wlp59s0/s/.*ESSID:"\(.*\)".*/\1/p'
