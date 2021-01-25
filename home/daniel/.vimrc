@@ -123,6 +123,7 @@ Plug 'nvie/vim-flake8'
 Plug 'vim-erlang/vim-erlang-runtime'
 
 " syntax highlighters
+Plug 'neo4j-contrib/cypher-vim-syntax'
 Plug 'hashivim/vim-terraform'
 Plug 'elixir-editors/vim-elixir'
 Plug 'pangloss/vim-javascript'
@@ -147,6 +148,7 @@ let g:syntastic_python_checkers = ['python']
 " File Extensions and Types
 "###############################################################################
 autocmd BufRead,BufNewFile *.plt set ft=gnuplot
+autocmd BufRead,BufNewFile *.cy  set ft=cypher
 
 "###############################################################################
 " Moving Lines
