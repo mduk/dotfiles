@@ -180,10 +180,7 @@ bindsym $alt+Prior             floating toggle
 ################################################################################
 # Container Split
 ################################################################################
-bindsym $win+h                  split h
-bindsym $win+v                  split v
-bindsym $win+Shift+H            split h; exec $terminal
-bindsym $win+Shift+V            split v; exec $terminal
+bindsym $alt+Ctrl+S             split v
 
 
 ################################################################################
