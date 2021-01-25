@@ -166,8 +166,8 @@ bindsym $alt+Ctrl+L             move workspace to output $outputInternal
 ################################################################################
 # Focus
 ################################################################################
-bindsym $win+p                  focus parent
-bindsym $win+l                  focus child
+bindsym $alt+Ctrl+p                  focus parent
+bindsym $alt+Ctrl+l                  focus child
 
 
 ################################################################################
