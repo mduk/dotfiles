@@ -1,0 +1,18 @@
+#!/bin/bash
+
+set -eu
+
+case "$1" in
+
+  on)
+    sudo modprobe v4l2loopback \
+      video_nr=9 \
+      card_label="Loopback Device" \
+      exclusive_caps=1
+    ;;
+
+  off)
+    sudo modprobe -r v4l2loopback
+    ;;
+
+esac
