@@ -1,5 +1,6 @@
 ecb() {
-  declare tmpfile=$(mktemp)
+  declare tmpfile=$(mktemp /tmp/ecb.XXXXXXXXX)
   cb > $tmpfile
   e $tmpfile
+  cb < $tmpfile
 }
