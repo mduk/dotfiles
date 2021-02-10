@@ -12,6 +12,7 @@ declare PROMPT_RESET="\033[0m"
 
 declare -ag PROMPT_BLOCKS=(
   'user host screen'
+  'python'
   'path git'
   'clock prompt'
 )
@@ -42,9 +43,7 @@ block_php() {
     return
   fi
 
-  if grep -i "php" &>/dev/null <<<"$PROMPT_VERSIONS"
-  then echo "[PHP: $(php -r 'echo phpversion();')]"
-  fi
+  echo "[PHP: $(php -r 'echo phpversion();')]"
 }
 
 block_ruby() {
@@ -54,9 +53,7 @@ block_ruby() {
     return
   fi
 
-  if grep -i "ruby" &>/dev/null <<<"$PROMPT_VERSIONS"
-  then echo "[Ruby: $(ruby -v | awk '{print $2}')]"
-  fi
+  echo "[Ruby: $(ruby -v | awk '{print $2}')]"
 }
 
 block_python() {
@@ -66,12 +63,9 @@ block_python() {
     return
   fi
 
-  if grep -i "python" &>/dev/null <<<"$PROMPT_VERSIONS"
-  then
-      local version=$(python --version 2>&1 | awk '{print $2}')
-      local env=$([[ -v VIRTUAL_ENV ]] && echo venv || echo system)
-      echo "[Python: $version ($env)]"
-  fi
+  declare version=$(python --version 2>&1 | awk '{print $2}')
+  declare env=$([[ -v VIRTUAL_ENV ]] && echo venv || echo system)
+  echo "[Python: $version ($env)]"
 }
 
 block_clock() {
