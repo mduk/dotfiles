@@ -12,7 +12,6 @@ declare PROMPT_RESET="\033[0m"
 
 declare -ag PROMPT_BLOCKS=(
   'user host screen'
-  'python'
   'path git'
   'clock prompt'
 )
