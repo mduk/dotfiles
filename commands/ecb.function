@@ -3,4 +3,5 @@ ecb() {
   cb > $tmpfile
   e $tmpfile
   cb < $tmpfile
+  echo $tmpfile
 }
