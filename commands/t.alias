@@ -1,1 +1,1 @@
-t4
+tree -L 4 -I '__pycache__'
