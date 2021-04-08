@@ -5,6 +5,7 @@ set showtabline=1
 set noshowmode
 
 set mouse=a
+set ttymouse=sgr
 
 set nowrap
 
