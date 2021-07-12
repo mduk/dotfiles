@@ -64,3 +64,5 @@ fi
 shopt -s autocd
 
 export GR="1.61803398875"
+
+source "$HOME/.dotfiles/env_client.sh"
