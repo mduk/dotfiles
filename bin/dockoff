@@ -1,5 +1,26 @@
 #!/bin/bash
 
+declare -r bold="$(tput bold)"
+declare -r normal="$(tput sgr0)"
+
+header() {
+  echo
+  echo "================================================================================"
+  echo "${bold}${@}${normal}"
+  echo
+}
+
+header "Stopping Containers"
 docker stop $(docker ps -a -q)
+
+header "Deleting Containers"
 docker rm $(docker ps -a -q)
+
+header "Deleting Images"
 docker rmi -f $(docker images -a -q)
+
+header "Deleting Volumes"
+docker volume rm $(docker volume ls -q)
+
+header "System prune"
+docker system prune -a -f
