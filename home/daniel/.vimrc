@@ -5,7 +5,7 @@ set showtabline=1
 set noshowmode
 
 set mouse=a
-set ttymouse=sgr
+set ttymouse=xterm2
 
 set nowrap
 
@@ -103,6 +103,7 @@ endif
 "###############################################################################
 call plug#begin('~/.vim/plugged')
 
+Plug 'vim-scripts/LargeFile'
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
@@ -138,6 +139,8 @@ Plug 'tbastos/vim-lua'
 
 call plug#end()
 
+
+let g:LargeFile = 32
 let g:vim_search_pulse_duration = 50
 
 let g:rainbow_active = 1
