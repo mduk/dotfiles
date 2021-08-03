@@ -136,6 +136,7 @@ Plug 'peterhoeg/vim-qml'
 Plug 'vim-scripts/gnuplot-syntax-highlighting'
 Plug 'arrufat/vala.vim'
 Plug 'tbastos/vim-lua'
+Plug 'chr4/nginx.vim'
 
 call plug#end()
 
