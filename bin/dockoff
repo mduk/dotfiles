@@ -22,5 +22,5 @@ docker rmi -f $(docker images -a -q)
 header "Deleting Volumes"
 docker volume rm $(docker volume ls -q)
 
-header "System prune"
+header "System Prune"
 docker system prune -a -f
