@@ -6,16 +6,16 @@ declare -a blocked=()
 while read file
 do
 
-  read year month day hour minute second _tail < <( \
+  read year month day hour minute second tz < <( \
     exiftool -json "$file" \
-      | jq -r '.[0].CreateDate' \
+      | jq -r '.[] | with_entries(select(.key | match("Date";"i"))) | if .SubSecCreateDate then .SubSecCreateDate else .CreateDate end' \
       | sed 's/[:\+/]/ /g'
   )
 
   if [[ $year == 'null' ]]
   then
     echo "$file has null create date"
-    echo "$file ==> $newfile" >> nullcreate.log
+    echo "$file" >> /tmp/nullcreate.log
     continue
   fi
 
@@ -24,46 +24,44 @@ do
   declare extension="${file##*.}" # Strip off everything before the dot
   declare createdate="$year-$month-$day-$hour-$minute-$second" # Splitseconds, maybe?
 
-  #echo "Create Date: $createdate"
-
   if [[ $createdate == '0000-00-00-00-00-00' ]]
   then
-    echo "$file => $newfile" >> ./blank.log
+    echo "$file => $newfile" >> /tmp/blank.log
     continue
   fi
 
-  declare newdir="${CAMERA_DIR:-$HOME/Camera}/$year-$month"
+  declare newdir="${CAMERA_DIR:-$HOME/Camera}/$year/$month/$day"
   declare newfile="$newdir/$createdate.$extension"
-
-  if [[ ! -d "$newdir" ]]
-  then if mkdir -p "$newdir"
-       then echo "Created Directory: $newdir"
-       else echo "Error creating directory: $newdir"
-	    continue
-       fi
-  fi
 
   if [[ "$file" == "$newfile" ]]
   then
     echo "$file same"
-    echo "$file ==> $newfile" >> ./same.log
+    echo "$file ==> $newfile" >> /tmp/same.log
     continue
   fi
 
-  if [[ -a "$newfile" ]] 
+  if [[ -a "$newfile" ]]
   then
     echo "$newfile already exists"
-    echo "$file ==> $newfile" >> ./blocked.log
+    echo "$file ==> $newfile" >> /tmp/blocked.log
     continue
+  fi
+
+  if [[ ! -d "$newdir" ]]
+  then if mkdir -p "$newdir"
+       then echo "Created Directory: $newdir"
+       else
+         echo "Error creating directory: $newdir"
+         continue
+       fi
   fi
 
   declare cmdstring="$cmd '$file' '$newfile'"
 
   if eval "$cmdstring"
-  then echo "$file copied"
-       echo "$file ==> $newfile" >> ./copied.log
-  else echo "$file error" 
-       echo "$file ==> $newfile" >> ./cmderror.log
+  then echo -e "From: $file\n To: $newfile\n"
+  else echo "$file error"
+       echo "$cmdstring" >> /tmp/cmderror.log
   fi
 
 done < <(find "$PWD" \
