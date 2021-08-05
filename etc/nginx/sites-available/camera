@@ -1,0 +1,46 @@
+
+server {
+  listen 82 default_server;
+  listen [::]:82 default_server;
+
+  root /home/daniel/Camera/;
+
+  autoindex on;
+  #index index.html
+
+  error_log /tmp/info.log;
+  access_log   /tmp/access.log;
+
+  server_name _;
+
+  location / {
+    # First attempt to serve request as file, then
+    # as directory, then fall back to displaying a 404.
+    try_files $uri $uri/ =404;
+    default_type text/plain;
+  }
+
+#  location ~ /\. {
+#    deny all;
+#  }
+
+  lua_code_cache off;
+
+#  location = /lua {
+#    default_type 'text/plain';
+#    content_by_lua_file $document_root/main.lua;
+#  }
+#
+#  location = /as/token.oauth2 {
+#    content_by_lua_file $document_root/as-token.lua;
+#  }
+#
+#  location = /resource {
+#    access_by_lua_block {
+#      return true;
+#    }
+#    try_files $uri $uri/ =404;
+#  }
+}
+
+
