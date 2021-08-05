@@ -5,6 +5,7 @@ function g {
          --exclude-dir=.git/ \
          --exclude-dir=.idea/ \
          --exclude-dir=.pytest_cache/ \
+         --exclude-dir=node_modules/ \
          --recursive \
          --line-number \
          "$1" \
