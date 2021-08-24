@@ -124,6 +124,8 @@ Plug 'lilydjwg/colorizer'
 Plug 'nvie/vim-flake8'
 Plug 'vim-erlang/vim-erlang-runtime'
 
+Plug 'frazrepo/vim-rainbow'
+
 " syntax highlighters
 Plug 'neo4j-contrib/cypher-vim-syntax'
 Plug 'hashivim/vim-terraform'
@@ -144,7 +146,7 @@ call plug#end()
 let g:LargeFile = 32
 let g:vim_search_pulse_duration = 50
 
-let g:rainbow_active = 1
+let g:rainbow_active = 0
 
 let g:syntastic_python_python_exec = 'python3'
 let g:syntastic_python_checkers = ['python']
