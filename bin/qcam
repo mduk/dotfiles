@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -eu
+
+qv4l2 -d $(find-camera C920)
