@@ -6,9 +6,7 @@ declare profile="${host}-standalone"
 echo "Default Profile: $profile"
 
 declare -A monitor_profiles=(
-  [d41d8cd98f00b204e9800998ecf8427e]='eddie-flat'
-  [be333760900e48176448e7e32208e432]='eddie-home-desk'
-  [45fddb542f5b3cab00835b8d46986de0]='eddie-home-kitchen'
+  [d41d8cd98f00b204e9800998ecf8427e]='eddie-desk'
   [1309228f39f53636f00b25977ed0b964]='eddie-home-tv+audio' # tv
   [fdb68fcec44cd29c74723a1874234271]='eddie-home-tv+audio' # avreceiver
 #  [d41d8cd98f00b204e9800998ecf8427e]='queeg-flat'
