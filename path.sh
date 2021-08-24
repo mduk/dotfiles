@@ -42,4 +42,5 @@ then
   path_append $(latest_jetbrains_bin DataGrip)
   path_append $(latest_jetbrains_bin pycharm)
   path_append $(latest_jetbrains_bin idea)
+  path_append $(latest_jetbrains_bin clion)
 fi
