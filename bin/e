@@ -2,16 +2,23 @@
 
 path="$1"
 
-if [ -f "$path" ]
+if [[ -z "$path" ]] \
+  && [[ -f '.session.vim' ]]
 then
-  owner="$(stat "$path" --printf=%G)"
-
-  if [[ "$owner" != "$USER" ]]
-  then
-    sudo $EDITOR "$path"
-  else
-    $EDITOR "$path"
-  fi
+  echo "Restoring session..."
+  vim -S .session.vim
 else
-  $EDITOR "$path"
+  if [[ -f "$path" ]]
+  then
+    owner="$(stat "$path" --printf=%G)"
+
+    if [[ "$owner" != "$USER" ]]
+    then
+      sudo vim "$path"
+    else
+      vim "$path"
+    fi
+  else
+    vim "$path"
+  fi
 fi
