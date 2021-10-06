@@ -65,4 +65,6 @@ shopt -s autocd
 
 export GR="1.61803398875"
 
-source "$HOME/.dotfiles/env_client.sh"
+if [[ -f "$HOME/.dotfiles/env_client.sh" ]]
+then source "$HOME/.dotfiles/env_client.sh"
+fi
