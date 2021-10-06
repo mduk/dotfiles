@@ -4,7 +4,7 @@ case $# in
   0)
     if [[ -f $PWD/.www ]]
     then
-      chromium-browser --app="$(cat $PWD/.www)" &
+      firefox -new-window "$(cat $PWD/.www)" &
     else
       declare url=$(
         (
@@ -25,7 +25,7 @@ case $# in
       else declare url="http://www.google.com/search?q=$(echo $url | sed -r 's/\s+/+/')"
       fi
 
-      chromium-browser --app="$url"
+      firefox -new-window "$url"
     fi
 
     ;;
@@ -40,7 +40,7 @@ case $# in
     else url="http://$1"
     fi
 
-    chromium-browser --app="$url" &
+    firefox -new-window "$url"
     ;;
 
   2)
