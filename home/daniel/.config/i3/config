@@ -79,12 +79,6 @@ bindsym --border button2 kill
 
 
 ################################################################################
-# Monitor Configuration / Touchscreen / Polybar
-################################################################################
-exec_always auto-monitors
-
-
-################################################################################
 # PulseAudio
 ################################################################################
 exec_always pulseaudio
@@ -94,9 +88,11 @@ exec vol mute
 ################################################################################
 # HID Configuration
 ################################################################################
+exec_always auto-monitors
 exec_always keyboard configure
 exec_always trackpad configure
 exec_always touchscreen configure
+exec_always touchscreen off
 
 
 ################################################################################
@@ -307,11 +303,6 @@ mode "Resize" {
 bindsym $alt+Shift+m            mode "Media"
 bindsym $alt+m                  mode "Media"
 mode "Media" {
-#  bindsym Up                    exec vol up
-#  bindsym Down                  exec vol down
-#  bindsym Left                  exec mpc prev
-#  bindsym Right                 exec mpc next
-
   bindsym H                     exec mpc prev
   bindsym J                     exec vol down
   bindsym K                     exec vol up
