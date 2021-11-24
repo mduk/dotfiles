@@ -171,6 +171,20 @@ vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
 
 "###############################################################################
+" Plugin: GitGutter
+"###############################################################################
+set signcolumn=yes
+highlight clear SignColumn
+
+let g:gitgutter_sign_added = '++'
+let g:gitgutter_sign_modified = '≈≈'
+let g:gitgutter_sign_removed = '--'
+
+highlight GitGutterAdd    ctermfg=green  ctermbg=NONE
+highlight GitGutterChange ctermfg=yellow ctermbg=NONE
+highlight GitGutterDelete ctermfg=red    ctermbg=NONE
+
+"###############################################################################
 " Plugin: Autoformat
 "###############################################################################
 
