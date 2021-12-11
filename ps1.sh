@@ -68,7 +68,9 @@ block_python() {
 }
 
 block_clock() {
-  if [[ $(date --date="$PROMPT_HOMETIME" +%s) -le $(date +%s) ]] && [[ ! "$(wifi-ssid)" -eq "VM9243984" ]]
+  declare ssid=$(wifi-ssid)
+  declare hometime=$(date --date="$PROMPT_HOMETIME" +%s)
+  if [[ "$hometime" -le "$(date +%s)" ]] && [[ ! "$ssid" == "VM9243984" ]]
   then echo -e "$PROMPT_RED[$(date +%H:%M:%S)]"
   else echo -e "$PROMPT_BOLD[$(date +%H:%M:%S)]"
   fi
