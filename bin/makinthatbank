@@ -1,0 +1,15 @@
+#!/bin/bash
+
+declare rate="${DAY_RATE:-${1:-0}}"
+
+declare days=$(ncal -h | sed '/^ /d; /^S./d; s/^[A-Za-z]\{2\}\W*//; s/\W*$//; s/\W\W/ /g; s/\W/\n/g' | sort -n | xargs echo)
+
+declare totaldays=$(wc -w <<< "$days")
+declare pastdays=$(sed "s/$(date +%d).*/$(date +%d)/" <<< $days | wc -w)
+declare nextdays=$(sed "s/.*$(date +%d)//" <<< $days | wc -w)
+
+rate() {
+  bc -q <<< "$1 * $rate"
+}
+
+echo "$(rate $pastdays)/$(rate $nextdays) ($(rate $totaldays))"
