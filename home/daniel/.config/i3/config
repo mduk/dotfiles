@@ -1,6 +1,6 @@
 set $www                      www
 set $randomBackground         false
-set $terminal                 /usr/bin/konsole
+set $terminal                 /usr/bin/urxvt
 set $filemanager              /usr/bin/nautilus
 set $browser                  /usr/bin/firefox
 
