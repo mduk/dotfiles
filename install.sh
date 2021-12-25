@@ -1,49 +1,36 @@
 #!/bin/bash
 
-source ./dot.sh
-
-apt_install() {
-  echo -n "Installing $1: "
-
-  if dpkg -s $1 | grep '^Status:.* ok .*' >/dev/null 2>/dev/null
-  then
-    echo "Already Installed"
-    return 0
-  else
-    echo -n "Installing"
-    if apt-get install -y $1 | sed 's/^/   /'
-    then echo "OK"
-    else echo "ERROR"
-    fi
-  fi
-}
-
-title() {
-  declare title="$@"
-  declare title_length=${#title}
-  declare n=$((title_length + 4))
-
-  echo
-  echo
-
-  for i in $(seq $n)
-  do echo -n '#'
-  done
-  echo
-
-  echo '#' $title '#'
-
-  for i in $(seq $n)
-  do echo -n '#'
-  done
-  echo
-}
-
 set -e
 
-title Updating APT
-apt-get update
+sudo apt update
+sudo xargs apt install < packages
 
-for arg in install.d/*
-do source $arg
-done
+JANET_HOST=janet.local
+
+echo "Copying SSH Keys, looking for Janet..."
+if ping $JANET_HOST -c 1 &>/dev/null
+then rsync -avh -e 'ssh -o StrictHostKeyChecking=no' $USER@$JANET_HOST:~/.ssh/ $HOME/.ssh/
+else echo "Can't find Janet. SSH keys won't be installed!" >&2
+fi
+
+git config --global user.email "daniel@kendell.org.uk"
+git config --global user.name "Daniel Kendell"
+
+dot_dir="$HOME/.dotfiles"
+ssh_url="git@github.com:mduk/dotfiles.git"
+http_url="https://github.com/mduk/dotfiles.git"
+
+if [[ ! -d $dot_dir ]]
+then
+  if [[ -f $HOME/.ssh/id_rsa ]]
+  then git clone "$ssh_url" "$dot_dir"
+  else git clone "$http_url" "$dot_dir"
+  fi
+fi
+
+if ! grep 'dot.sh' $HOME/.bashrc
+then echo -e "\n\nsource \"$HOME/.dotfiles/dot.sh\"" >> $HOME/.bashrc
+else echo "already dotty"
+fi
+
+
