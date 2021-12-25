@@ -22,46 +22,33 @@ background-alt = #444
 foreground = #dfdfdf
 foreground-alt = #555
 
-primary = #ffb52a
-secondary = #e60053
-alert = #bd2c40
-
-inactive = ${self.red}
-ready = ${self.blue}
-active =  ${self.green}
-
-battery-full = ${self.green}
-battery-charging = ${self.green}
-battery-discharging = ${self.yellow}
-
 red = #e60053
 green = #306B34
 blue = #0a6cf5
 yellow = #ffb52a
-grey = #555555
 
 [bar/example]
 monitor = ${env:MONITOR}
 width = 100%
 height = 32
-;offset-x = 1%
-;offset-y = 1%
+offset-x = 1%
+offset-y = 1%
 fixed-center = true
 
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-line-size = 6
-line-color = #f00
 
-border-size = 4
+border-size = 0
 border-color = #00000000
 
 padding-left = 0
 padding-right = 0
 
-module-margin-left = 0
+module-margin-left = 1
 module-margin-right = 1
+
+separator = %{F#666666}|%{F-}
 
 font-0 = Monospace:pixelsize=18
 
@@ -103,7 +90,6 @@ type = custom/script
 interval = 1
 exec = touchscreen status
 click-left = touchscreen toggle
-format-underline = ${colors.blue}
 
 
 
@@ -120,7 +106,6 @@ interval = 1
 exec = i3-screensaver status
 click-left = i3-screensaver toggle
 click-right = auto-monitors
-format-underline = ${colors.blue}
 
 
 
@@ -135,11 +120,9 @@ format-underline = ${colors.blue}
 type = internal/xkeyboard
 
 label-indicator-background = ${colors.red}
-label-indicator-underline = ${colors.red}
 label-indicator-padding = 1
 blacklist-0 = num lock
 
-format-underline = ${colors.blue}
 label-layout = %name%
 
 
@@ -174,7 +157,7 @@ pin-workspaces = true
 ; Mode Indicator
 label-mode-padding = 2
 label-mode-foreground = #000
-label-mode-background = ${colors.primary}
+label-mode-background = ${colors.yellow}
 
 ; focused = Active workspace on focused monitor
 label-focused = %index%
@@ -294,12 +277,12 @@ interface = wlp59s0
 interval = 1
 
 format-connected = <label-connected>
-format-connected-underline = ${colors.green}
+format-connected-foreground = ${colors.green}
 format-disconnected = <label-disconnected>
-format-disconnected-underline = ${colors.red}
+format-disconnected-foreground = ${colors.red}
 
 label-connected = "%essid% %local_ip%"
-label-disconnected = "Disconnected"
+label-disconnected = "WiFi Disconnected"
 
 
 
@@ -411,13 +394,13 @@ adapter = AC
 full-at = 98
 
 format-charging = <label-charging>
-format-charging-underline = ${colors.battery-charging}
+format-charging-underline = ${colors.green}
 
 format-discharging = <label-discharging>
-format-discharging-underline = ${colors.battery-discharging}
+format-discharging-underline = ${colors.yellow}
 
 format-full = 100%
-format-full-underline = ${colors.battery-full}
+format-full-underline = ${colors.green}
 
 
 
@@ -442,7 +425,7 @@ format-warn-underline = ${self.format-underline}
 
 label = %temperature-c%
 label-warn = %temperature-c%
-label-warn-foreground = ${colors.secondary}
+label-warn-foreground = ${colors.red}
 
 ramp-0 = 
 ramp-1 = 
