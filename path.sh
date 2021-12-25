@@ -44,3 +44,6 @@ then
   path_append $(latest_jetbrains_bin idea)
   path_append $(latest_jetbrains_bin clion)
 fi
+
+# Isolinear Build
+path_append "$DEV_DIR/mduk/Isolinear/.build/bin"
