@@ -63,13 +63,12 @@ padding-right = 0
 module-margin-left = 0
 module-margin-right = 1
 
-font-0 = fixed:pixelsize=14;1
-font-1 = fontawesome:pixelsize=14;1
+font-0 = Monospace:pixelsize=18
 
 ;tray-position = right
 modules-left = i3
 modules-center =
-modules-right = trackpoint trackpad touchscreen nordvpn xscreensaver xkeyboard mpd xbacklight pulseaudio wifi battery date
+modules-right = touchscreen xscreensaver xkeyboard pulseaudio wifi battery date
 
 ;wm-restack = i3
 
@@ -111,17 +110,6 @@ format-underline = ${colors.blue}
 
 
 
-[module/nordvpn]
-type = custom/script
-interval = 1
-
-exec = i3-nordvpn status
-click-left = i3-nordvpn toggle
-format-prefix = " "
-format-underline = ${colors.blue}
-
-
-
 
 
 
@@ -132,7 +120,6 @@ interval = 1
 exec = i3-screensaver status
 click-left = i3-screensaver toggle
 click-right = auto-monitors
-format-prefix = " "
 format-underline = ${colors.blue}
 
 
@@ -152,7 +139,6 @@ label-indicator-underline = ${colors.red}
 label-indicator-padding = 1
 blacklist-0 = num lock
 
-format-prefix = " "
 format-underline = ${colors.blue}
 label-layout = %name%
 
@@ -192,8 +178,8 @@ label-mode-background = ${colors.primary}
 
 ; focused = Active workspace on focused monitor
 label-focused = %index%
-label-focused-background = ${colors.background}
-label-focused-underline = ${colors.green}
+label-focused-background = ${colors.yellow}
+label-focused-foreground = #000
 label-focused-padding = 2
 
 ; visible = Active workspace on unfocused monitor
@@ -221,33 +207,6 @@ label-urgent-padding = 2
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-[module/mpd]
-type = internal/mpd
-format-online =  <label-time> <icon-prev> <toggle> <icon-next>
-format-online-underline = ${colors.ready}
-
-icon-prev = 
-icon-play = 
-icon-pause = 
-icon-next = 
 
 
 
@@ -334,9 +293,9 @@ type = internal/network
 interface = wlp59s0
 interval = 1
 
-format-connected =  <label-connected>
+format-connected = <label-connected>
 format-connected-underline = ${colors.green}
-format-disconnected =  <label-disconnected>
+format-disconnected = <label-disconnected>
 format-disconnected-underline = ${colors.red}
 
 label-connected = "%essid% %local_ip%"
@@ -373,9 +332,9 @@ label-disconnected = "Disconnected"
 type = internal/date
 interval = 1
 
-date = " %Y-%m-%d"
-time = " %H:%M:%S"
-label =   %date% %time%
+date = "%Y-%m-%d %A"
+time = "%H:%M:%S"
+label = %date% %time%
 
 format-underline = ${colors.blue}
 
@@ -400,13 +359,15 @@ interval = 9
 
 sink = alsa_output.pci-0000_00_1f.3.analog-stereo
 
-format-volume = <label-volume> <bar-volume>
-format-volume-underline = ${colors.active}
-format-muted-underline = ${colors.inactive}
-label-volume = 
+format-volume = <bar-volume>
+format-volume-underline = ${colors.green}
+
+format-muted-underline = ${colors.red}
+
 label-volume-foreground = ${root.foreground}
 
-label-muted =  MUTE
+label-muted = =========
+label-muted-foreground = ${colors.background-alt}
 
 use-ui-max = false
 
@@ -419,12 +380,12 @@ bar-volume-foreground-4 = #55aa55
 bar-volume-foreground-5 = #f5a70a
 bar-volume-foreground-6 = #ff5555
 bar-volume-gradient = true
-bar-volume-indicator = |
-bar-volume-indicator-font = 2
-bar-volume-fill = ─
-bar-volume-fill-font = 2
-bar-volume-empty = ─
-bar-volume-empty-font = 2
+bar-volume-indicator =
+bar-volume-indicator-font = 0
+bar-volume-fill = =
+bar-volume-fill-font = 0
+bar-volume-empty = =
+bar-volume-empty-font = 0
 bar-volume-empty-foreground = ${colors.foreground-alt}
 
 
@@ -449,33 +410,14 @@ battery = BAT0
 adapter = AC
 full-at = 98
 
-format-charging = <animation-charging> <label-charging>
-format-charging-prefix = " "
+format-charging = <label-charging>
 format-charging-underline = ${colors.battery-charging}
 
-format-discharging = <animation-discharging> <label-discharging>
+format-discharging = <label-discharging>
 format-discharging-underline = ${colors.battery-discharging}
 
-format-full =  100%
+format-full = 100%
 format-full-underline = ${colors.battery-full}
-
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-3 = 
-animation-charging-4 = 
-animation-charging-framerate = 500
-;animation-charging-foreground = ${colors.battery-charging}
-
-animation-discharging-0 = 
-animation-discharging-1 = 
-animation-discharging-2 = 
-animation-discharging-3 = 
-animation-discharging-4 = 
-animation-discharging-framerate = 500
-;animation-discharging-foreground = ${colors.battery-discharging}
-
-
 
 
 
@@ -530,15 +472,3 @@ screenchange-reload = true
 [global/wm]
 margin-top = 5
 margin-bottom = 5
-
-
-
-
-
-
-
-
-
-
-
-

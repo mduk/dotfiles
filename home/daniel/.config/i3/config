@@ -26,7 +26,7 @@ bindsym $alt+space              exec i3-dmenu
 ################################################################################
 # i3 Font
 ################################################################################
-font pango:monospace 12
+font pango:monospace 16
 
 
 ################################################################################
@@ -120,8 +120,15 @@ bindsym $angryalt+L            focus right
 
 
 ################################################################################
+# Window Syles
+################################################################################
+default_border none
+#hide_edge_borders both
+
+################################################################################
 # Floating Windows
 ################################################################################
+#for_window [class="Isolinear"]        border pixel 0
 for_window [class="plasmashell"]      floating enable
 for_window [class="gnuplot_qt"]       floating enable
 for_window [class="Tek4010"]          floating enable

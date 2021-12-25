@@ -2,10 +2,10 @@ set t_Co=256
 set rtp+=/usr/local/lib/python3.5/dist-packages/powerline/bindings/vim/
 set laststatus=2
 set showtabline=1
-set noshowmode
 
 set mouse=a
 set ttymouse=xterm2
+set term=xterm-256color
 
 set nowrap
 
@@ -24,6 +24,7 @@ set list
 set listchars=tab:>-,trail:~,extends:>,precedes:<
 
 set encoding=utf-8
+
 
 "###############################################################################
 " Fuck off Middle Mouse, you're really pissing me off now.
