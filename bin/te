@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -eu
+
+tmux new-session -s $(basename $PWD) e
