@@ -11,7 +11,7 @@ pushd ~/Videos
 
 alert "Download Beginning..."
 
-youtube-dl \
+yt-dlp \
   -f webm \
   --output "%(uploader)s/%(release_date)s - %(title)s.%(ext)s" \
   --write-info-json \
