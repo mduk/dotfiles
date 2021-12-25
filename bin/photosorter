@@ -57,7 +57,7 @@ do
     continue
   fi
 
-  cp "$path" "$dest"
+  cp -n "$path" "$dest"
   stderr "copied\n"
 
 done
