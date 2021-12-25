@@ -31,6 +31,7 @@ case "$1" in
     ;;
 
   pull)
+    set -x
     rsync -avhz -e "ssh ${ssh_key}" "$ssh_dest:$2" "$2"
     ;;
 
