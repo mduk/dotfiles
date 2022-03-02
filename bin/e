@@ -10,7 +10,7 @@ then
 else
   if [[ -f "$path" ]]
   then
-    owner="$(stat "$path" --printf=%G)"
+    owner="$(stat "$path" --printf=%U)"
 
     if [[ "$owner" != "$USER" ]]
     then
