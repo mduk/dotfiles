@@ -1,5 +1,4 @@
 set $www                      www
-set $randomBackground         false
 set $terminal                 /usr/bin/urxvt
 set $filemanager              /usr/bin/nautilus
 set $browser                  /usr/bin/firefox
@@ -17,9 +16,12 @@ focus_follows_mouse no
 bindsym $alt+Return             exec $terminal
 bindsym $alt+Shift+Return       exec $browser
 
+bindsym $alt+Shift+c            exec $terminal -e bc
+bindsym $alt+Shift+v            exec $terminal -e vim
+bindsym $alt+Shift+p            exec /usr/bin/system-config-printer
+
 bindsym $alt+Shift+q            kill
-bindsym $alt+Shift+c            reload
-bindsym $alt+Shift+r            restart
+bindsym $alt+Shift+r            reload
 bindsym $alt+space              exec i3-dmenu
 
 
