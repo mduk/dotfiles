@@ -341,6 +341,7 @@ type = internal/pulseaudio
 interval = 9
 
 sink = alsa_output.pci-0000_00_1f.3.analog-stereo
+;sink = alsa_output.usb-Burr-Brown_from_TI_USB_Audio_CODEC-00.analog-stereo
 
 format-volume = <bar-volume>
 format-volume-underline = ${colors.green}
@@ -393,46 +394,15 @@ battery = BAT0
 adapter = AC
 full-at = 98
 
-format-charging = <label-charging>
-format-charging-underline = ${colors.green}
+format-charging = "<label-charging>"
+format-charging-foreground = ${colors.green}
 
-format-discharging = <label-discharging>
-format-discharging-underline = ${colors.yellow}
+
+format-discharging = "<label-discharging>"
+format-discharging-foreground = ${colors.red}
 
 format-full = 100%
 format-full-underline = ${colors.green}
-
-
-
-
-
-
-
-
-
-
-
-
-[module/temperature]
-type = internal/temperature
-thermal-zone = 0
-warn-temperature = 60
-
-format = <ramp> <label>
-format-underline = #f50a4d
-format-warn = <ramp> <label-warn>
-format-warn-underline = ${self.format-underline}
-
-label = %temperature-c%
-label-warn = %temperature-c%
-label-warn-foreground = ${colors.red}
-
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
-ramp-foreground = ${colors.foreground-alt}
-
-
 
 
 
