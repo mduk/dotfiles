@@ -1,11 +1,10 @@
 function g {
     grep --color=always \
-         --exclude=*.swp \
-         --exclude=*.pyc \
-         --exclude-dir=.git/ \
-         --exclude-dir=.idea/ \
-         --exclude-dir=.pytest_cache/ \
-         --exclude-dir=node_modules/ \
+         --exclude='.*' \
+         --exclude-dir='.*' \
+         --exclude='*.swp' \
+         --exclude='*.pyc' \
+         --exclude-dir='node_modules' \
          --recursive \
          --line-number \
          "$1" \
