@@ -104,7 +104,9 @@ endif
 "###############################################################################
 call plug#begin('~/.vim/plugged')
 
+Plug 'vim-scripts/BufOnly.vim'
 Plug 'vim-scripts/LargeFile'
+
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
