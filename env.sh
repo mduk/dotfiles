@@ -53,7 +53,9 @@ esac
 export DMENU_FONT='fixed:pixelsize=32'
 export GTK_THEME='Adwaita-dark'
 export QT_STYLE_OVERRIDE='Adwaita-dark'
-export TERM="xterm-256color"
+
+# Terminal
+export TERM="rxvt-unicode-256color"
 
 if [[ $(hostname) == eddie ]]
 then
