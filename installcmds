@@ -33,3 +33,4 @@ sudo adduser $USER dialout
 git config --global user.email "daniel.kendell@gmail.com"
 git config --global user.name "Daniel Kendell"
 
+ xrdb ~/.Xresources
