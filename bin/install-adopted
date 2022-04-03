@@ -7,12 +7,12 @@ do
 
   declare dotfile=$(realpath "$DOT_DIR/$adoptedfile")
 
-  if [[ ! -f $adoptedfile ]] && [[ ! -d $adoptedfile ]]
-  then
-    echo "File doesn't exist: $adoptedfile"
-    echo "           Skipped"
-    continue
-  fi
+#  if [[ ! -f $adoptedfile ]] && [[ ! -d $adoptedfile ]]
+#  then
+#    echo "File doesn't exist: $adoptedfile"
+#    echo "           Skipped"
+#    continue
+#  fi
 
   if [[ -L $adoptedfile ]]
   then
@@ -24,11 +24,16 @@ do
   echo "Linking adopted file: $adoptedfile"
   echo "                from: $dotfile"
 
-  if [[ -O $(dirname "$adoptedfile") ]]
-  then      mv "$adoptedfile" "$adoptedfile.dist"
-            ln -s "$dotfile" "$adoptedfile"
-  else sudo mv "$adoptedfile" "$adoptedfile.dist"
-       sudo ln -s "$dotfile" "$adoptedfile"
+  if [[ -f $adoptedfile ]] || [[ -d $adoptedfile ]]
+  then
+    if [[ -O $(dirname "$adoptedfile") ]]
+    then      mv "$adoptedfile" "$adoptedfile.dist"
+              ln -s "$dotfile" "$adoptedfile"
+    else sudo mv "$adoptedfile" "$adoptedfile.dist"
+         sudo ln -s "$dotfile" "$adoptedfile"
+    fi
+  else
+    ln -s "$dotfile" "$adoptedfile"
   fi
 done < "$DOT_DIR/adoptedfiles"
 

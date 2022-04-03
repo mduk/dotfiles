@@ -1,5 +1,8 @@
 /etc/default/grub
 /etc/mpd.conf
 /etc/pulse/default.pa
-/etc/nginx
 /home/daniel/.config/i3
+/home/daniel/.fonts
+/home/daniel/.vimrc
+/home/daniel/.tmux.conf
+/home/daniel/.tmux.conf.local
