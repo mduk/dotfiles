@@ -1,3 +1,0 @@
-apt_install pavucontrol
-apt_install pavumeter
-apt_install pamix

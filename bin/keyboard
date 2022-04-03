@@ -6,5 +6,11 @@ then
   exit 1
 fi
 
+if ! which numlockx >/dev/null
+then 
+  echo "Install numlockx"
+  sudo apt install numlockx
+fi
+
 setxkbmap -option ctrl:nocaps
 numlockx on

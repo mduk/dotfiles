@@ -1,9 +1,14 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+if ! which vim >/dev/null
+then
+  echo "Install vim"
+  sudo apt install vim
+fi
 
 path="$1"
 
-if [[ -z "$path" ]] \
-  && [[ -f '.session.vim' ]]
+if [[ -z "$path" ]]  && [[ -f '.session.vim' ]]
 then
   echo "Restoring session..."
   vim -S .session.vim
