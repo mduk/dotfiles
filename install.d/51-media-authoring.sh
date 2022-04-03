@@ -1,2 +1,0 @@
-apt_install kdenlive
-apt_install vokoscreen
