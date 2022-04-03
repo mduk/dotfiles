@@ -1,3 +1,7 @@
+nmap <Leader>gn <Plug>(GitGutterNextHunk)  " git next
+nmap <Leader>gp <Plug>(GitGutterPrevHunk)  " git previous
+nmap <Leader>gs <Plug>(GitGutterPreviewHunk)
+
 set t_Co=256
 set rtp+=/usr/local/lib/python3.5/dist-packages/powerline/bindings/vim/
 set laststatus=2
