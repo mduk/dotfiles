@@ -2,7 +2,7 @@ sudo apt update -y
 
 sudo apt install -y adwaita-icon-theme-full adwaita-qt tcl-awthemes lxappearance
 sudo apt install -y bc gnuplot
-sudo apt install -y binutils build-essential
+sudo apt install -y binutils build-essential pkg-config
 sudo apt install -y docker.io docker-compose kubernetes
 sudo apt install -y dos2unix
 sudo apt install -y exfatprogs
