@@ -24,6 +24,7 @@ sudo apt install -y tree
 sudo apt install -y virtualbox vagrant
 sudo apt install -y xscreensaver xscreensaver-data-extra
 sudo apt install -y xsel arandr read-edid xclip
+sudo apt install -y kicad
 
 sudo apt autoremove -y
 
