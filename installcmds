@@ -5,7 +5,7 @@ sudo apt install -y bc gnuplot
 sudo apt install -y binutils build-essential
 sudo apt install -y docker.io docker-compose kubernetes
 sudo apt install -y dos2unix
-sudo apt install -y exfat-utils
+sudo apt install -y exfatprogs
 sudo apt install -y firefox chromium-browser
 sudo apt install -y i3-wm suckless-tools feh
 sudo apt install -y inkscape gimp
@@ -17,7 +17,7 @@ sudo apt install -y openscad
 sudo apt install -y openssh-server openssh-client
 sudo apt install -y pavucontrol pavumeter pamix
 sudo apt install -y pipenv
-sudo apt install -y rxvt-unicode-256color
+sudo apt install -y rxvt-unicode
 sudo apt install -y telnet nmap openssl whois
 sudo apt install -y tmux vim git jq httpie
 sudo apt install -y tree
