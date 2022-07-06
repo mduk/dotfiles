@@ -29,7 +29,7 @@ URxvt.lineSpace:            0
 
 ! Fonts
 URxvt.allow_bold:           true
-URxvt*font: xft:Monospace:pixelsize=28
+URxvt*font: xft:Monospace:pixelsize=22
 URxvt*boldFont: xft:Monospace:pixelsize=28:weight=bold
 
 ! Fix font space
