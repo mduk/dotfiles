@@ -49,14 +49,15 @@ floating_modifier $alt
 ################################################################################
 # Function Keys
 ################################################################################
-bindsym XF86AudioMute         exec --no-startup-id pactl set-sink-mute 0 toggle
-bindsym XF86AudioLowerVolume  exec --no-startup-id pactl set-sink-volume 0 -5%
-bindsym XF86AudioRaiseVolume  exec --no-startup-id pactl set-sink-volume 0 +5%
+bindsym XF86AudioMute         exec --no-startup-id vol mute
+bindsym XF86AudioLowerVolume  exec --no-startup-id vol down
+bindsym XF86AudioRaiseVolume  exec --no-startup-id vol up
 bindsym XF86AudioMicMute      exec --no-startup-id pactl set-source-mute 0 toggle
 bindsym XF86AudioPrev         exec mpc prev
 bindsym XF86AudioPause        exec mpc toggle
 bindsym XF86AudioPlay         exec mpc toggle
 bindsym XF86AudioNext         exec mpc next
+bindsym XF86Favorites         exec $filemanager
 #bindsym $win+p                exec touch /tmp/display
 bindsym XF86Search            exec $www
 # F10 / kbdbacklight
