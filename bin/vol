@@ -1,21 +1,23 @@
 #!/bin/bash
 
+sink_idx=4
+
 case $1 in
 
   up)
-    amixer set Master 2%+
+    pactl set-sink-volume $sink_idx +10%
     ;;
 
   down)
-    amixer set Master 2%-
+    pactl set-sink-volume $sink_idx -10%
     ;;
 
   mute)
-    amixer set Master 0
+    pactl set-sink-mute $sink_idx toggle
     ;;
 
   *)
-    echo "Usage: vol [up|down]"
+    echo "Usage: vol [up|down|mute]"
     exit 1
     ;;
 
