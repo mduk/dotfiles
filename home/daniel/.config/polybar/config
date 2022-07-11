@@ -55,7 +55,7 @@ font-0 = Monospace:pixelsize=18
 ;tray-position = right
 modules-left = i3
 modules-center =
-modules-right = xscreensaver xkeyboard pulseaudio wifi battery date
+modules-right = xscreensaver pulseaudio wifi battery date
 
 ;wm-restack = i3
 
@@ -273,7 +273,7 @@ card = intel_backlight
 
 [module/wifi]
 type = internal/network
-interface = wlp59s0
+interface = ${env:WIFI_INTERFACE}
 interval = 1
 
 format-connected = <label-connected>
