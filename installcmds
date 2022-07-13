@@ -7,7 +7,7 @@ sudo apt install -y docker.io docker-compose kubernetes
 sudo apt install -y dos2unix
 sudo apt install -y exfatprogs
 sudo apt install -y firefox chromium-browser
-sudo apt install -y i3-wm suckless-tools feh polybar
+sudo apt install -y i3-wm suckless-tools feh polybar scrot
 sudo apt install -y inkscape gimp
 sudo apt install -y mpd mpc ncmpc
 sudo apt install -y mpv vlc ffmpeg dvdbackup handbrake
@@ -27,6 +27,7 @@ sudo apt install -y virtualbox vagrant
 sudo apt install -y xscreensaver xscreensaver-data-extra
 sudo apt install -y xsel arandr read-edid xclip
 sudo apt install -y kicad
+sudo apt install -y xvkbd xbindkeys
 
 sudo apt autoremove -y
 
