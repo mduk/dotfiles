@@ -27,7 +27,7 @@ sudo apt install -y virtualbox vagrant
 sudo apt install -y xscreensaver xscreensaver-data-extra
 sudo apt install -y xsel arandr read-edid xclip
 sudo apt install -y kicad
-sudo apt install -y xvkbd xbindkeys
+sudo apt install -y xvkbd xbindkeys libinput-tools
 
 sudo apt autoremove -y
 
