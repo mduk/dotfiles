@@ -404,8 +404,8 @@ mode "XSession" {
   bindsym S                    exec auto-monitors standalone                ; mode "default"
   bindsym $alt+Shift+S         exec systemctl poweroff                      ; mode "default"
 
-  bindsym T                    exec touchscreen toggle                      ; mode "default"
-  bindsym Shift+T              exec trackpad toggle                         ; mode "default"
+  bindsym T                    exec trackpad toggle                         ; mode "default"
+  bindsym Shift+T              exec touchscreen toggle                      ; mode "default"
 
   bindsym $alt+Shift+e         exec loginctl terminate-session $XDG_SESSION_ID
 
