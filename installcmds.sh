@@ -38,6 +38,14 @@ sudo sed -i \
   /etc/default/grub
 sudo update-grub
 
+pulse_tcp_listener=/etc/pulse/default.pa.d/tcp-listener.pa
+if [[ ! -f $pulse_tcp_listener ]]
+then echo "load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1" \
+  | sudo tee $pulse_tcp_listener
+fi
+
+# missing: install mpd.conf
+
 sudo adduser $USER dialout
 
 git config --global user.email "daniel.kendell@gmail.com"
