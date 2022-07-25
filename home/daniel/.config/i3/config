@@ -5,10 +5,8 @@ set $browser                  /usr/bin/firefox
 
 set $touchpad                 "SYNA2393:00 06CB:7A13 Touchpad"
 set $outputInternal           eDP-1
-set $outputHdmi               DP-3
+set $outputHdmi               HDMI-1
 
-
-bindsym $alt+Escape exec umsd
 
 mouse_warping none
 focus_follows_mouse no

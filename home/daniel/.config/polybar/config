@@ -28,7 +28,8 @@ blue = #0a6cf5
 yellow = #ffb52a
 
 [bar/main]
-monitor = ${env:MONITOR}
+monitor = ${env:MONITOR:eDP-1}
+
 width = 100%
 height = 32
 offset-x = 1%

@@ -6,10 +6,7 @@ declare profile="${host}-standalone"
 echo "Default Profile: $profile"
 
 declare -A monitor_profiles=(
-  [d41d8cd98f00b204e9800998ecf8427e]='eddie-desk'
-  [1309228f39f53636f00b25977ed0b964]='eddie-home-tv+audio' # tv
-  [fdb68fcec44cd29c74723a1874234271]='eddie-home-tv+audio' # avreceiver
-#  [d41d8cd98f00b204e9800998ecf8427e]='queeg-flat'
+  [d41d8cd98f00b204e9800998ecf8427e]='holly-desk'
 )
 
 if [[ -z $1 ]]
@@ -19,10 +16,10 @@ then
   then
     echo "  External Monitor Connected"
 
-    declare hash="$(hdmi-edid-hash)"
-    echo "  External Monitor EDID Hash: $hash"
+    declare edid="$(hdmi-edid-hash)"
+    echo "  External Monitor EDID Hash: $edid"
 
-    profile="${monitor_profiles[$hash]}"
+    profile="${monitor_profiles[$edid]}"
     echo "  Selected Profile: $profile"
   else
     echo "  No External Monitor Connected"
@@ -52,10 +49,13 @@ source "$layout"
 
 sleep 1
 
-echo Mapping Touchscreen
 if [[ -n $XINPUT_TOUCHSCREEN ]]
-then map-touchscreen
+then
+  echo Mapping Touchscreen
+  map-touchscreen
 fi
+
+i3-msg 'reload'
 
 echo Starting Polybar
 i3-polybar

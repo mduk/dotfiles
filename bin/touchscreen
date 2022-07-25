@@ -64,6 +64,10 @@ cmd-configure() {
     else echo
     fi
   done
+
+  if [[ "$cmd" == "trackpad" ]]
+  then synclient HorizScrollDelta=-111 VertScrollDelta=-111
+  fi
 }
 
 cmd-properties() {

@@ -11,9 +11,9 @@ declare monitors=$(
 
 for m in $monitors
 do
-  MONITOR=$m $HOME/Development/jaagr/polybar/build/bin/polybar \
+  MONITOR=$m polybar \
     --reload \
     --config=${XDG_CONFIG_HOME:-$HOME/.config}/polybar/config \
-    example \
+    main \
     2>&1 | logger &
 done
