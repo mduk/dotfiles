@@ -9,7 +9,7 @@ sudo apt install -y exfatprogs
 sudo apt install -y firefox chromium-browser
 sudo apt install -y i3-wm suckless-tools feh polybar scrot
 sudo apt install -y inkscape gimp
-sudo apt install -y mpd mpc ncmpc
+sudo apt install -y mpd mpc ncmpc kid3
 sudo apt install -y mpv vlc ffmpeg dvdbackup handbrake
 sudo apt install -y v4l-utils qv4l2
 sudo apt install -y obs-studio
@@ -28,6 +28,7 @@ sudo apt install -y xscreensaver xscreensaver-data-extra
 sudo apt install -y xsel arandr read-edid xclip
 sudo apt install -y kicad
 sudo apt install -y xvkbd xbindkeys libinput-tools
+sudo apt install -y transmission-gtk
 
 sudo apt autoremove -y
 
