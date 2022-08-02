@@ -412,7 +412,7 @@ mode "XSession" {
   bindsym Down                 exec xbacklight -dec 10
   bindsym Shift+Down           exec xbacklight -set 10                      ; mode "default"
 
-  bindsym space                exec auto-monitors && keyboard configure     ; mode "default"
+  bindsym space                exec auto-monitors || keyboard configure     ; mode "default"
   bindsym Return                                                            ; mode "default"
   bindsym Escape                                                            ; mode "default"
 }
