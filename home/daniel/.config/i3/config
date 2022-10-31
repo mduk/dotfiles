@@ -3,9 +3,22 @@ set $terminal                 /usr/bin/urxvt
 set $filemanager              /usr/bin/nautilus
 set $browser                  /usr/bin/firefox
 
+
+################################################################################
+# Devices
+################################################################################
 set $touchpad                 "SYNA2393:00 06CB:7A13 Touchpad"
 set $outputInternal           eDP-1
 set $outputHdmi               HDMI-1
+
+
+################################################################################
+# Modifier Keys
+################################################################################
+set $alt              Mod1
+set $win              Mod4
+set $angryalt         Mod5
+floating_modifier $win
 
 
 mouse_warping none
@@ -35,13 +48,6 @@ font pango:monospace 16
 exec_always polybar --reload main
 
 
-################################################################################
-# Modifier Keys
-################################################################################
-set $alt              Mod1
-set $win              Mod4
-set $angryalt         Mod5
-floating_modifier $alt
 
 
 ################################################################################
@@ -135,7 +141,9 @@ default_border none
 ################################################################################
 # Floating Windows
 ################################################################################
-#for_window [class="Isolinear"]        border pixel 0
+for_window [class="testwindows"] floating enable
+for_window [class="testwindows"] border pixel 4
+
 for_window [class="plasmashell"]      floating enable
 for_window [class="gnuplot_qt"]       floating enable
 for_window [class="Tek4010"]          floating enable
@@ -412,7 +420,7 @@ mode "XSession" {
   bindsym Down                 exec xbacklight -dec 10
   bindsym Shift+Down           exec xbacklight -set 10                      ; mode "default"
 
-  bindsym space                exec auto-monitors || keyboard configure     ; mode "default"
+  bindsym space                exec auto-configure                          ; mode "default"
   bindsym Return                                                            ; mode "default"
   bindsym Escape                                                            ; mode "default"
 }
