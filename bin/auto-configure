@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -eu
+
+auto-monitors
+keyboard configure
+trackpad configure
