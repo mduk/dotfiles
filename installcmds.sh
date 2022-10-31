@@ -7,7 +7,7 @@ sudo apt install -y docker.io docker-compose kubernetes
 sudo apt install -y dos2unix
 sudo apt install -y exfatprogs
 sudo apt install -y firefox chromium-browser
-sudo apt install -y i3-wm suckless-tools feh polybar scrot
+sudo apt install -y i3-wm suckless-tools feh polybar scrot dunst
 sudo apt install -y inkscape gimp
 sudo apt install -y mpd mpc ncmpc kid3
 sudo apt install -y mpv vlc ffmpeg dvdbackup handbrake
