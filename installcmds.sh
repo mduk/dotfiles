@@ -9,8 +9,8 @@ sudo apt install -y exfatprogs
 sudo apt install -y firefox chromium-browser
 sudo apt install -y i3-wm suckless-tools feh polybar scrot dunst
 sudo apt install -y inkscape gimp
-sudo apt install -y mpd mpc ncmpc kid3 flac
-sudo apt install -y mpv vlc ffmpeg dvdbackup handbrake
+sudo apt install -y mpd mpc ncmpc kid3 flac mediainfo
+sudo apt install -y mpv vlc ffmpeg dvdbackup handbrake sox
 sudo apt install -y v4l-utils qv4l2
 sudo apt install -y obs-studio
 sudo apt install -y nginx nginx-doc
@@ -25,12 +25,16 @@ sudo apt install -y tmux vim git jq httpie
 sudo apt install -y tree
 sudo apt install -y virtualbox vagrant
 sudo apt install -y xscreensaver xscreensaver-data-extra
-sudo apt install -y xsel arandr read-edid xclip
+sudo apt install -y xsel arandr read-edid xclip x11-utils
 sudo apt install -y kicad
 sudo apt install -y xvkbd xbindkeys libinput-tools
 sudo apt install -y transmission-gtk
+sudo apt install -y p7zip-full
+sudo apt install -y ncat
 
 sudo apt autoremove -y
+
+exit
 
 sudo sed -i \
   -e '/^GRUB_TIMEOUT=/s/=.*/=3/' \
