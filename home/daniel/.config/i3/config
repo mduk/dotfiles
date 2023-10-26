@@ -27,10 +27,6 @@ focus_follows_mouse no
 bindsym $alt+Return             exec $terminal
 bindsym $alt+Shift+Return       exec $browser
 
-bindsym $alt+Shift+c            exec $terminal -e bc
-bindsym $alt+Shift+v            exec $terminal -e vim
-bindsym $alt+Shift+p            exec /usr/bin/system-config-printer
-
 bindsym $alt+Shift+q            kill
 bindsym $alt+Shift+r            reload
 bindsym $alt+space              exec i3-dmenu
@@ -46,7 +42,6 @@ font pango:monospace 16
 # Polybar
 ################################################################################
 exec_always polybar --reload main
-
 
 
 
@@ -135,15 +130,25 @@ bindsym $angryalt+L            focus right
 ################################################################################
 # Window Syles
 ################################################################################
-#default_border none
-#hide_edge_borders both
+#client.focused          #aaaaaa #aaaaaa #000000 #306B34
+#client.focused_inactive #555555 #555555 #000000 #555555
+#client.unfocused        #555555 #000000 #555555 #000000
+#client.urgent           #bd2c40 #bd2c40 #bd2c40 #bd2c40
+
+#                       border  bckgrnd text    chldbdr
+client.focused          #df00fe #9c51b6 #000000 #306B34
+client.focused_inactive #df00fe #df00fe #000000 #555555
+client.unfocused        #df00fe #000000 #df00fe #000000
+client.urgent           #ff0000 #ff0000 #ff0000 #ff0000
+
+title_align center
+default_border pixel 3
+default_floating_border pixel 6
+hide_edge_borders smart
 
 ################################################################################
 # Floating Windows
 ################################################################################
-for_window [class="testwindows"] floating enable
-for_window [class="testwindows"] border pixel 4
-
 for_window [class="plasmashell"]      floating enable
 for_window [class="gnuplot_qt"]       floating enable
 for_window [class="Tek4010"]          floating enable
@@ -199,7 +204,7 @@ bindsym $alt+Prior             floating toggle
 ################################################################################
 # Container Split
 ################################################################################
-bindsym $alt+Ctrl+S             split v
+bindsym $alt+Shift+S             split v
 
 
 ################################################################################
@@ -395,6 +400,17 @@ mode "WWW" {
 }
 
 
+bindsym $alt+Shift+C           mode "Clipboard"
+mode "Clipboard" {
+  bindsym A                    exec cb-accesstoken                          ; mode "default"
+  bindsym J                    exec cb-json                                 ; mode "default"
+  bindsym S                    exec cb-scaleimage                           ; mode "default"
+  bindsym U                    exec cb-uuid                                 ; mode "default"
+
+  bindsym Escape                                                              mode "default"
+}
+
+
 ################################################################################
 # XSession
 ################################################################################
@@ -405,8 +421,9 @@ mode "XSession" {
   bindsym --release K          exec xkill                                   ; mode "default"
   bindsym P                    exec i3-input -F 'exec xprop > /tmp/%s.xprop'; mode "default"
 
-  bindsym R                    exec $HOME/.dotfiles/bin/record-active-window; mode "default"
   bindsym $alt+Shift+R         exec systemctl reboot                        ; mode "default"
+
+  bindsym R                    exec i3-msg reload                           ; mode "default"
 
   bindsym S                    exec auto-monitors standalone                ; mode "default"
   bindsym $alt+Shift+S         exec systemctl poweroff                      ; mode "default"
@@ -445,10 +462,4 @@ mode "DLYoutube" {
 }
 
 
-################################################################################
-# Colour Scheme (i3-style)
-################################################################################
-client.focused          #aaaaaa #aaaaaa #000000 #306B34
-client.focused_inactive #555555 #555555 #000000 #555555
-client.unfocused        #555555 #000000 #555555 #000000
-client.urgent           #bd2c40 #bd2c40 #bd2c40 #bd2c40
+
