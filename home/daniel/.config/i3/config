@@ -136,14 +136,19 @@ bindsym $angryalt+L            focus right
 #client.urgent           #bd2c40 #bd2c40 #bd2c40 #bd2c40
 
 #                       border  bckgrnd text    chldbdr
-client.focused          #df00fe #9c51b6 #000000 #306B34
-client.focused_inactive #df00fe #df00fe #000000 #555555
-client.unfocused        #df00fe #000000 #df00fe #000000
+client.focused          #df00fe #df00fe #000000 #9c51b6
+client.focused_inactive #890089 #ab00ab #000000 #9c51b6
+client.unfocused        #ab00ab #000000 #ab00ab #000000
 client.urgent           #ff0000 #ff0000 #ff0000 #ff0000
 
+set borderwidth 6
+
+# Force all windows to have a border
+for_window [class=".*"] border pixel $borderwidth
+
 title_align center
-default_border pixel 3
-default_floating_border pixel 6
+default_border pixel $borderwidth
+default_floating_border pixel $borderwidth
 hide_edge_borders smart
 
 ################################################################################
