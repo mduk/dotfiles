@@ -7,10 +7,19 @@ then
 fi
 
 if ! which numlockx >/dev/null
-then 
+then
   echo "Install numlockx"
   sudo apt install numlockx
 fi
 
+# Turn caps lock off
+declare -r caps_lock_status=$(xset q | grep "Caps Lock:" | awk '{print $4}')
+if [[ "$caps_lock_status" == "on" ]]
+then xdotool key Caps_Lock
+fi
+
+# Set caps lock key to control
 setxkbmap -option ctrl:nocaps
+
+# Turn on num lock
 numlockx on
