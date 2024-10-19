@@ -11,7 +11,8 @@ declare PROMPT_BOLD="\033[1m"
 declare PROMPT_RESET="\033[0m"
 
 declare -ag PROMPT_BLOCKS=(
-  'user host screen'
+  'user host screen aws docker'
+  'python'
   'path git'
   'clock prompt'
 )
@@ -63,7 +64,7 @@ block_python() {
   fi
 
   declare version=$(python --version 2>&1 | awk '{print $2}')
-  declare env=$([[ -v VIRTUAL_ENV ]] && echo venv || echo system)
+  declare env=$([[ -v VIRTUAL_ENV ]] && echo $VIRTUAL_ENV || echo system)
   echo "[Python: $version ($env)]"
 }
 
@@ -108,6 +109,18 @@ block_git() {
 
   if [[ -n $git_branch ]]
   then echo "[$git_branch]"
+  fi
+}
+
+block_aws() {
+  if [[ -n $AWS_SECRET_ACCESS_KEY ]]
+  then echo "[AWS]"
+  fi
+}
+
+block_docker() {
+  if [[ -n $DOCKER_HOST ]]
+  then echo "[DOCKER_HOST: $DOCKER_HOST]"
   fi
 }
 
