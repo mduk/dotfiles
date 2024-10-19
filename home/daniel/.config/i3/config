@@ -69,7 +69,7 @@ bindsym XF86WLAN              exec touch /tmp/wlan
 # Screenshots
 # https://www.reddit.com/r/i3wm/comments/65vis5/screenshot_commands_from_my_i3_config/
 ################################################################################
-bindsym --release Print exec scrot '-%Y-%m-%d-%H-%M-%S.png' -e 'mkdir -p ~/Pictures/Screenshots && mv $f ~/Pictures/Screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/Screenshots/`ls -1 -t ~/Pictures/Screenshots | head -1`' # All screens
+bindsym --release Print       exec scrot '%Y-%m-%d-%H-%M-%S.png' -e 'mkdir -p ~/Pictures/Screenshots && mv $f ~/Pictures/Screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/Screenshots/`ls -1 -t ~/Pictures/Screenshots | head -1`' # All screens
 bindsym --release Shift+Print exec scrot -s '%Y-%m-%d-%H-%M-%S.png' -e 'mkdir -p ~/Pictures/Screenshots && mv $f ~/Pictures/Screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/Screenshots/`ls -1 -t ~/Pictures/Screenshots | head -1`' # Area selection
 
 
@@ -137,18 +137,16 @@ bindsym $angryalt+L            focus right
 
 #                       border  bckgrnd text    chldbdr
 client.focused          #df00fe #df00fe #000000 #9c51b6
-client.focused_inactive #890089 #ab00ab #000000 #9c51b6
-client.unfocused        #ab00ab #000000 #ab00ab #000000
+client.focused_inactive #4b0082 #4b0082 #000000 #9c51b6
+client.unfocused        #4b0082 #000000 #4b0082 #000000
 client.urgent           #ff0000 #ff0000 #ff0000 #ff0000
 
-set borderwidth 6
-
 # Force all windows to have a border
-for_window [class=".*"] border pixel $borderwidth
+for_window [class=".*"] border pixel 6
 
 title_align center
-default_border pixel $borderwidth
-default_floating_border pixel $borderwidth
+default_border pixel 6
+default_floating_border pixel 6
 hide_edge_borders smart
 
 ################################################################################
@@ -365,9 +363,6 @@ mode "WWW" {
 
   bindsym E                   exec $www ebay                                    ; mode "default"
   bindsym Shift+E     $tabbed exec $www ebay                                    ; mode "default"
-
-  bindsym F                   exec $www facebook                                ; mode "default"
-  bindsym Shift+F     $tabbed exec $www facebook                                ; mode "default"
 
   bindsym G                   exec $www gmail                                   ; mode "default"
   bindsym Shift+G     $tabbed exec $www gmail                                   ; mode "default"
