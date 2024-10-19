@@ -1,0 +1,40 @@
+#!/bin/bash
+
+set -eu
+
+declare -ri max_dimension=320
+
+# Config ends, code begins.
+
+declare -r imgfile=$(mktemp)
+declare -r outfile=$(mktemp)
+
+# Read image from clipboard
+xclip -selection clipboard -t image/png -o > $imgfile
+
+# Parse the image size
+read _ _ imgsize _ <<<$(identify $imgfile)
+read imgwidth imgheight <<<$(echo "$imgsize" | tr 'x' ' ')
+
+# If the image falls within our desired dimensions, nothing to do.
+if   [[ $imgwidth  -lt $max_dimension ]] \
+  && [[ $imgheight -lt $max_dimension ]]
+then
+  exit 1
+fi
+
+# Will width or height be proportional?
+if [[ $imgwidth -gt $imgheight ]]
+then declare -r geometry="${max_dimension}x" # Landscape
+else declare -r geometry="x${max_dimension}" # Portrait
+fi
+
+# Scale image
+convert $imgfile -resize $geometry $outfile
+
+# Write image to clipboard
+xclip -selection clipboard -t image/png -i $outfile
+
+# Tidy up
+rm $imgfile
+rm $outfile

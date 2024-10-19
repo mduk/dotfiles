@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -eu
+
+/home/daniel/Development/Congenica/psga-backend/access_token.sh | tr -d '\n' | cb

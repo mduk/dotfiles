@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -eu
+
+uuidgen | tr -d '\n' | cb
