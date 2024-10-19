@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -eu
+
+HandBrakeCLI \
+  --input "$1" \
+  --title 0 \
+  --json \
+  2>/dev/null \
+| sed -n '
+  /JSON Title Set: /{
+    s///
+    :a
+    p
+    n
+    ba
+  }'

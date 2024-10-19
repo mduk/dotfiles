@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -eu
+
+cd $HOME/CDs
+
+while ! cdstatus /dev/sr0
+do sleep 1
+done
+
+abcde -p -o wav,flac,m4a && eject
