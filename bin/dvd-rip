@@ -1,7 +1,7 @@
 #!/bin/bash
 
 declare -r dvd_path="$1"; shift
-declare -r preset=${2:-Universal}; shift
+declare -r preset="HQ 1080p30 Surround"
 
 declare -r handbrake="$(which HandBrakeCLI)"
 
@@ -17,18 +17,27 @@ declare -r videots_path=$(
     -name VIDEO_TS
 )
 
-declare -r titles=$(
-  HandBrakeCLI \
-    --input "$videots_path" \
-    --title 0 \
-    2>&1 \
-  | sed -ne 's/+ title \([0-9]*\):/\1/p'
-)
+declare titles="$@"
+declare -r episodes_file="${dvd_path}/episodes.txt"
+
+if [[ -f $episodes_file ]]
+then
+  titles=$(awk '{ print $1 }' "$episodes_file" | xargs)
+fi
+
 
 for n in $titles
 do
     declare incomplete_path="${dvd_path}/title${n}-incomplete.mkv"
     declare complete_path="${dvd_path}/title${n}.mkv"
+
+    if [[ -f "$complete_path" ]]
+    then continue
+    fi
+
+    if [[ -f "$incomplete_path" ]]
+    then rm "$incomplete_path"
+    fi
 
     HandBrakeCLI \
         --input "$videots_path" \
