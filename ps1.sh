@@ -25,7 +25,7 @@ mini() {
 unprompt() {
   unset PROMPT_COMMAND
   unset -f prompt_command
-  export PS1="[\u@\h]\$ "
+  export PS1="\$ "
 }
 
 exit_bar() {
