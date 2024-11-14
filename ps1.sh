@@ -12,7 +12,6 @@ declare PROMPT_RESET="\033[0m"
 
 declare -ag PROMPT_BLOCKS=(
   'user host screen aws docker'
-  'python'
   'path git'
   'clock prompt'
 )
@@ -20,6 +19,9 @@ declare -ag PROMPT_BLOCKS=(
 mini() {
   PROMPT_SPACE=0
   PROMPT_BAR=false
+  PROMPT_BLOCKS=(
+    'clock prompt'
+  )
 }
 
 unprompt() {
@@ -186,7 +188,7 @@ prompt_command() {
     fi
   done
 
-  PS1="${promptbar}${promptspace}\n$(
+  PS1="${promptbar}${promptspace}$(
     local IFS=$'\n'
     echo "${promptlines[*]}"
   )$PROMPT_RESET"
