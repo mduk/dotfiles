@@ -351,7 +351,7 @@ format-muted-underline = ${colors.red}
 
 label-volume-foreground = ${root.foreground}
 
-label-muted = =========
+label-muted = ---------
 label-muted-foreground = ${colors.background-alt}
 
 use-ui-max = false
@@ -367,9 +367,9 @@ bar-volume-foreground-6 = #ff5555
 bar-volume-gradient = true
 bar-volume-indicator =
 bar-volume-indicator-font = 0
-bar-volume-fill = =
+bar-volume-fill = #
 bar-volume-fill-font = 0
-bar-volume-empty = =
+bar-volume-empty = #
 bar-volume-empty-font = 0
 bar-volume-empty-foreground = ${colors.foreground-alt}
 
