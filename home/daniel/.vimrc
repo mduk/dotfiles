@@ -124,9 +124,7 @@ Plug 'tpope/vim-abolish'
 Plug 'pbrisbin/vim-mkdir'
 
 Plug 'vim-syntastic/syntastic'
-"Plug 'ycm-core/YouCompleteMe'
 
-Plug 'lilydjwg/colorizer'
 
 Plug 'nvie/vim-flake8'
 Plug 'vim-erlang/vim-erlang-runtime'
