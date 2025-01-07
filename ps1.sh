@@ -104,14 +104,29 @@ block_user() {
 }
 
 block_git() {
+  local block=""
+
   local git_branch=$(
       git branch --no-color 2> /dev/null \
         | sed -n '/^* /s///p'
   )
 
   if [[ -n $git_branch ]]
-  then echo "[$git_branch]"
+  then block="$git_branch"
   fi
+
+  local git_stash=$(
+    git stash list \
+      | wc -l
+  )
+
+  if [[ $git_stash == "1" ]]
+  then block="${block} ${PROMPT_YELLOW}(${git_stash} stash)${PROMPT_RESET}"
+  elif [[ $git_stash != "0" ]]
+  then block="${block} ${PROMPT_YELLOW}(${git_stash} stashes)${PROMPT_RESET}"
+  fi
+
+  echo "[$block]"
 }
 
 block_aws() {
