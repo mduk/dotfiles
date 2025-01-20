@@ -426,7 +426,7 @@ mode "XSession" {
 
   bindsym R                    exec i3-msg reload                           ; mode "default"
 
-  bindsym S                    exec auto-monitors standalone                ; mode "default"
+  bindsym S                    exec systemctl suspend                       ; mode "default"
   bindsym $alt+Shift+S         exec systemctl poweroff                      ; mode "default"
 
   bindsym T                    exec trackpad toggle                         ; mode "default"
@@ -440,6 +440,8 @@ mode "XSession" {
   bindsym Shift+Down           exec xbacklight -set 10                      ; mode "default"
 
   bindsym space                exec auto-configure                          ; mode "default"
+  bindsym Shift+space          exec auto-monitors standalone                ; mode "default"
+
   bindsym Return                                                            ; mode "default"
   bindsym Escape                                                            ; mode "default"
 }
