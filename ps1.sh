@@ -104,6 +104,11 @@ block_user() {
 }
 
 block_git() {
+
+  if ! git status &> /dev/null
+  then return
+  fi
+
   local block=""
 
   local git_branch=$(
