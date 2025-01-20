@@ -1,1 +1,49 @@
-/home/daniel/.dotfiles/bin/dohost
+#!/bin/bash
+
+janet=janet.local #86.25.68.137
+key='janet'
+keypath="$HOME/.ssh/${key}_rsa"
+
+ssh_key="-i $keypath"
+ssh_args=""
+ssh_dest="$USER@$janet"
+ssh="ssh -XAt $ssh_key $ssh_dest"
+
+sync() {
+  while [[ $# -gt 0 ]]
+  do
+    rsync -avhzK -e "ssh ${ssh_key}" "$HOME/$1/" "$ssh_dest:/mnt/PAIR/$1"
+    shift
+  done
+}
+
+case "$1" in
+
+  sync)
+    sync ${2:-Documents Music Pictures Camera}
+    ;;
+
+  push)
+    if [[ -d "$2" ]]
+    then rsync -avhz -e "ssh ${ssh_key}" "$2/" "$ssh_dest:$2"
+    else scp "$ssh_key" "$2" "$ssh_dest:~/$2"
+    fi
+    ;;
+
+  pull)
+    rsync -avhz -e "ssh ${ssh_key}" "$ssh_dest:$2" "$2"
+    ;;
+
+  screen)
+    $ssh "SCREEN_NAME='$2' screen -DR $2"
+    ;;
+
+  screens)
+    $ssh "screen -ls"
+    ;;
+
+  *)
+    $ssh "$@"
+    ;;
+
+esac
