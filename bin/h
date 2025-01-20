@@ -1,0 +1,9 @@
+#!/bin/bash
+
+[[ $# -eq 0 ]] && echo "Usage: h <file>" \
+               && exit 1
+
+if [[ $1 == .* ]];
+  then mv "$1" "${1#.}"
+  else mv "$1" ".$1"
+fi
