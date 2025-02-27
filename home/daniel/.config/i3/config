@@ -21,7 +21,7 @@ set $angryalt         Mod5
 floating_modifier $win
 
 
-mouse_warping none
+mouse_warping output
 focus_follows_mouse no
 
 bindsym $alt+Return             exec $terminal
