@@ -16,7 +16,12 @@ Xft.hintstyle:              hintslight
 !-------------------------------------------------------------------------------
 
 URxvt.depth:                32
-URxvt.geometry:             90x30
+
+! There appears to be a bug in urxvt-unicode 9.31 that puts the cursor in the wrong
+! place if the window is full screen height. Setting URxvt.geometry seems to "fix"
+! it, I don't know why.
+URxvt.geometry:             400x400
+
 URxvt.transparent:          true
 URxvt.shading:              30
 URxvt.fading:               0
