@@ -2,11 +2,17 @@ sudo apt update -y
 
 sudo apt install -y adwaita-icon-theme-full adwaita-qt tcl-awthemes lxappearance
 sudo apt install -y bc gnuplot
-sudo apt install -y binutils build-essential pkg-config
-sudo apt install -y docker.io docker-compose kubernetes
+sudo apt install -y binutils build-essential pkg-config cmake
+
+# Install using docker's own APT repository
+# sudo apt install -y docker.io docker-compose kubernetes
+
 sudo apt install -y dos2unix
 sudo apt install -y exfatprogs
-sudo apt install -y firefox chromium-browser
+
+# Install using mozilla's own APT repository_
+#sudo apt install -y firefox chromium-browser
+
 sudo apt install -y i3-wm suckless-tools feh polybar scrot dunst keychain
 sudo apt install -y inkscape gimp
 sudo apt install -y mpd mpc ncmpc kid3 flac mediainfo
