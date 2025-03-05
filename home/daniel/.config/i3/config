@@ -1,6 +1,6 @@
 set $www                      www
 set $terminal                 /usr/bin/urxvt
-set $filemanager              /usr/bin/nautilus
+set $filemanager              /usr/bin/nemo
 set $browser                  /usr/bin/firefox
 
 
