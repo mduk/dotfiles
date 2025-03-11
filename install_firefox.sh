@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+sudo apt-get remove -y firefox
+
 sudo apt-get update
 sudo apt-get install ca-certificates curl
 sudo install -d -m 0755 /etc/apt/keyrings
