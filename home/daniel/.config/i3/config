@@ -100,7 +100,6 @@ exec_always auto-monitors
 exec_always keyboard configure
 exec_always trackpad configure
 exec_always touchscreen configure
-exec_always touchscreen off
 
 
 ################################################################################
