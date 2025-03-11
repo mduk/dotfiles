@@ -1,7 +1,7 @@
 set $www                      www
 set $terminal                 /usr/bin/urxvt
 set $filemanager              /usr/bin/nemo
-set $browser                  /usr/bin/firefox
+set $browser                  /usr/bin/google-chrome
 
 
 ################################################################################
