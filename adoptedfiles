@@ -1,6 +1,3 @@
-/etc/default/grub
-/etc/mpd.conf
-/etc/pulse/default.pa
 /home/daniel/.config/i3
 /home/daniel/.fonts
 /home/daniel/.vimrc
