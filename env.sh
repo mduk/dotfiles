@@ -28,6 +28,15 @@ fi
 
 # Hardware
 case "$(hostname)" in
+  eddie)
+    export WIFI_INTERFACE=''
+    export XINPUT_TOUCHSCREEN=''
+    export XRANDR_INTERNAL=''
+    export XRANDR_HDMI='HDMI-1'
+    export SYS_DISPLAY_INTERNAL=''
+    export SYS_DISPLAY_EXTERNAL='/sys/class/drm/card0-HDMI-A-1'
+    ;;
+
   holly)
     export WIFI_INTERFACE='wlp0s20f3'
     export XINPUT_TOUCHSCREEN=''
@@ -38,12 +47,12 @@ case "$(hostname)" in
     ;;
 
   queeg)
-    export WIFI_INTERFACE='wlp3s0'
-    export XINPUT_TOUCHSCREEN=''
-    export XRANDR_INTERNAL='LVDS-1'
-    export XRANDR_HDMI='DP-1'
-    export SYS_DISPLAY_INTERNAL='/sys/class/drm/card0-LVDS-1'
-    export SYS_DISPLAY_EXTERNAL='/sys/class/drm/card0-DP-1'
+    export WIFI_INTERFACE='wlp0s20f3'
+    export XINPUT_TOUCHSCREEN='9'
+    export XRANDR_INTERNAL='eDP-1'
+    export XRANDR_HDMI='HDMI-1'
+    export SYS_DISPLAY_INTERNAL='/sys/class/drm/card0-eDP-1'
+    export SYS_DISPLAY_EXTERNAL='/sys/class/drm/card0-HDMI-1'
     ;;
 
 esac
