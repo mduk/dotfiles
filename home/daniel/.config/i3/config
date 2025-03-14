@@ -60,8 +60,8 @@ bindsym XF86Favorites         exec $filemanager
 #bindsym $win+p                exec touch /tmp/display
 bindsym XF86Search            exec $www
 # F10 / kbdbacklight
-#bindsym XF86MonBrightnessDown exec xbacklight -dec
-#bindsym XF86MonBrightnessUp   exec xbacklight -inc
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym XF86MonBrightnessUp   exec brightnessctl set +5%
 bindsym XF86WLAN              exec touch /tmp/wlan
 
 
