@@ -9,7 +9,7 @@ set $browser                  /usr/bin/google-chrome
 ################################################################################
 set $touchpad                 "SYNA2393:00 06CB:7A13 Touchpad"
 set $outputInternal           eDP-1
-set $outputHdmi               HDMI-1
+set $outputHdmi               HDMI-2
 
 
 ################################################################################

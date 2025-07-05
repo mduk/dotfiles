@@ -48,11 +48,12 @@ case "$(hostname)" in
 
   queeg)
     export WIFI_INTERFACE='wlp0s20f3'
-    export XINPUT_TOUCHSCREEN='9'
+    export XINPUT_TOUCHSCREEN='15'
     export XRANDR_INTERNAL='eDP-1'
-    export XRANDR_HDMI='HDMI-1'
-    export SYS_DISPLAY_INTERNAL='/sys/class/drm/card0-eDP-1'
-    export SYS_DISPLAY_EXTERNAL='/sys/class/drm/card0-HDMI-1'
+    export XRANDR_HDMI='HDMI-2'
+    export SYS_DISPLAY_INTERNAL='/sys/class/drm/card1-eDP-1'
+    export SYS_DISPLAY_EXTERNAL='/sys/class/drm/card1-HDMI-A-2'
+
     ;;
 
 esac

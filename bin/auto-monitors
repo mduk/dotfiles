@@ -6,7 +6,8 @@ declare profile="${host}-standalone"
 echo "Default Profile: $profile"
 
 declare -A monitor_profiles=(
-  [d41d8cd98f00b204e9800998ecf8427e]='holly-desk'
+  [holly/d41d8cd98f00b204e9800998ecf8427e]='holly-desk'
+  [queeg/d41d8cd98f00b204e9800998ecf8427e]='queeg-desk'
 )
 
 if [[ -z $1 ]]
@@ -19,7 +20,7 @@ then
     declare edid="$(hdmi-edid-hash)"
     echo "  External Monitor EDID Hash: $edid"
 
-    profile="${monitor_profiles[$edid]}"
+    profile="${monitor_profiles["$(hostname)/$edid"]}"
     echo "  Selected Profile: $profile"
   else
     echo "  No External Monitor Connected"
@@ -51,7 +52,7 @@ sleep 1
 
 if [[ -n $XINPUT_TOUCHSCREEN ]]
 then
-  echo Mapping Touchscreen
+  echo Mapping Touchscreen: $XINPUT_TOUCHSCREEN
   map-touchscreen
 fi
 
