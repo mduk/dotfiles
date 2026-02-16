@@ -1,3 +1,21 @@
 #!/usr/bin/env bash
 
-xinput map-to-output "$XINPUT_TOUCHSCREEN" "$XRANDR_INTERNAL"
+#xinput map-to-output "$XINPUT_TOUCHSCREEN" "$XRANDR_INTERNAL"
+#!/usr/bin/env bash
+
+# Find touchscreen device ID under X11 (xinput)
+touch_id=$(
+  xinput list --name-only |
+  grep -i "multitouch sensor Finger" |
+  head -n1 |
+  xargs -I{} xinput list --id-only "{}"
+)
+
+if [ -n "$touch_id" ]; then
+  echo "Touchscreen ID: $touch_id"
+else
+  echo "No touchscreen device found."
+fi
+
+
+xinput map-to-output $touch_id "$XRANDR_INTERNAL"

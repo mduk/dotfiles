@@ -1,1 +1,4 @@
-git log --oneline
+git log \
+  --graph \
+  --pretty=format:'%Cgreen%cr%Creset %Cred%h%Creset -%C(yellow)%d%Creset %s' \
+  --abbrev-commit

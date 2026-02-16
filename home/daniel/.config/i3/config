@@ -1,6 +1,7 @@
 set $www                      www
-set $terminal                 /usr/bin/urxvt
-set $filemanager              /usr/bin/nemo
+#set $terminal                 /usr/bin/urxvt
+set $terminal                 /usr/bin/alacritty
+set $filemanager              /usr/bin/thunar
 set $browser                  /usr/bin/google-chrome
 
 
@@ -18,7 +19,7 @@ set $outputHdmi               HDMI-2
 set $alt              Mod1
 set $win              Mod4
 set $angryalt         Mod5
-floating_modifier $win
+floating_modifier $alt
 
 
 mouse_warping output
@@ -36,6 +37,13 @@ bindsym $alt+space              exec i3-dmenu
 # i3 Font
 ################################################################################
 font pango:monospace 16
+
+
+################################################################################
+# Gnome keyring
+################################################################################
+exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=ssh,secrets,pkcs11
+
 
 
 ################################################################################
@@ -296,6 +304,7 @@ mode "File Manager" {
   bindsym M                     exec $filemanager ~/Music              ; mode "default"
   bindsym P                     exec $filemanager ~/Pictures           ; mode "default"
   bindsym S                     exec $filemanager ~/Scrollsaw\ Patterns; mode "default"
+  bindsym T                     exec $filemanager /tmp                 ; mode "default"
   bindsym U                     exec $filemanager ~/Documents          ; mode "default"
   bindsym V                     exec $filemanager ~/Videos             ; mode "default"
   bindsym W                     exec $filemanager ~/Development/Devtank; mode "default"
@@ -465,3 +474,11 @@ mode "DLYoutube" {
 
 
 
+
+for_window [title="^i3-calc$"] \
+  floating enable, \
+  resize set 600 400, \
+  move position center, \
+  border pixel 5
+
+bindsym $alt+c exec --no-startup-id $terminal --title i3-calc -e bc -l

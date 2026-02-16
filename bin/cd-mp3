@@ -1,21 +1,22 @@
 #!/bin/bash
 
 set -eu
+shopt -s nullglob
 
 for album
 do
   pushd "$album"
 
-  if [[ ! -d flac ]]
-  then
-    mkdir flac
-    mv *.flac flac/
-  fi
+  mkdir -p flac
+
+  for flac in *.flac
+  do mv "$flac" flac/
+  done
 
   mkdir -p mp3
   for flac in flac/*.flac
   do
-    mp3="mp3/$(basename "$flac").mp3"
+    mp3="mp3/$(basename "${flac%.flac}").mp3"
 
     if [[ ! -f "$mp3" ]]
     then
