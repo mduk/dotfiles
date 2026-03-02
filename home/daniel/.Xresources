@@ -3,7 +3,7 @@
 !-------------------------------------------------------------------------------
 
 Xft.dpi:                    96
-Xft.antialias:              false
+Xft.antialias:              true
 Xft.rgba:                   rgb
 Xft.hinting:                true
 Xft.hintstyle:              hintslight
@@ -19,7 +19,7 @@ URxvt.depth:                32
 
 ! There appears to be a bug in urxvt-unicode 9.31 that puts the cursor in the wrong
 ! place if the window is full screen height. Setting URxvt.geometry seems to "fix"
-! it, I don't know why.
+! it, I do not know why.
 URxvt.geometry:             400x400
 
 URxvt.transparent:          true
