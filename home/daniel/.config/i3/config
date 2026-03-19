@@ -205,10 +205,11 @@ bindsym $alt+Ctrl+j                  focus child
 
 
 ################################################################################
-# Floating Windows
+# Floating Windows - Prior is PageUp, Next is PageDown
 ################################################################################
-bindsym $alt+Next              focus mode_toggle
 bindsym $alt+Prior             floating toggle
+bindsym $alt+Shift+Prior       sticky toggle
+bindsym $alt+Next              focus mode_toggle
 
 
 ################################################################################
