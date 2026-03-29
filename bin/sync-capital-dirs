@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+cleanup() {
+  echo "EXIT"
+  exit 1
+}
+
+trap cleanup INT
+
+for syncdir in [A-Z]*/
+do
+  figlet "$syncdir"
+  rsync -avhPH "$syncdir" "/media/daniel/SABRENT1TB/$syncdir"
+done

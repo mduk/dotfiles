@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -eu
+
+if rsync -avh /media/daniel/Sandisk16gb/ /media/daniel/SABRENT1TB/Sandisk16gb/
+then notify-send "Sync Sandisk" "Copied to SABRENT1TB"
+else notify-send "Syns Sandisk" "Error copying to SABRENT1TB"
+fi
+
+if rsync -avh /media/daniel/Sandisk16gb/ daniel@janet.local:/mnt/ARCHIVE/Daniel/Sandisk16gb/
+then notify-send "Sync Sandisk" "Copied to Janet"
+else notify-send "Syns Sandisk" "Error copying to Janet"
+fi
